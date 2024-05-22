@@ -8,17 +8,16 @@
 import SwiftUI
 
 struct Nombrex: View {
+    @State var n = Nombre()
     
-    var natural = Number( set : .naturel)
-    var relative = Number(set: .relatif)
-    var decimal = Number(set: .decimal)
     @State var index = 0
     
     var body: some View {
         TabView(selection: $index) {
-            natural.tabItem { Text("naturel") }.tag(1)
-            relative.tabItem { Text("relatif") }.tag(2)
-            decimal.tabItem { Text("decimal") }.tag(3)
+            NumberView(nombre: $n, edition:!n.isNaN).tabItem { Text("vue") }.tag(0)
+            NumberCreator($n , .naturel).tabItem { Text("naturel") }.tag(1)
+            NumberCreator($n , .relatif).tabItem { Text("relatif") }.tag(2)
+            NumberCreator($n , .decimal).tabItem { Text("decimal") }.tag(3)
         }
     }
 }
