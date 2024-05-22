@@ -71,6 +71,14 @@ public class Devise: Equatable, Codable {
         }
         return d
     }
+    public func cents(_ digits: Int) -> Int {
+        if decimal_digits == 0 {
+            return digits
+        } else {
+            return Int(Double(digits) / Double(div))
+        }
+    }
+    
     // décimales à supprimer pour trouver les centimes
     var rounding = 0
     // diviseur pour arrondir en centimes
