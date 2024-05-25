@@ -7,21 +7,26 @@
 
 import SwiftUI
 
-protocol Selectable: CaseIterable, Hashable, Identifiable {
+public protocol Selectable: CaseIterable, Hashable, Identifiable {
    // static var all: [Self] {get}
     static var selector: String {get}
     var label: String {get}
    
 }
 
-struct EnumPicker<T:Selectable>: View {
+public struct EnumPicker<T:Selectable>: View {
     let cases: [T]
     var prompt: String = ""
     @Binding var selected: T?
     
-    var body: some View {
+    public init(_ cases:[T], _ selected:Binding<T?>) {
+        self.cases = cases
+        self._selected = selected
+    }
+    
+    public var body: some View {
         Picker(T.selector, selection:$selected) {
-            //Text("\t\(prompt)").tag(nil as T?)
+            Text("\t\(T.selector)").tag(nil as T?)
             ForEach (cases) { item in
                 Text(item.label).tag(item as T?)
             }

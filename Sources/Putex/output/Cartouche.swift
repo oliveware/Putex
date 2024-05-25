@@ -33,7 +33,7 @@ public struct Cartouche {
         nbcar = size
     }
     
-    var astring: String {
+    public var astring: String {
         var cartouche = ""
         for line in lines {
             cartouche += "\(line)\n"
@@ -41,17 +41,17 @@ public struct Cartouche {
         return cartouche
     }
     
-    func width(_ carwidth:Int = 5) -> CGFloat {
+    public func width(_ carwidth:Int = 5) -> CGFloat {
         CGFloat(linemax * carwidth)
     }
-    func height(_ carheight:Int = 5) -> CGFloat {
+    public func height(_ carheight:Int = 5) -> CGFloat {
         CGFloat(lines.count * carheight)
     }
     
-    mutating func add(_ line: String) {
+    public mutating func add(_ line: String) {
         lines.append(line)
     }
-    mutating func add(_ cartouche: Cartouche) {
+    public mutating func add(_ cartouche: Cartouche) {
         for line in cartouche.lines {
             lines.append(line)
         }
@@ -67,7 +67,7 @@ public struct CartoucheView: View {
     public init(_ lines: [String] = ["titre", "ligne 1", "ligne 2"], _ size:Int = 0) {
         cartouche = Cartouche(lines, size)
     }
-    init(_ c: Cartouche) { cartouche = c }
+    public init(_ c: Cartouche) { cartouche = c }
     
     public var body: some View {
         VStack {
