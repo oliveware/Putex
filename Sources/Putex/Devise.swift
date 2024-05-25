@@ -59,38 +59,39 @@ public class Devise: Equatable, Codable {
     var symbol_native = ""
     var name: String = ""
 
-    // nombre de décimales
-    var decimal_digits = 2
-    // diviseur pour arrondir en centimes
-    var div:Int {
-        var d = 1
-        if decimal_digits > 0 {
-            for _ in 0..<decimal_digits {
-                d = 10 * d
-            }
-        }
-        return d
-    }
-    public func cents(_ digits: Int) -> Int {
-        if decimal_digits == 0 {
-            return digits
-        } else {
-            return Int(Double(digits) / Double(div))
-        }
-    }
-    
+    // nombre de décimales dans le calcul de conversion
+    var decimal_digits = 4
     // décimales à supprimer pour trouver les centimes
-    var rounding = 0
-    // diviseur pour arrondir en centimes
-    var rounder:Int {
+    var rounding = 2
+    // diviseur
+    func div(_ nbdec:Int) -> Int {
         var d = 1
-        if rounding > 0 {
-            for _ in 0..<rounding {
+        if nbdec > 0 {
+            for _ in 0..<nbdec {
                 d = 10 * d
             }
         }
         return d
     }
+    // valeur double avec toutes les décimales
+    public func value(_ digits:Int, _ nbdec:Int) -> Double {
+        let div = Double(div(decimal_digits))
+        return Double(digits) / div
+    }
+    // valeur entière exprimée en centimes
+    public func cents(_ digits: Int, _ nbdec:Int) -> Int {
+        let div = Double(div(decimal_digits - rounding))
+        return Int(Double(digits) / div )
+    }
+    // valeur exprimée en nombre
+  /*  public func nombre(_ digits:Int) -> Nombre {
+        let double = String(value(digits))
+        let index = double.lastIndex - decimal_digits
+        var decimales = ""
+        if index > 0 {
+            decimales = double[index...]
+        }
+    }*/
     
     // var short = ""
     var singulier = ""
@@ -98,11 +99,13 @@ public class Devise: Equatable, Codable {
     var cent = "cent"
     var cents = "cents"
     
-    public init(_ k:Kind, _ dec:Int = 2, _ r:Int = 0) {
+    public init(_ k:Kind) {
         kind = k
         name = k.rawValue
-        decimal_digits = dec
-        rounding = r
+        
+        decimal_digits = 4
+        rounding = 2
+        
         switch k {
         case .EUR:
             code = "EUR" ; symbol = "€"
@@ -126,32 +129,12 @@ public extension Int {
        // string(100, "€")
     }
     func money(_ d:Devise) -> String {
-        moneydigits(d.div, d.symbol)
+        "\(decimal(d.decimal_digits)) \(d.symbol)"
     }
-    func monetaire(_ d:Devise) -> String {
-        moneydigits(d.div, d.code)
-    }
-    func moneyname(_ d:Devise) -> String {
-        moneydigits(d.div, d.name)
+
+    func cours(_ d:Devise) -> String {
+        "\(decimal(d.decimal_digits)) \(d.code)"
     }
     
-    func moneydigits(_ div:Int = 100, _ symbole:String = "€") -> String {
-        let negatif = self < 0
-        var value : Int
-        if negatif {
-            value = -self
-        } else {
-            value = self
-        }
-        let reste = value % div
-        if reste == 0 {
-            return "\(negatif ? "-" : "") \(value / div) \(symbole)"
-        } else {
-            let mant = (value - reste) / div
-            var decimales = String(reste)
-            let nbzero = String(div).count - 1 - decimales.count
-            for _ in 0..<nbzero { decimales = "0" + decimales }
-            return "\(negatif ? "-" : "") \(mant),\(decimales) \(symbole)"
-        }
-    }
+
 }

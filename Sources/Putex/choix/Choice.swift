@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct Choice: View {
+public struct Choice: View {
     var prompt = ""
     var width: CGFloat = 120
     var height: CGFloat = 25

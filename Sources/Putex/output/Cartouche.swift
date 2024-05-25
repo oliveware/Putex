@@ -61,8 +61,8 @@ struct Cartouche {
 
 public struct CartoucheView: View {
     var cartouche:Cartouche
-    var carwidth : Int = 5
-    var carheight : Int = 5
+    var carwidth : Int = 12
+    var carheight : Int = 25
     
     public init(_ lines: [String] = ["titre", "ligne 1", "ligne 2"], _ size:Int = 0) {
         cartouche = Cartouche(lines, size)

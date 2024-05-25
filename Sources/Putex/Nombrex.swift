@@ -14,10 +14,10 @@ struct Nombrex: View {
     
     var body: some View {
         TabView(selection: $index) {
-            NumberView(nombre: $n, edition:!n.isNaN).tabItem { Text("vue") }.tag(0)
-            NumberCreator($n , .naturel).tabItem { Text("naturel") }.tag(1)
-            NumberCreator($n , .relatif).tabItem { Text("relatif") }.tag(2)
-            NumberCreator($n , .decimal).tabItem { Text("decimal") }.tag(3)
+         //   NumberView($n, n.isnul, nil).tabItem { Text("multi") }.tag(0)
+            NumberView($n , n.isnul, .naturel, "m3").tabItem { Text("m3") }.tag(1)
+            NumberView($n , n.isnul, .relatif).tabItem { Text("relatif") }.tag(2)
+            NumberView($n , n.isnul, .decimal2, "€").tabItem { Text("euro") }.tag(3)
         }
     }
 }

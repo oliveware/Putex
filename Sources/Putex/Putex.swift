@@ -16,23 +16,25 @@ public struct Putex: View {
             Text("Putex")
                 .font(.title3)
             
-            MotView($data.mot)
+            MotView($data.mot).frame(width:400)
                 
             NomPropre($data.nompropre, "compositeur", "aide" )
              
             Line(input:$data.ligne)
                
 
-        
-        Nombrex()
-            .frame(alignment: .center)
+            HStack(spacing:30){
+                NumberView($data.naturel , data.naturel.isnul, .naturel, "m3")
+                NumberView($data.relatif , data.relatif.isnul, .relatif)
+                NumberView($data.decimal , data.decimal.isnul, .decimal2, "€")
+            }
             .padding(5)
             .overlay(RoundedRectangle(cornerRadius: 10)
                 .stroke(Color.gray, lineWidth: 1))
             
         
        
-            Choice(["un","deux","trois","quatre"],"choix")
+            Vignette(picture: Picture("https://wallpapercave.com/wp/wp2555019.jpg"))
         }
     }
     }

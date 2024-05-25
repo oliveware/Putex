@@ -16,7 +16,9 @@ struct Putexdata {
     var devise = Devise(.EUR)
     var erreur = Erreur("problème dans", "Type", "Propriété")
     var ligne = "une ligne courte"
-    var entier = 0
+    var naturel = Nombre()
+    var relatif = Nombre()
+    var decimal = Nombre()
     var image = Picture("photo")
     
     init () {}
