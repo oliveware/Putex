@@ -27,7 +27,7 @@ public enum Unité: String, Codable, Selectable {
     case jom    = "journée d'ordures ménagères"
     case unit   = "pièce"
 
-    var local: Mot {
+    public var local: Mot {
         switch self {
         case .eau:      return Mot("litre","litres")
         case .long :    return Mot("mètre","mètres")
@@ -39,7 +39,7 @@ public enum Unité: String, Codable, Selectable {
         }
     }
     
-    func global(_ value: Double) -> String {
+    public func global(_ value: Double) -> String {
         switch self {
         case .elec, .hc, .hp :
             return Measurement(value:value, unit:UnitEnergy.kilowattHours).formatted()
@@ -58,7 +58,7 @@ public enum Unité: String, Codable, Selectable {
         }
     }
     
-    var symbol:String {
+    public var symbol:String {
         switch self {
         case .eau:          return "l"
         case .long:         return "m"
