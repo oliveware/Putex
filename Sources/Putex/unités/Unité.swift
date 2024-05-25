@@ -8,14 +8,14 @@
 import Foundation
 import SwiftUI
 
-enum Unité: String, Codable, Selectable {
+public enum Unité: String, Codable, Selectable {
     static var all: [Unité] {
         Self.allCases
     }
-    static var selector = "unité"
-    var label: String {self.rawValue}
+    public static var selector = "unité"
+    public var label: String {self.rawValue}
     
-    var id: Self {self}
+    public var id: Self {self}
     
     case elec   = "global (hc + hp)"
     case hc     = "heures creuses"
