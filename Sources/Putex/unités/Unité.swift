@@ -71,7 +71,7 @@ public enum Unité: String, Codable, Selectable {
     }
    
     
-    var color:Color {
+    public var color:Color {
         switch self {
         case .eau:          return Color.blue
         case .elec,.hc,.hp: return Color.red
@@ -83,9 +83,9 @@ public enum Unité: String, Codable, Selectable {
 }
 
 
-    public extension Int {
-        
-        func unit(_ unit:String = "") -> String{
-            "\(self) \(unit)"
-        }
+public extension Int {
+    
+    func unit(_ unit:String = "") -> String {
+        "\(self) \(unit)"
     }
+}
