@@ -40,7 +40,7 @@ public struct Mot : Codable {
     var singulier:String
     var pluriel:String
 
-    init(_ s:String,_ p:String?, _ g:Genre = .m) {
+    public init(_ s:String,_ p:String?, _ g:Genre = .m) {
         singulier = s
         pluriel = p ?? ""
         genre = g

@@ -21,7 +21,18 @@ public struct Nombre {
         entiere = 0
     }
     
-    init(_ n:Int, _ nbdec:Int = 0) {
+    init(_ e:Int, _ d:String = "") {
+        entiere = e
+        decimales = d
+    }
+    
+    init(_ e:String, _ d:String = "", _ negative:Bool = false) {
+        entiere = Int(e) ??  0
+        if negative { entiere = -entiere }
+        decimales = d
+    }
+    
+    public init(_ n:Int, _ nbdec:Int = 0) {
         if nbdec == 0 {
             entiere = n
         } else {
@@ -46,16 +57,7 @@ public struct Nombre {
     }
     
     
-    init(_ e:Int, _ d:String = "") {
-        entiere = e 
-        decimales = d
-    }
-    
-    init(_ e:String, _ d:String = "", _ negative:Bool = false) {
-        entiere = Int(e) ??  0
-        if negative { entiere = -entiere }
-        decimales = d
-    }
+  
     
     var cents : (c:Int, nbdec:Int) {
         if decimales == "" {

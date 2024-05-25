@@ -29,6 +29,8 @@ import SwiftUI
 public struct Vignette:View {
     var picture : Picture
     public var body: some View {
+        // ne fonctionne pas
+        // à revoir
         Image(picture.url)
     }
 }

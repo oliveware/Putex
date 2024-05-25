@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct Cartouche {
+public struct Cartouche {
     var lines: [String] = ["titre", "ligne 1", "ligne 2"]
     
     var nbcar: Int = 0
