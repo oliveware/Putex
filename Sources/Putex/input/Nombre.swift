@@ -8,10 +8,10 @@
 import Foundation
 
 public struct Nombre {
-
+// représentation en base 10
     var entiere:Int = 0
     var decimales:String = ""
-    var base = 10
+    let base = 10
     
     var isnul: Bool {
         entiere == 0 && decimales == ""
@@ -21,11 +21,12 @@ public struct Nombre {
         entiere = 0
     }
     
-    init(_ e:Int, _ d:String = "") {
+    init(_ e:Int) {
         entiere = e
-        decimales = d
+        decimales = ""
     }
     
+    // d.count doit correspondre au NumberSet
     init(_ e:String, _ d:String = "", _ negative:Bool = false) {
         entiere = Int(e) ??  0
         if negative { entiere = -entiere }
@@ -56,7 +57,15 @@ public struct Nombre {
         return d
     }
     
-    
+    var value : Double {
+        var decimal : Double = 0
+        if let deci = Double(decimales) {
+            decimal = deci / Double(div(decimales.count))
+        } else {
+            print("décimales erronées")
+        }
+        return Double(entiere) + decimal
+    }
   
     
     var cents : (c:Int, nbdec:Int) {

@@ -26,7 +26,7 @@ public struct Putex: View {
             HStack(spacing:30){
                 NumberView($data.naturel , data.naturel.isnul, .naturel, "m3")
                 NumberView($data.relatif , data.relatif.isnul, .relatif)
-                NumberView($data.decimal , data.decimal.isnul, .decimal2, "€")
+                NumberView($data.decimal , data.decimal.isnul, .decimal(2), "€")
             }
             .padding(5)
             .overlay(RoundedRectangle(cornerRadius: 10)

@@ -7,19 +7,44 @@
 
 import SwiftUI
 
-public enum NumberSet {
-        case naturel
-        case relatif
-        case decimal2
-        case decimal4
+public enum NumberSet: Equatable {
+    
+    case naturel
+    case relatif
+    case decimal(Int)
+    
     var nbdec: Int {
         switch self {
         case .naturel, .relatif:
             return 0
-        case .decimal2:
+        case .decimal(2):
             return 2
-        case .decimal4:
+        case .decimal(4):
             return 4
+        default:
+            return 0
+        }
+    }
+    
+    func normalize(_ decimale:String) -> String {
+        if self == .naturel || self == .relatif {
+            return ""
+        } else {
+            let nbdecimales = decimale.count
+            var norm = decimale
+            if nbdecimales != self.nbdec {
+                if nbdecimales < self.nbdec {
+                    // ajouter les zéros manquants
+                    for _ in 0..<self.nbdec-nbdecimales {
+                        norm = norm + "0"
+                    }
+                } else {
+                    // enlever les décimales superflues
+                    let index = decimale.index(decimale.startIndex, offsetBy: self.nbdec)
+                    norm = String(decimale[..<index])
+                }
+            }
+            return norm
         }
     }
 }
@@ -201,18 +226,25 @@ struct NumberCreator: View {
                     if (entiere != "0"  && entiere.count < 17) {entiere += digit}
                 }
             } else {
-                decimale += digit
+                if decimale.count < set.nbdec {
+                    decimale += digit
+                }
             }
         } else {
             if dot == "" {
                 if entiere.count < 17 {entiere += digit}
             } else {
-               decimale += digit
+                if decimale.count < set.nbdec {
+                    decimale += digit
+                }
             }
         }
         if set == .naturel {
-            var naturel = Int(entiere)!
-            nombre = Nombre(naturel , decimale)
+            if let naturel = Int(entiere) {
+                nombre = Nombre(naturel)
+            } else {
+                print ("chiffres erronés")
+            }
         } else {
             nombre = Nombre(entiere, decimale, negative)
         }
@@ -228,11 +260,8 @@ struct NumberCreator: View {
     }
     
     func valider() {
-        let nbdec = decimale.count
-        for _ in 0..<set.nbdec {
-            
-        }
-       nombre = Nombre(entiere, decimale, negative)
+        decimale = set.normalize(decimale)
+        nombre = Nombre(entiere, decimale, negative)
         entiere = "" ; decimale = "" ; dot = "" ; negative = false
         creation = false
     }
@@ -240,11 +269,11 @@ struct NumberCreator: View {
 
 
 #Preview ("décimal création") {
-    NumberView(.constant(Nombre()), true, .decimal2)
+    NumberView(.constant(Nombre()), true, .decimal(2))
         .frame(width:400, height:250)
 }
 
 #Preview ("décimal édition") {
-    NumberView(.constant(Nombre(182925,2)), false, .decimal4, "€")
+    NumberView(.constant(Nombre(182925,2)), false, .decimal(4), "€")
         .frame(width:400, height:250)
 }
