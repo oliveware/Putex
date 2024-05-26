@@ -226,17 +226,13 @@ struct NumberCreator: View {
                     if (entiere != "0"  && entiere.count < 17) {entiere += digit}
                 }
             } else {
-                if decimale.count < set.nbdec {
-                    decimale += digit
-                }
+                decimale += digit
             }
         } else {
             if dot == "" {
                 if entiere.count < 17 {entiere += digit}
             } else {
-                if decimale.count < set.nbdec {
-                    decimale += digit
-                }
+                decimale += digit
             }
         }
         if set == .naturel {
@@ -246,7 +242,15 @@ struct NumberCreator: View {
                 print ("chiffres erronés")
             }
         } else {
-            nombre = Nombre(entiere, decimale, negative)
+            if set == .relatif {
+                nombre = Nombre(entiere, "", negative)
+            } else {
+                if decimale.count == set.nbdec {
+                    valider()
+                } else {
+                    nombre = Nombre(entiere, decimale, negative)
+                }
+            }
         }
         //nombre.entiere = Int(entiere)!
         //nombre.decimales = decimale

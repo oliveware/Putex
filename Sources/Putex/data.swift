@@ -18,7 +18,8 @@ struct Putexdata {
     var ligne = "une ligne courte"
     var naturel = Nombre()
     var relatif = Nombre()
-    var decimal = Nombre()
+    var euro = Nombre()
+    var cours = Nombre()
     var image = Picture("photo")
     
     init () {}
