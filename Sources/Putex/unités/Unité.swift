@@ -24,7 +24,8 @@ public enum Unité: String, Codable, Selectable {
     case aire = "surface"
     case volume  = "eau (m3)"
     case eau    = "eau (l)"
-    case jom    = "journée d'ordures ménagères"
+    case jour   = "journée"
+    case mois   = "mois"
     case unit   = "pièce"
 
     public var local: Mot {
@@ -34,7 +35,8 @@ public enum Unité: String, Codable, Selectable {
         case .aire :    return Mot("mètre carré","mètres carrés")
         case .volume:   return Mot("mètre cube", "mètres cubes")
         case .elec,.hc,.hp: return Mot("kWh","kWh")
-        case .jom:          return Mot("jour","jours")
+        case .jour:          return Mot("jour","jours")
+        case .mois:          return Mot("mois","mois")
         case .unit :        return Mot("pièce", "pièces")
         }
     }
@@ -51,10 +53,12 @@ public enum Unité: String, Codable, Selectable {
             return Measurement(value:value, unit:UnitArea.squareMeters).formatted()
         case .volume :
             return Measurement(value:value, unit:UnitVolume.cubicMeters).formatted()
-        case .jom:
-            return "day"
+        case .jour:
+            return "jour"
+        case .mois :
+            return "mois"
         default:
-            return "piece"
+            return "pièce"
         }
     }
     
@@ -65,7 +69,8 @@ public enum Unité: String, Codable, Selectable {
         case .aire:         return "m2"
         case .volume:       return "m3"
         case .elec,.hc,.hp: return "kWh"
-        case .jom:          return "j"
+        case .jour:         return "j"
+        case .mois:         return "m"
         case .unit :        return ""
         }
     }
@@ -73,10 +78,10 @@ public enum Unité: String, Codable, Selectable {
     
     public var color:Color {
         switch self {
-        case .eau:          return Color.blue
-        case .elec,.hc,.hp: return Color.red
-        case .jom:          return Color.yellow
-        case .long, .aire, .volume:    return Color.white
+        case .eau:                  return Color.blue
+        case .elec,.hc,.hp:         return Color.red
+        case .jour, .mois:           return Color.yellow
+        case .long, .aire, .volume: return Color.white
         case .unit:    return Color.white
         }
     }
