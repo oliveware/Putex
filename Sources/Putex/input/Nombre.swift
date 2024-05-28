@@ -14,7 +14,7 @@ public struct Nombre: Codable {
     var decimales:String = ""
     var base = 10
     
-    var isnul: Bool {
+    public var isnul: Bool {
         entiere == 0 && decimales == ""
     }
     
