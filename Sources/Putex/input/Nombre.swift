@@ -8,11 +8,11 @@
 import Foundation
 
 // représentation d'un nombre décimal en base 10
-public struct Nombre {
+public struct Nombre: Codable {
         
     var entiere:Int = 0
     var decimales:String = ""
-    let base = 10
+    var base = 10
     
     var isnul: Bool {
         entiere == 0 && decimales == ""
