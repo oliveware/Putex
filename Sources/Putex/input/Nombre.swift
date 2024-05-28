@@ -7,8 +7,9 @@
 
 import Foundation
 
+// représentation d'un nombre décimal en base 10
 public struct Nombre {
-// représentation en base 10
+        
     var entiere:Int = 0
     var decimales:String = ""
     let base = 10
@@ -57,7 +58,7 @@ public struct Nombre {
         return d
     }
     
-    var value : Double {
+    public var value : Double {
         var decimal : Double = 0
         if let deci = Double(decimales) {
             decimal = deci / Double(div(decimales.count))
@@ -68,7 +69,7 @@ public struct Nombre {
     }
   
     
-    var cents : (c:Int, nbdec:Int) {
+    /*var cents : (c:Int, nbdec:Int) {
         if decimales == "" {
             return (c:entiere, nbdec:0)
         } else {
@@ -79,7 +80,7 @@ public struct Nombre {
                 return (c:value, nbdec:decimales.count)
             }
         }
-    }
+    }*/
     
     public func enchiffres(_ dot:String = ",") -> String {
         let chiffres = String(entiere)
