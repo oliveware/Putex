@@ -48,6 +48,13 @@ public struct Nombre: Codable {
         }
     }
     
+    public init(_ d:Double, _ nbdec:Int) {
+        let ent = Int(d)
+        entiere = ent
+        let deci = (d - Double(ent)) * Double(div(nbdec))
+        decimales = String(deci)
+    }
+    
     func div(_ nbdec:Int) -> Int {
         var d = 1
         if nbdec > 0 {
