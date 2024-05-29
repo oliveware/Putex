@@ -63,6 +63,7 @@ public class Devise: Equatable, Codable {
     var decimal_digits = 4
     // décimales à supprimer pour trouver les centimes
     var rounding = 2
+    var money_digits:Int {decimal_digits - rounding}
     // diviseur
     func div(_ nbdec:Int) -> Int {
         var d = 1
@@ -129,7 +130,7 @@ public extension Int {
        // string(100, "€")
     }
     func money(_ d:Devise) -> String {
-        "\(decimal(d.decimal_digits)) \(d.symbol)"
+        "\(decimal(d.money_digits)) \(d.symbol)"
     }
 
     func cours(_ d:Devise) -> String {
