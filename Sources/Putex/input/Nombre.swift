@@ -157,7 +157,7 @@ public struct Nombre: Codable {
 }
 
 public extension Int {
-    func decimal(_ nbdec:Int = 4) -> String {
+    func decimal(_ nbdec:Int = 2) -> String {
         let negatif = self < 0
         var nombre : Nombre
         if negatif {
