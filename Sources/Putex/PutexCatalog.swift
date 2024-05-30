@@ -42,13 +42,16 @@ public struct PutexCatalog: View {
                     .padding(5)
                     .overlay(RoundedRectangle(cornerRadius: 10)
                     .stroke(Color.gray, lineWidth: 1))
-                    .tabItem { Text("nombres") }.tag(4)
+                    .tabItem { Text("nombres") }.tag(1)
                 
                 TabView(selection: $choix) {
                     Choice(["un","deux","trois","quatre"],"choix")
                     .tabItem { Text("Choice") }.tag(1)
                   
-                }.tabItem { Text("sélection") }.tag(0)
+                }.tabItem { Text("sélection") }.tag(2)
+                
+                Version()
+                    .tabItem { Text("version") }.tag(3)
             }
         }
         .frame(width: 600, height: 400, alignment: .center)
