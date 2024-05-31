@@ -8,25 +8,55 @@
 import SwiftUI
 
 struct JMAPicker : View {
-    var kindofdate: String
+    var prompt: String = "Replanifier la date"
+    var kindofdate: String = ""
     @Binding var jma:JMA
-    @Binding var modal: Bool
+    @State var edition: Bool = false
     
     @State var date = Date.now
     
     var body : some View {
-        VStack(spacing:30) {
-            Text("Replanifier la date de \(kindofdate)").font(.title3)
-            DatePicker("nouvelle date", selection: $date, displayedComponents: .date)
-                .frame(width: 200)
-            Button("valider",  action:  planifier)
-        }.padding(30)
+        if edition {
+            VStack(spacing:5) {
+                if prompt != "" {
+                    Text( prompt).font(.title3)
+                }
+                DatePicker("\(kindofdate)", selection: $date, displayedComponents: .date)
+                    .frame(width: 200)
+                Button("valider",  action:  planifier)
+                    .padding(.top,10)
+            }.padding(30)
+        } else {
+            Button("\(kindofdate) \(jma.entexte)", action:{edition = true})
+        }
     }
     
     func planifier() {
-        modal = false
+        edition = false
         jma = JMA(date)
     }
 }
 
+struct JMAPreview : View {
+    @State var date: JMA = JMA(Date.now)
+    var body : some View {
+        JMAPicker(jma:$date)
+            .frame(width:200, height: 100)
+    }
+}
 
+#Preview {
+    JMAPreview()
+}
+
+
+/*
+ var body : some View {
+     VStack(spacing:30) {
+         Text("Replanifier la date de \(kindofdate)").font(.title3)
+         DatePicker("nouvelle date", selection: $date, displayedComponents: .date)
+             .frame(width: 200)
+         Button("valider",  action:  planifier)
+     }.padding(30)
+ }
+ */

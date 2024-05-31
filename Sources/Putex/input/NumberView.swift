@@ -271,13 +271,32 @@ struct NumberCreator: View {
     }
 }
 
+struct NumberPreview : View {
+    @State var nombre : Nombre
+    var creation = false
+    var set : NumberSet = .naturel
+    var classifier = ""
+    
+    public init(_ nombre:Nombre, _ creation:Bool, _ set: NumberSet, _ classifier:String = "") {
+        self.nombre = nombre
+        self.creation = creation
+        self.set = set
+        self.classifier = classifier
+    }
+    
+    var body : some View {
+        NumberView($nombre, creation, set, classifier)
+            .frame(width:200, height: 100)
+    }
+}
+
 
 #Preview ("décimal création") {
-    NumberView(.constant(Nombre()), true, .decimal(2))
+    NumberPreview(Nombre(), true, .decimal(2))
         .frame(width:400, height:250)
 }
 
 #Preview ("décimal édition") {
-    NumberView(.constant(Nombre(182925,2)), false, .decimal(4), "€")
+    NumberPreview(Nombre(12925,4), false, .decimal(4), "€")
         .frame(width:400, height:250)
 }
