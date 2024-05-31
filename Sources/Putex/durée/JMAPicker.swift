@@ -7,15 +7,22 @@
 
 import SwiftUI
 
-struct JMAPicker : View {
+public struct JMAPicker : View {
     var prompt: String = "Replanifier la date"
     var kindofdate: String = ""
     @Binding var jma:JMA
-    @State var edition: Bool = false
+    @State private var edition: Bool = false
     
-    @State var date = Date.now
+    @State private var date = Date.now
     
-    var body : some View {
+    public init(_ date:Binding<JMA>, _ p:String = "", _ kod:String = "") {
+        _jma = date
+        prompt = p
+        kindofdate = kod
+    }
+    
+    
+    public var body : some View {
         if edition {
             VStack(spacing:5) {
                 if prompt != "" {
@@ -40,7 +47,7 @@ struct JMAPicker : View {
 struct JMAPreview : View {
     @State var date: JMA = JMA(Date.now)
     var body : some View {
-        JMAPicker(jma:$date)
+        JMAPicker($date)
             .frame(width:200, height: 100)
     }
 }
