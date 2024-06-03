@@ -12,7 +12,7 @@ enum CompteAnalytique: String, Codable, Selectable {
     static var all : [Self] = Self.allCases
     static var bancaire: [Self] = [.courant,.épargne,.pea,.titre]
     static var foncier: [Self] = [.caution,.loyer,.entretien,.admin,.assurance,.réparation,.indemnité,.taxes]
-    
+    static var selector: String = "compte analytique"
     var label: String {self.rawValue}
     
     case courant     = "compte bancaire"
