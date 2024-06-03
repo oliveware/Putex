@@ -7,13 +7,13 @@
 
 import Foundation
 
-enum CompteAnalytique: String, Codable, Selectable {
-    var id: Self { self }
+public enum CompteAnalytique: String, Codable, Selectable {
+    public var id: Self { self }
     static var all : [Self] = Self.allCases
     static var bancaire: [Self] = [.courant,.épargne,.pea,.titre]
     static var foncier: [Self] = [.caution,.loyer,.entretien,.admin,.assurance,.réparation,.indemnité,.taxes]
-    static var selector: String = "compte analytique"
-    var label: String {self.rawValue}
+    public static var selector: String = "compte analytique"
+    public var label: String {self.rawValue}
     
     case courant     = "compte bancaire"
     case épargne    = "livret d'épargne"
