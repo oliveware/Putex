@@ -10,15 +10,9 @@ import Foundation
 public enum CompteAnalytique: String, Codable, Selectable {
     public var id: Self { self }
     static var all : [Self] = Self.allCases
-    static var bancaire: [Self] = [.courant,.épargne,.pea,.titre]
     static var foncier: [Self] = [.caution,.loyer,.entretien,.admin,.assurance,.réparation,.indemnité,.taxes]
     public static var selector: String = "compte analytique"
     public var label: String {self.rawValue}
-    
-    case courant     = "compte bancaire"
-    case épargne    = "livret d'épargne"
-    case pea        = "PEA - compte espèces PEA"
-    case titre     = "compte titre - espèces"
     
     case caution    = "Dépôt de garantie"
     case loyer      = "Loyers"
@@ -33,14 +27,6 @@ public enum CompteAnalytique: String, Codable, Selectable {
     var description : String {
 
         switch self {
-        case .courant:
-             "compte courant détenu dans une banque"
-        case .épargne:
-             "livret d'épargne"
-        case .pea:
-           "compte espèces de PEA"
-        case .titre:
-           "compte espèces de compte titre"
             
         case .caution:
              "garantie remboursable"
