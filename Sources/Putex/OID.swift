@@ -7,6 +7,6 @@
 
 import Foundation
 
-struct OID {
+public struct OID {
     
 }
