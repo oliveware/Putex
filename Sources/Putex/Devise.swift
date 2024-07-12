@@ -104,8 +104,8 @@ public class Devise: Equatable, Codable {
         kind = k
         name = k.rawValue
         
-        decimal_digits = 4
-        rounding = 2
+        decimal_digits = 2
+        rounding = 0
         
         switch k {
         case .EUR:
