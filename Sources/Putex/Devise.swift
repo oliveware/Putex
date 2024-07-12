@@ -81,7 +81,7 @@ public class Devise: Equatable, Codable {
     }
     // valeur entière exprimée en centimes
     public func cents(_ digits: Int, _ nbdec:Int) -> Int {
-        let div = Double(div(decimal_digits - rounding))
+        let div = Double(div(nbdec))
         return Int(Double(digits) / div )
     }
     // valeur exprimée en nombre
