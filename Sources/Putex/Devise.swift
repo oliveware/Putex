@@ -60,9 +60,9 @@ public class Devise: Equatable, Codable {
     var name: String = ""
 
     // nombre de décimales dans le calcul de conversion
-    public var decimal_digits = 4
+    public var decimal_digits = 2
     // décimales à supprimer pour trouver les centimes
-    var rounding = 2
+    var rounding = 0
     public var money_digits:Int {decimal_digits - rounding}
     // diviseur
     func div(_ nbdec:Int) -> Int {
