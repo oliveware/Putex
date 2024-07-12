@@ -75,13 +75,13 @@ public class Devise: Equatable, Codable {
         return d
     }
     // valeur double avec toutes les décimales
-    public func value(_ digits:Int, _ nbdec:Int) -> Double {
+    public func value(_ digits:Int) -> Double {
         let div = Double(div(decimal_digits))
         return Double(digits) / div
     }
     // valeur entière exprimée en centimes
-    public func cents(_ digits: Int, _ nbdec:Int) -> Int {
-        let div = Double(div(nbdec))
+    public func cents(_ digits: Int) -> Int {
+        let div = Double(div(decimal_digits - rounding))
         return Int(Double(digits) / div )
     }
     // valeur exprimée en nombre
