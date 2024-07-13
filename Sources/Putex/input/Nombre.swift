@@ -48,11 +48,19 @@ public struct Nombre: Codable {
         }
     }
     
-    public init(_ d:Double, _ nbdec:Int) {
-        let ent = Int(d)
-        entiere = ent
-        let deci = (d - Double(ent)) * Double(div(nbdec))
-        decimales = String(deci)
+    public init(_ d:Double) {
+        entiere = Int(d)
+        
+        let chiffres = String(d)
+        if let index = chiffres.firstIndex(of: ",") {
+            decimales = String(chiffres[index...])
+        } else {
+            if let index = chiffres.firstIndex(of: ".") {
+                decimales = String(chiffres[index...])
+            } else {
+                decimales = ""
+            }
+        }
     }
     
     func div(_ nbdec:Int) -> Int {
@@ -90,7 +98,30 @@ public struct Nombre: Codable {
     }*/
     
     public func enchiffres(_ dot:String = ",") -> String {
-        let chiffres = String(entiere)
+        var chiffres = ""
+        if entiere < 1000 {
+            chiffres = String(entiere)
+        } else {
+            var main = entiere
+            while main > 999 {
+                let reste = main % 1000
+                var groupe = String(reste)
+                switch groupe.count {
+                case 0 :
+                    chiffres = " 000" + chiffres
+                case 1:
+                    chiffres = " 00" + String(reste) + chiffres
+                case 2:
+                    chiffres = " 0" + String(reste) + chiffres
+                default:
+                    chiffres = " " + String(reste) + chiffres
+                }
+                main = (main - reste) / 1000
+                
+            }
+            if main > 0 { chiffres = String(main) + chiffres}
+        }
+       
         if decimales != "" {
             return chiffres + dot + decimales
         } else {
