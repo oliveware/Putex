@@ -64,7 +64,7 @@ public struct NumberView: View {
         self.classifier = classifier
     }
     var width:CGFloat{
-        var nbc = nombre.enchiffres().count + classifier.count
+        var nbc = nombre.enchiffres().count + classifier.count + 1
         if nbc < 4 { nbc = 4 }
         return CGFloat(nbc * 8)
     }
@@ -102,9 +102,9 @@ public struct NumberView: View {
                             })
                 {
                     Text(nombre.enchiffres() + " " + classifier)
-                        .font(.title)
-                        .frame(width:width*1.5)
-                }
+                        .font(.title2)
+                        
+                }.frame(width:width*1.7)
             }
         }
     }
@@ -133,7 +133,7 @@ struct NumberPreview : View {
     
     var body : some View {
         NumberView($nombre, creation, set, classifier)
-            .frame(width:200, height: 100)
+            //.frame(width:200, height: 100)
     }
 }
 
