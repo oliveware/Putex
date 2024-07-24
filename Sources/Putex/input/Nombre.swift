@@ -28,8 +28,14 @@ public struct Nombre: Codable {
     }
     
     public init(_ s:String){
-        let point = s.split(separator: ".")
-        let virgule = s.split(separator: ",")
+        var enchiffre = ""
+        for character in s {
+            if ["0","1","2","3","4","5","6","7","8","9",",",".","-"].contains(character) {
+                enchiffre += String(character)
+            }
+        }
+        let point = enchiffre.split(separator: ".")
+        let virgule = enchiffre.split(separator: ",")
         if point.count == 1 && virgule.count == 1 {
             entiere = Int(s) ?? 0
         } else {
