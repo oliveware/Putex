@@ -117,10 +117,15 @@ public struct JMA: Codable, Equatable {
     
     public init(_ jma:String) {
         let date = jma.split(separator: "/")
-        jour = Int(date[0]) ?? 0
-        mois = Int(date[1]) ?? 0
-        let a = Int(date[2]) ?? 0
-        année = a < 100 ? 2000 + a : a
+        if date.count == 3 {
+            jour = Int(date[0]) ?? 0
+            mois = Int(date[1]) ?? 0
+            let a = Int(date[2]) ?? 0
+            année = a < 100 ? 2000 + a : a
+        } else {
+            print ("\(jma) n'est pas une date")
+            self = JMA.origine
+        }
     }
     
     public init(_ date :Date){
