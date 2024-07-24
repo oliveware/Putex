@@ -27,6 +27,26 @@ public struct Nombre: Codable {
         decimales = ""
     }
     
+    init(_ s:String){
+        let point = s.split(separator: ".")
+        let virgule = s.split(separator: ",")
+        if point.count == 1 && virgule.count == 1 {
+            entiere = Int(s) ?? 0
+        } else {
+            if point.count == 2 {
+                entiere = Int(point[0]) ?? 0
+                decimales = String(point[1])
+            } else {
+                if virgule.count == 2 {
+                    entiere = Int(virgule[0]) ?? 0
+                    decimales = String(virgule[1])
+                } else {
+                    print("\(s) n'est pas un nombre")
+                }
+            }
+        }
+    }
+    
     // d.count doit correspondre au NumberSet
     init(_ e:String, _ d:String = "", _ negative:Bool = false) {
         entiere = Int(e) ??  0
@@ -105,7 +125,7 @@ public struct Nombre: Codable {
             var main = entiere
             while main > 999 {
                 let reste = main % 1000
-                var groupe = String(reste)
+                let groupe = String(reste)
                 switch groupe.count {
                 case 0 :
                     chiffres = " 000" + chiffres
