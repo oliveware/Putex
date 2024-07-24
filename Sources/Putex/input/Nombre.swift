@@ -27,7 +27,7 @@ public struct Nombre: Codable {
         decimales = ""
     }
     
-    init(_ s:String){
+    public init(_ s:String){
         let point = s.split(separator: ".")
         let virgule = s.split(separator: ",")
         if point.count == 1 && virgule.count == 1 {
