@@ -12,10 +12,10 @@ public enum CompteBancaire: String, Codable, Selectable {
     public var id: Self { self }
     static var all : [Self] = [.courant,.épargne,.pea,.titre]
     
-    public static var selector: String = "compte bancaire"
+    public static var selector: String = "type de compte"
     public var label: String {self.rawValue}
     
-    case courant     = "compte bancaire"
+    case courant     = "compte courant"
     case épargne    = "livret d'épargne"
     case pea        = "PEA - compte espèces PEA"
     case titre     = "compte titre - espèces"

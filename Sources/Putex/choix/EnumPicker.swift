@@ -26,14 +26,33 @@ public struct EnumPicker<T:Selectable>: View {
     
     public var body: some View {
         Picker(T.selector, selection:$selected) {
-            Text("\t\(T.selector)").tag(nil as T?)
+          //  Text("\t\(T.selector)").tag(nil as T?)
             ForEach (cases) { item in
                 Text(item.label).tag(item as T?)
             }
         }//.pickerStyle(.radioGroup)
-        .frame(width: 120, height: 40, alignment: .center)
+        .frame(width: 300, height: 40, alignment: .center)
     }
 }
 
+struct BankPreview: View  {
+    @State var data : CompteBancaire?
+    var body: some View {
+        EnumPicker<CompteBancaire>(CompteBancaire.all, $data)
+            .frame(width:300, height:150)
+    }
+}
+#Preview("bancaire") {
+    BankPreview()
+}
 
-
+struct AnaPreview: View  {
+    @State var data : CompteAnalytique?
+    var body: some View {
+        EnumPicker<CompteAnalytique>(CompteAnalytique.all, $data)
+            .frame(width:300, height:150)
+    }
+}
+#Preview("analytique") {
+    AnaPreview()
+}
