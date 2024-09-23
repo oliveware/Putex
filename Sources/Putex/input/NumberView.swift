@@ -89,7 +89,7 @@ public struct NumberView: View {
                                 .frame(width:CGFloat(nombre.decimales.count) * 11 )
                         }
                         Text(" " + classifier)
-                    }.frame(width:width + 20)
+                    }.frame(minWidth:width + 20)
                     Button(action: {edition = false})
                     {Image(systemName: "checkmark")}
                        
