@@ -65,7 +65,7 @@ public struct NumberView: View {
     }
     var width:CGFloat{
         var nbc = nombre.enchiffres().count + classifier.count + 1
-        if nbc < 4 { nbc = 4 }
+        if nbc < 5 { nbc = 5 }
         return CGFloat(nbc * 8)
     }
     
@@ -82,7 +82,7 @@ public struct NumberView: View {
                        
                     HStack(spacing:0){
                         TextField("", value:$nombre.entiere, format:.number)
-                            .frame(width:CGFloat(String(nombre.entiere).count) * 10 )
+                            .frame(width:CGFloat(String(nombre.entiere).count+1) * 8, alignment: .trailing )
                         if nombre.decimales != "" {
                             Text(".")
                             TextField("", text:$nombre.decimales)

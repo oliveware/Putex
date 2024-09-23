@@ -39,7 +39,7 @@ struct BankPreview: View  {
     @State var data : CompteBancaire?
     var body: some View {
         EnumPicker<CompteBancaire>(CompteBancaire.all, $data)
-            .frame(width:300, height:150)
+            .frame(width:400, height:150)
     }
 }
 #Preview("bancaire") {
@@ -50,7 +50,7 @@ struct AnaPreview: View  {
     @State var data : CompteAnalytique?
     var body: some View {
         EnumPicker<CompteAnalytique>(CompteAnalytique.all, $data)
-            .frame(width:300, height:150)
+            .frame(width:400, height:150)
     }
 }
 #Preview("analytique") {
