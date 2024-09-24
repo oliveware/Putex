@@ -37,7 +37,7 @@ public struct Nombre: Codable {
         let point = enchiffre.split(separator: ".")
         let virgule = enchiffre.split(separator: ",")
         if point.count == 1 && virgule.count == 1 {
-            entiere = Int(s) ?? 0
+            entiere = Int(enchiffre) ?? 0
         } else {
             if point.count == 2 {
                 entiere = Int(point[0]) ?? 0
