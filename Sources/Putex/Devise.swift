@@ -122,6 +122,16 @@ public class Devise: Equatable, Codable {
             name = k.rawValue
         }
     }
+    
+    public convenience init(_ char:Character){
+        switch char {
+        case "€" : self.init(.EUR)
+        case "$" : self.init(.USD)
+        case "£" : self.init(.GBP)
+        default:
+            self.init(.EUR)
+        }
+    }
 }
 
 public extension Int {
