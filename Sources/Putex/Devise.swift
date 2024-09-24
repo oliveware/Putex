@@ -53,7 +53,7 @@ public class Devise: Equatable, Codable {
         case THB = "Thai Baht"
         case ZAR = "South African Rand"
         
-        static func match(_ char:Character) -> Self {
+        public static func match(_ char:Character) -> Self {
             switch char {
             case "€" : self.EUR
             case "$" : self.USD
