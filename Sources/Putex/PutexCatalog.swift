@@ -52,9 +52,11 @@ public struct PutexCatalog: View {
                 
                 Version()
                     .tabItem { Text("version") }.tag(3)
+                OptionalPreview()
+                    .tabItem { Text("optional") }.tag(4)
             }
         }
-        .frame(width: 600, height: 400, alignment: .center)
+        .frame(width: 700, height: 400, alignment: .center)
     }
 }
 
