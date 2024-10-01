@@ -37,7 +37,7 @@ public struct Table: Codable, Identifiable {
     static var all: [String:Table] = [:]
     
     static var nextid = 0
-    static func newid(_ tablename:String) -> String {
+    public static func newid(_ tablename:String) -> String {
         nextid += 1
         return "T-" + tablename + String(nextid)
     }
