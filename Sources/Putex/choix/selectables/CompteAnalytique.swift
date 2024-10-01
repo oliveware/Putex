@@ -7,7 +7,7 @@
 
 import Foundation
 
-public enum CompteAnalytique: String, Codable, Selectable {
+public enum TypeCompteAnalytique: String, Codable, Selectable {
     public var id: Self { self }
     static var all : [Self] = Self.allCases
     static var foncier: [Self] = [.caution,.loyer,.entretien,.admin,.assurance,.réparation,.indemnité,.taxes]
