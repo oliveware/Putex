@@ -6,34 +6,27 @@
 //
 
 
-struct Tablitem: Codable, Identifiable, Hashable {
+struct Tablitem: Codable, Identifiable, Classable {
+    static var prompt = "item"
+    
    
     var id :String {code}
     var code : String
-    var description : String
-    
-    init(_ tablename:String, _ itemid:String, _ itemdesc:String) {
-       // id = Table.newid(tablename)
-        code = itemid
-        description = itemdesc
-        if Table.all[tablename] != nil {
-            Table.all[tablename]!.insert(self)
-        } else {
-            var table = Table(tablename)
-            table.insert(self)
-        }
-    }
+    var label : String
     
     init(_ id:String, _ desc:String) {
         code = id
-        description = desc
+        label = desc
     }
-    
     
 }
 
 
-public struct Table: Codable, Identifiable {
+public struct Table: Codable, Identifiable{
+    public var label: String {name}
+    
+    public static var prompt = "tables"
+    
     static var all: [String:Table] = [:]
     
     static var nextid = 0

@@ -9,43 +9,57 @@ import SwiftUI
 
 public struct TablePicker: View {
     var prompt = ""
-    var width: CGFloat = 200
-    var height: CGFloat = 25
+    var width: CGFloat = 130
+    var height: CGFloat = 125
     
     var table : Table
     @Binding var selected : Tablitem?
     
     init(_ table:Table, _ selected:Binding<Tablitem?>) {
         self.table = table
-        prompt = table.selector
         _selected = selected
     }
     
     public var body: some View {
-       
         VStack {
-            if prompt != "" {
-                Text(prompt).font(.caption)
-            }
-            Picker(prompt, selection: $selected) {
-                ForEach (table.items) {
-                    item in
-                    Text(item.description).tag(item)
-                }
-            }
-            .frame(width: width, height: 25, alignment: .leading)
+            Text(prompt)
+            ScrollView {
+                VStack(spacing:2){
+                    ForEach(0..<table.items.count, id: \.self) {
+                        index in
+                       /* Button(table.items[index].label) {
+                            choose(table.items[index])
+                        }.frame(width:width)*/
+                        Button( action: {
+                            choose(table.items[index])
+                        }){
+                            Text(table.items[index].label)
+                                .frame(width:width)
+                        }
+                        //.param(w: width, h: 20)
+                    }
+                }.frame(alignment: .center)
+            }.frame(height:height)
         }
-            
+    }
+    
+    func choose(_ item:Tablitem) {
+        selected = item
     }
 }
+
+
 
 struct TablePickerPreview : View {
     @State var table = banques
     @State var item: Tablitem? = nil
     
     var body: some View {
-        TablePicker(table, $item)
-            .frame(width:300)
+        VStack {
+            TablePicker(table, $item)
+                .frame(width:300)
+            Text(item?.label ?? "")
+        }.padding(10)
     }
 }
 
