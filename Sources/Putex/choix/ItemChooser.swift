@@ -17,7 +17,7 @@ public struct ItemChooser<T:Classable>: View {
     var items : [T]
     @Binding var selected : T?
     
-    init(_ prompt:String, _ items:[T], _ selected:Binding<T?>) {
+    public init(_ prompt:String, _ items:[T], _ selected:Binding<T?>) {
         self.prompt = prompt
         self.items = items
         // prompt = T.selector
