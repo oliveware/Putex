@@ -1,5 +1,5 @@
 //
-//  Table.swift
+//  Tableref.swift
 //  Putex
 //
 //  Created by Herve Crespel on 01/10/2024.
@@ -8,26 +8,25 @@
 
 struct Tablitem: Codable, Identifiable, Classable {
     static var prompt = "item"
-    
    
-    var id :String {code}
-    var code : String
+    var id : String
     var label : String
     
     init(_ id:String, _ desc:String) {
-        code = id
+        self.id = id
         label = desc
     }
     
 }
 
-
-public struct Table: Codable, Identifiable{
+// le nom Tableref évite la confusion avec Foundation.Table
+//
+public struct Tableref: Codable, Identifiable{
     public var label: String {name}
     
     public static var prompt = "tables"
     
-    static var all: [String:Table] = [:]
+    static var all: [String:Tableref] = [:]
     
     static var nextid = 0
     public static func newid(_ tablename:String) -> String {
@@ -42,13 +41,13 @@ public struct Table: Codable, Identifiable{
     public init(_ tablename:String) {
         name = tablename
         selector = tablename
-        Table.all[name] = self
+        Tableref.all[name] = self
     }
     init(_ tablename:String, _ items:[Tablitem]) {
         name = tablename
         selector = tablename
         self.items = items
-        Table.all[name] = self
+        Tableref.all[name] = self
     }
     
     mutating func insert(_ item:Tablitem) {
@@ -57,7 +56,7 @@ public struct Table: Codable, Identifiable{
 }
 
 
-let banques = Table("banques",
+let banques = Tableref("banques",
 [
     Tablitem("SG", "Société Générale"),
     Tablitem("CM", "Crédit Mutuel"),
