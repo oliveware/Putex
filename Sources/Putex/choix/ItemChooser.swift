@@ -4,13 +4,14 @@
 //
 //  Created by Herve Crespel on 04/10/2024.
 //
-public protocol Classable {
+public protocol Pickable {
+    var id:String {get}
     var label:String {get}
 }
 
 import SwiftUI
 
-public struct ItemChooser<T:Classable>: View {
+public struct ItemChooser<T:Pickable>: View {
     var width: CGFloat = 200
     var height: CGFloat = 125
     var prompt:String

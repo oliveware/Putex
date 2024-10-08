@@ -6,7 +6,7 @@
 //
 
 
-struct Tablitem: Codable, Identifiable, Classable {
+struct Tablitem: Codable, Identifiable, Pickable {
     static var prompt = "item"
    
     var id : String
@@ -16,7 +16,10 @@ struct Tablitem: Codable, Identifiable, Classable {
         self.id = id
         label = desc
     }
-    
+    init<T:Pickable>(_ item:T) {
+        id = item.id
+        label = item.label
+    }
 }
 
 // le nom Tableref évite la confusion avec Foundation.Table
@@ -24,7 +27,7 @@ struct Tablitem: Codable, Identifiable, Classable {
 public struct Tableref: Codable, Identifiable{
     public var label: String {name}
     
-    public static var prompt = "tables"
+    public static var allprompt = "tables"
     
     static var all: [String:Tableref] = [:]
     
@@ -38,15 +41,25 @@ public struct Tableref: Codable, Identifiable{
     var items : [Tablitem] = []
     var selector: String = ""
     
-    public init(_ tablename:String) {
-        name = tablename
-        selector = tablename
+    public init(_ tablename:Mot) {
+        name = tablename.pluriel
+        selector = tablename.singulier
         Tableref.all[name] = self
     }
-    init(_ tablename:String, _ items:[Tablitem]) {
-        name = tablename
-        selector = tablename
+    init(_ tablename:Mot, _ items:[Tablitem]) {
+        name = tablename.pluriel
+        selector = tablename.singulier
         self.items = items
+        Tableref.all[name] = self
+    }
+    init<T:Pickable>(_ tablename:Mot, _ items:[T]) {
+        name = tablename.pluriel
+        selector = tablename.singulier
+        var tablitems: [Tablitem] = []
+        for item in items {
+            tablitems.append(Tablitem(item))
+        }
+        self.items = tablitems
         Tableref.all[name] = self
     }
     
@@ -56,7 +69,7 @@ public struct Tableref: Codable, Identifiable{
 }
 
 
-let banques = Tableref("banques",
+let banques = Tableref(Mot("banque", "banques"),
 [
     Tablitem("SG", "Société Générale"),
     Tablitem("CM", "Crédit Mutuel"),

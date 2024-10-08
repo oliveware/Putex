@@ -12,11 +12,11 @@ public struct TablerefPicker: View {
     var width: CGFloat = 130
     var height: CGFloat = 125
     
-    var table : Tableref
+    @Binding var table : Tableref
     @Binding var selected : Tablitem?
     
-    init(_ table:Tableref, _ selected:Binding<Tablitem?>) {
-        self.table = table
+    init(_ table:Binding<Tableref>, _ selected:Binding<Tablitem?>) {
+        self._table = table
         _selected = selected
     }
     
@@ -27,9 +27,6 @@ public struct TablerefPicker: View {
                 VStack(spacing:2){
                     ForEach(0..<table.items.count, id: \.self) {
                         index in
-                       /* Button(table.items[index].label) {
-                            choose(table.items[index])
-                        }.frame(width:width)*/
                         Button( action: {
                             choose(table.items[index])
                         }){
@@ -38,8 +35,15 @@ public struct TablerefPicker: View {
                         }
                         //.param(w: width, h: 20)
                     }
+                   /* Button( action: {
+                        table.insert(Tablitem("id","label"))
+                    }){
+                        Text("ajouter un item")
+                            .frame(width:width)
+                    }.padding(.top, 10)*/
                 }.frame(alignment: .center)
             }.frame(height:height)
+                      
         }
     }
     
@@ -56,7 +60,7 @@ struct TablerefPickerPreview : View {
     
     var body: some View {
         VStack {
-            TablerefPicker(table, $item)
+            TablerefPicker($table, $item)
                 .frame(width:300)
             Text(item?.label ?? "")
         }.padding(10)
