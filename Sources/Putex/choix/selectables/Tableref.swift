@@ -66,6 +66,16 @@ public struct Tableref: Codable, Identifiable{
     mutating func insert(_ item:Tablitem) {
         items.append(item)
     }
+    
+    subscript(_ id:String) -> String {
+        var found = "nil"
+        for item in items {
+            if item.id == id {
+                found = item.label
+            }
+        }
+        return found
+    }
 }
 
 

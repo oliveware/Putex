@@ -4,6 +4,7 @@
 //
 //  Created by Herve Crespel on 04/10/2024.
 //
+
 public protocol Pickable {
     var id:String {get}
     var label:String {get}
@@ -16,9 +17,9 @@ public struct ItemChooser<T:Pickable>: View {
     var height: CGFloat = 125
     var prompt:String
     var items : [T]
-    @Binding var selected : T?
+    @Binding var selected : String?
     
-    public init(_ prompt:String, _ items:[T], _ selected:Binding<T?>) {
+    public init(_ prompt:String, _ items:[T], _ selected:Binding<String?>) {
         self.prompt = prompt
         self.items = items
         // prompt = T.selector
@@ -45,7 +46,7 @@ public struct ItemChooser<T:Pickable>: View {
     }
     
     func choose(_ item:T) {
-        selected = item
+        selected = item.id
     }
 }
 
@@ -53,13 +54,15 @@ public struct ItemChooser<T:Pickable>: View {
 
 struct ItemChooserPreview : View {
     @State var table = banques
-    @State var item: Tablitem? = nil
+    @State var itemid: String? = nil
     
     var body: some View {
         VStack {
-            ItemChooser("banque",table.items, $item)
+            ItemChooser("banque",table.items, $itemid)
                 .frame(width:300)
-            Text(item?.label ?? "")
+            if itemid != nil {
+                Text(table[itemid!])
+            }
         }.padding(10)
     }
 }
