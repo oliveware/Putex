@@ -78,7 +78,7 @@ public struct JMA: Codable, Equatable {
                     if let before = d.date {
                         return JMA(before)
                     } else {
-                        Erreur("date - delta impossible","JMA", "static -").show()
+            let _ = Erreur("date - delta impossible","JMA", "static -").show
                         return JMA.origine
                     }
                 }
