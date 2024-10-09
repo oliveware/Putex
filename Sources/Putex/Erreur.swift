@@ -24,7 +24,10 @@ public struct Erreur {
     
     public var show: String {
         let warn = "erreur - \(message)\n(\(type) - \(prop))"
-        print (warn)
         return warn
+    }
+    
+    public func warn() {
+        print(show)
     }
 }
