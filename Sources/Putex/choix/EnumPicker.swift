@@ -38,8 +38,13 @@ public struct EnumPicker<T:Enumerable>: View {
 struct BankPreview: View  {
     @State var data : TypeCompteBancaire?
     var body: some View {
-        EnumPicker<TypeCompteBancaire>(TypeCompteBancaire.all, $data)
-            .frame(width:400, height:150)
+        VStack {
+            Text("le choix retourne un cas")
+                .font(.title2)
+                .padding(20)
+            EnumPicker<TypeCompteBancaire>(TypeCompteBancaire.all, $data)
+                .frame(width:400, height:150)
+        }
     }
 }
 #Preview("bancaire") {
@@ -49,8 +54,13 @@ struct BankPreview: View  {
 struct AnaPreview: View  {
     @State var data : TypeCompteAnalytique?
     var body: some View {
-        EnumPicker<TypeCompteAnalytique>(TypeCompteAnalytique.all, $data)
-            .frame(width:400, height:150)
+        VStack {
+            Text("le choix retourne un cas")
+                .font(.title2)
+                .padding(20)
+            EnumPicker<TypeCompteAnalytique>(TypeCompteAnalytique.all, $data)
+                .frame(width:400, height:150)
+        }
     }
 }
 #Preview("analytique") {

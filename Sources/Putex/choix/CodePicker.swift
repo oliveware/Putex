@@ -13,9 +13,9 @@ public struct CodePicker: View {
     var height: CGFloat = 125
     
     var table : Coderef
-    @Binding var selected : Coditem?
+    @Binding var selected : String?
     
-    public init(_ table:Coderef, _ selected:Binding<Coditem?>, _ prompt:String?) {
+    public init(_ table:Coderef, _ selected:Binding<String?>, _ prompt:String?) {
         self.prompt = prompt ?? table.name.pluriel
         self.table = table
         _selected = selected
@@ -49,7 +49,7 @@ public struct CodePicker: View {
     }
     
     func choose(_ item:Coditem) {
-        selected = item
+        selected = item.code
     }
 }
 
@@ -57,13 +57,16 @@ public struct CodePicker: View {
 
 struct CodePickerPreview : View {
    var table = banques
-    @State var item: Coditem? = nil
+    @State var item: String? = nil
     
     var body: some View {
         VStack {
-            CodePicker(table, $item, nil)
+            Text("le choix retourne un code")
+                .font(.title2)
+                .padding(20)
+            CodePicker(table, $item, "")
                 .frame(width:300)
-            Text(item?.label ?? "")
+            Text(item == nil ? "" : "code : " + item!)
         }.padding(10)
     }
 }

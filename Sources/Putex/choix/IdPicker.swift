@@ -58,10 +58,13 @@ struct IdPickerPreview : View {
     
     var body: some View {
         VStack {
+            Text("le choix retourne un id")
+                .font(.title2)
+                .padding(20)
             IdPicker(table.items, $itemid, "banque")
                 .frame(width:300)
             if itemid != nil {
-                Text(table[itemid!])
+                Text("id : " + itemid!)
             }
         }.padding(10)
     }

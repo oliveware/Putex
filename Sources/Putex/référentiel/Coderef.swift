@@ -39,9 +39,9 @@ public struct Coderef: Codable, Identifiable {
     }
     
     static var nextcode = 0
-    public static func newcode(_ tablename:String) -> String {
+    public static func newcode(_ domain:String) -> String {
         nextcode += 1
-        return "T-" + tablename + String(nextcode)
+        return "T-" + domain + String(nextcode)
     }
     public var id : String { name.pluriel }
     var name : Mot
@@ -91,9 +91,4 @@ public struct Coderef: Codable, Identifiable {
 }
 
 
-let banques = Coderef(Mot("banque", "banques"),
-[
-    Coditem("SG", "Société Générale"),
-    Coditem("CM", "Crédit Mutuel"),
-    Coditem("BP", "Banque Postale")
-])
+
