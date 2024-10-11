@@ -39,7 +39,7 @@ struct BankPreview: View  {
     @State var data : TypeCompteBancaire?
     var body: some View {
         VStack {
-            Text("le choix retourne un cas")
+            Text("le choix retourne un cas d'énumération")
                 .font(.title2)
                 .padding(20)
             EnumPicker<TypeCompteBancaire>(TypeCompteBancaire.all, $data)
