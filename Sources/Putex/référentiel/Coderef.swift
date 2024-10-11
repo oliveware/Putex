@@ -59,7 +59,7 @@ public struct Coderef: Codable, Identifiable {
         self.items = items
         Coderef.all[name.pluriel] = self
     }
-    init<T:Pickable>(_ tablename:Mot, _ items:[T]) {
+    public init<T:Pickable>(_ tablename:Mot, _ items:[T]) {
         name = tablename
         selector = tablename.singulier
         var tablitems: [Coditem] = []
