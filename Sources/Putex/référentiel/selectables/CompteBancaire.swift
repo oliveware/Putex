@@ -8,7 +8,7 @@
 import Foundation
 
 
-public enum TypeCompteBancaire: String, Codable, Selectable {
+public enum TypeCompteBancaire: String, Codable, Enumerable {
     public var id: Self { self }
     static var all : [Self] = [.courant,.épargne,.pea,.titre]
     

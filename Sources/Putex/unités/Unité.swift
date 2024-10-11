@@ -8,7 +8,7 @@
 import Foundation
 import SwiftUI
 
-public enum Unité: String, Codable, Selectable {
+public enum Unité: String, Codable, Enumerable {
     static var all: [Unité] {
         Self.allCases
     }

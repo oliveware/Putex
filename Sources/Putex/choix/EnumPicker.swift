@@ -7,14 +7,14 @@
 
 import SwiftUI
 
-public protocol Selectable: CaseIterable, Hashable, Identifiable {
+public protocol Enumerable: CaseIterable, Hashable, Identifiable {
    // static var all: [Self] {get}
     static var selector: String {get}
     var label: String {get}
    
 }
 
-public struct EnumPicker<T:Selectable>: View {
+public struct EnumPicker<T:Enumerable>: View {
     let cases: [T]
     var prompt: String = ""
     @Binding var selected: T?
