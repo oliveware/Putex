@@ -31,6 +31,12 @@ public struct Coderef: Codable, Identifiable {
     public static var allprompt = "tables"
     
     static var all: [String:Coderef] = [:]
+    static func find(_ name:String) -> Coderef {
+        all[name] ?? empty
+    }
+    static var empty: Coderef {
+        Coderef(Mot("vide",nil))
+    }
     
     static var nextcode = 0
     public static func newcode(_ tablename:String) -> String {
@@ -67,6 +73,11 @@ public struct Coderef: Codable, Identifiable {
     mutating func insert(_ item:Coditem) {
         items.append(item)
     }
+    mutating func insert<T:Pickable>(_ item:T) {
+        items.append(Coditem(item))
+    }
+    
+    
     
     subscript(_ code:String) -> String {
         var found = "nil"
