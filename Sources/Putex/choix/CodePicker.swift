@@ -13,9 +13,9 @@ public struct CodePicker: View {
     var height: CGFloat = 125
     
     var table : Coderef
-    @Binding var selected : Tablitem?
+    @Binding var selected : Coditem?
     
-    init(_ table:Coderef, _ selected:Binding<Tablitem?>) {
+    init(_ table:Coderef, _ selected:Binding<Coditem?>) {
         self.table = table
         _selected = selected
     }
@@ -36,7 +36,7 @@ public struct CodePicker: View {
                         //.param(w: width, h: 20)
                     }
                    /* Button( action: {
-                        table.insert(Tablitem("id","label"))
+                        table.insert(Coditem("id","label"))
                     }){
                         Text("ajouter un item")
                             .frame(width:width)
@@ -47,7 +47,7 @@ public struct CodePicker: View {
         }
     }
     
-    func choose(_ item:Tablitem) {
+    func choose(_ item:Coditem) {
         selected = item
     }
 }
@@ -56,7 +56,7 @@ public struct CodePicker: View {
 
 struct CodePickerPreview : View {
    var table = banques
-    @State var item: Tablitem? = nil
+    @State var item: Coditem? = nil
     
     var body: some View {
         VStack {

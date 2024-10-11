@@ -6,39 +6,40 @@
 //
 
 
-struct Tablitem: Codable, Identifiable, Pickable {
-    static var prompt = "item"
-   
-    var id : String
+struct Coditem: Codable, Identifiable, Pickable {
+    static var selector = "item"
+    
+    var id:String {code}
+    var code : String
     var label : String
     
-    init(_ id:String, _ desc:String) {
-        self.id = id
+    init(_ code:String, _ desc:String) {
+        self.code = code
         label = desc
     }
     init<T:Pickable>(_ item:T) {
-        id = item.id
+        code = item.id
         label = item.label
     }
 }
 
 // le nom Coderef évite la confusion avec Foundation.Table
 //
-public struct Coderef: Codable, Identifiable{
+public struct Coderef: Codable, Identifiable {
     public var label: String {name}
     
     public static var allprompt = "tables"
     
     static var all: [String:Coderef] = [:]
     
-    static var nextid = 0
-    public static func newid(_ tablename:String) -> String {
-        nextid += 1
-        return "T-" + tablename + String(nextid)
+    static var nextcode = 0
+    public static func newcode(_ tablename:String) -> String {
+        nextcode += 1
+        return "T-" + tablename + String(nextcode)
     }
     public var id : String { name }
     var name : String = ""
-    var items : [Tablitem] = []
+    var items : [Coditem] = []
     var selector: String = ""
     
     public init(_ tablename:Mot) {
@@ -46,7 +47,7 @@ public struct Coderef: Codable, Identifiable{
         selector = tablename.singulier
         Coderef.all[name] = self
     }
-    init(_ tablename:Mot, _ items:[Tablitem]) {
+    init(_ tablename:Mot, _ items:[Coditem]) {
         name = tablename.pluriel
         selector = tablename.singulier
         self.items = items
@@ -55,22 +56,22 @@ public struct Coderef: Codable, Identifiable{
     init<T:Pickable>(_ tablename:Mot, _ items:[T]) {
         name = tablename.pluriel
         selector = tablename.singulier
-        var tablitems: [Tablitem] = []
+        var tablitems: [Coditem] = []
         for item in items {
-            tablitems.append(Tablitem(item))
+            tablitems.append(Coditem(item))
         }
         self.items = tablitems
         Coderef.all[name] = self
     }
     
-    mutating func insert(_ item:Tablitem) {
+    mutating func insert(_ item:Coditem) {
         items.append(item)
     }
     
-    subscript(_ id:String) -> String {
+    subscript(_ code:String) -> String {
         var found = "nil"
         for item in items {
-            if item.id == id {
+            if item.code == code {
                 found = item.label
             }
         }
@@ -81,7 +82,7 @@ public struct Coderef: Codable, Identifiable{
 
 let banques = Coderef(Mot("banque", "banques"),
 [
-    Tablitem("SG", "Société Générale"),
-    Tablitem("CM", "Crédit Mutuel"),
-    Tablitem("BP", "Banque Postale")
+    Coditem("SG", "Société Générale"),
+    Coditem("CM", "Crédit Mutuel"),
+    Coditem("BP", "Banque Postale")
 ])
