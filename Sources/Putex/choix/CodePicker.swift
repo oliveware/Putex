@@ -15,7 +15,8 @@ public struct CodePicker: View {
     var table : Coderef
     @Binding var selected : Coditem?
     
-    init(_ table:Coderef, _ selected:Binding<Coditem?>) {
+    init(_ table:Coderef, _ selected:Binding<Coditem?>, _ prompt:String?) {
+        self.prompt = prompt ?? table.name.pluriel
         self.table = table
         _selected = selected
     }
@@ -60,7 +61,7 @@ struct CodePickerPreview : View {
     
     var body: some View {
         VStack {
-            CodePicker(table, $item)
+            CodePicker(table, $item, nil)
                 .frame(width:300)
             Text(item?.label ?? "")
         }.padding(10)

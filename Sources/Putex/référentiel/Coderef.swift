@@ -26,7 +26,7 @@ struct Coditem: Codable, Identifiable, Pickable {
 // le nom Coderef évite la confusion avec Foundation.Table
 //
 public struct Coderef: Codable, Identifiable {
-    public var label: String {name}
+    public var label: String {name.pluriel}
     
     public static var allprompt = "tables"
     
@@ -43,31 +43,31 @@ public struct Coderef: Codable, Identifiable {
         nextcode += 1
         return "T-" + tablename + String(nextcode)
     }
-    public var id : String { name }
-    var name : String = ""
+    public var id : String { name.pluriel }
+    var name : Mot
     var items : [Coditem] = []
     var selector: String = ""
     
     public init(_ tablename:Mot) {
-        name = tablename.pluriel
+        name = tablename
         selector = tablename.singulier
-        Coderef.all[name] = self
+        Coderef.all[name.pluriel] = self
     }
     init(_ tablename:Mot, _ items:[Coditem]) {
-        name = tablename.pluriel
+        name = tablename
         selector = tablename.singulier
         self.items = items
-        Coderef.all[name] = self
+        Coderef.all[name.pluriel] = self
     }
     init<T:Pickable>(_ tablename:Mot, _ items:[T]) {
-        name = tablename.pluriel
+        name = tablename
         selector = tablename.singulier
         var tablitems: [Coditem] = []
         for item in items {
             tablitems.append(Coditem(item))
         }
         self.items = tablitems
-        Coderef.all[name] = self
+        Coderef.all[name.pluriel] = self
     }
     
     mutating func insert(_ item:Coditem) {
