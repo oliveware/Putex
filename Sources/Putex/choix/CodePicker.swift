@@ -64,7 +64,7 @@ public struct CodePicker: View {
         self.prompt = prompt ?? table.name.pluriel
         self.table = table
         _selected = selected
-        choice = "choisir " + table.name.singulier
+        choice = "choisir " + table.name.indéterminé
     }
     
     public var body: some View {

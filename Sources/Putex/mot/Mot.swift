@@ -18,6 +18,13 @@ public enum Genre : String, Codable {
     case f = "féminin"
     case m = "masculin"
     case n = "neutre"
+    
+    var indéterminé:String {
+        self == .f ? "une" : "un"
+    }
+    var déterminé:String {
+        self == .f ? "la" : "le"
+    }
 }
 
 struct GenrePicker: View {
@@ -44,6 +51,19 @@ public struct Mot : Codable {
         singulier = s
         pluriel = p ?? ""
         genre = g
+    }
+    
+    var indéterminé: String {
+        genre.indéterminé + " " + singulier
+    }
+    var indéterminés: String {
+        "des " + pluriel
+    }
+    var déterminé: String {
+        genre.déterminé + " " + singulier
+    }
+    var déterminés: String {
+        "les " + pluriel
     }
     
     subscript(_ nb:Int = 1) -> String {
