@@ -31,7 +31,7 @@ public struct Coderef: Codable, Identifiable {
     public static var allprompt = "tables"
     
     static var all: [String:Coderef] = [:]
-    static func find(_ name:String) -> Coderef {
+    public static func find(_ name:String) -> Coderef {
         all[name] ?? empty
     }
     static var empty: Coderef {
