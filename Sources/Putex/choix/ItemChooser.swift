@@ -12,7 +12,7 @@ public protocol Pickable {
 
 import SwiftUI
 
-public struct ItemChooser<T:Pickable>: View {
+public struct IdPicker<T:Pickable>: View {
     var width: CGFloat = 200
     var height: CGFloat = 125
     var prompt:String
@@ -52,13 +52,13 @@ public struct ItemChooser<T:Pickable>: View {
 
 
 
-struct ItemChooserPreview : View {
+struct IdPickerPreview : View {
     @State var table = banques
     @State var itemid: String? = nil
     
     var body: some View {
         VStack {
-            ItemChooser("banque",table.items, $itemid)
+            IdPicker("banque",table.items, $itemid)
                 .frame(width:300)
             if itemid != nil {
                 Text(table[itemid!])
@@ -69,5 +69,5 @@ struct ItemChooserPreview : View {
 
 
 #Preview {
-    ItemChooserPreview()
+    IdPickerPreview()
 }

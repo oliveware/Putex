@@ -1,5 +1,5 @@
 //
-//  ClassLookup.swift
+//  Idref.swift
 //  Putex
 //
 //  Created by Herve Crespel on 04/10/2024.
@@ -66,7 +66,7 @@ struct Lookcreator<T:Lookable>: View {
 
 import SwiftUI
 
-public struct ClassLookup<T:Lookable>: View {
+public struct ClassPicker<T:Lookable>: View {
     var width: CGFloat = 200
     var height: CGFloat = 65
     @Binding var items : [T]
@@ -120,13 +120,13 @@ public struct ClassLookup<T:Lookable>: View {
 
 
 
-struct ClassLookupPreview : View {
+struct ClassPickerPreview : View {
     @State var items = Looksample.all
     @State var item = Looksample("","")
     
     var body: some View {
         VStack {
-            ClassLookup($items, $item)
+            ClassPicker($items, $item)
                 //.frame(width:300,height:450)
             Text(item.label)
         }.padding(10)
@@ -136,5 +136,5 @@ struct ClassLookupPreview : View {
 
 
 #Preview {
-    ClassLookupPreview()
+    ClassPickerPreview()
 }

@@ -1,5 +1,5 @@
 //
-//  Tableref.swift
+//  Coderef.swift
 //  Putex
 //
 //  Created by Herve Crespel on 01/10/2024.
@@ -22,14 +22,14 @@ struct Tablitem: Codable, Identifiable, Pickable {
     }
 }
 
-// le nom Tableref évite la confusion avec Foundation.Table
+// le nom Coderef évite la confusion avec Foundation.Table
 //
-public struct Tableref: Codable, Identifiable{
+public struct Coderef: Codable, Identifiable{
     public var label: String {name}
     
     public static var allprompt = "tables"
     
-    static var all: [String:Tableref] = [:]
+    static var all: [String:Coderef] = [:]
     
     static var nextid = 0
     public static func newid(_ tablename:String) -> String {
@@ -44,13 +44,13 @@ public struct Tableref: Codable, Identifiable{
     public init(_ tablename:Mot) {
         name = tablename.pluriel
         selector = tablename.singulier
-        Tableref.all[name] = self
+        Coderef.all[name] = self
     }
     init(_ tablename:Mot, _ items:[Tablitem]) {
         name = tablename.pluriel
         selector = tablename.singulier
         self.items = items
-        Tableref.all[name] = self
+        Coderef.all[name] = self
     }
     init<T:Pickable>(_ tablename:Mot, _ items:[T]) {
         name = tablename.pluriel
@@ -60,7 +60,7 @@ public struct Tableref: Codable, Identifiable{
             tablitems.append(Tablitem(item))
         }
         self.items = tablitems
-        Tableref.all[name] = self
+        Coderef.all[name] = self
     }
     
     mutating func insert(_ item:Tablitem) {
@@ -79,7 +79,7 @@ public struct Tableref: Codable, Identifiable{
 }
 
 
-let banques = Tableref(Mot("banque", "banques"),
+let banques = Coderef(Mot("banque", "banques"),
 [
     Tablitem("SG", "Société Générale"),
     Tablitem("CM", "Crédit Mutuel"),

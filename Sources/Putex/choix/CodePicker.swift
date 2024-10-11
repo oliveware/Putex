@@ -1,5 +1,5 @@
 //
-//  TablerefPicker.swift
+//  CodePicker.swift
 //  Putex
 //
 //  Created by Herve Crespel on 01/10/2024.
@@ -7,15 +7,15 @@
 
 import SwiftUI
 
-public struct TablerefPicker: View {
+public struct CodePicker: View {
     var prompt = ""
     var width: CGFloat = 130
     var height: CGFloat = 125
     
-    var table : Tableref
+    var table : Coderef
     @Binding var selected : Tablitem?
     
-    init(_ table:Tableref, _ selected:Binding<Tablitem?>) {
+    init(_ table:Coderef, _ selected:Binding<Tablitem?>) {
         self.table = table
         _selected = selected
     }
@@ -54,13 +54,13 @@ public struct TablerefPicker: View {
 
 
 
-struct TablerefPickerPreview : View {
+struct CodePickerPreview : View {
    var table = banques
     @State var item: Tablitem? = nil
     
     var body: some View {
         VStack {
-            TablerefPicker(table, $item)
+            CodePicker(table, $item)
                 .frame(width:300)
             Text(item?.label ?? "")
         }.padding(10)
@@ -69,5 +69,5 @@ struct TablerefPickerPreview : View {
 
 
 #Preview {
-    TablerefPickerPreview()
+    CodePickerPreview()
 }
