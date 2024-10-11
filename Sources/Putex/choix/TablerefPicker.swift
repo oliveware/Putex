@@ -12,11 +12,11 @@ public struct TablerefPicker: View {
     var width: CGFloat = 130
     var height: CGFloat = 125
     
-    @Binding var table : Tableref
+    var table : Tableref
     @Binding var selected : Tablitem?
     
-    init(_ table:Binding<Tableref>, _ selected:Binding<Tablitem?>) {
-        self._table = table
+    init(_ table:Tableref, _ selected:Binding<Tablitem?>) {
+        self.table = table
         _selected = selected
     }
     
@@ -55,12 +55,12 @@ public struct TablerefPicker: View {
 
 
 struct TablerefPickerPreview : View {
-    @State var table = banques
+   var table = banques
     @State var item: Tablitem? = nil
     
     var body: some View {
         VStack {
-            TablerefPicker($table, $item)
+            TablerefPicker(table, $item)
                 .frame(width:300)
             Text(item?.label ?? "")
         }.padding(10)
