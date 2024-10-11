@@ -6,12 +6,12 @@
 //
 
 
-struct Coditem: Codable, Identifiable, Pickable {
-    static var selector = "item"
+public struct Coditem: Codable, Identifiable, Pickable {
+    public static var selector = "item"
     
-    var id:String {code}
+    public var id:String {code}
     var code : String
-    var label : String
+    public var label : String
     
     init(_ code:String, _ desc:String) {
         self.code = code

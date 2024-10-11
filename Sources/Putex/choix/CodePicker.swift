@@ -15,7 +15,7 @@ public struct CodePicker: View {
     var table : Coderef
     @Binding var selected : Coditem?
     
-    init(_ table:Coderef, _ selected:Binding<Coditem?>, _ prompt:String?) {
+    public init(_ table:Coderef, _ selected:Binding<Coditem?>, _ prompt:String?) {
         self.prompt = prompt ?? table.name.pluriel
         self.table = table
         _selected = selected
