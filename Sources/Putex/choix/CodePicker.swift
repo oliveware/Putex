@@ -60,16 +60,16 @@ public struct CodePicker: View {
     @State var choice:String
     @State var open = false
     
-    public init(_ table:Coderef, _ selected:Binding<String?>, _ prompt:String?) {
+    public init(_ table:Coderef, _ selected:Binding<String?>, _ prompt:String?, _ choice:String?) {
         self.prompt = prompt ?? table.name.pluriel
         self.table = table
         _selected = selected
-        choice = "choisir " + table.name.indéterminé
+        self.choice = choice ?? "choisir " + table.name.indéterminé
     }
     
     public var body: some View {
         HStack {
-            Text(prompt)
+            if prompt != "" {Text(prompt)}
             Button(action:{open = true})
             {
                 Text(choice)
@@ -90,7 +90,7 @@ struct CodePickerPreview : View {
             Text("le choix retourne un code")
                 .font(.title2)
                 .padding(20)
-            CodePicker(table, $item, "")
+            CodePicker(table, $item, "", nil)
                 .frame(width:300)
             Text(item == nil ? "" : "code choisi: " + item!)
         }.padding(10)
