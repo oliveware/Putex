@@ -15,12 +15,14 @@ public struct CodeChoice: View {
     var table : Coderef
     @Binding var selected : String?
     @Binding var choice : String
+    @Binding var open:Bool
     
-    public init(_ table:Coderef, _ selected:Binding<String?>, _ choice:Binding<String>,_ prompt:String?) {
+    public init(_ open: Binding<Bool>, _ table:Coderef, _ selected:Binding<String?>, _ choice:Binding<String>,_ prompt:String?) {
         self.prompt = prompt ?? table.name.pluriel
         self.table = table
         _selected = selected
         _choice = choice
+        _open = open
     }
     
     public var body: some View {
@@ -47,6 +49,7 @@ public struct CodeChoice: View {
     func choose(_ item:Coditem) {
         selected = item.code
         choice = item.label
+        open = false
     }
 }
 
@@ -74,7 +77,7 @@ public struct CodePicker: View {
             {
                 Text(choice)
             }
-            .sheet(isPresented: $open, content: {CodeChoice(table, $selected, $choice, prompt)})
+            .sheet(isPresented: $open, content: {CodeChoice($open, table, $selected, $choice, prompt)})
         }
     }
 }
@@ -101,15 +104,21 @@ struct CodeChoicePreview : View {
    var table = banques
     @State var code: String? = nil
     @State var choice = ""
+    @State var open = true
     
     var body: some View {
         VStack {
             Text("le choix retourne un code")
                 .font(.title2)
                 .padding(20)
-            CodeChoice(table, $code, $choice, "")
-                .frame(width:300)
-            Text(code == nil ? "" : "code choisi: " + code!)
+            if open {
+                CodeChoice($open, table, $code, $choice, "")
+                    .frame(width:300)
+            } else {
+                Button(action:{open = true})
+                {
+                    Text(code == nil ? "" : "code choisi: " + code!)}
+            }
         }.padding(10)
     }
 }
