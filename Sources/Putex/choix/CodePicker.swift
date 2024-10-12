@@ -13,42 +13,49 @@ public struct CodeChoice: View {
     var height: CGFloat = 125
     
     var table : Coderef
-    @Binding var selected : String?
-    @Binding var choice : String
+    @Binding var code : String?
+    @Binding var label : String
     @Binding var open:Bool
     
     public init(_ open: Binding<Bool>, _ table:Coderef, _ selected:Binding<String?>, _ choice:Binding<String>,_ prompt:String?) {
-        self.prompt = prompt ?? table.name.pluriel
+        self.prompt = prompt ?? "Choisir " + table.name.indéterminé
         self.table = table
-        _selected = selected
-        _choice = choice
+        _code = selected
+        _label = choice
         _open = open
     }
     
     public var body: some View {
-        VStack {
-            Text(prompt)
-            ScrollView {
-                VStack(spacing:2){
-                    ForEach(0..<table.items.count, id: \.self) {
-                        index in
-                        Button( action: {
-                            choose(table.items[index])
-                        }){
-                            Text(table.items[index].label)
-                                .frame(width:width)
+        if open {
+            VStack {
+                Text(prompt)
+                ScrollView {
+                    VStack(spacing:2){
+                        ForEach(0..<table.items.count, id: \.self) {
+                            index in
+                            Button( action: {
+                                choose(table.items[index])
+                            }){
+                                Text(table.items[index].label)
+                                    .frame(width:width)
+                            }
+                            //.param(w: width, h: 20)
                         }
-                        //.param(w: width, h: 20)
-                    }
-                    
-                }.frame(alignment: .center)
-            }.frame(height:height)
+                        
+                    }.frame(alignment: .center)
+                }.frame(height:height)
+            }
+        } else {
+            Button(action:{open = true})
+            {
+            Text(code == nil ? prompt : label)}
         }
+        
     }
     
     func choose(_ item:Coditem) {
-        selected = item.code
-        choice = item.label
+        code = item.code
+        label = item.label
         open = false
     }
 }
@@ -103,22 +110,18 @@ struct CodePickerPreview : View {
 struct CodeChoicePreview : View {
    var table = banques
     @State var code: String? = nil
-    @State var choice = ""
-    @State var open = true
+    @State var label = "choisir une banque"
+    @State var open = false
     
     var body: some View {
         VStack {
-            Text("le choix retourne un code")
+            Text("le choix retourne code et label")
                 .font(.title2)
                 .padding(20)
-            if open {
-                CodeChoice($open, table, $code, $choice, "")
+           
+                CodeChoice($open, table, $code, $label, nil)
                     .frame(width:300)
-            } else {
-                Button(action:{open = true})
-                {
-                    Text(code == nil ? "" : "code choisi: " + code!)}
-            }
+          
         }.padding(10)
     }
 }

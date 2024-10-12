@@ -5,7 +5,7 @@
 //  Created by Herve Crespel on 11/10/2024.
 //
 
-let banques = Coderef(Mot("banque", "banques"),
+let banques = Coderef(Mot("banque", "banques", .f),
 [
     Coditem("SG", "Société Générale"),
     Coditem("CM", "Crédit Mutuel"),
