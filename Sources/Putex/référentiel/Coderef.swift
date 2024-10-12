@@ -30,7 +30,7 @@ public struct Coderef: Codable, Identifiable {
     
     public static var allprompt = "tables"
     
-    static var all: [String:Coderef] = [:]
+    public static var all: [String:Coderef] = [:]
     public static func find(_ name:String) -> Coderef {
         all[name] ?? empty
     }
@@ -68,6 +68,10 @@ public struct Coderef: Codable, Identifiable {
         }
         self.items = tablitems
         Coderef.all[name.pluriel] = self
+    }
+    
+    public mutating func insert(_ code:String, _ label:String){
+        insert(Coditem(code, label))
     }
     
     mutating func insert(_ item:Coditem) {
