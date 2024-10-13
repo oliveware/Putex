@@ -48,7 +48,7 @@ public struct CodeChoice: View {
         } else {
             Button(action:{open = true})
             {
-            Text(code == nil ? prompt : label)}
+                Text(code == nil ? table.name.singulier : label)}
             .disabled(table.items.isEmpty)
         }
         
