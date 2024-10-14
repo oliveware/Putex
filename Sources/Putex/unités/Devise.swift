@@ -16,7 +16,7 @@ public class Devise: Equatable, Codable {
         lhs.code == rhs.code
     }
     
-    public enum Kind: String, Codable{
+    public enum Kind: String, Codable, Enumerable{
         case AED = "United Arab Emirates Dirham"
         case AFN = "Afghan Afghani"
         case EUR = "Euro"
@@ -52,6 +52,14 @@ public class Devise: Equatable, Codable {
         case SGD = "Singapore Dollar"
         case THB = "Thai Baht"
         case ZAR = "South African Rand"
+        
+        public var id:String {self.rawValue}
+        public var label:String {self.rawValue}
+        public static var selector = "devise"
+        //static var all:[Kind] = [.EUR,.USD,.GBP]
+        static var all: [Kind] {
+            Self.allCases
+        }
         
         public static func match(_ char:Character) -> Self {
             switch char {
