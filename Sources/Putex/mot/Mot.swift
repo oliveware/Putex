@@ -28,7 +28,7 @@ public enum Genre : String, Codable {
 }
 
 struct GenrePicker: View {
-    @Binding var selected: Genre
+    @Binding var selected: Genre?
     
     var body:some View {
         Picker("", selection: $selected) {
@@ -43,7 +43,7 @@ struct GenrePicker: View {
 }
 
 public struct Mot : Codable {
-    var genre : Genre
+    var genre : Genre?
     var singulier:String
     var pluriel:String
 
@@ -54,13 +54,13 @@ public struct Mot : Codable {
     }
     
     var indéterminé: String {
-        genre.indéterminé + " " + singulier
+        (genre ?? .m).indéterminé + " " + singulier
     }
     var indéterminés: String {
         "des " + pluriel
     }
     var déterminé: String {
-        genre.déterminé + " " + singulier
+        (genre ?? .m).déterminé + " " + singulier
     }
     var déterminés: String {
         "les " + pluriel

@@ -36,15 +36,20 @@ public class Devise2: Equatable, Codable, Pickable {
     
     
     var code = ""
-    var symbol: String = ""
-    var symbol_native = ""
     var name: String = ""
+    var symbol: String?
+    var symbol_native: String?
+    
     
     // nombre de décimales dans le calcul de conversion
-    public var decimal_digits = 2
+    public var decimal_digits: Int?
     // décimales à supprimer pour trouver les centimes
-    var rounding = 0
-    public var money_digits:Int {decimal_digits - rounding}
+    var rounding: Int?
+    public var money_digits:Int {
+        let dd = decimal_digits ?? 2
+        let ro = rounding ?? 0
+        return dd - ro
+    }
     // diviseur
     func div(_ nbdec:Int) -> Int {
         var d = 1
@@ -57,12 +62,12 @@ public class Devise2: Equatable, Codable, Pickable {
     }
     // valeur double avec toutes les décimales
     public func value(_ digits:Int) -> Double {
-        let div = Double(div(decimal_digits))
+        let div = Double(div(decimal_digits ?? 2))
         return Double(digits) / div
     }
     // valeur entière exprimée en centimes
     public func cents(_ digits: Int) -> Int {
-        let div = Double(div(decimal_digits - rounding))
+        let div = Double(div(money_digits))
         return Int(Double(digits) / div )
     }
     // valeur exprimée en nombre
@@ -75,10 +80,10 @@ public class Devise2: Equatable, Codable, Pickable {
      }
      }*/
     
-    var mot: Mot
-    var cent: Mot
+    var mot: Mot?
+    var cent: Mot?
 }
-public struct Deviset {
+public struct Deviset:Codable {
     var all:[Devise2] = []
 
     public init(_ json:String = "") {
@@ -88,9 +93,8 @@ public struct Deviset {
         } else {
             jsonData = json.data(using: .utf8)!
         }
-        let devises = try! JSONDecoder().decode([Devise2].self, from: jsonData)
-        all = devises
-        let _ = Coderef(Mot("devise","devises"), devises)
+        let devises = try! JSONDecoder().decode(Deviset.self, from: jsonData)
+        self = devises
     }
     
     subscript(_ code:String) -> Devise2? {

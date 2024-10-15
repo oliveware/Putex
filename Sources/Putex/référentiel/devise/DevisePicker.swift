@@ -11,13 +11,13 @@ let deviset = Deviset()
 
 public struct DevisePicker: View {
     @Binding var selected: String?
-    
+
     public init(_ code:Binding<String?>) {
         _selected = code
     }
     
     public var body: some View {
-        CodePicker(Coderef.all["devises"] ?? Coderef.empty, $selected, "", "€")
+        IdPicker(deviset.all, $selected, "devise")
             .frame(width:200)
     }
 }
