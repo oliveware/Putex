@@ -6,7 +6,7 @@
 //
 
 
-public struct Coditem: Codable, Identifiable, Pickable {
+public struct Head: Codable, Identifiable, Pickable {
     public static var selector = "item"
     
     public var id:String {code}
@@ -45,7 +45,7 @@ public struct Coderef: Codable, Identifiable {
     }
     public var id : String { name.pluriel }
     var name : Mot
-    var items : [Coditem] = []
+    var items : [Head] = []
     var selector: String = ""
     
     public init(_ tablename:Mot) {
@@ -53,7 +53,7 @@ public struct Coderef: Codable, Identifiable {
         selector = tablename.singulier
         Coderef.all[name.pluriel] = self
     }
-    init(_ tablename:Mot, _ items:[Coditem]) {
+    init(_ tablename:Mot, _ items:[Head]) {
         name = tablename
         selector = tablename.singulier
         self.items = items
@@ -62,23 +62,23 @@ public struct Coderef: Codable, Identifiable {
     public init<T:Pickable>(_ tablename:Mot, _ items:[T]) {
         name = tablename
         selector = tablename.singulier
-        var tablitems: [Coditem] = []
+        var heads: [Head] = []
         for item in items {
-            tablitems.append(Coditem(item))
+            heads.append(Head(item))
         }
-        self.items = tablitems
+        self.items = heads
         Coderef.all[name.pluriel] = self
     }
     
     public mutating func insert(_ code:String, _ label:String){
-        insert(Coditem(code, label))
+        insert(Head(code, label))
     }
     
-    mutating func insert(_ item:Coditem) {
+    mutating func insert(_ item:Head) {
         items.append(item)
     }
     mutating func insert<T:Pickable>(_ item:T) {
-        items.append(Coditem(item))
+        items.append(Head(item))
     }
     
     

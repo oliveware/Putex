@@ -54,7 +54,7 @@ public struct CodeChoice: View {
         
     }
     
-    func choose(_ item:Coditem) {
+    func choose(_ item:Head) {
         code = item.code
         label = item.label
         open = false

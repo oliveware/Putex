@@ -7,7 +7,7 @@
 
 let banques = Coderef(Mot("banque", "banques", .f),
 [
-    Coditem("SG", "Société Générale"),
-    Coditem("CM", "Crédit Mutuel"),
-    Coditem("BP", "Banque Postale")
+    Head("SG", "Société Générale"),
+    Head("CM", "Crédit Mutuel"),
+    Head("BP", "Banque Postale")
 ])
