@@ -5,7 +5,7 @@
 //  Created by Herve Crespel on 04/10/2024.
 //
 
-public protocol Pickable {
+public protocol Pickable: Codable {
     var id:String {get}
     var label:String {get}
     static var selector:String {get}
