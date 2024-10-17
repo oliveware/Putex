@@ -98,7 +98,7 @@ public struct Deviset:Codable {
         self = devises
     }
     
-    subscript(_ code:String) -> Devise2? {
+   public subscript(_ code:String) -> Devise2? {
         var found : Devise2?
         for devise in all {
             if devise.code == code {
