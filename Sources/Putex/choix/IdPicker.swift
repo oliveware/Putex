@@ -18,9 +18,9 @@ public struct IdPicker<T:Pickable>: View {
     var height: CGFloat = 125
     var prompt:String
     var items : [T]
-    @Binding var selected : String?
+    @Binding var selected : String
     
-    public init(_ items:[T], _ selected:Binding<String?>, _ prompt:String? ) {
+    public init(_ items:[T], _ selected:Binding<String>, _ prompt:String? ) {
         self.prompt = prompt ?? T.selector
         self.items = items
         _selected = selected
@@ -54,7 +54,7 @@ public struct IdPicker<T:Pickable>: View {
 
 struct IdPickerPreview : View {
     @State var table = banques
-    @State var itemid: String? = nil
+    @State var itemid: String = ""
     
     var body: some View {
         VStack {
@@ -63,8 +63,8 @@ struct IdPickerPreview : View {
                 .padding(20)
             IdPicker(table.items, $itemid, "banque")
                 .frame(width:300)
-            if itemid != nil {
-                Text("id : " + itemid!)
+            if itemid != "" {
+                Text("id : " + itemid)
             }
         }.padding(10)
     }

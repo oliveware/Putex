@@ -10,7 +10,7 @@ public protocol Lookable {
 
     var id:String {get set}
     var label:String {get set}
-    init(_ id:String,_ label:String)
+
 }
 @Observable
 class Looksample : Lookable {
@@ -24,8 +24,8 @@ class Looksample : Lookable {
 
     var id:String
     var label:String
-  //  init() { self.init("","") }
-    required init(_ id:String, _ label:String) {
+ 
+    init(_ id:String, _ label:String) {
         self.id = id
         self.label = label
     }
@@ -108,7 +108,13 @@ public struct ClassPicker<T:Lookable>: View {
     }
     
     func new(){
-        selected = T("","")
+        switch selected {
+        case _ as Looksample:
+            selected = Looksample("","") as! T
+        default:
+            print("erreur")
+        }
+        
         items.append(selected)
         creation = true
     }

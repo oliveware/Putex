@@ -20,8 +20,9 @@ public class Devise2: Equatable, Codable, Pickable {
     public var id:String {code}
     public var label:String {name}
     public static var selector = "devise"
-    //static var all:[Kind] = [.EUR,.USD,.GBP]
-    static var all: [Devise2] = []
+
+    static var all = Deviset(deviseref)
+    
     
     
     /*   public static func match(_ char:Character) -> Self {
