@@ -8,33 +8,56 @@
 import SwiftUI
 
 public struct JMAPicker : View {
-    var prompt: String = "Replanifier la date"
-    var kindofdate: String = ""
+    var vprompt: String = "Replanifier la date"
+    var hprompt = "date d'arrivée"
     @Binding var jma:JMA
     @State private var edition: Bool = false
-    
+    var sheet = false
+    var vertical = false
     @State private var date = Date.now
     
-    public init(_ date:Binding<JMA>, _ p:String = "", _ kod:String = "") {
+    public init(_ date:Binding<JMA>, _ sheet:Bool = false,_ p:String = "", _ vertical: Bool = false) {
         _jma = date
-        prompt = p
-        kindofdate = kod
+        if vertical {
+            vprompt = p
+            hprompt = ""
+        } else {
+            vprompt = ""
+            hprompt = p
+        }
+        self.sheet = sheet
     }
     
+    var edit: some View {
+        VStack(spacing:5) {
+            DatePicker(hprompt, selection: $date, displayedComponents: .date)
+                .frame(width: 200)
+            Button("valider",  action:  planifier)
+                .padding(.top,10)
+        }.padding(30)
+    }
     
     public var body : some View {
-        if edition {
-            VStack(spacing:5) {
-                if prompt != "" {
-                    Text( prompt).font(.title3)
+        VStack(alignment:.leading,spacing:5)
+            {
+                if vprompt != "" {
+                    Text( vprompt).font(.caption)
                 }
-                DatePicker("\(kindofdate)", selection: $date, displayedComponents: .date)
-                    .frame(width: 200)
-                Button("valider",  action:  planifier)
-                    .padding(.top,10)
-            }.padding(30)
-        } else {
-            Button("\(kindofdate) \(jma.entexte)", action:{edition = true})
+                if edition && !sheet {
+                    edit
+                } else {
+                    HStack {
+                        if hprompt != "" {
+                            Text( hprompt + " :").font(.title3)
+                        }
+                    if sheet {
+                        Button("\(jma.entexte)", action:{edition = true})
+                            .sheet(isPresented: $edition){edit}
+                    } else{
+                        Button("\(jma.entexte)", action:{edition = true})
+                    }
+                }
+            }
         }
     }
     
@@ -46,24 +69,22 @@ public struct JMAPicker : View {
 
 struct JMAPreview : View {
     @State var date: JMA = JMA(Date.now)
+    var sheet :Bool
+    var vertical = true
+    
     var body : some View {
-        JMAPicker($date)
-            .frame(width:200, height: 100)
+
+        JMAPicker($date, sheet, "arrivée", vertical)
+                .frame(width:200, height: 100)
     }
 }
 
-#Preview {
-    JMAPreview()
+#Preview("horizontal") {
+    JMAPreview(sheet:false, vertical: false)
 }
-
-
-/*
- var body : some View {
-     VStack(spacing:30) {
-         Text("Replanifier la date de \(kindofdate)").font(.title3)
-         DatePicker("nouvelle date", selection: $date, displayedComponents: .date)
-             .frame(width: 200)
-         Button("valider",  action:  planifier)
-     }.padding(30)
- }
- */
+#Preview("vertical") {
+    JMAPreview(sheet:false, vertical: true)
+}
+#Preview("sheet") {
+    JMAPreview(sheet:true)
+}
