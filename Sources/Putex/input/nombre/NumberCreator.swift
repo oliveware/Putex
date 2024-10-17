@@ -16,15 +16,16 @@ struct NumberCreator: View {
     @State private var entiere = ""
     @State private var negative = false
     @State private var decimale = ""
-    @State private var dot = ""
+    @Binding var dot: String
     
     var set : NumberSet
     var decimal: Bool { (set != .naturel && set != .relatif) }
     
-    init(_ nombre:Binding<Nombre>,_ creation:Binding<Bool>, _ set: NumberSet) {
+    init(_ nombre:Binding<Nombre>,_ creation:Binding<Bool>, _ set: NumberSet, _ dot:Binding<String>) {
         self._nombre = nombre
         self._creation = creation
         self.set = set
+        _dot = dot
     }
     
     var width: CGFloat {
@@ -60,7 +61,7 @@ struct NumberCreator: View {
                                         digit in
                                         Button(action: {putin(String(digit))}) {Text(String(digit))}
                                     }
-                                }.disabled(decimal && dot == "" && entiere == "0")
+                                }.disabled(decimal && dot != "," && dot != "." && entiere == "0")
                                     .frame(width:width)
                                 
                                 Text("\(negative ? "-" : "") \(entiere)\(dot)\(decimale)")
@@ -71,7 +72,7 @@ struct NumberCreator: View {
                                         digit in
                                         Button(action: {putin(String(digit))}) {Text(String(digit))}
                                     }
-                                }.disabled(decimal && dot == "" && entiere == "0")
+                                }.disabled(decimal && dot != "," && dot != "." && entiere == "0")
                                     .frame(width:width)
                             }
                             
@@ -84,12 +85,12 @@ struct NumberCreator: View {
                         }.frame(width:width)
                         .disabled(entiere == "" && decimale == "")
                     }
-                    if decimal && dot == "" {
+                    if decimal && dot != "," && dot != "." {
                         VStack {
 
-                            Button(action: {dotin(",")}) {Text(",")}
+                            Button(action: {dotin(",")}) {Text(",").frame(width:20)}
                             
-                            Button(action: {dotin(".")}) {Text(".")}
+                            Button(action: {dotin(".")}) {Text(".").frame(width:20)}
                         }
                     }
                 }

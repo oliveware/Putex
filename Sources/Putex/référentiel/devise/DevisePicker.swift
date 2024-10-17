@@ -35,6 +35,7 @@ struct DevisePreview: View {
     
     var body:some View {
         DevisePicker($code)
+            .frame(width:200, height:100)
     }
 }
 

@@ -109,6 +109,9 @@ public struct Nombre: Codable {
         return Double(entiere) + decimal
     }
   
+    var cents: Int {
+        Int(value * 100)
+    }
     
     /*var cents : (c:Int, nbdec:Int) {
         if decimales == "" {
