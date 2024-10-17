@@ -21,7 +21,7 @@ public class Devise2: Equatable, Codable, Pickable {
     public var label:String {name}
     public static var selector = "devise"
 
-    static var all = Deviset(deviseref)
+    public static var all = Deviset(deviseref)
     
     
     
