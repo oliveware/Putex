@@ -109,7 +109,7 @@ public struct Nombre: Codable {
         return Double(entiere) + decimal
     }
   
-    var cents: Int {
+    public var cents: Int {
         Int(value * 100)
     }
     
