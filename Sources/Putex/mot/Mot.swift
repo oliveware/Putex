@@ -66,6 +66,10 @@ public struct Mot : Codable {
         "les " + pluriel
     }
     
+    func quantifié(_ plusieurs:Bool) -> String {
+        plusieurs ? pluriel : singulier
+    }
+    
     subscript(_ nb:Int = 1) -> String {
         switch nb {
         case -1, 0, 1:  return singulier

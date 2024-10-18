@@ -21,7 +21,7 @@ public struct DevisePicker: View {
 
         Button(action:{ edition = true })
         {
-            Text(Devise2.all[selected]?.symbol ?? "")
+            Text(Devise[selected].symbol ?? "")
                 .frame(width:20)
         }.sheet(isPresented: $edition) {
             IdPicker(deviset.all, $selected, "devise")
