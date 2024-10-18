@@ -47,11 +47,11 @@ public class Devise: Equatable, Codable, Pickable {
     
     
     // nombre de décimales dans le calcul de conversion
-    public var decimal_digits: Int = 2
+    public var decimal_digits: Int?
     // décimales à supprimer pour trouver les centimes
     var rounding: Int?
     public var money_digits:Int {
-        let dd = decimal_digits
+        let dd = decimal_digits ?? 2
         let ro = rounding ?? 0
         return dd - ro
     }
@@ -67,7 +67,7 @@ public class Devise: Equatable, Codable, Pickable {
     }
     // valeur double avec toutes les décimales
     public func value(_ digits:Int) -> Double {
-        let div = Double(div(decimal_digits))
+        let div = Double(div(decimal_digits ?? 2))
         return Double(digits) / div
     }
     // valeur entière exprimée en centimes
@@ -101,6 +101,6 @@ public extension Int {
     }
 
    func cours(_ d:Devise) -> String {
-        decimal(d.decimal_digits) + " " + d.code
+        decimal(d.decimal_digits ?? 2) + " " + d.code
     }
 }
