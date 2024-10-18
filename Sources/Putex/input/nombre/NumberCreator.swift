@@ -9,23 +9,26 @@ import SwiftUI
 
 struct NumberCreator: View {
     
-    @Binding var nombre: Nombre
-    @Binding var creation : Bool
+    @Environment(\.locale) var locale: Locale
     
+    @Binding var nombre: Nombre
+    @State var creation : Bool = true
+    @State var edition = false
     var fonte = Font.title
     @State private var entiere = ""
     @State private var negative = false
     @State private var decimale = ""
-    @Binding var dot: String
+    @State var dot: String = ""
+    var localedot : String = ""
     
     var set : NumberSet
     var decimal: Bool { (set != .naturel && set != .relatif) }
     
-    init(_ nombre:Binding<Nombre>,_ creation:Binding<Bool>, _ set: NumberSet, _ dot:Binding<String>) {
+    init(_ nombre:Binding<Nombre>, _ set: NumberSet) {
         self._nombre = nombre
-        self._creation = creation
+        if nombre.wrappedValue.isnul { creation = true }
         self.set = set
-        _dot = dot
+        localedot = locale.decimalSeparator ?? ","
     }
     
     var width: CGFloat {
@@ -36,10 +39,18 @@ struct NumberCreator: View {
     }
     
     var body: some View {
+        if creation {
+            creator
+        } else {
+            NumberView($nombre, $edition, $creation, set)
+        }
+    }
+    
+    var creator: some View {
         HStack(alignment:.center, spacing:5) {
             if entiere != "" {
-              //  Button(action: {clear()})
-              //  {Image(systemName: "trash")}
+                //  Button(action: {clear()})
+                //  {Image(systemName: "trash")}
                 
                 if set != .naturel && (entiere != "0" || decimale != "") {
                     Button(action: {negative.toggle()})
@@ -61,10 +72,11 @@ struct NumberCreator: View {
                                         digit in
                                         Button(action: {putin(String(digit))}) {Text(String(digit))}
                                     }
-                                }.disabled(decimal && dot != "," && dot != "." && entiere == "0")
+                                }.disabled(decimal && entiere == "0")
                                     .frame(width:width)
                                 
-                                Text("\(negative ? "-" : "") \(entiere)\(dot)\(decimale)")
+                                Text(
+                                    (negative ? "-" : "") + " " + entiere + dot + decimale )
                                     .font(fonte)
                                     .frame(width:width)
                                 HStack(spacing:2) {
@@ -72,41 +84,39 @@ struct NumberCreator: View {
                                         digit in
                                         Button(action: {putin(String(digit))}) {Text(String(digit))}
                                     }
-                                }.disabled(decimal && dot != "," && dot != "." && entiere == "0")
+                                }.disabled(decimal && entiere == "0")
                                     .frame(width:width)
                             }
                             
                         }.padding(2)
                         
                         HStack {
-                            Button("annuler") {clear()}
+                            Button("annuler") {cancel()}
                             Spacer()
                             Button("valider") { valider() }
                         }.frame(width:width)
-                        .disabled(entiere == "" && decimale == "")
+                            .disabled(entiere == "" && decimale == "")
                     }
-                    if decimal && dot != "," && dot != "." {
-                        VStack {
-
-                            Button(action: {dotin(",")}) {Text(",").frame(width:20)}
-                            
-                            Button(action: {dotin(".")}) {Text(".").frame(width:20)}
+                    if decimal  {
+                        Button(action: dotin ) {
+                            Text(localedot)
+                                .font(.title)
+                                .offset(CGSize(width: 0, height: -7))
+                                .frame(width:10)
                         }
                     }
                 }
-                  /*  if set != .decimal {
-                        let moins = sign == "" ? "" : "moins "
-                        Text(moins + Français().lit(entiere))
-                    }*/
-                
-                
+                /*  if set != .decimal {
+                 let moins = sign == "" ? "" : "moins "
+                 Text(moins + Français().lit(entiere))
+                 }*/
             }
         }
     }
     
-    func dotin(_ dot:String){
+    func dotin() {
         if decimal {
-            self.dot = dot
+            dot = localedot
             if entiere.count == 0 { entiere = "0"}
         }
     }
@@ -151,8 +161,8 @@ struct NumberCreator: View {
         print(nombre)
     }
     
-    func clear() {
-        entiere = "" ; decimale = "" ; dot = "" ; negative = false
+    func cancel() {
+        entiere = "" ; decimale = "" ;  negative = false
         nombre = Nombre()
         creation = true
     }
@@ -160,7 +170,26 @@ struct NumberCreator: View {
     func valider() {
         decimale = set.normalize(decimale)
         nombre = Nombre(entiere, decimale, negative)
-        entiere = "" ; decimale = "" ; dot = "" ; negative = false
-        creation = false
+        entiere = "" ; decimale = "" ;  negative = false
+        creation = nombre.isnul
     }
+}
+
+struct NumberCreatorPreview : View {
+    @State var nombre = Nombre(12589)
+    @State var creation = true
+    var set : NumberSet = .naturel
+    
+    var body: some View {
+        NumberCreator($nombre, set)
+            .frame(width:300, height:200)
+    }
+}
+
+#Preview("edit") {
+    NumberCreatorPreview(set:.decimal(2))
+}
+
+#Preview("show") {
+    NumberCreatorPreview(creation:false)
 }

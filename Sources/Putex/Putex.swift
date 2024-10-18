@@ -23,12 +23,13 @@ public struct Putex: View {
             Line(input:$data.ligne)
                
 
-            HStack(spacing:30){
+            /*HStack(spacing:30){
                 NumberView($data.naturel , data.naturel.isnul, .naturel, "m3")
                 NumberView($data.relatif , data.relatif.isnul, .relatif)
                 NumberView($data.euro , data.euro.isnul, .decimal(2), "€")
                 NumberView($data.cours , data.cours.isnul, .decimal(4), "€")
-            }
+            }*/
+            Nombrex(Nombre())
             .padding(5)
             .overlay(RoundedRectangle(cornerRadius: 10)
                 .stroke(Color.gray, lineWidth: 1))

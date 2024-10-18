@@ -9,17 +9,25 @@ import SwiftUI
 
 struct Nombrex: View {
     @State var n = Nombre()
+    @State var edition : Bool
+    @State var creation : Bool
     
     @State var index = 0
+    
+    init(_ nombre:Nombre) {
+        n = nombre
+        edition = nombre.isnul
+        creation = nombre.isnul
+    }
     
     var body: some View {
         TabView(selection: $index) {
          //   NumberView($n, n.isnul, nil).tabItem { Text("multi") }.tag(0)
-            NumberView($n , n.isnul, .naturel, "m3")
+            NumberView($n , $edition, $creation, .naturel, "m3")
                 .tabItem { Text("m3") }.tag(1)
-            NumberView($n , n.isnul, .relatif)
+            NumberView($n , $edition, $creation, .relatif)
                 .tabItem { Text("relatif") }.tag(2)
-            NumberView($n , n.isnul, .decimal(2), "€")
+            NumberView($n , $edition, $creation, .decimal(2), "€")
                 .tabItem { Text("euro") }.tag(3)
         }
     }
@@ -27,6 +35,6 @@ struct Nombrex: View {
 
 struct Nombrex_Previews: PreviewProvider {
     static var previews: some View {
-        Nombrex()
+        Nombrex(Nombre())
     }
 }

@@ -37,7 +37,7 @@ public struct PutexCatalog: View {
                         .tabItem { Text("ligne") }.tag(2)
                 }.tabItem { Text("simple") }.tag(0)
                 
-                Nombrex()
+                Nombrex(Nombre())
                     .frame(alignment: .center)
                     .padding(5)
                     .overlay(RoundedRectangle(cornerRadius: 10)
@@ -60,8 +60,6 @@ public struct PutexCatalog: View {
     }
 }
 
-struct Putex_Previews: PreviewProvider {
-    static var previews: some View {
-        PutexCatalog()
-    }
+#Preview {
+    PutexCatalog()
 }
