@@ -12,6 +12,7 @@ struct NumberCreator: View {
     @Environment(\.locale) var locale: Locale
     
     @Binding var nombre: Nombre
+    @State var créé = Nombre(0)
     @State var creation : Bool = true
     @State var edition = false
     var fonte = Font.title
@@ -25,8 +26,10 @@ struct NumberCreator: View {
     var decimal: Bool { (set != .naturel && set != .relatif) }
     
     init(_ nombre:Binding<Nombre>, _ set: NumberSet) {
-        self._nombre = nombre
-        if nombre.wrappedValue.isnul { creation = true }
+        _nombre = nombre
+        if nombre.wrappedValue.isnul {
+            creation = true
+        }
         self.set = set
         localedot = locale.decimalSeparator ?? ","
     }
@@ -39,10 +42,10 @@ struct NumberCreator: View {
     }
     
     var body: some View {
-        if creation {
+        if edition && creation {
             creator
         } else {
-            NumberView($nombre, $edition, $creation, set)
+           // NumberView($nombre, $edition, $creation, set)
         }
     }
     
@@ -156,19 +159,17 @@ struct NumberCreator: View {
                 }
             }
         }
-        //nombre.entiere = Int(entiere)!
-        //nombre.decimales = decimale
         print(nombre)
     }
     
     func cancel() {
         entiere = "" ; decimale = "" ;  negative = false
-        nombre = Nombre()
+        nombre = Nombre() ; dot = ""
         creation = true
     }
     
     func valider() {
-        decimale = set.normalize(decimale)
+        decimale = set.normalize(decimale) ; dot = ""
         nombre = Nombre(entiere, decimale, negative)
         entiere = "" ; decimale = "" ;  negative = false
         creation = nombre.isnul

@@ -14,7 +14,6 @@ public struct NumberView: View {
     
     @Binding var nombre: Nombre
     @Binding var edition : Bool
-    @Binding var creation : Bool
     @State var set : NumberSet
     var classifier: String = ""
     var autovalide = false
@@ -23,10 +22,10 @@ public struct NumberView: View {
     var localedot : String = ""
     
     
-    public init(_ nombre:Binding<Nombre>, _ edition:Binding<Bool>, _ creation:Binding<Bool>,_ set: NumberSet, _ classifier:String = "", _ autovalide:Bool = false) {
+    public init(_ nombre:Binding<Nombre>, _ edition:Binding<Bool>, _ set: NumberSet, _ classifier:String = "", _ autovalide:Bool = false) {
         _nombre = nombre
         _edition = edition
-        _creation = creation
+
         self.set = set
         self.classifier = classifier
         self.autovalide = autovalide
@@ -67,8 +66,8 @@ public struct NumberView: View {
     func clear() {
         nombre = Nombre()
         dot = ""
-        edition = false
-        creation = true
+        edition = true
+        
     }
 }
 
@@ -92,7 +91,7 @@ struct NumberPreview : View {
     
     var body : some View {
         HStack {
-            NumberView($nombre, $edition, $creation, set, classifier)
+            NumberView($nombre, $edition, set, classifier)
             if !autovalide && edition {
                 Button(action: {edition = false})
                 {Image(systemName: "checkmark")}
