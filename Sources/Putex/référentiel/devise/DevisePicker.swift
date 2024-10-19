@@ -10,31 +10,31 @@ import SwiftUI
 let deviset = Deviset()
 
 public struct DevisePicker: View {
-    @Binding var selected: String
+    @Binding var selected: Devise
     @State var edition = false
 
-    public init(_ code:Binding<String>) {
-        _selected = code
+    public init(_ devise:Binding<Devise>) {
+        _selected = devise
     }
     
     public var body: some View {
 
         Button(action:{ edition = true })
         {
-            Text(Devise[selected].symbol ?? "")
+            Text(selected.symbol ?? "?")
                 .frame(width:20)
         }.sheet(isPresented: $edition) {
-            IdPicker(deviset.all, $selected, "devise")
+            ItemPicker(deviset.all, $selected)
                 .frame(width:200)
         }
     }
 }
 
 struct DevisePreview: View {
-    @State var code:String = ""
+    @State var devise = Devise.unknown
     
     var body:some View {
-        DevisePicker($code)
+        DevisePicker($devise)
             .frame(width:200, height:100)
     }
 }

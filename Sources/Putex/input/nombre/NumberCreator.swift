@@ -42,7 +42,7 @@ struct NumberCreator: View {
     }
     
     var body: some View {
-        if edition && creation {
+        if creation {
             creator
         } else {
            // NumberView($nombre, $edition, $creation, set)
