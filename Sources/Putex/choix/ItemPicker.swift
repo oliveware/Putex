@@ -12,10 +12,12 @@ public struct ItemPicker<T:Pickable>: View {
     var height: CGFloat = 65
     var items : [T]
     @Binding var selected : T
+    var done: () -> Void
     
-    public init(_ items:[T], _ selected:Binding<T>) {
+    public init(_ items:[T], _ selected:Binding<T>, _ done: @escaping () -> Void) {
         self.items = items
         _selected = selected
+        self.done = done
     }
     
     public var body: some View {
@@ -39,6 +41,7 @@ public struct ItemPicker<T:Pickable>: View {
     
     func choose(_ item:T) {
         selected = item
+        done()
     }
 }
 
@@ -48,12 +51,14 @@ struct ItemPickerPreview : View {
     
     var body: some View {
         VStack {
-            ItemPicker(items, $item)
+            ItemPicker(items, $item, done)
                 //.frame(width:300,height:450)
             Text(item.label + " - " + (item.symbol ?? "symbole absent"))
         }.padding(10)
             //.frame(height:400)
     }
+    
+    func done(){}
 }
 
 
