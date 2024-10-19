@@ -109,22 +109,31 @@ public struct Nombre: Codable {
         return Double(entiere) + decimal
     }
   
+    // arrondi ne concerne que les décimales
     public var cents: Int {
-        Int(value * 100)
-    }
-    
-    /*var cents : (c:Int, nbdec:Int) {
-        if decimales == "" {
-            return (c:entiere, nbdec:0)
-        } else {
-            let value = Int(String(entiere) + decimales) ?? 0
-            if entiere < 0 {
-                return (c:-value, nbdec:decimales.count)
+        let nbdec = decimales.count
+        var deci : Int
+        if let decint = Int(decimales) {
+            if decint < 100 {
+                deci = decint
             } else {
-                return (c:value, nbdec:decimales.count)
+                let dec = Int(Double(decint)/100)
+                if dec < 10 {
+                    deci = 10 * dec
+                } else {
+                    deci = dec
+                }
             }
+        } else {
+            deci = 0
+            print("erreur : decimales incorrectes")
         }
-    }*/
+        if entiere < 0 {
+            return -(entiere * 100 + deci)
+        } else {
+            return entiere * 100 + deci
+        }
+    }
     
     public func enchiffres(_ dot:String = ",") -> String {
         var chiffres = ""
