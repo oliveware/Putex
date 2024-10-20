@@ -106,6 +106,7 @@ public struct Nombre: Codable {
         } else {
             print("décimales erronées")
         }
+        if entiere < 0 { decimal = -decimal }
         return Double(entiere) + decimal
     }
   
@@ -158,6 +159,7 @@ public struct Nombre: Codable {
                 
             }
             if main > 0 { chiffres = String(main) + chiffres}
+            if entiere < 0 { chiffres = "-" + chiffres }
         }
        
         if decimales != "" {
