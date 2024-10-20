@@ -129,7 +129,7 @@ public struct Nombre: Codable {
             print("erreur : decimales incorrectes")
         }
         if entiere < 0 {
-            return -(entiere * 100 + deci)
+            return entiere * 100 - deci
         } else {
             return entiere * 100 + deci
         }
