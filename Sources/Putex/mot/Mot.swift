@@ -53,27 +53,27 @@ public struct Mot : Codable {
         genre = g
     }
     
-    var indéterminé: String {
+    public var indéterminé: String {
         (genre ?? .m).indéterminé + " " + singulier
     }
-    var indéterminés: String {
+    public var indéterminés: String {
         "des " + pluriel
     }
-    var déterminé: String {
+    public var déterminé: String {
         (genre ?? .m).déterminé + " " + singulier
     }
-    var déterminés: String {
+    public var déterminés: String {
         "les " + pluriel
     }
     
-    func quantifié(_ plusieurs:Bool) -> String {
+    public func quantifié(_ plusieurs:Bool) -> String {
         plusieurs ? pluriel : singulier
     }
     
-    subscript(_ nb:Int = 1) -> String {
+    public subscript(_ nb:Int = 1) -> String {
         switch nb {
-        case -1, 0, 1:  return singulier
-        default:        return pluriel
+        case -1, 0, 1:  return String(nb) + " " + singulier
+        default:        return String(nb) + " " + pluriel
         }
     }
 }
