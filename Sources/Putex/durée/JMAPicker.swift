@@ -15,8 +15,9 @@ public struct JMAPicker : View {
     var sheet = false
     var vertical = false
     @State private var date = Date.now
+    var todo: () -> Void
     
-    public init(_ date:Binding<JMA>, _ sheet:Bool = false,_ p:String = "", _ vertical: Bool = false) {
+    public init(_ date:Binding<JMA>,_ p:String = "", _ todo: @escaping () -> Void, _ sheet:Bool = false, _ vertical: Bool = false) {
         _jma = date
         if vertical {
             vprompt = p
@@ -26,6 +27,7 @@ public struct JMAPicker : View {
             hprompt = p
         }
         self.sheet = sheet
+        self.todo = todo
     }
     
     var edit: some View {
@@ -74,7 +76,7 @@ struct JMAPreview : View {
     
     var body : some View {
 
-        JMAPicker($date, sheet, "arrivée", vertical)
+        JMAPicker($date, "arrivée", {}, sheet, vertical)
                 .frame(width:200, height: 100)
     }
 }
