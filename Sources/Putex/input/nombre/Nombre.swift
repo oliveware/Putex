@@ -61,8 +61,9 @@ public struct Nombre: Codable {
     }
     
     public init(_ n:Int, _ nbdec:Int = 0) {
+        let negative = n < 0
         if nbdec == 0 {
-            entiere = n
+            entiere = negative ? -n : n
         } else {
             let div = div(nbdec)
             let reste = n % div
@@ -72,6 +73,7 @@ public struct Nombre: Codable {
             for _ in 0..<nbzero { deci = "0" + deci }
             decimales = deci
         }
+        if negative { entiere = -entiere }
     }
     
     public init(_ d:Double) {
