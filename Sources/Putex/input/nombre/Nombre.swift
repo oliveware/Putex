@@ -68,7 +68,7 @@ public struct Nombre: Codable {
             let div = div(nbdec)
             let reste = n % div
             entiere = (n - reste) / div
-            var deci = negative ? String(reste) : String(-reste)
+            var deci = negative ? String(-reste) : String(reste)
             let nbzero = String(div).count - 1 - deci.count
             for _ in 0..<nbzero { deci = "0" + deci }
             decimales = deci
