@@ -10,7 +10,7 @@ import Foundation
 // représentation d'un nombre décimal en base 10
 public struct Nombre: Codable {
         
-    var entiere:Int = 0
+    var entiere:Int?
     var decimales:String = ""
     var base = 10
     
@@ -19,7 +19,6 @@ public struct Nombre: Codable {
     }
     
     init() {
-        entiere = 0
     }
     
     init(_ e:Int) {
@@ -55,8 +54,9 @@ public struct Nombre: Codable {
     
     // d.count doit correspondre au NumberSet
     init(_ e:String, _ d:String = "", _ negative:Bool = false) {
-        entiere = Int(e) ??  0
-        if negative { entiere = -entiere }
+        var entier = Int(e) ??  0
+        if negative { entier = -entier }
+        entiere = entier
         decimales = d
     }
     
@@ -73,7 +73,7 @@ public struct Nombre: Codable {
             for _ in 0..<nbzero { deci = "0" + deci }
             decimales = deci
         }
-        if negative { entiere = -entiere }
+        if negative { entiere = -entiere! }
     }
     
     public init(_ d:Double) {
@@ -108,13 +108,16 @@ public struct Nombre: Codable {
         } else {
             print("décimales erronées")
         }
-        if entiere < 0 { decimal = -decimal }
-        return Double(entiere) + decimal
+        if let entier = entiere {
+            if entier < 0 { decimal = -decimal }
+            return Double(entier) + decimal
+        } else {
+            return 0
+        }
     }
   
     // arrondi ne concerne que les décimales
     public var cents: Int {
-        let nbdec = decimales.count
         var deci : Int
         if let decint = Int(decimales) {
             if decint < 100 {
@@ -131,77 +134,98 @@ public struct Nombre: Codable {
             deci = 0
             print("erreur : decimales incorrectes")
         }
-        if entiere < 0 {
-            return entiere * 100 - deci
+        if let entier = entiere {
+            if entier < 0 {
+                return entier * 100 - deci
+            } else {
+                return entier * 100 + deci
+            }
         } else {
-            return entiere * 100 + deci
+            return 0
         }
     }
     
     public func enchiffres(_ dot:String = ",") -> String {
         var chiffres = ""
-        if entiere < 1000 {
-            chiffres = String(entiere)
-        } else {
-            var main = entiere
-            while main > 999 {
-                let reste = main % 1000
-                let groupe = String(reste)
-                switch groupe.count {
-                case 0 :
-                    chiffres = " 000" + chiffres
-                case 1:
-                    chiffres = " 00" + String(reste) + chiffres
-                case 2:
-                    chiffres = " 0" + String(reste) + chiffres
-                default:
-                    chiffres = " " + String(reste) + chiffres
+        if let entier = entiere {
+            if entier < 1000 {
+                chiffres = String(entier)
+            } else {
+                var main = entier
+                while main > 999 {
+                    let reste = main % 1000
+                    let groupe = String(reste)
+                    switch groupe.count {
+                    case 0 :
+                        chiffres = " 000" + chiffres
+                    case 1:
+                        chiffres = " 00" + String(reste) + chiffres
+                    case 2:
+                        chiffres = " 0" + String(reste) + chiffres
+                    default:
+                        chiffres = " " + String(reste) + chiffres
+                    }
+                    main = (main - reste) / 1000
+                    
                 }
-                main = (main - reste) / 1000
-                
+                if main > 0 { chiffres = String(main) + chiffres}
+                if entier < 0 { chiffres = "-" + chiffres }
             }
-            if main > 0 { chiffres = String(main) + chiffres}
-            if entiere < 0 { chiffres = "-" + chiffres }
+            if decimales != "" {
+                return chiffres + dot + decimales
+            } else {
+                return chiffres
+            }
+        } else {
+            return "0"
         }
        
-        if decimales != "" {
-            return chiffres + dot + decimales
-        } else {
-            return chiffres
-        }
+        
     }
     
     public var enlettres: String {
-        var lettres = "\(entiere.enlettres)"
-        if decimales != "" { lettres += " et \(iemes)"}
-        return lettres
+        if let entier = entiere {
+            var lettres = "\(entier.enlettres)"
+            if decimales != "" { lettres += " et \(iemes)"}
+            return lettres
+        } else {
+            return ""
+        }
     }
     
     public func enlettres(_ devise:Devise) ->  String {
-        var lettres = entiere.enlettres + " " + (devise.mot?.quantifié(entiere > 1) ?? "")
-        if decimales != "" {
-            if let deci = Int(decimales) {
-                if deci > 0 {
-                    lettres += " et " + deci.enlettres + " " + (devise.cent?.quantifié(deci > 1 ) ?? "")
+        if let entier = entiere {
+            var lettres = entier.enlettres + " " + (devise.mot?.quantifié(entier > 1) ?? "")
+            if decimales != "" {
+                if let deci = Int(decimales) {
+                    if deci > 0 {
+                        lettres += " et " + deci.enlettres + " " + (devise.cent?.quantifié(deci > 1 ) ?? "")
+                    }
+                } else {
+                    print ("erreur nombre en lettres")
                 }
-            } else {
-                print ("erreur nombre en lettres")
             }
+            return lettres
+        } else {
+            return ""
         }
-        return lettres
     }
     public func enlettres(_ classifier:Mot) ->  String {
-        var lettres = "\(entiere.enlettres) \(entiere > 1 ? classifier.pluriel : classifier.singulier)"
-        if decimales != "" {
-            if let deci = Int(decimales) {
-                if deci > 0 {
-                    lettres += " et \(iemes) de \(deci == 1 ? classifier.singulier : classifier.pluriel)"
+        if let entier = entiere {
+            var lettres = "\(entier.enlettres) \(entier > 1 ? classifier.pluriel : classifier.singulier)"
+            if decimales != "" {
+                if let deci = Int(decimales) {
+                    if deci > 0 {
+                        lettres += " et \(iemes) de \(deci == 1 ? classifier.singulier : classifier.pluriel)"
+                    }
+                } else {
+                    print ("erreur nombre en lettres")
                 }
-            } else {
-                print ("erreur nombre en lettres")
             }
+            return lettres
+        } else {
+            return ""
         }
-        return lettres
     }
     
     var iemes : String {

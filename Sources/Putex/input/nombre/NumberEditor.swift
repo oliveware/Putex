@@ -18,6 +18,13 @@ struct NumberEditor: View {
     @State var dot = ""
     var localedot : String = ""
     
+    var entierestring:String {
+        if nombre.entiere == nil {
+            return ""
+        } else {
+            return String(nombre.entiere!)
+        }
+    }
     func width(_ chiffres:String) -> CGFloat {
         let width  = CGFloat((chiffres.count + 1) * 8)
         return width > 20 ? width : 20
@@ -33,7 +40,7 @@ struct NumberEditor: View {
     var body: some View {
         HStack(spacing:0){
             TextField("", value:$nombre.entiere, format:.number)
-                .frame(width: width(String(nombre.entiere)), alignment: .trailing )
+                .frame(width: width(entierestring), alignment: .trailing )
             if nombre.decimales != ""  || set.nbdec > 0 {
                 Text(localedot)
                 TextField("", text:$nombre.decimales)

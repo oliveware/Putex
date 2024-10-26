@@ -41,8 +41,10 @@ public struct NumberView: View {
     public var body: some View {
         if edition {
                 HStack{
-                    Button(action: clear)
-                    {Image(systemName: "trash")}
+                    if !nombre.isnul {
+                        Button(action: clear)
+                        {Image(systemName: "eraser")}
+                    }
                     
                     NumberEditor($nombre, set, classifier)
                    .frame(minWidth:showidth + 20)
