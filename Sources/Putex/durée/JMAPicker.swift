@@ -31,12 +31,10 @@ public struct JMAPicker : View {
     }
     
     var edit: some View {
-        VStack(spacing:5) {
-            DatePicker(hprompt, selection: $date, displayedComponents: .date)
-                .frame(width: 200)
-            Button("valider",  action:  planifier)
-                .padding(.top,10)
-        }.padding(30)
+        
+        DatePicker(hprompt, selection: $date, displayedComponents: .date)
+           // .frame(width: 200)
+            .onChange(of:date) {jma = JMA(date)}
     }
     
     public var body : some View {
@@ -56,7 +54,7 @@ public struct JMAPicker : View {
                         Button("\(jma.entexte)", action:{edition = true})
                             .sheet(isPresented: $edition){edit}
                     } else{
-                        Button("\(jma.entexte)", action:{edition = true})
+                        edit
                     }
                 }
             }
@@ -76,8 +74,11 @@ struct JMAPreview : View {
     
     var body : some View {
 
-        JMAPicker($date, "arrivée", {}, sheet, vertical)
+        VStack(spacing:20) {
+            JMAPicker($date, "arrivée", {}, sheet, vertical)
                 .frame(width:200, height: 100)
+            Text(date.entexte)
+        }
     }
 }
 
