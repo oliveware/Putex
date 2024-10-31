@@ -14,7 +14,7 @@ struct NumberCreator: View {
     @Binding var nombre: Nombre
     @State var créé = Nombre(0)
     @State var creation : Bool = true
-    @State var edition = false
+    @State var edition = true
     var fonte = Font.title
     @State private var entiere = ""
     @State private var negative = false
@@ -45,7 +45,7 @@ struct NumberCreator: View {
         if creation {
             creator
         } else {
-           // NumberView($nombre, $edition, $creation, set)
+           NumberView($nombre, $edition, set)
         }
     }
     

@@ -10,7 +10,8 @@ import Foundation
 public enum TypeCompteAnalytique: String, Codable, Enumerable {
     public var id: Self { self }
     static var all : [Self] = Self.allCases
-    static var foncier: [Self] = [.caution,.loyer,.entretien,.admin,.assurance,.réparation,.indemnité,.taxes]
+    public static var foncier: [Self] = [.caution,.loyer,.entretien,.admin,.assurance,.réparation,.indemnité,.taxes]
+    public static var location: [Self] = [.caution,.loyer,.indemnité]
     public static var selector: String = "compte analytique"
     public var label: String {self.rawValue}
     

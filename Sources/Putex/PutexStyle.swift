@@ -19,7 +19,7 @@ struct putexStyle: TextFieldStyle {
         configuration
         
 //        .border(Color.gray, width: /*@START_MENU_TOKEN@*/2/*@END_MENU_TOKEN@*/)
-        .popover(isPresented: .constant(help)) {
+        .popover(isPresented: $help) {
                 Text(helptext).padding(5)
         }
       // .focusable(true, onFocusChange: { _ in self.help=true})
