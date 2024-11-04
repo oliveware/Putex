@@ -6,5 +6,8 @@
 //
 
 struct Batiment {
-    
+    // un bâtiment a une seule adresse
+    // cette adresse est l'une des adresses de la parcelle
+    var voie: String
+    var numéro:String
 }

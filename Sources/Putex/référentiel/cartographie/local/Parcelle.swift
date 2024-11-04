@@ -9,8 +9,9 @@ struct Parcelle: Codable, Identifiable {
     var id:Int?
     
     var nom:String
-    // adresse : nom de la voie
-    var voie:String = ""
+    
+    // adresses des voies qui bordent la parcelle
+    var adresses:[(numéro:String, voie:String)] = []
     
     
     enum Kind: String, Codable {

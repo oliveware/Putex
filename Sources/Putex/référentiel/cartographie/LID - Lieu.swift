@@ -58,6 +58,8 @@ public struct Lieu {
         }
      }
     
+    
+    
  /*  public  init(_ lid:[Int]) {
         territoire = Continent.europe[lid[0]]
         if lid.count > 1 {
