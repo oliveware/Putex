@@ -11,7 +11,7 @@ public struct MultiPicker: View {
     @State var choice = "choisir"
     @State var open : [Bool]
     var tables:[Coderef]
-    var nbt = 0
+    let nbt : Int
     
     func show(_ index:Int) -> Bool {
         var result = false
