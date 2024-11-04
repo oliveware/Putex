@@ -22,15 +22,14 @@ public struct Urbanid:Codable {
     public enum Kind {
         case quartier
         case parcelle
-        case local
+        case batiment
     }
     
     var quartier : Int
     var parcelle : Int?
-    var local : Int?
+    var batiment : Int?
     
     public init(_ type:Urbanid.Kind) {
-
         switch type {
         case .quartier:
             quartier = Urbanid.first()
@@ -38,11 +37,11 @@ public struct Urbanid:Codable {
             let next = Urbanid.second()
             quartier = next.one
             parcelle = next.two
-        case .local:
+        case .batiment:
             let next = Urbanid.third()
             quartier = next.one
             parcelle = next.two
-            local = next.three
+            batiment = next.three
         }
     }
 }

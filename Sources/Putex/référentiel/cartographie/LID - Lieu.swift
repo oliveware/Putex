@@ -19,8 +19,8 @@ public struct LID : Codable, Identifiable {
         if let urba = urba {
             let q = urba.quartier * 4096
             let p = (urba.parcelle ?? 0) * 64
-            let l = urba.local ?? 0
-            return g + "-" + String( q + p + l)
+            let b = urba.batiment ?? 0
+            return g + "-" + String( q + p + b)
         } else {
             return g
         }
@@ -35,7 +35,7 @@ public struct Lieu {
     var quartier : Quartier?
     var parcelle : Parcelle?
    // var batiment : Batiment?
-   // var local : Local?
+    var batiment : Batiment?
     
     public  init(_ lid:LID) {
         let global = lid.global
