@@ -7,9 +7,24 @@
 
 import Foundation
 
-public struct LID {
+public struct LID : Codable, Identifiable {
     var global:Globalid
     var urba:Urbanid?
+    
+    public var id: String {
+        let t = global.territoire * 4096
+        let r = (global.region ?? 0) * 64
+        let c = global.commune ?? 0
+        let g = String( t + r + c)
+        if let urba = urba {
+            let q = urba.quartier * 4096
+            let p = (urba.parcelle ?? 0) * 64
+            let l = urba.local ?? 0
+            return g + "-" + String( q + p + l)
+        } else {
+            return g
+        }
+    }
 }
 
 public struct Lieu {
