@@ -6,12 +6,16 @@
 //
 
 struct Parcelle: Codable, Identifiable {
-    var id:Int?
+    var id:Int
     
     var nom:String
     
+    struct adresse: Codable {
+        var voie:String
+        var numéro:String
+    }
     // adresses des voies qui bordent la parcelle
-    var adresses:[(numéro:String, voie:String)] = []
+    var adresses:[adresse] = []
     
     
     enum Kind: String, Codable {
