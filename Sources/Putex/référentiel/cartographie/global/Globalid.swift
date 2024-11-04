@@ -6,6 +6,7 @@
 //
 
 public struct Globalid:Codable {
+    static var NA = Globalid()
     static var next = (one:0, two:0, three:0)
     static func first() -> Int {
         next.one += 1 ; return next.one
@@ -27,6 +28,8 @@ public struct Globalid:Codable {
     var territoire : Int
     var region : Int?
     var commune : Int?
+    
+    init() {territoire = 0}
     
     public init(_ type:Globalid.Kind) {
         switch type {

@@ -8,18 +8,24 @@
 import Foundation
 
 public struct LID : Codable, Identifiable {
+    public static var NA = LID(Globalid())
     var global:Globalid
-    var urba:Urbanid?
+    var local:Localid?
+    
+    init(_ g:Globalid, _ l:Localid? = nil) {
+        global = g
+        local = l
+    }
     
     public var id: String {
         let t = global.territoire * 4096
         let r = (global.region ?? 0) * 64
         let c = global.commune ?? 0
         let g = String( t + r + c)
-        if let urba = urba {
-            let q = urba.quartier * 4096
-            let p = (urba.parcelle ?? 0) * 64
-            let b = urba.batiment ?? 0
+        if let local = local {
+            let q = local.quartier * 4096
+            let p = (local.parcelle ?? 0) * 64
+            let b = local.batiment ?? 0
             return g + "-" + String( q + p + b)
         } else {
             return g
@@ -39,7 +45,7 @@ public struct Lieu {
     
     public  init(_ lid:LID) {
         let global = lid.global
-        let urba = lid.urba
+        let local = lid.local
 
         territoire = Continent.europe[global.territoire]
         if global.region != nil {
@@ -47,11 +53,11 @@ public struct Lieu {
             if global.commune != nil {
                 let commune = region![global.commune!]
                 self.commune = commune
-                if urba != nil {
-                    let quartier = commune[urba!.quartier]
+                if local != nil {
+                    let quartier = commune[local!.quartier]
                     self.quartier = quartier
-                    if urba!.parcelle != nil {
-                        parcelle = quartier[urba!.parcelle!]
+                    if local!.parcelle != nil {
+                        parcelle = quartier[local!.parcelle!]
                     }
                 }
             }

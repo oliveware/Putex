@@ -1,12 +1,12 @@
 //
-//  Urbanid.swift
+//  Localid.swift
 //  Putex
 //
 //  Created by Herve Crespel on 01/11/2024.
 //
 
 
-public struct Urbanid:Codable {
+public struct Localid:Codable {
     static var next = (one:0, two:0, three:0)
     static func first() -> Int {
         next.one += 1 ; return next.one
@@ -29,16 +29,16 @@ public struct Urbanid:Codable {
     var parcelle : Int?
     var batiment : Int?
     
-    public init(_ type:Urbanid.Kind) {
+    public init(_ type:Localid.Kind) {
         switch type {
         case .quartier:
-            quartier = Urbanid.first()
+            quartier = Localid.first()
         case .parcelle:
-            let next = Urbanid.second()
+            let next = Localid.second()
             quartier = next.one
             parcelle = next.two
         case .batiment:
-            let next = Urbanid.third()
+            let next = Localid.third()
             quartier = next.one
             parcelle = next.two
             batiment = next.three

@@ -7,7 +7,7 @@
 
 /*
 struct Localid {
-    var local:Urbanid
+    var local:Localid
     var piece:Int
 }
 
