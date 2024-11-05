@@ -11,8 +11,8 @@ struct Parcelle: Codable, Identifiable {
     var nom:String
     
     struct adresse: Codable {
-        var voie:String
-        var numéro:String
+        var voie:String = ""
+        var numéro:String = ""
     }
     // adresses des voies qui bordent la parcelle
     var adresses:[adresse] = []
