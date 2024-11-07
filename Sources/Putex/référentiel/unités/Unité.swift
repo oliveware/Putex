@@ -13,20 +13,35 @@ public enum Unité: String, Codable, Enumerable {
         Self.allCases
     }
     public static var selector = "unité"
-    public var label: String {self.rawValue}
+    
     
     public var id: Self {self}
     
-    case elec   = "global (hc + hp)"
-    case hc     = "heures creuses"
-    case hp     = "heures pleines"
-    case long = "longueur"
-    case aire = "surface"
-    case volume  = "eau (m3)"
-    case eau    = "eau (l)"
-    case jour   = "journée"
+    case elec   = "kwh"
+    case hc     = "hc"
+    case hp     = "hp"
+    case long   = "m"
+    case aire   = "m2"
+    case volume  = "m3"
+    case eau   = "l"
+    case jour   = "jour"
     case mois   = "mois"
     case unit   = "pièce"
+    
+    public var label: String {
+        switch self {
+        case .elec   : return "global (hc + hp)"
+        case .hc     : return "heures creuses"
+        case .hp     : return "heures pleines"
+        case .long    : return "longueur"
+        case .aire : return "surface"
+        case .volume  : return "eau (m3)"
+        case .eau    : return "eau (l)"
+        case .jour   : return "journée"
+        case .mois   : return "mois"
+        case .unit   : return "pièce"
+        }
+    }
 
     public var local: Mot {
         switch self {
@@ -41,7 +56,7 @@ public enum Unité: String, Codable, Enumerable {
         }
     }
     
-    public func global(_ value: Double) -> String {
+    public func mesure(_ value: Double) -> String {
         switch self {
         case .elec, .hc, .hp :
             return Measurement(value:value, unit:UnitEnergy.kilowattHours).formatted()
@@ -65,12 +80,12 @@ public enum Unité: String, Codable, Enumerable {
     public var symbol:String {
         switch self {
         case .eau:          return "l"
-        case .long:         return "m"
+        case .long:         return UnitLength.meters.symbol
         case .aire:         return "m2"
         case .volume:       return "m3"
         case .elec,.hc,.hp: return "kWh"
         case .jour:         return "j"
-        case .mois:         return "m"
+        case .mois:         return "mois"
         case .unit :        return ""
         }
     }
