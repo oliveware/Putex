@@ -8,26 +8,19 @@
 
 public struct Localid:Codable {
     static var next = (one:0, two:0, three:0, four:0)
-    static func first() -> Int {
+    static func quartier() -> Int {
         next.one += 1 ; return next.one
     }
-    static func second() -> (one:Int, two:Int) {
-        next.two += 1 ; return (one:next.one, two:next.two)
+    static func parcelle() -> Int {
+        next.two += 1 ; return next.two
     }
-    static func third() -> (one:Int, two:Int, three:Int) {
+    static func batiment() -> Int {
         next.three += 1
-        return (one:next.one, two:next.two, three:next.three)
+        return next.three
     }
-    static func fourth() -> (one:Int, two:Int, three:Int, four:Int) {
+    static func local() -> Int {
         next.four += 1
-        return (one:next.one, two:next.two, three:next.three, four:next.four)
-    }
-    
-    public enum Kind {
-        case quartier
-        case parcelle
-        case batiment
-        case local
+        return next.four
     }
     
     var quartier : Int
@@ -35,25 +28,23 @@ public struct Localid:Codable {
     var batiment : Int?
     var local: Int?
     
-    public init(_ type:Localid.Kind) {
-        switch type {
-        case .quartier:
-            quartier = Localid.first()
-        case .parcelle:
-            let next = Localid.second()
-            quartier = next.one
-            parcelle = next.two
-        case .batiment:
-            let next = Localid.third()
-            quartier = next.one
-            parcelle = next.two
-            batiment = next.three
-        case .local:
-            let next = Localid.fourth()
-            quartier = next.one
-            parcelle = next.two
-            batiment = next.three
-            local = next.four
+    
+    public init (_ localid:Localid? = nil){
+        if let first = localid {
+            quartier = first.quartier
+            if let second = first.parcelle {
+                parcelle = second
+                if let third = first.batiment {
+                    batiment = third
+                    local = Localid.local()
+                } else {
+                    batiment = Localid.batiment()
+                }
+            } else {
+                parcelle = Localid.parcelle()
+            }
+        } else {
+            quartier = Localid.quartier()
         }
     }
 }
