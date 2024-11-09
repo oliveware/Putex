@@ -21,8 +21,17 @@ public struct Commune: Codable, Identifiable {
         id = Commune.new()
     }
 
-    subscript(_ index:Int) -> Quartier {
+   /* subscript(_ index:Int) -> Quartier {
         quartiers[index]
+    }*/
+    subscript(_ id:Int) -> Quartier? {
+        var found : Quartier?
+        for quartier in quartiers {
+            if quartier.id == id {
+                found = quartier
+            }
+        }
+        return found
     }
 }
 

@@ -8,28 +8,71 @@
 import Foundation
 
 public struct LID : Codable, Identifiable {
-    public static var NA = LID(Globalid())
-    var global:Globalid
-    var local:Localid?
+    public static var NA = LID()
+    static var next = (one:0, two:0, three:0, four:0, five:0)
+    static func territoire() -> Int {
+        next.one += 1 ; return next.one
+    }
+    static func region() -> Int {
+        next.two += 1 ; return next.two
+    }
+    static func commune() -> Int {
+        next.three += 1
+        return next.three
+    }
+    static func quartier() -> Int {
+        next.four += 1 ; return next.four
+    }
+    static func parcelle() -> Int {
+        next.five += 1 ; return next.five
+    }
     
-    init(_ g:Globalid, _ l:Localid? = nil) {
-        global = g
-        local = l
+    var territoire : Int
+    var region : Int?
+    var commune : Int?
+    var quartier : Int?
+    var parcelle : Int?
+    
+    // initialisation du niveau inférieur
+    init(_ lid:LID? = nil) {
+        if let parent = lid {
+            territoire = parent.territoire
+            if let second = parent.region {
+                region = second
+                if let third = parent.commune {
+                    commune = third
+                    if let fourth = parent.quartier {
+                        quartier = fourth
+                        parcelle = LID.parcelle()
+                    } else {
+                        quartier = LID.quartier()
+                    }
+                } else {
+                    commune = LID.commune()
+                }
+            } else {
+                region = LID.region()
+            }
+        } else {
+            territoire = LID.territoire()
+        }
     }
     
     public var id: String {
-        let t = global.territoire * 4096
-        let r = (global.region ?? 0) * 64
-        let c = global.commune ?? 0
-        let g = String( t + r + c)
-        if let local = local {
-            let q = local.quartier * 4096
-            let p = (local.parcelle ?? 0) * 64
-            let b = local.local ?? 0
-            return g + "-" + String( q + p + b)
-        } else {
-            return g
+        var t =  String(territoire)
+        if let r = region {
+            t = t + "-" + String(r)
+            if let c = commune {
+                t = t + "-" + String(c)
+                if let q = quartier {
+                    t = t + "-" + String(q)
+                    if let p = parcelle {
+                        t = t + "-" + String(p)
+                    }
+                }
+            }
         }
+        return t
     }
 }
 
@@ -42,20 +85,18 @@ public struct Lieu {
     var parcelle : Parcelle?
     
     public  init(_ lid:LID) {
-        let global = lid.global
-        let local = lid.local
 
-        territoire = Continent(Europe)[global.territoire]
-        if global.region != nil {
-            region = territoire[global.region!]
-            if global.commune != nil {
-                let commune = region![global.commune!]
+        territoire = Continent(Europe)[lid.territoire]
+        if lid.region != nil {
+            region = territoire[lid.region!]
+            if lid.commune != nil {
+                let commune = region![lid.commune!]
                 self.commune = commune
-                if local != nil {
-                    let quartier = commune[local!.quartier]
+                if lid.quartier != nil {
+                    let quartier = commune[lid.quartier!]
                     self.quartier = quartier
-                    if local!.parcelle != nil {
-                        parcelle = quartier[local!.parcelle!]
+                    if lid.parcelle != nil {
+                        parcelle = quartier![lid.parcelle!]
                     }
                 }
             }

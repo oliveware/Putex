@@ -57,42 +57,18 @@ let Europe = """
                 {"id":700,"nom":"Lambersart", "quartiers":[
                     {"id":1,"nom":"bois blanc", 
                     "parcelles":[
-                        {"id":395,"nom":"395", "adresse":{"voie":"avenue Hyppolite Peslin", "num":"4"},
-                        "batiments":[
-                        {"nom":"maison","locaux":[]}]},
-                        {"id":570,"nom":"570", "adresse":{"voie":"avenue de Soubise", "num":"11"},
-                        "batiments":[
-                        {"nom":"garage","locaux":[{"nom":"grand"}]}]},
-                        {"id":571,"nom":"571", "adresse":{"voie":"avenue de Soubise", "num":"11"},
-                        "batiments":[
-                        {"nom":"garage","locaux":[{"nom":"milieu"}]}]},
-                        {"id":572,"nom":"572", "adresse":{"voie":"avenue de Soubise", "num":"11"},
-                        "batiments":[
-                        {"nom":"garage","locaux":[{"nom":"droit"}]}]},
-                        {"id":581,"nom":"581", "adresse":{"voie":"avenue Watteau", "num":"1"},
-                        "batiments":[
-                        {"nom":"garage","locaux":[{"nom":"1"}]}]},
-                        {"id":582,"nom":"582", "adresse":{"voie":"avenue Watteau", "num":"1"},
-                        "batiments":[
-                        {"nom":"garage","locaux":[{"nom":"2"}]}]},
-                        {"id":583,"nom":"583", "adresse":{"voie":"avenue Watteau", "num":"1"},
-                        "batiments":[
-                        {"nom":"garage","locaux":[{"nom":"3"}]}]},
-                        {"id":584,"nom":"584", "adresse":{"voie":"avenue Watteau", "num":"1"},
-                        "batiments":[
-                        {"nom":"garage","locaux":[{"nom":"4"}]}]},
-                        {"id":585,"nom":"585", "adresse":{"voie":"avenue Watteau", "num":"1"},
-                        "batiments":[
-                        {"nom":"garage","locaux":[{"nom":"5"}]}]},
-                        {"id":586,"nom":"586", "adresse":{"voie":"avenue Watteau", "num":"1"},
-                        "batiments":[
-                        {"nom":"garage","locaux":[{"nom":"6"}]}]},
-                        {"id":587,"nom":"587", "adresse":{"voie":"avenue Watteau", "num":"1"},
-                        "batiments":[
-                        {"nom":"garage","locaux":[{"nom":"7"}]}]},
-                        {"id":588,"nom":"588", "adresse":{"voie":"avenue Watteau", "num":"1"},
-                        "batiments":[
-                        {"nom":"cour garages","locaux":[]}]}
+                        {"id":395,"nom":"395", "adresse":{"voie":"avenue Hyppolite Peslin", "num":"4"}},
+                        {"id":570,"nom":"570", "adresse":{"voie":"avenue de Soubise", "num":"11"}},
+                        {"id":571,"nom":"571", "adresse":{"voie":"avenue de Soubise", "num":"11"}},
+                        {"id":572,"nom":"572", "adresse":{"voie":"avenue de Soubise", "num":"11"}},
+                        {"id":581,"nom":"581", "adresse":{"voie":"avenue Watteau", "num":"1"}},
+                        {"id":582,"nom":"582", "adresse":{"voie":"avenue Watteau", "num":"1"}},
+                        {"id":583,"nom":"583", "adresse":{"voie":"avenue Watteau", "num":"1"}},
+                        {"id":584,"nom":"584", "adresse":{"voie":"avenue Watteau", "num":"1"}},
+                        {"id":585,"nom":"585", "adresse":{"voie":"avenue Watteau", "num":"1"}},
+                        {"id":586,"nom":"586", "adresse":{"voie":"avenue Watteau", "num":"1"}},
+                        {"id":587,"nom":"587", "adresse":{"voie":"avenue Watteau", "num":"1"}},
+                        {"id":588,"nom":"588", "adresse":{"voie":"avenue Watteau", "num":"1"}}
                     ]}
                 ]}, 
                 {"id":701,"nom":"Lille", "quartiers":[]}, 
@@ -102,29 +78,9 @@ let Europe = """
                 "quartiers":[
                     {"id":1,"nom":"Seclin centre", 
                     "parcelles":[
-                        {"id":148,"nom":"148", "adresse":{"voie":"rue du 14 juillet 1789", "num":"67"},
-                        "batiments":[
-                        {"nom":"rue","locaux":[
-                            {"nom":"droit"},{"nom":"gauche"},{"nom":"premier"},{"nom":"second"}
-                                ]},
-                        {"nom":"cour","locaux":[]},
-                        {"nom":"grange","locaux":[]}
-                        ]
-                        },
-                        {"id":254,"nom":"254", "adresse":{"voie":"rue du 14 juillet 1789", "num":"61 bis"},
-                        "batiments":[
-                        {"nom":"apartements","locaux":[
-                            {"nom":"rue"},{"nom":"cour"}]},
-                        {"nom":"garages","locaux":[
-                            {"nom":"1"},{"nom":"2"},{"nom":"3"},{"nom":"4"},{"nom":"5"}]}
-                        ]
-                        },
-                        {"id":252,"nom":"252", "adresse":{"voie":"rue du 14 juillet 1789", "num":"61 bis"},
-                        "batiments":[
-                        {"nom":"garages","locaux":[
-                            {"nom":"6"},{"nom":"7"}]}
-                        ]
-                        }
+                        {"id":148,"nom":"148", "adresse":{"voie":"rue du 14 juillet 1789", "num":"67"}},
+                        {"id":254,"nom":"254", "adresse":{"voie":"rue du 14 juillet 1789", "num":"61 bis"}},
+                        {"id":252,"nom":"252", "adresse":{"voie":"rue du 14 juillet 1789", "num":"61 bis"}}
                         ]
                     }
                 ]
@@ -133,14 +89,7 @@ let Europe = """
                     "quartiers":[
                         {"nom":"Triolo", 
                         "parcelles":[
-                            {"id":139,"nom":"139", "adresse":{"voie":"allée du Ternois", "num":"3"},
-                            "batiments":[
-                            {"nom":"maison","locaux":[
-                                {"nom":"maison"}
-                            ]
-                            }
-                            ]
-                        }
+                            {"id":139,"nom":"139", "adresse":{"voie":"allée du Ternois", "num":"3"}}
                         ]
                         }
                     ]
@@ -149,12 +98,7 @@ let Europe = """
                     "quartiers":[
                         {"nom":"plage", 
                             "parcelles":[
-                                {"nom":"48", "adresse":{"voie":"", "num":""},
-                                "batiments":[
-                                {"nom":"La Réale","locaux":[ {"nom":"R 6"} ]
-                                }
-                            ]
-                            }
+                                {"nom":"48", "adresse":{"voie":"", "num":""}}
                             ]
                         }
                     ]
@@ -163,21 +107,21 @@ let Europe = """
                 {"id":708,"nom":"Bray-Dunes", "quartiers":[
                         {"nom":"plage", 
                             "parcelles":[
-                                {"nom":"33", "adresse":{"voie":"boulevard Georges Pompidou", "num":"327"},
-                                "batiments":[
-                                {"nom":"maison","locaux":[ {"nom":"maison"} ]
-                                }
-                            ]
-                            }
+                                {"nom":"33", "adresse":{"voie":"boulevard Georges Pompidou", "num":"327"}}
                             ]
                         }
-]},
+                    ]},
                 {"id":709,"nom":"Lomme", "quartiers":[]}
                 ]
             },
         {"id":13, "nom":"Île-de-France",
             "communes":[
-                {"id":1301,"nom":"Paris", "quartiers":[]}, 
+                {"id":1301,"nom":"Paris", "quartiers":[ 
+                    {"nom":"11 ième", 
+                            "parcelles":[
+                                {"nom":"60", "adresse":{"voie":"avenue Claude Vellefaux", "num":"9"}}
+                            ]
+                        }]}, 
                 {"id":1302,"nom":"Boulogne-Billancourt", "quartiers":[]},
                 {"id":1303,"nom":"Saint-Denis", "quartiers":[]}
             ]
