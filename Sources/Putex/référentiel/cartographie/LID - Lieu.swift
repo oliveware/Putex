@@ -58,6 +58,27 @@ public struct LID : Codable, Identifiable {
         }
     }
     
+    public init(_ tab:[Int]) {
+        let div = tab.count
+        if div > 0 {
+            territoire = tab[0]
+            if div > 1 {
+                region = tab[1]
+                if div > 2 {
+                    commune = tab[2]
+                    if div > 3 {
+                        quartier = tab[3]
+                        if div == 5 {
+                            parcelle = tab[4]
+                        }
+                    }
+                }
+            }
+        } else {
+            territoire = LID.territoire()
+        }
+    }
+    
     public var id: String {
         var t =  String(territoire)
         if let r = region {
