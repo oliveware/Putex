@@ -14,7 +14,7 @@ public struct Commune: Codable, Identifiable {
     
     public var id:Int?
     
-    var nom = ""
+    public var nom = ""
     var quartiers:[Quartier] = []
    
     init() {

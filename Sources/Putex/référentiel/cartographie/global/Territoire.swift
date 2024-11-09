@@ -14,7 +14,7 @@ public struct Territoire : Codable, Identifiable {
 
     public var id:Int
     
-    var nom = ""
+    public var nom = ""
     public var pays:String { nom }
     
     var regions:[Region] = []

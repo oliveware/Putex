@@ -14,7 +14,7 @@ public struct Region: Codable, Identifiable {
 
     public var id:Int?
     
-    var nom = ""
+    public var nom = ""
     var communes:[Commune] = []
    
     init() {

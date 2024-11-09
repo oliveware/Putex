@@ -35,12 +35,11 @@ public struct LID : Codable, Identifiable {
 
 public struct Lieu {
     
-    var territoire : Territoire
-    var region : Region?
-    var commune : Commune?
+    public var territoire : Territoire
+    public var region : Region?
+    public var commune : Commune?
     var quartier : Quartier?
     var parcelle : Parcelle?
-    var batiment : Batiment?
     
     public  init(_ lid:LID) {
         let global = lid.global
