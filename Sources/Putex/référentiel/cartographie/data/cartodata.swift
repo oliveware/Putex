@@ -54,6 +54,47 @@ let Europe = """
             },
             {"id":7, "nom":"Hauts de France",
             "communes":[
+                {"id":700,"nom":"Lambersart", "quartiers":[
+                    {"id":1,"nom":"bois blanc", 
+                    "parcelles":[
+                        {"id":395,"nom":"395", "adresse":{"voie":"avenue Hyppolite Peslin", "num":"4"},
+                        "batiments":[
+                        {"nom":"maison","locaux":[]}]},
+                        {"id":570,"nom":"570", "adresse":{"voie":"avenue de Soubise", "num":"11"},
+                        "batiments":[
+                        {"nom":"garage","locaux":[{"nom":"grand"}]}]},
+                        {"id":571,"nom":"571", "adresse":{"voie":"avenue de Soubise", "num":"11"},
+                        "batiments":[
+                        {"nom":"garage","locaux":[{"nom":"milieu"}]}]},
+                        {"id":572,"nom":"572", "adresse":{"voie":"avenue de Soubise", "num":"11"},
+                        "batiments":[
+                        {"nom":"garage","locaux":[{"nom":"droit"}]}]},
+                        {"id":581,"nom":"581", "adresse":{"voie":"avenue Watteau", "num":"1"},
+                        "batiments":[
+                        {"nom":"garage","locaux":[{"nom":"1"}]}]},
+                        {"id":582,"nom":"582", "adresse":{"voie":"avenue Watteau", "num":"1"},
+                        "batiments":[
+                        {"nom":"garage","locaux":[{"nom":"2"}]}]},
+                        {"id":583,"nom":"583", "adresse":{"voie":"avenue Watteau", "num":"1"},
+                        "batiments":[
+                        {"nom":"garage","locaux":[{"nom":"3"}]}]},
+                        {"id":584,"nom":"584", "adresse":{"voie":"avenue Watteau", "num":"1"},
+                        "batiments":[
+                        {"nom":"garage","locaux":[{"nom":"4"}]}]},
+                        {"id":585,"nom":"585", "adresse":{"voie":"avenue Watteau", "num":"1"},
+                        "batiments":[
+                        {"nom":"garage","locaux":[{"nom":"5"}]}]},
+                        {"id":586,"nom":"586", "adresse":{"voie":"avenue Watteau", "num":"1"},
+                        "batiments":[
+                        {"nom":"garage","locaux":[{"nom":"6"}]}]},
+                        {"id":587,"nom":"587", "adresse":{"voie":"avenue Watteau", "num":"1"},
+                        "batiments":[
+                        {"nom":"garage","locaux":[{"nom":"7"}]}]},
+                        {"id":588,"nom":"588", "adresse":{"voie":"avenue Watteau", "num":"1"},
+                        "batiments":[
+                        {"nom":"cour garages","locaux":[]}]}
+                    ]}
+                ]}, 
                 {"id":701,"nom":"Lille", "quartiers":[]}, 
                 {"id":702,"nom":"Amiens", "quartiers":[]}, 
                 {"id":703,"nom":"Roubaix", "quartiers":[]}, 
@@ -61,7 +102,7 @@ let Europe = """
                 "quartiers":[
                     {"id":1,"nom":"Seclin centre", 
                     "parcelles":[
-                        {"id":1,"nom":"148", "adresse":{"voie":"rue du 14 juillet 1789", "num":"67"},
+                        {"id":148,"nom":"148", "adresse":{"voie":"rue du 14 juillet 1789", "num":"67"},
                         "batiments":[
                         {"nom":"rue","locaux":[
                             {"nom":"droit"},{"nom":"gauche"},{"nom":"premier"},{"nom":"second"}
@@ -70,10 +111,18 @@ let Europe = """
                         {"nom":"grange","locaux":[]}
                         ]
                         },
-                        {"id":2,"nom":"143", "adresse":{"voie":"rue du 14 juillet 1789", "num":"61 bis"},
+                        {"id":254,"nom":"254", "adresse":{"voie":"rue du 14 juillet 1789", "num":"61 bis"},
                         "batiments":[
-                        {"nom":"rue","locaux":[
-                            {"nom":"rue"},{"nom":"cour"}]}
+                        {"nom":"apartements","locaux":[
+                            {"nom":"rue"},{"nom":"cour"}]},
+                        {"nom":"garages","locaux":[
+                            {"nom":"1"},{"nom":"2"},{"nom":"3"},{"nom":"4"},{"nom":"5"}]}
+                        ]
+                        },
+                        {"id":252,"nom":"252", "adresse":{"voie":"rue du 14 juillet 1789", "num":"61 bis"},
+                        "batiments":[
+                        {"nom":"garages","locaux":[
+                            {"nom":"6"},{"nom":"7"}]}
                         ]
                         }
                         ]
@@ -84,9 +133,9 @@ let Europe = """
                     "quartiers":[
                         {"nom":"Triolo", 
                         "parcelles":[
-                            {"nom":"18", "adresse":{"voie":"allée du Ternois", "num":"3"},
+                            {"id":139,"nom":"139", "adresse":{"voie":"allée du Ternois", "num":"3"},
                             "batiments":[
-                            {"nom":"rue","locaux":[
+                            {"nom":"maison","locaux":[
                                 {"nom":"maison"}
                             ]
                             }
@@ -111,7 +160,18 @@ let Europe = """
                     ]
                 },
                 {"id":707,"nom":"Hauboudin", "quartiers":[]},
-                {"id":708,"nom":"Bray-Dunes", "quartiers":[]},
+                {"id":708,"nom":"Bray-Dunes", "quartiers":[
+                        {"nom":"plage", 
+                            "parcelles":[
+                                {"nom":"33", "adresse":{"voie":"boulevard Georges Pompidou", "num":"327"},
+                                "batiments":[
+                                {"nom":"maison","locaux":[ {"nom":"maison"} ]
+                                }
+                            ]
+                            }
+                            ]
+                        }
+]},
                 {"id":709,"nom":"Lomme", "quartiers":[]}
                 ]
             },

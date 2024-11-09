@@ -20,22 +20,12 @@ struct Parcelle: Codable, Identifiable {
     
     var nom = ""
     
-    struct Adresse: Codable {
-        var voie:String = ""
-        var num:String = ""
-    }
-    // adresses des voies qui bordent la parcelle
-    var adresse = Adresse()
-    var altenadresse: Adresse?
-    
-    
     enum Kind: String, Codable {
         case agricole   = "agricole"
         case foret      = "forêt"
         case logement   = "logement"
         case commerce   = "commerce"
         case industrie  = "industrie"
-        case autre      = "non défini"
     }
     var kind : Kind?
     

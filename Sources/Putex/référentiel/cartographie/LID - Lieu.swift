@@ -25,7 +25,7 @@ public struct LID : Codable, Identifiable {
         if let local = local {
             let q = local.quartier * 4096
             let p = (local.parcelle ?? 0) * 64
-            let b = local.batiment ?? 0
+            let b = local.local ?? 0
             return g + "-" + String( q + p + b)
         } else {
             return g
@@ -63,26 +63,7 @@ public struct Lieu {
         }
      }
     
-    public var adresse: (
-              numero : String,
-              voie : String,
-              complement : String,
-              codepostal : String,
-              commune : String,
-              pays : String
-    ) {
-        let pays = territoire.nom
-        if let batiment = batiment {
-            let numero = batiment.adresse.num
-            let voie = batiment.adresse.voie
-            let complement = batiment.nom
-            let codepostal = batiment.codepostal
-            let commune = commune!.nom
-            return (numero: numero, voie: voie, complement: complement, codepostal: codepostal, commune: commune, pays: pays)
-        } else {
-            return (numero: "", voie: "", complement: "", codepostal: "", commune: "", pays: pays)
-        }
-    }
+   
     
  /*  public  init(_ lid:[Int]) {
         territoire = Continent.europe[lid[0]]

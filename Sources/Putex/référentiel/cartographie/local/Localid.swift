@@ -14,32 +14,22 @@ public struct Localid:Codable {
     static func parcelle() -> Int {
         next.two += 1 ; return next.two
     }
-    static func batiment() -> Int {
+    static func local() -> Int {
         next.three += 1
         return next.three
-    }
-    static func local() -> Int {
-        next.four += 1
-        return next.four
     }
     
     var quartier : Int
     var parcelle : Int?
-    var batiment : Int?
     var local: Int?
     
-    
+    // initialisation d'une division inférieure
     public init (_ localid:Localid? = nil){
         if let first = localid {
             quartier = first.quartier
             if let second = first.parcelle {
                 parcelle = second
-                if let third = first.batiment {
-                    batiment = third
-                    local = Localid.local()
-                } else {
-                    batiment = Localid.batiment()
-                }
+                local = Localid.local()
             } else {
                 parcelle = Localid.parcelle()
             }
