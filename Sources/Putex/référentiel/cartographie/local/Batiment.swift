@@ -9,7 +9,7 @@ struct Batiment {
     var nom: String
     // un bâtiment a une seule adresse
     // cette adresse est l'une des adresses de la parcelle
-    var adresse = Parcelle.adresse()
+    var adresse = Parcelle.Adresse()
     var codepostal:String = ""
     
     init(_ nom:String) {

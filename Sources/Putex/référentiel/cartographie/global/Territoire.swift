@@ -6,18 +6,32 @@
 //
 
 public struct Territoire : Codable, Identifiable {
+    static var nextid = 100
+    static func new() -> Int {
+        nextid += 1
+        return nextid
+    }
 
     public var id:Int
     
-    var nom:String
+    var nom = ""
     public var pays:String { nom }
     
     var regions:[Region] = []
     
-    
+    init() {
+        id = Territoire.new()
+    }
 
-    subscript(_ index:Int) -> Region {
-        regions[index]
+    subscript(_ id:Int) -> Region? {
+        var found : Region?
+        for region in regions {
+            if region.id == id {
+                found = region
+                break
+            }
+        }
+        return found
     }
 }
 

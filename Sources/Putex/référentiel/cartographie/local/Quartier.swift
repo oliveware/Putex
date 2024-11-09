@@ -6,13 +6,23 @@
 //
 
 struct Quartier: Codable, Identifiable {
+    static var nextid = 100
+    static func new() -> Int {
+        nextid += 1
+        return nextid
+    }
+    
     var id:Int?
     
-    var nom:String
+    var nom = ""
     // adresse
     var codepostal:String?
     
     var parcelles:[Parcelle] = []
+    
+    init() {
+        id = Quartier.new()
+    }
 
     subscript(_ id:Int) -> Parcelle? {
         var found : Parcelle?

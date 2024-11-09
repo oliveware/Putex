@@ -40,14 +40,13 @@ public struct Lieu {
     var commune : Commune?
     var quartier : Quartier?
     var parcelle : Parcelle?
-   // var batiment : Batiment?
     var batiment : Batiment?
     
     public  init(_ lid:LID) {
         let global = lid.global
         let local = lid.local
 
-        territoire = Continent.europe[global.territoire]
+        territoire = Continent(Europe)[global.territoire]
         if global.region != nil {
             region = territoire[global.region!]
             if global.commune != nil {
@@ -74,7 +73,7 @@ public struct Lieu {
     ) {
         let pays = territoire.nom
         if let batiment = batiment {
-            let numero = batiment.adresse.numéro
+            let numero = batiment.adresse.num
             let voie = batiment.adresse.voie
             let complement = batiment.nom
             let codepostal = batiment.codepostal

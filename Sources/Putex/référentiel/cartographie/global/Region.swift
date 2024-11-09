@@ -5,14 +5,21 @@
 //  Created by Herve Crespel on 02/11/2024.
 //
 
-public struct Region: Codable {
+public struct Region: Codable, Identifiable {
+    static var nextid = 100
+    static func new() -> Int {
+        nextid += 1
+        return nextid
+    }
+
+    public var id:Int?
     
-    public var id:Int
-    
-    var nom:String
+    var nom = ""
     var communes:[Commune] = []
    
-  
+    init() {
+        id = Region.new()
+    }
 
     subscript(_ index:Int) -> Commune {
         communes[index]

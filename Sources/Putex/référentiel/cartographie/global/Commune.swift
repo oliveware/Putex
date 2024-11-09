@@ -5,13 +5,21 @@
 //  Created by Herve Crespel on 02/11/2024.
 //
 
-public struct Commune: Codable {
+public struct Commune: Codable, Identifiable {
+    static var nextid = 100
+    static func new() -> Int {
+        nextid += 1
+        return nextid
+    }
     
-    public var id:Int
+    public var id:Int?
     
-    var nom:String
+    var nom = ""
     var quartiers:[Quartier] = []
    
+    init() {
+        id = Commune.new()
+    }
 
     subscript(_ index:Int) -> Quartier {
         quartiers[index]

@@ -8,12 +8,14 @@
 import Foundation
 
 struct Continent : Codable {
-    static var europe = Continent(Europe)
+  //  static var monde = ["Europe":Continent(Europe)]
     
+    var nom = ""
     var territoires : [Territoire] = []
     
-    init(_ lands: [Territoire]) {
-            territoires = lands
+    init(_ nom:String, _ lands: [Territoire]) {
+        self.nom = nom
+        territoires = lands
     }
     
     init(_ json:String) {

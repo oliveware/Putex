@@ -6,16 +6,27 @@
 //
 
 struct Parcelle: Codable, Identifiable {
-    var id:Int
+    static var nextid = 100
+    static func new() -> Int {
+        nextid += 1
+        return nextid
+    }
     
-    var nom:String
+    var id:Int?
     
-    struct adresse: Codable {
+    init() {
+        id = Parcelle.new()
+    }
+    
+    var nom = ""
+    
+    struct Adresse: Codable {
         var voie:String = ""
-        var numéro:String = ""
+        var num:String = ""
     }
     // adresses des voies qui bordent la parcelle
-    var adresses:[adresse] = []
+    var adresse = Adresse()
+    var altenadresse: Adresse?
     
     
     enum Kind: String, Codable {
@@ -26,7 +37,7 @@ struct Parcelle: Codable, Identifiable {
         case industrie  = "industrie"
         case autre      = "non défini"
     }
-    var kind = Kind.logement
+    var kind : Kind?
     
 
 /*    extension Parcelle {

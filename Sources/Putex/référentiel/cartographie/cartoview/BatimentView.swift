@@ -15,7 +15,7 @@ struct BatimentView: View {
             GroupBox ("adresse"){
                 TextField("voie      ", text:$batiment.adresse.voie)
                 HStack {
-                    TextField("numéro", text:$batiment.adresse.numéro)
+                    TextField("numéro", text:$batiment.adresse.num)
                         .frame(width:100)
                     TextField("code postal", text:$batiment.codepostal)
                 }
