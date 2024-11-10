@@ -53,7 +53,7 @@ public struct NumberView: View {
     public var body: some View {
         if edition {
                 HStack{
-                    if !nombre.isnul {
+                    if !nombre.isNaN {
                         Button(action: clear)
                         {Image(systemName: "eraser")}
                     }

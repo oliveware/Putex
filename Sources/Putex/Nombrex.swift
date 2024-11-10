@@ -15,7 +15,7 @@ struct Nombrex: View {
     
     init(_ nombre:Nombre) {
         n = nombre
-        edition = nombre.isnul
+        edition = nombre.isNaN
     }
     
     var body: some View {

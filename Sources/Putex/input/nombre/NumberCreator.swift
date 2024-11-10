@@ -27,7 +27,7 @@ struct NumberCreator: View {
     
     init(_ nombre:Binding<Nombre>, _ set: NumberSet) {
         _nombre = nombre
-        if nombre.wrappedValue.isnul {
+        if nombre.wrappedValue.isNaN {
             creation = true
         }
         self.set = set
@@ -172,7 +172,7 @@ struct NumberCreator: View {
         decimale = set.normalize(decimale) ; dot = ""
         nombre = Nombre(entiere, decimale, negative)
         entiere = "" ; decimale = "" ;  negative = false
-        creation = nombre.isnul
+        creation = nombre.isNaN
     }
 }
 

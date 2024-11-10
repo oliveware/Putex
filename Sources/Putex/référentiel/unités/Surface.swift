@@ -14,6 +14,10 @@ public struct Mesure: Codable {
         unit.mesure(nombre.value)
     }
     
+    public init(_ unit:Unité = .aire) {
+        nombre = Nombre()
+        self.unit = unit
+    }
     public init(_ s:String, _ unit:Unité = .aire) {
          nombre = Nombre(s)
         self.unit = unit
@@ -53,6 +57,7 @@ public struct SurfaceView : View {
 struct SurfacePreview : View {
     @State var surface = Surface("19,92")
     @State var mesure = Mesure("45,2", .aire)
+    @State var optionel = Mesure(.long)
     
     var body:some View {
         VStack {
@@ -61,6 +66,8 @@ struct SurfacePreview : View {
             NumberView($surface)
             
             NumberView($mesure)
+            
+            NumberView($optionel)
         } .frame(width:250)
     }
 }
