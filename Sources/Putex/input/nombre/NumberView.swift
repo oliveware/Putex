@@ -35,6 +35,13 @@ public struct NumberView: View {
         classifier = surface.wrappedValue.unit.symbol
         prompt = "surface"
     }
+    public init(_ mesure:Binding<Mesure>) {
+        _nombre = mesure.nombre
+        set = .decimal(2)
+        classifier = mesure.wrappedValue.unit.symbol
+        prompt = mesure.wrappedValue.unit.label
+    }
+
     
     var showidth:CGFloat{
         var nbc = nombre.enchiffres().count + classifier.count + 1

@@ -6,6 +6,20 @@
 //
 import SwiftUI
 
+public struct Mesure: Codable {
+    var nombre: Nombre
+    var unit : Unité
+    
+    var astring : String {
+        unit.mesure(nombre.value)
+    }
+    
+    public init(_ s:String, _ unit:Unité = .aire) {
+         nombre = Nombre(s)
+        self.unit = unit
+    }
+}
+
 public struct Surface: Codable {
     var nombre: Nombre
     var unit = Unité.aire
@@ -38,15 +52,20 @@ public struct SurfaceView : View {
 
 struct SurfacePreview : View {
     @State var surface = Surface("19,92")
-
+    @State var mesure = Mesure("45,2", .aire)
     
     var body:some View {
-        NumberView($surface.nombre, .decimal(2), surface.unit.symbol, "surface")
-            .frame(width:250)
+        VStack {
+            NumberView($surface.nombre, .decimal(2), surface.unit.symbol, "surface")
+            
+            NumberView($surface)
+            
+            NumberView($mesure)
+        } .frame(width:250)
     }
 }
 
 #Preview {
-    SurfacePreview(surface:Surface("19,92"))
+    SurfacePreview()
 }
 
