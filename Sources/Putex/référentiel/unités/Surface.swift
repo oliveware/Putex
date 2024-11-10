@@ -42,10 +42,10 @@ public struct SurfaceView : View {
 
 struct SurfacePreview : View {
     @State var surface = Surface("19,92")
-
+    @State var edition = false
     
     var body:some View {
-        SurfaceView($surface)
+        NumberView($surface, $edition)
             .frame(width:250)
     }
 }

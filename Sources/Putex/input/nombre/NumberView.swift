@@ -20,7 +20,7 @@ public struct NumberView: View {
     var prompt :String?
     
     @State var dot = ""
-    var localedot : String = ""
+    var localedot : String {locale.decimalSeparator ?? ","}
     
     
     public init(_ nombre:Binding<Nombre>, _ edition:Binding<Bool>, _ set: NumberSet, _ classifier:String = "",_ prompt:String? = nil, _ autovalide:Bool = false) {
@@ -31,8 +31,16 @@ public struct NumberView: View {
         self.classifier = classifier
         self.prompt = prompt
         self.autovalide = autovalide
-        localedot = locale.decimalSeparator ?? ","
     }
+    public init(_ surface:Binding<Surface>, _ edition:Binding<Bool>) {
+        _nombre = surface.nombre
+        _edition = edition
+        set = .decimal(2)
+        classifier = surface.wrappedValue.unit.symbol
+        prompt = "surface"
+        autovalide = true
+    }
+    
     var showidth:CGFloat{
         var nbc = nombre.enchiffres().count + classifier.count + 1
         if nbc < 5 { nbc = 5 }
