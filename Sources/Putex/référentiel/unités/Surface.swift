@@ -14,7 +14,7 @@ public struct Surface: Codable {
         unit.mesure(nombre.value)
     }
     
-    init(_ s:String, _ unit:Unité = .aire) {
+    public init(_ s:String, _ unit:Unité = .aire) {
          nombre = Nombre(s)
         self.unit = unit
     }
