@@ -17,17 +17,19 @@ public struct NumberView: View {
     @State var set : NumberSet
     var classifier: String = ""
     var autovalide = false
+    var prompt :String?
     
     @State var dot = ""
     var localedot : String = ""
     
     
-    public init(_ nombre:Binding<Nombre>, _ edition:Binding<Bool>, _ set: NumberSet, _ classifier:String = "", _ autovalide:Bool = false) {
+    public init(_ nombre:Binding<Nombre>, _ edition:Binding<Bool>, _ set: NumberSet, _ classifier:String = "",_ prompt:String? = nil, _ autovalide:Bool = false) {
         _nombre = nombre
         _edition = edition
 
         self.set = set
         self.classifier = classifier
+        self.prompt = prompt
         self.autovalide = autovalide
         localedot = locale.decimalSeparator ?? ","
     }
@@ -46,6 +48,10 @@ public struct NumberView: View {
                         {Image(systemName: "eraser")}
                     }
                     
+                    if let prompt = prompt {
+                        Text(prompt)
+                    }
+                    
                     NumberEditor($nombre, set, classifier)
                    .frame(minWidth:showidth + 20)
                     
@@ -55,13 +61,20 @@ public struct NumberView: View {
                     }
                 }
         } else {
-            Button(action:{
-                edition = true
-            })
-            {
-                Text(nombre.enchiffres(localedot) + " " + classifier)
-                    .font(.title2)
-            }.frame(width:showidth*1.7)
+            HStack {
+                if let prompt = prompt {
+                    Text(prompt)
+                }
+              /*  Button(action:{
+                    edition = true
+                })
+                {*/
+                    Text(nombre.enchiffres(localedot) + " " + classifier)
+                        .font(.title3)
+               // }.frame(width:showidth*1.7)
+                Button(action: {edition = true})
+                {Image(systemName: "pencil")}
+            }
         }
     }
     
@@ -93,7 +106,7 @@ struct NumberPreview : View {
     
     var body : some View {
         HStack {
-            NumberView($nombre, $edition, set, classifier)
+            NumberView($nombre, $edition, set, classifier, "prompt")
             if !autovalide && edition {
                 Button(action: {edition = false})
                 {Image(systemName: "checkmark")}

@@ -22,22 +22,16 @@ public struct Surface: Codable {
 
 public struct SurfaceView : View {
     @Binding var surface:Surface
-    var prompt = "surface"
     @State var edition = false
     
-    public init(_ surface:Binding<Surface>, _ prompt:String? = nil) {
+    public init(_ surface:Binding<Surface>) {
         _surface = surface
-        if let p = prompt {
-           if p != "" {self.prompt = p}
-        } else {
-            self.prompt = ""
-        }
     }
     
     public var body:some View {
         HStack{
-            Text(prompt)
-            NumberView($surface.nombre, $edition, .decimal(2), surface.unit.symbol)
+
+            NumberView($surface.nombre, $edition, .decimal(2), surface.unit.symbol, "surface")
             if edition {
                 Button(action: {edition = false})
                 {Image(systemName: "checkmark")}
@@ -48,17 +42,17 @@ public struct SurfaceView : View {
 
 struct SurfacePreview : View {
     @State var surface = Surface("19,92")
-    var prompt:String?
+
     
     var body:some View {
-        SurfaceView($surface, prompt)
+        SurfaceView($surface)
             .frame(width:250)
     }
 }
 
 #Preview {
-    SurfacePreview(surface:Surface("19,92"), prompt:"")
+    SurfacePreview(surface:Surface("19,92"))
 }
 #Preview("no prmpt") {
-    SurfacePreview(surface:Surface("9,58"), prompt:nil)
+    SurfacePreview(surface:Surface("9,58"))
 }
