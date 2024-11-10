@@ -20,9 +20,8 @@ public struct Surface: Codable {
     }
 }
 
-public struct SurfaceView : View {
+/*public struct SurfaceView : View {
     @Binding var surface:Surface
-    @State var edition = false
     
     public init(_ surface:Binding<Surface>) {
         _surface = surface
@@ -31,21 +30,18 @@ public struct SurfaceView : View {
     public var body:some View {
         HStack{
 
-            NumberView($surface.nombre, $edition, .decimal(2), surface.unit.symbol, "surface")
-            if edition {
-                Button(action: {edition = false})
-                {Image(systemName: "checkmark")}
-            }
+            NumberView($surface.nombre, .decimal(2), surface.unit.symbol, "surface")
+
         }
     }
-}
+}*/
 
 struct SurfacePreview : View {
     @State var surface = Surface("19,92")
-    @State var edition = false
+
     
     var body:some View {
-        NumberView($surface, $edition)
+        NumberView($surface)
             .frame(width:250)
     }
 }
@@ -53,6 +49,4 @@ struct SurfacePreview : View {
 #Preview {
     SurfacePreview(surface:Surface("19,92"))
 }
-#Preview("no prmpt") {
-    SurfacePreview(surface:Surface("9,58"))
-}
+

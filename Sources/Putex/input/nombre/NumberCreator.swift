@@ -45,7 +45,7 @@ struct NumberCreator: View {
         if creation {
             creator
         } else {
-           NumberView($nombre, $edition, set)
+           NumberView($nombre, set)
         }
     }
     

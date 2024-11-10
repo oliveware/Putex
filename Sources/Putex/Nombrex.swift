@@ -21,11 +21,11 @@ struct Nombrex: View {
     var body: some View {
         TabView(selection: $index) {
          //   NumberView($n, n.isnul, nil).tabItem { Text("multi") }.tag(0)
-            NumberView($n , $edition,  .naturel, "m3")
+            NumberView($n , .naturel, "m3")
                 .tabItem { Text("m3") }.tag(1)
-            NumberView($n , $edition,  .relatif)
+            NumberView($n , .relatif)
                 .tabItem { Text("relatif") }.tag(2)
-            NumberView($n , $edition,  .decimal(2), "€")
+            NumberView($n , .decimal(2), "€")
                 .tabItem { Text("euro") }.tag(3)
         }
     }
