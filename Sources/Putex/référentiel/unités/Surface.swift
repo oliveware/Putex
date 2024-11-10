@@ -52,7 +52,7 @@ struct SurfacePreview : View {
     
     var body:some View {
         SurfaceView($surface, prompt)
-            .frame(width:200)
+            .frame(width:250)
     }
 }
 
