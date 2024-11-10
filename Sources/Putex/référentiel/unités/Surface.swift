@@ -41,7 +41,7 @@ struct SurfacePreview : View {
 
     
     var body:some View {
-        NumberView($surface)
+        NumberView($surface.nombre, .decimal(2), surface.unit.symbol, "surface")
             .frame(width:250)
     }
 }
