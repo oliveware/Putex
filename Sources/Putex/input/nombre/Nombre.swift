@@ -177,7 +177,11 @@ public struct Nombre: Codable {
                 return chiffres
             }
         } else {
-            return "0"
+            if decimales == "" {
+                return ""
+            } else {
+                return "0" + dot + decimales
+            }
         }
        
         

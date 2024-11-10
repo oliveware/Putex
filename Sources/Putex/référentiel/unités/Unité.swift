@@ -89,6 +89,19 @@ public enum Unité: String, Codable, Enumerable {
         case .unit :        return ""
         }
     }
+    
+    public var numberset:NumberSet {
+        switch self {
+        case .eau:          return .naturel
+        case .long:         return .decimal(3)
+        case .aire:         return .decimal(2)
+        case .volume:       return .decimal(3)
+        case .elec,.hc,.hp: return .naturel
+        case .jour:         return .naturel
+        case .mois:         return .naturel
+        case .unit :        return .naturel
+        }
+    }
    
     
     public var color:Color {

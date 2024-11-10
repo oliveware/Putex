@@ -24,7 +24,7 @@ public struct Mesure: Codable {
     }
 }
 
-public struct Surface: Codable {
+/*public struct Surface: Codable {
     var nombre: Nombre
     var unit = Unité.aire
     
@@ -52,20 +52,21 @@ public struct SurfaceView : View {
 
         }
     }
-}
+}*/
 
-struct SurfacePreview : View {
-    @State var surface = Surface("19,92")
-    @State var mesure = Mesure("45,2", .aire)
+struct MesurePreview : View {
+    @State var volume = Mesure("19,92", .eau)
+    @State var surface = Mesure("45,2", .aire)
+    @State var hp = Mesure("4,52", .hp)
     @State var optionel = Mesure(.long)
     
     var body:some View {
         VStack {
-            NumberView($surface.nombre, .decimal(2), surface.unit.symbol, "surface")
+            NumberView($volume)
             
             NumberView($surface)
             
-            NumberView($mesure)
+            NumberView($hp)
             
             NumberView($optionel)
         } .frame(width:250)
@@ -73,6 +74,6 @@ struct SurfacePreview : View {
 }
 
 #Preview {
-    SurfacePreview()
+    MesurePreview()
 }
 

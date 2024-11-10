@@ -29,15 +29,15 @@ public struct NumberView: View {
         self.classifier = classifier
         self.prompt = prompt
     }
-    public init(_ surface:Binding<Surface>) {
+ /*   public init(_ surface:Binding<Surface>) {
         _nombre = surface.nombre
         set = .decimal(2)
         classifier = surface.wrappedValue.unit.symbol
         prompt = "surface"
-    }
+    }*/
     public init(_ mesure:Binding<Mesure>) {
         _nombre = mesure.nombre
-        set = .decimal(2)
+        set = mesure.wrappedValue.unit.numberset
         classifier = mesure.wrappedValue.unit.symbol
         prompt = mesure.wrappedValue.unit.label
     }
@@ -73,13 +73,13 @@ public struct NumberView: View {
                 if let prompt = prompt {
                     Text(prompt)
                 }
-              /*  Button(action:{
-                    edition = true
-                })
-                {*/
+                if nombre.isNaN {
+                    Text ("à définir")
+                } else {
                     Text(nombre.enchiffres(localedot) + " " + classifier)
-                        .font(.title3)
-               // }.frame(width:showidth*1.7)
+                    .font(.title3)
+                    //.frame(width:showidth*1.7)
+                    }
                 Button(action: {edition = true})
                 {Image(systemName: "pencil")}
             }
