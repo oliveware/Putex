@@ -20,7 +20,7 @@ public struct Surface: Codable {
     }
 }
 
-/*public struct SurfaceView : View {
+public struct SurfaceView : View {
     @Binding var surface:Surface
     
     public init(_ surface:Binding<Surface>) {
@@ -34,7 +34,7 @@ public struct Surface: Codable {
 
         }
     }
-}*/
+}
 
 struct SurfacePreview : View {
     @State var surface = Surface("19,92")
