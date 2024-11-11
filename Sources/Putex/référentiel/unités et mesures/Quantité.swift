@@ -21,11 +21,11 @@ public struct Quantité: Codable, Equatable {
     
     var label : String = ""
     
-    init(_ code:Quantifiable) {
+    public init(_ code:Quantifiable) {
         nature = code
         label = label(code)
     }
-    init(_ autre:String) {
+    public init(_ autre:String) {
      //   autrenature = autre
         label = autre == "" ? "inconnu" : autre
     }
