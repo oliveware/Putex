@@ -269,3 +269,28 @@ public extension Int {
         return "\(negatif ? "-" : "") \(nombre.enchiffres())"
     }
 }
+
+extension Nombre {
+    public static func > (a:Nombre, b:Nombre) -> Bool {
+        return a.value > b.value
+    }
+    
+    public static func > (a:Nombre, b:Int) -> Bool {
+        return a.value > Double(b)
+    }
+    
+    public static func - (a:Nombre, b:Nombre) -> Nombre {
+        return Nombre(String(a.value - b.value))
+    }
+    
+    public static func + (a:Nombre, b:Nombre) -> Nombre {
+        return Nombre(String(a.value + b.value))
+    }
+    
+    public static func * (a:Nombre, b:Nombre) -> Nombre {
+        return Nombre(String(a.value * b.value))
+    }
+    public static func / (a:Nombre, b:Nombre) -> Nombre {
+        return Nombre(String(a.value / b.value))
+    }
+}

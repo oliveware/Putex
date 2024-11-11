@@ -15,36 +15,32 @@ public struct NumberView: View {
     @Binding var nombre: Nombre
     @State var edition = false
     @State var set : NumberSet
-    var classifier: String = ""
-    var prompt :String?
+    var symbol: String = ""
+    var label :String?
     
     @State var dot = ""
     var localedot : String {locale.decimalSeparator ?? ","}
     
     
-    public init(_ nombre:Binding<Nombre>, _ set: NumberSet, _ classifier:String = "",_ prompt:String? = nil) {
+    public init(_ nombre:Binding<Nombre>, _ set: NumberSet, _ symbol:String = "", _ label:String? = nil) {
         _nombre = nombre
 
         self.set = set
-        self.classifier = classifier
-        self.prompt = prompt
+        self.symbol = symbol
+        self.label = label
     }
- /*   public init(_ surface:Binding<Surface>) {
-        _nombre = surface.nombre
-        set = .decimal(2)
-        classifier = surface.wrappedValue.unit.symbol
-        prompt = "surface"
-    }*/
+
     public init(_ mesure:Binding<Mesure>) {
         _nombre = mesure.nombre
-        set = mesure.wrappedValue.unit.numberset
-        classifier = mesure.wrappedValue.unit.symbol
-        prompt = mesure.wrappedValue.unit.label
+        let mv = mesure.wrappedValue
+        set = mv.set
+        symbol = mv.symbol
+        label = mv.label
     }
 
     
     var showidth:CGFloat{
-        var nbc = nombre.enchiffres().count + classifier.count + 1
+        var nbc = nombre.enchiffres().count + symbol.count + 1
         if nbc < 5 { nbc = 5 }
         return CGFloat(nbc * 8)
     }
@@ -58,11 +54,11 @@ public struct NumberView: View {
                         {Image(systemName: "eraser")}
                     }
                     
-                    if let prompt = prompt {
-                        Text(prompt)
+                    if let label = label {
+                        Text(label)
                     }
                     
-                    NumberEditor($nombre, set, classifier)
+                    NumberEditor($nombre, set, symbol)
                    .frame(minWidth:showidth + 20)
                     
                     Button(action: {edition = false})
@@ -70,13 +66,13 @@ public struct NumberView: View {
                 }
         } else {
             HStack {
-                if let prompt = prompt {
-                    Text(prompt)
+                if let label = label {
+                    Text(label)
                 }
                 if nombre.isNaN {
                     Text ("à définir")
                 } else {
-                    Text(nombre.enchiffres(localedot) + " " + classifier)
+                    Text(nombre.enchiffres(localedot) + " " + symbol)
                     .font(.title3)
                     //.frame(width:showidth*1.7)
                     }
@@ -99,36 +95,48 @@ public struct NumberView: View {
 struct NumberPreview : View {
     @State var nombre : Nombre
     var set : NumberSet = .naturel
-    var classifier = ""
+    var symbol: String
+    var label: String
     
-    public init(_ nombre:Nombre, _ set: NumberSet, _ classifier:String = "") {
+    public init(_ nombre:Nombre, _ set: NumberSet, _ symbol:String = "m2", _ label:String = "surface") {
         self.nombre = nombre
         self.set = set
-        self.classifier = classifier
+        self.symbol = symbol
+        self.label = label
     }
     
     var body : some View {
         HStack {
-            NumberView($nombre, set, classifier, "prompt")
+            NumberView($nombre, set, symbol, label)
         }
-            //.frame(width:200, height: 100)
     }
 }
 
 
-#Preview ("décimal création") {
-    NumberPreview(Nombre(), .decimal(2))
-        .frame(width:400, height:250)
+#Preview  {
+    VStack {
+        HStack {
+            Text("édition").font(.title3).padding(20)
+            Spacer()
+        }
+        HStack {
+            Text("nombre décimal").frame(width:100)
+            NumberPreview(Nombre(), .decimal(2))
+                .frame(width:400)
+        }
+        HStack {
+            Text("nombre < 1000").frame(width:100)
+            NumberPreview(Nombre(1325,2), .decimal(2), "€", "montant")
+               .frame(width:400)
+        }
+        HStack {
+            Text("nombre > 1000").frame(width:100)
+            NumberPreview(Nombre(1784874782392925,4), .decimal(4), "km", "distance")
+               .frame(width:400)
+        }
+    }.frame(width:520, height:250)
 }
 
-#Preview ("<1000 édition") {
-        NumberPreview(Nombre(1325,2), .decimal(2), "€")
-            .frame(width:400, height:250)
-}
 
-#Preview (">1000 édition") {
-        NumberPreview(Nombre(1784874782392925,4), .decimal(4), "km")
-            .frame(width:400, height:250)
-}
 
 

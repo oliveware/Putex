@@ -5,7 +5,7 @@
 //  Created by Herve Crespel on 17/10/2024.
 //
 
-public enum NumberSet: Equatable {
+public enum NumberSet: Codable,Equatable {
     
     case naturel
     case relatif
