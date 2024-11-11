@@ -41,7 +41,7 @@ public struct Quantité: Codable, Equatable {
         }
     }
     
-    public func couleur(_ nature:Quantifiable) -> Color {
+    public var color: Color {
         switch nature {
         case .eau:          return Color.blue
         case .elec,.hp,.hc: return Color.red
