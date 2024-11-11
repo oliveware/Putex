@@ -16,7 +16,7 @@ public struct Mesure: Codable {
     var symbol: String
     var label: String
     
-    var astring : String {
+    public var astring : String {
         unité.mesure(nombre.value)
     }
     
