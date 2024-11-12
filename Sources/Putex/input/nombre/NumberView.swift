@@ -126,12 +126,12 @@ struct NumberPreview : View {
         }
         HStack {
             Text("nombre < 1000").frame(width:100)
-            NumberPreview(Nombre(1325,2), .decimal(2), "€", "montant")
+            NumberPreview(Nombre(1325,2), .decimal(2), "m", "longueur")
                .frame(width:400)
         }
         HStack {
             Text("nombre > 1000").frame(width:100)
-            NumberPreview(Nombre(1784874782392925,4), .decimal(4), "km", "distance")
+            NumberPreview(Nombre(1784874782392925,4), .naturel, "km", "distance")
                .frame(width:400)
         }
     }.frame(width:520, height:250)

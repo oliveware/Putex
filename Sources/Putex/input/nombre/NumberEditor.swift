@@ -78,3 +78,9 @@ struct NumberEditPreview : View {
     NumberEditPreview(Nombre(), true, .decimal(2))
         .frame(width:400, height:250)
 }
+
+#Preview ("mesure") {
+    NumberEditPreview(Nombre(), true, .decimal(2), "m3")
+        .frame(width:400, height:250)
+}
+
