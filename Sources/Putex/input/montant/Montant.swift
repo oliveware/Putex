@@ -60,18 +60,7 @@ public extension Montant {
         }
         return total
     }
-    
-    static func + (_ ht:Montant, _ taxe:Taxe) -> Montant {
-        return ht + taxe.montant(ht)
-    }
-    static func + (_ ht: Montant,_ taxation:Taxation)-> Montant {
-        var ttc = ht
-        for taxe in taxation.taxes {
-            ttc = ttc + taxe.montant(ht)
-        }
-        return ttc
-    }
-   
+
     static func - (_ a:Montant, _ b:Montant) -> Montant {
         if a.symbol == b.symbol {
             return Montant(a.cents - b.cents, a.symbol)
