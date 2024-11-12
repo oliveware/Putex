@@ -12,7 +12,7 @@ public struct Nombre: Codable {
         
     var entiere:Int?
     var decimales:String = ""
-    var base = 10
+    let base = 10 
     
     public var isNaN: Bool {
         entiere == nil && decimales == ""
