@@ -10,17 +10,16 @@ import SwiftUI
 
 
 public struct NumberView: View {
-    @Environment(\.locale) var locale: Locale
+    //@Environment(\.locale) var locale: Locale
+    //var localedot : String {locale.decimalSeparator ?? ","}
+    var dot = ","
+    
     
     @Binding var nombre: Nombre
     @State var edition = false
     @State var set : NumberSet
     var symbol: String = ""
     var label :String?
-    
-    @State var dot = ""
-    var localedot : String {locale.decimalSeparator ?? ","}
-    
     
     public init(_ nombre:Binding<Nombre>, _ set: NumberSet, _ symbol:String = "", _ label:String? = nil) {
         _nombre = nombre
@@ -72,7 +71,7 @@ public struct NumberView: View {
                 if nombre.isNaN {
                     Text ("à définir")
                 } else {
-                    Text(nombre.enchiffres(localedot) + " " + symbol)
+                    Text(nombre.enchiffres(dot) + " " + symbol)
                     .font(.title3)
                     //.frame(width:showidth*1.7)
                     }
@@ -84,9 +83,7 @@ public struct NumberView: View {
     
     func clear() {
         nombre = Nombre()
-        dot = ""
         edition = true
-        
     }
 }
 

@@ -5,8 +5,6 @@
 //  Created by Herve Crespel on 17/10/2024.
 //
 
-import Putex
-
 public struct Montant: Codable {
     var nombre:Nombre
     var symbol:String = "€"

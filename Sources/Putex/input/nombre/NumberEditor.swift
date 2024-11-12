@@ -8,15 +8,14 @@
 import SwiftUI
 
 struct NumberEditor: View {
-    
-    @Environment(\.locale) var locale: Locale
+    //@Environment(\.locale) var locale: Locale
+    //var localedot : String {locale.decimalSeparator ?? ","}
+    var dot = ","
     
     @Binding var nombre: Nombre
     @State var set : NumberSet
     var classifier: String = ""
     var autovalide = false
-    @State var dot = ""
-    var localedot : String = ""
     
     var entierestring:String {
         if nombre.entiere == nil {
@@ -34,7 +33,7 @@ struct NumberEditor: View {
         _nombre = nombre
         self.set = set
         self.classifier = classifier
-        localedot = locale.decimalSeparator ?? ","
+      //  localedot = locale.decimalSeparator ?? ","
     }
     
     var body: some View {
@@ -42,7 +41,7 @@ struct NumberEditor: View {
             TextField("", value:$nombre.entiere, format:.number)
                 .frame(width: width(entierestring), alignment: .trailing )
             if nombre.decimales != ""  || set.nbdec > 0 {
-                Text(localedot)
+                Text(dot)
                 TextField("", text:$nombre.decimales)
                     .frame(width: width(nombre.decimales) )
             }

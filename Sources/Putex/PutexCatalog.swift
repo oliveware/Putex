@@ -43,7 +43,8 @@ public struct PutexCatalog: View {
                     .overlay(RoundedRectangle(cornerRadius: 10)
                     .stroke(Color.gray, lineWidth: 1))
                     .tabItem { Text("nombres") }.tag(1)
-                
+                MontantDemo()
+                   .tabItem {Text("montant")}.tag(5)
                 TabView(selection: $choix) {
                     Choice(["un","deux","trois","quatre"],"choix")
                     .tabItem { Text("Choice") }.tag(1)
