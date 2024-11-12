@@ -13,7 +13,7 @@ public struct Montant: Codable {
         nombre = Nombre(m,2)
         symbol = ds
     }
-    var isnul : Bool { cents == 0 }
+    public var isnul : Bool { cents == 0 }
     
     public var cents:Int { nombre.cents }
 
