@@ -32,7 +32,7 @@ public enum Quantité: String,Codable {
     case volume = "volume"
     //case loyer = "loyer"
     
-    var unité: Unité {
+    public var unité: Unité {
         switch self {
         case .aire: return .m2
         case .volume: return .m3
