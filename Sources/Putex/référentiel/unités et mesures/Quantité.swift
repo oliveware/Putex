@@ -7,64 +7,16 @@
 import SwiftUI
 
 // nature de la chose mesurée
-public struct Quantité: Codable, Equatable {
-    public static func == (a:Quantité, b:Quantité) -> Bool {
-        if let na = a.nature {
-            return na == b.nature
-        } else {
-            return a.label == b.label
-        }
-    }
+public enum Quantité: String,Codable {
     
-    var nature : Quantifiable?
-  //  var autrenature : String?
-    
-    var label : String = ""
-    
-    public init(_ code:Quantifiable) {
-        nature = code
-        label = label(code)
-    }
-    public init(_ autre:String) {
-     //   autrenature = autre
-        label = autre == "" ? "inconnu" : autre
-    }
-    
-    func label(_ nature:Quantifiable) -> String {
-        switch nature {
-        case .elec,.hp,.hc,.eau  : return "consommation " + nature.rawValue
-        case .aire   : return "surface"
-       // case .jour   : return "nb de jours"
-        case .annuel,.mensuel   : return "abonnement"
-        //case .unit   : return "nb de pièces"
-        default: return "label"
-        }
-    }
-    
-    public var color: Color {
-        switch nature {
-        case .eau:          return Color.blue
-        case .elec,.hp,.hc: return Color.red
-        case .annuel,.mensuel:           return Color.yellow
-       default:    return Color.white
-        }
-    }
-    
-
-}
-
-
-
-public enum Quantifiable: String,Codable {
-    
-    static var utility :[Quantifiable] = [.eau, .elec, .hp, .hc, .gaz, .web, .mobile,.cloud,.tv]
+    static var utility :[Quantité] = [.eau, .elec, .hp, .hc, .gaz, .web, .mobile,.tv]
     static var loyer = "loyer"
     static var honoraire = "honoraires"
     static var nourriture = "nourriture"
     static var equipement = "équipement"
     
     case mensuel = "nb mois"
-    case annuel = "nb années"
+  //  case annuel = "nb années"
     
     case eau = "eau"
     case elec = "électricité"
@@ -73,12 +25,52 @@ public enum Quantifiable: String,Codable {
     case gaz = "gaz"
     case web = "accès internet"
     case mobile = "réseau mobile"
-    case cloud = "cloud"
+  //  case cloud = "cloud"
     case tv = "télévision"
         
     case aire = "surface"
     case volume = "volume"
     //case loyer = "loyer"
+    
+    var unité: Unité {
+        switch self {
+        case .aire: return .m2
+        case .volume: return .m3
+        case .elec,.hp,.hc : return .kwh
+        case .eau : return .l
+        case .gaz: return .m3
+        case .mensuel,.web,.mobile,.tv: return .mois
+      //  case .annuel: return .an
+        }
+    }
+    var label: String {
+        switch self {
+        case .elec,.hp,.hc,.eau  : return "consommation " + self.rawValue
+        case .aire   : return "surface"
+       // case .jour   : return "nb de jours"
+        case .mensuel   : return "abonnement"
+        //case .unit   : return "nb de pièces"
+        default: return "label"
+        }
+    }
+    
+    var set: NumberSet {
+        switch self {
+        case .aire: return .decimal(2)
+        case .volume,.gaz: return .decimal(3)
+        case .elec,.hp,.hc,.eau, .mensuel,.web,.mobile,.tv : return .naturel
+      //  case .annuel: return .an
+        }
+    }
+    
+    public var color: Color {
+        switch self {
+        case .eau:          return Color.blue
+        case .elec,.hp,.hc: return Color.red
+        case .mensuel:      return Color.yellow
+       default:    return Color.white
+        }
+    }
 }
 
 

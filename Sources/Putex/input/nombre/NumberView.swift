@@ -7,8 +7,6 @@
 
 import SwiftUI
 
-
-
 public struct NumberView: View {
     //@Environment(\.locale) var locale: Locale
     //var localedot : String {locale.decimalSeparator ?? ","}
@@ -31,10 +29,10 @@ public struct NumberView: View {
 
     public init(_ mesure:Binding<Mesure>) {
         _nombre = mesure.nombre
-        let mv = mesure.wrappedValue
-        set = mv.set
-        symbol = mv.symbol
-        label = mv.label
+        let q = mesure.wrappedValue.quantité
+        set = q.set
+        symbol = q.unité.symbol
+        label = q.label
     }
 
     
