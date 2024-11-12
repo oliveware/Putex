@@ -21,7 +21,7 @@ public struct Mesure: Codable {
     }
     
     public init(_ unit:Unité,
-                nature:Quantifiable? = nil,
+                nature: Quantifiable? = nil,
                 numberset: NumberSet? = nil ,
                 symbol: String? = nil ,
                 label: String? = nil) {
