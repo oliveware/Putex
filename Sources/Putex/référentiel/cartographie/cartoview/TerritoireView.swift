@@ -11,18 +11,18 @@ struct TerritoireView : View {
 
     @State var commune = Commune()
     @State var quartier = Quartier()
-    @State var parcelle = Parcelle()
+    @State var terrain = Terrain()
 
     var body:some View {
         NavigationSplitView {
             List {
                 ForEach($territoire.regions) { item in
                     NavigationLink {
-                        RegionView(region:item, commune:$commune, quartier:$quartier, parcelle:$parcelle)
+                        RegionView(region:item, commune:$commune, quartier:$quartier, terrain:$terrain)
                             .onChange(of:item.id) {
                                 commune = Commune()
                                 quartier = Quartier()
-                                parcelle = Parcelle()
+                                terrain = Terrain()
                             }
                     } label: {
                         Text(item.wrappedValue.nom)

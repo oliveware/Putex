@@ -6,28 +6,15 @@
 //
 
 struct Parcelle: Codable, Identifiable {
-    static var nextid = 100
-    static func new() -> Int {
-        nextid += 1
-        return nextid
+    
+    var id:String
+    
+    init(_ nom:String) {
+        id = nom
     }
     
-    var id:Int?
+    var surface = Mesure(.aire)
     
-    init() {
-        id = Parcelle.new()
-    }
-    
-    var nom = ""
-    
-    enum Kind: String, Codable {
-        case agricole   = "agricole"
-        case foret      = "forêt"
-        case logement   = "logement"
-        case commerce   = "commerce"
-        case industrie  = "industrie"
-    }
-    var kind : Kind?
     
 
 /*    extension Parcelle {

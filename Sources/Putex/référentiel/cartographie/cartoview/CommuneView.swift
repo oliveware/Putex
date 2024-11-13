@@ -9,7 +9,7 @@ import SwiftUI
 struct CommuneView: View {
     @Binding var commune: Commune
     @Binding var quartier : Quartier
-    @Binding var parcelle : Parcelle
+    @Binding var terrain : Terrain
     
     var body:some View {
         if commune.quartiers.count > 0 {
@@ -27,7 +27,7 @@ struct CommuneView: View {
                         }
                     }
                     
-                    QuartierView(quartier:$quartier, parcelle:$parcelle)
+                    QuartierView(quartier:$quartier, terrain:$terrain)
                 }.frame(alignment:.leading)
             }
         } else {
@@ -40,18 +40,18 @@ struct CommuneView: View {
 
 struct QuartierView : View {
     @Binding var quartier: Quartier
-    @Binding var parcelle : Parcelle
+    @Binding var terrain : Terrain
     
     var body:some View {
-        if quartier.parcelles.count > 0 {
+        if quartier.terrains.count > 0 {
             HStack {
                 VStack {
-                    Text("parcelles")
-                    ForEach($quartier.parcelles){
+                    Text("terrainss")
+                    ForEach($quartier.terrains){
                         item in
-                        Button(action:{parcelle = item.wrappedValue})
+                        Button(action:{terrain = item.wrappedValue})
                         {
-                            Text(item.wrappedValue.nom).frame(width:100)
+                            Text(item.wrappedValue.label).frame(width:100)
                         }
                     }
                 }
@@ -60,7 +60,7 @@ struct QuartierView : View {
             }.frame(alignment:.leading)
         } else {
             if quartier.nom != "" {
-                Text("aucune parcelle définie")
+                Text("aucun terrain défini")
             }
         }
     }

@@ -10,7 +10,7 @@ struct RegionView: View {
     @Binding var region:Region
     @Binding var commune : Commune
     @Binding var quartier : Quartier
-    @Binding var parcelle : Parcelle
+    @Binding var terrain : Terrain
 
     
     var body:some View {
@@ -35,23 +35,30 @@ struct RegionView: View {
             Text("Select an item")
         }
        */
-           HStack {
-               VStack {
-                   Text("communes")
-                   
-                   ForEach($region.communes){
-                       item in
-                       Button(action:{
-                           commune = item.wrappedValue
-                           quartier = Quartier()
-                           parcelle = Parcelle()
-                       })
-                       { Text(item.wrappedValue.nom).frame(width:120) }
-                   }
-               }
-               
-               CommuneView(commune:$commune, quartier:$quartier, parcelle:$parcelle)
-           }.frame(alignment:.leading)
+            VStack {
+                GroupBox("adresse") {
+                    Text(terrain.adresse + " " + commune.nom)
+                }
+                Spacer()
+                HStack {
+                    VStack {
+                        Text("communes")
+                        
+                        ForEach($region.communes){
+                            item in
+                            Button(action:{
+                                commune = item.wrappedValue
+                                quartier = Quartier()
+                                terrain = Terrain()
+                            })
+                            { Text(item.wrappedValue.nom).frame(width:120) }
+                        }
+                    }
+                    
+                    CommuneView(commune:$commune, quartier:$quartier, terrain:$terrain)
+                }.frame(alignment:.leading)
+                Spacer()
+            }
        }
         
     }

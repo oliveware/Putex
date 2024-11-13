@@ -15,20 +15,19 @@ struct Quartier: Codable, Identifiable {
     var id:Int?
     
     var nom = ""
-    // adresse
-    var codepostal:String?
     
-    var parcelles:[Parcelle] = []
+    var terrains:[Terrain] = []
     
     init() {
         id = Quartier.new()
     }
 
-    subscript(_ id:Int) -> Parcelle? {
-        var found : Parcelle?
-        for parcelle in parcelles {
-            if parcelle.id == id {
-                found = parcelle
+    subscript(_ id:Int) -> Terrain? {
+        var found : Terrain?
+        for terrain in terrains {
+            if terrain.id == id {
+                found = terrain
+                break
             }
         }
         return found

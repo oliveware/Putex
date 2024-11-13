@@ -23,7 +23,7 @@ public struct LID : Codable, Identifiable {
     static func quartier() -> Int {
         next.four += 1 ; return next.four
     }
-    static func parcelle() -> Int {
+    static func terrain() -> Int {
         next.five += 1 ; return next.five
     }
     
@@ -31,7 +31,7 @@ public struct LID : Codable, Identifiable {
     var region : Int?
     var commune : Int?
     var quartier : Int?
-    var parcelle : Int?
+    var terrain : Int?
     
     // initialisation du niveau inférieur
     init(_ lid:LID? = nil) {
@@ -43,7 +43,7 @@ public struct LID : Codable, Identifiable {
                     commune = third
                     if let fourth = parent.quartier {
                         quartier = fourth
-                        parcelle = LID.parcelle()
+                        terrain = LID.terrain()
                     } else {
                         quartier = LID.quartier()
                     }
@@ -69,7 +69,7 @@ public struct LID : Codable, Identifiable {
                     if div > 3 {
                         quartier = tab[3]
                         if div == 5 {
-                            parcelle = tab[4]
+                            terrain = tab[4]
                         }
                     }
                 }
@@ -87,7 +87,7 @@ public struct LID : Codable, Identifiable {
                 t = t + "-" + String(c)
                 if let q = quartier {
                     t = t + "-" + String(q)
-                    if let p = parcelle {
+                    if let p = terrain {
                         t = t + "-" + String(p)
                     }
                 }
@@ -103,7 +103,7 @@ public struct Lieu {
     public var region : Region?
     public var commune : Commune?
     var quartier : Quartier?
-    var parcelle : Parcelle?
+    var terrain : Terrain?
     
     public  init(_ lid:LID) {
 
@@ -116,8 +116,8 @@ public struct Lieu {
                 if lid.quartier != nil {
                     let quartier = commune[lid.quartier!]
                     self.quartier = quartier
-                    if lid.parcelle != nil {
-                        parcelle = quartier![lid.parcelle!]
+                    if lid.terrain != nil {
+                        terrain = quartier![lid.terrain!]
                     }
                 }
             }
@@ -138,10 +138,10 @@ public struct Lieu {
             quartier = commune![lid[3]]
         }
         if lid.count > 4 {
-            parcelle = quartier![lid[4]]
+            terrain = quartier![lid[4]]
         }
        /* if lid.count > 5 {
-            batiment = parcelle![lid[5]]
+            batiment = terrain![lid[5]]
         }*/
     }
  */
@@ -153,7 +153,7 @@ enum Division : String, Codable {
     case region = "région"
     case commune = "commune"
     case quartier = "quartier"
-    case parcelle = "parcelle"
+    case terrain = "terrain"
     //case batiment = "batiment"
 }
 
