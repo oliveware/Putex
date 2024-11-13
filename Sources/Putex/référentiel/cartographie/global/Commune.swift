@@ -6,24 +6,20 @@
 //
 
 public struct Commune: Codable, Identifiable {
-    static var nextid = 100
-    static func new() -> Int {
-        nextid += 1
-        return nextid
-    }
     
-    public var id:Int?
+    public var id:Int
+    var lid:LID?
     
     public var nom = ""
     var quartiers:[Quartier] = []
    
-    init() {
-        id = Commune.new()
+    init(_ region:LID) {
+        let communelid = LID(region)
+        lid = communelid
+        id = communelid.commune!
     }
+    init() { id = 0 }
 
-   /* subscript(_ index:Int) -> Quartier {
-        quartiers[index]
-    }*/
     subscript(_ id:Int) -> Quartier? {
         var found : Quartier?
         for quartier in quartiers {

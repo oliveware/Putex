@@ -18,7 +18,8 @@ struct TerritoireView : View {
             List {
                 ForEach($territoire.regions) { item in
                     NavigationLink {
-                        RegionView(region:item, commune:$commune, quartier:$quartier, terrain:$terrain)
+                        RegionView(region:item, commune:$commune, quartier:$quartier, terrain:$terrain,
+                                   territoire:territoire)
                             .onChange(of:item.id) {
                                 commune = Commune()
                                 quartier = Quartier()

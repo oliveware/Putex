@@ -8,7 +8,7 @@
 import Foundation
 
 public struct LID : Codable, Identifiable {
-    public static var NA = LID()
+    public static var NA = LID([0,0,0,0,0])
     static var next = (one:0, two:0, three:0, four:0, five:0)
     static func territoire() -> Int {
         next.one += 1 ; return next.one
@@ -60,15 +60,15 @@ public struct LID : Codable, Identifiable {
     
     public init(_ tab:[Int]) {
         let div = tab.count
-        if div > 0 {
+        if div > 0 && tab[0] > 0 {
             territoire = tab[0]
-            if div > 1 {
+            if div > 1 && tab[1] > 0 {
                 region = tab[1]
-                if div > 2 {
+                if div > 2 && tab[2] > 0  {
                     commune = tab[2]
-                    if div > 3 {
+                    if div > 3 && tab[3] > 0  {
                         quartier = tab[3]
-                        if div == 5 {
+                        if div == 5 && tab[4] > 0  {
                             terrain = tab[4]
                         }
                     }
@@ -99,25 +99,26 @@ public struct LID : Codable, Identifiable {
 
 public struct Lieu {
     
-    public var territoire : Territoire
+    public var territoire : Territoire?
     public var region : Region?
     public var commune : Commune?
     var quartier : Quartier?
     var terrain : Terrain?
     
     public  init(_ lid:LID) {
-
-        territoire = Continent(Europe)[lid.territoire]
-        if lid.region != nil {
-            region = territoire[lid.region!]
-            if lid.commune != nil {
-                let commune = region![lid.commune!]
-                self.commune = commune
-                if lid.quartier != nil {
-                    let quartier = commune[lid.quartier!]
-                    self.quartier = quartier
-                    if lid.terrain != nil {
-                        terrain = quartier![lid.terrain!]
+        let territoire_id = lid.territoire
+        if let territoire = Continent(Europe)[territoire_id] {
+            if lid.region != nil {
+                region = territoire[lid.region!]
+                if lid.commune != nil {
+                    let commune = region![lid.commune!]
+                    self.commune = commune
+                    if lid.quartier != nil {
+                        let quartier = commune![lid.quartier!]
+                        self.quartier = quartier
+                        if lid.terrain != nil {
+                            terrain = quartier![lid.terrain!]
+                        }
                     }
                 }
             }

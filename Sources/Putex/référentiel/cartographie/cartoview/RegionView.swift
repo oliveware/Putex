@@ -11,7 +11,10 @@ struct RegionView: View {
     @Binding var commune : Commune
     @Binding var quartier : Quartier
     @Binding var terrain : Terrain
-
+    var territoire:Territoire
+    var lid:LID {
+        LID([territoire.id,region.id,commune.id,quartier.id,terrain.id])
+    }
     
     var body:some View {
         
@@ -36,8 +39,29 @@ struct RegionView: View {
         }
        */
             VStack {
-                GroupBox("adresse") {
-                    Text(terrain.adresse + " " + commune.nom)
+                GroupBox("LID") {
+                    VStack {
+                        Text(terrain.lid?.id ??
+                             (quartier.lid?.id ??
+                              (commune.lid?.id ??
+                               (region.lid?.id ?? "")
+                              )
+                             )
+                        )
+                        Text(lid.id)
+                    }
+                }
+                if terrain.adresse[0] != " \n" {
+                    HStack{
+                        GroupBox("adresse") {
+                            Text(terrain.adresse[0] + " " + commune.nom)
+                        }
+                        if terrain.adresse[1] != "" {
+                            GroupBox("autre adresse") {
+                                Text(terrain.adresse[0] + " " + commune.nom)
+                            }
+                        }
+                    }
                 }
                 Spacer()
                 HStack {

@@ -13,49 +13,49 @@ let Europe = """
         "regions":[
             {"id":1, "nom":"Auvergne-Rhône-Alpes",
                 "communes":[
-                    {"id":101,"nom":"Lyon", "quartiers":[]}, 
-                    {"id":102,"nom":"Saint-Étienne", "quartiers":[]},
-                    {"id":103,"nom":"Grenoble", "quartiers":[]}
+                    {"id":1,"nom":"Lyon", "quartiers":[]}, 
+                    {"id":2,"nom":"Saint-Étienne", "quartiers":[]},
+                    {"id":3,"nom":"Grenoble", "quartiers":[]}
                 ]
             },
             {"id":2, "nom":"Bourgogne-Franche-Comté",
                 "communes":[
-                    {"id":201,"nom":"Dijon", "quartiers":[]}, 
-                    {"id":202,"nom":"Besançon", "quartiers":[]},
-                    {"id":203,"nom":"Belfort", "quartiers":[]}
+                    {"id":1,"nom":"Dijon", "quartiers":[]}, 
+                    {"id":2,"nom":"Besançon", "quartiers":[]},
+                    {"id":3,"nom":"Belfort", "quartiers":[]}
                 ]
             },
             {"id":3, "nom":"Bretagne",
                 "communes":[
-                    {"id":301,"nom":"Rennes", "quartiers":[]}, 
-                    {"id":302,"nom":"Brest", "quartiers":[]},
-                    {"id":303,"nom":"Quimper", "quartiers":[]}
+                    {"id":1,"nom":"Rennes", "quartiers":[]}, 
+                    {"id":2,"nom":"Brest", "quartiers":[]},
+                    {"id":3,"nom":"Quimper", "quartiers":[]}
                 ]
             },
             {"id":4, "nom":"Centre-Val de Loire",
                 "communes":[
-                    {"id":401,"nom":"Tours", "quartiers":[]}, 
-                    {"id":402,"nom":"Orléans", "quartiers":[]},
-                    {"id":403,"nom":"Bourges", "quartiers":[]}
+                    {"id":1,"nom":"Tours", "quartiers":[]}, 
+                    {"id":2,"nom":"Orléans", "quartiers":[]},
+                    {"id":3,"nom":"Bourges", "quartiers":[]}
                 ]
             },
             {"id":5, "nom":"Corse",
                 "communes":[
-                    {"id":501,"nom":"Ajaccio", "quartiers":[]}, 
-                    {"id":502,"nom":"Bastia", "quartiers":[]},
-                    {"id":503,"nom":"Porto-Vecchio", "quartiers":[]}
+                    {"id":1,"nom":"Ajaccio", "quartiers":[]}, 
+                    {"id":2,"nom":"Bastia", "quartiers":[]},
+                    {"id":3,"nom":"Porto-Vecchio", "quartiers":[]}
                 ]
             },
             {"id":6, "nom":"Grand Est",
                 "communes":[
-                    {"id":601,"nom":"Strasbourg", "quartiers":[]}, 
-                    {"id":602,"nom":"Reims", "quartiers":[]},
-                    {"id":603,"nom":"Metz", "quartiers":[]}
+                    {"id":1,"nom":"Strasbourg", "quartiers":[]}, 
+                    {"id":2,"nom":"Reims", "quartiers":[]},
+                    {"id":3,"nom":"Metz", "quartiers":[]}
                 ]
             },
             {"id":7, "nom":"Hauts de France",
             "communes":[
-                {"id":700,"nom":"Lambersart", "quartiers":[
+                {"id":1,"nom":"Lambersart", "quartiers":[
                     {"id":1,"nom":"bois blanc", 
                     "terrains":[
                         {"id":395, "numvoie":{"voie":"avenue Hyppolite Peslin", "num":"4","codepostal":"59130"}, 
@@ -67,10 +67,10 @@ let Europe = """
                     ]
                    }
                 ]}, 
-                {"id":701,"nom":"Lille", "quartiers":[]}, 
-                {"id":702,"nom":"Amiens", "quartiers":[]}, 
-                {"id":703,"nom":"Roubaix", "quartiers":[]}, 
-                {"id":704,"nom":"Seclin", 
+                {"id":2,"nom":"Lille", "quartiers":[]}, 
+                {"id":3,"nom":"Amiens", "quartiers":[]}, 
+                {"id":4,"nom":"Roubaix", "quartiers":[]}, 
+                {"id":5,"nom":"Seclin", 
                 "quartiers":[
                     {"id":1,"nom":"Seclin centre", 
                     "terrains":[
@@ -84,9 +84,9 @@ let Europe = """
                     }
                 ]
                 }, 
-                {"id":705,"nom":"Villeneuve d'Ascq", 
+                {"id":6,"nom":"Villeneuve d'Ascq", 
                     "quartiers":[
-                        {"nom":"Triolo", 
+                        {"id":1,"nom":"Triolo", 
                         "terrains":[
                             {"id":139, "numvoie":{"voie":"allée du Ternois", "num":"3","codepostal":"59950"},
                             "parcelles":[139]}
@@ -94,9 +94,9 @@ let Europe = """
                         }
                     ]
                 }, 
-                {"id":706,"nom":"Hardelot", 
+                {"id":7,"nom":"Hardelot", 
                     "quartiers":[
-                        {"nom":"plage", 
+                        {"id":1, "nom":"plage", 
                             "terrains":[
                                 {"id":48, "numvoie":{"voie":"", "num":"","codepostal":"62"},
                                 "parcelles":[48]}
@@ -104,71 +104,71 @@ let Europe = """
                         }
                     ]
                 },
-                {"id":707,"nom":"Hauboudin", "quartiers":[]},
-                {"id":708,"nom":"Bray-Dunes", "quartiers":[
-                        {"nom":"plage", 
+                {"id":8,"nom":"Hauboudin", "quartiers":[]},
+                {"id":9,"nom":"Bray-Dunes", "quartiers":[
+                        {"id":1, "nom":"plage", 
                             "terrains":[
                                 {"id":33, "numvoie":{"voie":"boulevard Georges Pompidou", "num":"327","codepostal":"59131"},
                                 "parcelles":[148]}
                             ]
                         }
                     ]},
-                {"id":709,"nom":"Lomme", "quartiers":[]}
+                {"id":10,"nom":"Lomme", "quartiers":[]}
                 ]
             },
         {"id":13, "nom":"Île-de-France",
             "communes":[
-                {"id":1301,"nom":"Paris", "quartiers":[ 
-                    {"nom":"11 ième", 
+                {"id":1,"nom":"Paris", "quartiers":[ 
+                    {"id":11, "nom":"11 ième", 
                             "terrains":[
                                 {"id":60, "numvoie":{"voie":"avenue Claude Vellefaux", "num":"9","codepostal":"75010"},
                                 "parcelles":[60]}
                             ]
                         }]}, 
-                {"id":1302,"nom":"Boulogne-Billancourt", "quartiers":[]},
-                {"id":1303,"nom":"Saint-Denis", "quartiers":[]}
+                {"id":2,"nom":"Boulogne-Billancourt", "quartiers":[]},
+                {"id":3,"nom":"Saint-Denis", "quartiers":[]}
             ]
         },
             {"id":8, "nom":"Normandie",
                 "communes":[
-                    {"id":801,"nom":"Le Havre", "quartiers":[]}, 
-                    {"id":802,"nom":"Rouen", "quartiers":[]},
-                    {"id":803,"nom":"Caen", "quartiers":[]},
-                    {"id":804,"nom":"Dieppe", "quartiers":[]}
+                    {"id":1,"nom":"Le Havre", "quartiers":[]}, 
+                    {"id":2,"nom":"Rouen", "quartiers":[]},
+                    {"id":3,"nom":"Caen", "quartiers":[]},
+                    {"id":4,"nom":"Dieppe", "quartiers":[]}
                 ]
             },
             {"id":9, "nom":"Nouvelle-Aquitaine",
                 "communes":[
-                    {"id":901,"nom":"Bordeaux", "quartiers":[]}, 
-                    {"id":902,"nom":"Limoges", "quartiers":[]},
-                    {"id":903,"nom":"Poitiers", "quartiers":[]}
+                    {"id":1,"nom":"Bordeaux", "quartiers":[]}, 
+                    {"id":2,"nom":"Limoges", "quartiers":[]},
+                    {"id":3,"nom":"Poitiers", "quartiers":[]}
                 ]
             },
             {"id":10, "nom":"Occitanie",
                 "communes":[
-                    {"id":151,"nom":"Toulouse", "quartiers":[]}, 
-                    {"id":152,"nom":"Montpellier", "quartiers":[]},
-                    {"id":153,"nom":"Nimes", "quartiers":[]}
+                    {"id":1,"nom":"Toulouse", "quartiers":[]}, 
+                    {"id":2,"nom":"Montpellier", "quartiers":[]},
+                    {"id":3,"nom":"Nimes", "quartiers":[]}
                 ]
             },
             {"id":11, "nom":"Pays de la Loire",
                 "communes":[
-                    {"id":161,"nom":"Nantes", "quartiers":[]}, 
-                    {"id":162,"nom":"Angers", "quartiers":[]},
-                    {"id":163,"nom":"Le Mans", "quartiers":[]}
+                    {"id":1,"nom":"Nantes", "quartiers":[]}, 
+                    {"id":2,"nom":"Angers", "quartiers":[]},
+                    {"id":3,"nom":"Le Mans", "quartiers":[]}
                 ]
             },
             {"id":12, "nom":"Provence-Alpes-Côte d'Azur",
                 "communes":[
-                    {"id":171,"nom":"Marseille", "quartiers":[]}, 
-                    {"id":172,"nom":"Nice", "quartiers":[]},
-                    {"id":173,"nom":"Toulon", "quartiers":[]}
+                    {"id":1,"nom":"Marseille", "quartiers":[]}, 
+                    {"id":2,"nom":"Nice", "quartiers":[]},
+                    {"id":3,"nom":"Toulon", "quartiers":[]}
                 ]
             },
            
             {"id":14, "nom": "Guyanne",
             "communes":[
-                {"id":1401,"nom":"Cayenne", "quartiers":[]}
+                {"id":1,"nom":"Cayenne", "quartiers":[]}
             ]}
 
          ]

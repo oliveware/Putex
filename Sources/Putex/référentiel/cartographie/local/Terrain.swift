@@ -6,27 +6,23 @@
 //
 
 struct Terrain: Codable, Identifiable {
-    static var nextid = 100
-    static func new() -> Int {
-        nextid += 1
-        return nextid
-    }
     
-    var id:Int
+    public var id:Int
+    var lid:LID?
+    
     var label:String {String(id)}
     
-    init() {
-        id = Terrain.new()
+    init(_ quartier:LID) {
+        let terrainlid = LID(quartier)
+        lid = terrainlid
+        id = terrainlid.terrain!
     }
+    init() { id = 0 }
     
     var numvoie =    NumVoie()
     var autrenumvoie: NumVoie?
-    var adresse : String {
-        if autrenumvoie == nil {
-            return numvoie.adresse
-        } else {
-            return numvoie.adresse + "\n" + autrenumvoie!.adresse
-        }
+    var adresse : [String] {
+        return [numvoie.adresse, autrenumvoie?.adresse ?? ""]
     }
     
     var parcelles:[Int] = []
@@ -39,4 +35,6 @@ struct Terrain: Codable, Identifiable {
         case industrie  = "industrie"
     }
     var usage : Usage?
+    
+    
 }

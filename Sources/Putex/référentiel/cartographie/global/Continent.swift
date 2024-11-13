@@ -28,11 +28,16 @@ struct Continent : Codable {
         
     }
     
-    subscript(_ index:Int) -> Territoire {
-        territoires[index]
+    subscript(_ id:Int) -> Territoire? {
+        var found : Territoire?
+        for territoire in territoires {
+            if territoire.id == id {
+                found = territoire
+                break
+            }
+        }
+        return found
     }
-    
-    
     
    /* func parcelle(_ lid:Lid) -> Parcelle {
         let territoire = territoires[lid.territoire]

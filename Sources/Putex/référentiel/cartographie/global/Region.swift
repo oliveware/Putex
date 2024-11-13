@@ -6,23 +6,28 @@
 //
 
 public struct Region: Codable, Identifiable {
-    static var nextid = 100
-    static func new() -> Int {
-        nextid += 1
-        return nextid
-    }
 
-    public var id:Int?
+    public var id:Int
+    var lid:LID?
     
     public var nom = ""
     var communes:[Commune] = []
    
-    init() {
-        id = Region.new()
+    init(_ territoire:LID) {
+       let regionlid = LID(territoire)
+        lid = regionlid
+        id = regionlid.region!
     }
-
-    subscript(_ index:Int) -> Commune {
-        communes[index]
+    
+    subscript(_ id:Int) -> Commune? {
+        var found : Commune?
+        for commune in communes {
+            if commune.id == id {
+                found = commune
+                break
+            }
+        }
+        return found
     }
 }
 

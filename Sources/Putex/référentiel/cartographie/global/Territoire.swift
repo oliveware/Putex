@@ -6,13 +6,9 @@
 //
 
 public struct Territoire : Codable, Identifiable {
-    static var nextid = 100
-    static func new() -> Int {
-        nextid += 1
-        return nextid
-    }
 
     public var id:Int
+    var lid:LID?
     
     public var nom = ""
     public var pays:String { nom }
@@ -20,7 +16,9 @@ public struct Territoire : Codable, Identifiable {
     var regions:[Region] = []
     
     init() {
-        id = Territoire.new()
+       let territoirelid = LID()
+        lid = territoirelid
+        id = territoirelid.territoire
     }
 
     subscript(_ id:Int) -> Region? {

@@ -11,7 +11,7 @@ struct NumVoie: Codable {
     var codepostal:String = ""
     
     var adresse:String {
-        num + " " + voie + " " + codepostal
+        num + " " + voie + "\n" + codepostal
     }
     
     init() {}

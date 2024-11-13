@@ -6,22 +6,21 @@
 //
 
 struct Quartier: Codable, Identifiable {
-    static var nextid = 100
-    static func new() -> Int {
-        nextid += 1
-        return nextid
-    }
     
-    var id:Int?
+    public var id:Int
+    var lid:LID?
     
     var nom = ""
     
     var terrains:[Terrain] = []
     
-    init() {
-        id = Quartier.new()
+    init(_ commune:LID) {
+        let quartierlid = LID(commune)
+        lid = quartierlid
+        id = quartierlid.quartier!
     }
-
+    init() { id = 0}
+    
     subscript(_ id:Int) -> Terrain? {
         var found : Terrain?
         for terrain in terrains {

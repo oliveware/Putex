@@ -32,7 +32,7 @@ struct CommuneView: View {
             }
         } else {
             if commune.nom != "" {
-                Text("aucun quartier défini").padding(20)
+                Text("aucun quartier défini à " + commune.nom).padding(20)
             }
         }
     }
@@ -46,7 +46,7 @@ struct QuartierView : View {
         if quartier.terrains.count > 0 {
             HStack {
                 VStack {
-                    Text("terrainss")
+                    Text("terrains")
                     ForEach($quartier.terrains){
                         item in
                         Button(action:{terrain = item.wrappedValue})
@@ -60,7 +60,7 @@ struct QuartierView : View {
             }.frame(alignment:.leading)
         } else {
             if quartier.nom != "" {
-                Text("aucun terrain défini")
+                Text("aucun terrain défini dans " + quartier.nom)
             }
         }
     }
