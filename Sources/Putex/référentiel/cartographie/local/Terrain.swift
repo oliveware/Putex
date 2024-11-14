@@ -30,7 +30,16 @@ public struct Terrain: Codable, Identifiable {
         autre ? (autrenumvoie?.adresse(complement) ?? "") : numvoie.adresse(complement)
     }
     
-    var parcelles:[Int] = []
+    var parcelles:[Parcelle] = []
+    
+    var surface:Mesure {
+        var surface = Mesure(.aire)
+        let zero = Mesure("0",.aire)
+        for parcelle in parcelles {
+            surface = (surface + (parcelle.surface ?? zero)) ?? surface
+        }
+        return surface
+    }
     
     enum Usage: String, Codable {
         case agricole   = "agricole"

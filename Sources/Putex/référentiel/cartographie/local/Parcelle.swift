@@ -7,13 +7,13 @@
 
 struct Parcelle: Codable, Identifiable {
     
-    var id:String
+    var id:Int
     
-    init(_ nom:String) {
-        id = nom
+    init(_ num:Int) {
+        id = num
     }
     
-    var surface = Mesure(.aire)
+    var surface : Mesure?
     
     
 

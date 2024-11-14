@@ -59,14 +59,17 @@ let Europe = """
                     {"id":1,"nom":"bois blanc", 
                     "terrains":[
                         {"id":395, "numvoie":{"voie":"avenue Hyppolite Peslin", "num":"4","codepostal":"59130"}, 
-                        "parcelles":[395]},
+                        "parcelles":[{"id":395}]},
                         {"id":57, "numvoie":{"voie":"avenue de Soubise", "num":"11","codepostal":"59130"}, 
-                        "parcelles":[570,571,572]},
+                            "parcelles":[{"id":570}, {"id":571}, {"id":572}
+                            ]
+                        },
                         {"id":58, "numvoie":{"voie":"avenue Watteau", "num":"1","codepostal":"59130"}, 
-                        "parcelles":[580,581,582,583,584,585,586,587,588]}
+                            "parcelles":[{"id":580}, {"id":581}, {"id":582}, {"id":583}, {"id":584}, {"id":585}, {"id":586}, {"id":587}, {"id":588}]}
+                            ]
+                        }
                     ]
-                   }
-                ]}, 
+                }, 
                 {"id":2,"nom":"Lille", "quartiers":[]}, 
                 {"id":3,"nom":"Amiens", "quartiers":[]}, 
                 {"id":4,"nom":"Roubaix", "quartiers":[]}, 
@@ -75,11 +78,11 @@ let Europe = """
                     {"id":1,"nom":"Seclin centre", 
                     "terrains":[
                         {"id":148, "numvoie":{"voie":"rue du 14 juillet 1789", "num":"67","codepostal":"59113"},
-                        "parcelles":[148]},
+                        "parcelles":[{"id":148}]},
                         {"id":254, "numvoie":{"voie":"rue du 14 juillet 1789", "num":"61 bis","codepostal":"59113"},
-                        "parcelles":[254]},
+                        "parcelles":[{"id":254}]},
                         {"id":252, "numvoie":{"voie":"rue du 14 juillet 1789", "num":"61 bis","codepostal":"59113"},
-                        "parcelles":[252]}
+                        "parcelles":[{"id":252}]}
                         ]
                     }
                 ]
@@ -89,7 +92,7 @@ let Europe = """
                         {"id":1,"nom":"Triolo", 
                         "terrains":[
                             {"id":139, "numvoie":{"voie":"allée du Ternois", "num":"3","codepostal":"59950"},
-                            "parcelles":[139]}
+                            "parcelles":[{"id":139}]}
                         ]
                         }
                     ]
@@ -99,7 +102,7 @@ let Europe = """
                         {"id":1, "nom":"plage", 
                             "terrains":[
                                 {"id":48, "numvoie":{"voie":"", "num":"","codepostal":"62"},
-                                "parcelles":[48]}
+                                "parcelles":[{"id":48}]}
                             ]
                         }
                     ]
@@ -109,7 +112,7 @@ let Europe = """
                         {"id":1, "nom":"plage", 
                             "terrains":[
                                 {"id":33, "numvoie":{"voie":"boulevard Georges Pompidou", "num":"327","codepostal":"59131"},
-                                "parcelles":[148]}
+                                "parcelles":[{"id":148}]}
                             ]
                         }
                     ]},
@@ -122,7 +125,7 @@ let Europe = """
                     {"id":11, "nom":"11 ième", 
                             "terrains":[
                                 {"id":60, "numvoie":{"voie":"avenue Claude Vellefaux", "num":"9","codepostal":"75010"},
-                                "parcelles":[60]}
+                                "parcelles":[{"id":60}]}
                             ]
                         }]}, 
                 {"id":2,"nom":"Boulogne-Billancourt", "quartiers":[]},
