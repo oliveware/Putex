@@ -104,9 +104,20 @@ public struct Lieu {
     public var commune : Commune?
     public var quartier : Quartier?
     var terrain : Terrain?
-    public func adresse(_ complement:String, _ autre:Bool = false) -> String {
-        terrain == nil ? "" : terrain!.adresse(complement, autre)
+    
+    public func adresse(_ complement:String,_ pays:Bool = false, _ autre:Bool = false) -> String {
+        if terrain == nil {
+            if commune == nil {
+                return territoire == nil ? "" : territoire!.nom
+            } else {
+                return commune!.nom + " " + (pays ? territoire!.nom : "")
+            }
+        } else {
+            let adresse = terrain!.adresse(complement, autre) + " " + commune!.nom
+            return adresse + (pays ? "\n" + territoire!.nom : "")
+        }
     }
+    
     public  init(_ lid:LID) {
         let territoire_id = lid.territoire
         if let territoire = Continent(Europe)[territoire_id] {

@@ -5,7 +5,7 @@
 //  Created by Herve Crespel on 13/11/2024.
 //
 
-struct Terrain: Codable, Identifiable {
+public struct Terrain: Codable, Identifiable {
     
     public var id:Int
     var lid:LID?
