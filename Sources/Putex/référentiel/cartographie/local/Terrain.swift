@@ -19,10 +19,15 @@ struct Terrain: Codable, Identifiable {
     }
     init() { id = 0 }
     
+    // un terrain peut avoir deux adresses
     var numvoie =    NumVoie()
     var autrenumvoie: NumVoie?
-    var adresse : [String] {
+    public var adresse : [String] {
         return [numvoie.adresse, autrenumvoie?.adresse ?? ""]
+    }
+    
+    func adresse(_ complement:String, _ autre:Bool = false) -> String {
+        autre ? (autrenumvoie?.adresse(complement) ?? "") : numvoie.adresse(complement)
     }
     
     var parcelles:[Int] = []

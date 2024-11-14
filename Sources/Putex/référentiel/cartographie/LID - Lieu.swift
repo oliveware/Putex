@@ -102,9 +102,11 @@ public struct Lieu {
     public var territoire : Territoire?
     public var region : Region?
     public var commune : Commune?
-    var quartier : Quartier?
+    public var quartier : Quartier?
     var terrain : Terrain?
-    
+    public func adresse(_ complement:String, _ autre:Bool = false) -> String {
+        terrain == nil ? "" : terrain!.adresse(complement, autre)
+    }
     public  init(_ lid:LID) {
         let territoire_id = lid.territoire
         if let territoire = Continent(Europe)[territoire_id] {

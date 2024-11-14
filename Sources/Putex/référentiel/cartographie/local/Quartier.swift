@@ -5,7 +5,7 @@
 //  Created by Herve Crespel on 02/11/2024.
 //
 
-struct Quartier: Codable, Identifiable {
+public struct Quartier: Codable, Identifiable {
     
     public var id:Int
     var lid:LID?
