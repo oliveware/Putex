@@ -32,7 +32,7 @@ public struct JMAPicker : View {
     
     var edit: some View {
         
-        DatePicker(hprompt, selection: $date, displayedComponents: .date)
+        DatePicker("", selection: $date, displayedComponents: .date)
            // .frame(width: 200)
             .onChange(of:date) {jma = JMA(date)}
     }
