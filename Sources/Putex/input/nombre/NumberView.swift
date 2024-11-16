@@ -37,9 +37,10 @@ public struct NumberView: View {
 
     
     var showidth:CGFloat{
-        var nbc = nombre.enchiffres().count + symbol.count + 3
+        let ll = label == nil ? 0 : label!.count + 3
+        var nbc = nombre.enchiffres().count + symbol.count + 1
         if nbc < 5 { nbc = 5 }
-        return CGFloat(nbc * 8)
+        return CGFloat(nbc) * 7.1
     }
     
     
