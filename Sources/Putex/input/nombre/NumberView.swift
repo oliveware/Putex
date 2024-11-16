@@ -37,7 +37,6 @@ public struct NumberView: View {
 
     
     var showidth:CGFloat{
-        let ll = label == nil ? 0 : label!.count + 3
         var nbc = nombre.enchiffres().count + symbol.count + 1
         if nbc < 5 { nbc = 5 }
         return CGFloat(nbc) * 7.1
@@ -122,8 +121,8 @@ struct NumberPreview : View {
         }
         HStack {
             Text("nombre < 1000").frame(width:100)
-            NumberPreview(Nombre(1325,2), .decimal(2), "m", "longueur")
-               .frame(width:400)
+            NumberPreview(Nombre(1325,2), .decimal(2), "m", "estimation")
+               .frame(width:300)
         }
         HStack {
             Text("nombre > 1000").frame(width:100)
