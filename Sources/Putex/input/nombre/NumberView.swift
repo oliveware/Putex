@@ -37,7 +37,7 @@ public struct NumberView: View {
 
     
     var showidth:CGFloat{
-        var nbc = nombre.enchiffres().count + symbol.count + 1
+        var nbc = nombre.enchiffres().count + symbol.count + 3
         if nbc < 5 { nbc = 5 }
         return CGFloat(nbc * 8)
     }
@@ -52,7 +52,7 @@ public struct NumberView: View {
                     }
                     
                     if let label = label {
-                        Text(label)
+                        Text(label + " : ")
                     }
                     
                     NumberEditor($nombre, set, symbol)
@@ -69,7 +69,7 @@ public struct NumberView: View {
                 if nombre.isNaN {
                     Text ("à définir")
                 } else {
-                    Text(nombre.enchiffres(dot) + " " + symbol)
+                    Text((label == nil ? "" : " : ") + nombre.enchiffres(dot) + " " + symbol)
                     .font(.title3)
                     //.frame(width:showidth*1.7)
                     }

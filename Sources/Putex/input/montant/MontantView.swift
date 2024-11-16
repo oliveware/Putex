@@ -19,7 +19,7 @@ public struct MontantView: View {
     var label = "montant"
     
     var width : CGFloat {
-        let nbc = String(montant.cents).count
+        let nbc = String(montant.cents).count + label.count + 3
         return CGFloat(nbc < 1 ? 40 : nbc * 6)
     }
     
@@ -30,14 +30,14 @@ public struct MontantView: View {
         self.editable = editable
     }
     
-    var showidth:CGFloat{
-        var nbc = montant.nombre.enchiffres().count + montant.symbol.count + 1
+    var editorwidth:CGFloat{
+        var nbc = montant.nombre.enchiffres().count  + montant.symbol.count + 1
         if nbc < 5 { nbc = 5 }
         return CGFloat(nbc * 8)
     }
     
     var show: some View {
-        Text(montant.enchiffres)
+        Text(label + " : " + montant.enchiffres)
     }
     
     var edit: some View {
@@ -49,11 +49,11 @@ public struct MontantView: View {
                 }
                 
                 if label != "" {
-                    Text(label)
+                    Text(label + " : ")
                 }
                 
                 NumberEditor($montant.nombre, .decimal(2), "")
-                    .frame(minWidth:showidth + 20)
+                    .frame(minWidth:editorwidth + 20)
                 DevisePicker($montant.symbol)
                 
                 Button(action: {edition = false})
@@ -69,7 +69,7 @@ public struct MontantView: View {
     
     public var body: some View {
         HStack {
-            if label != "" {Text("\(label) : ")}
+         //   if label != "" {Text("\(label) : ")}
             if editable { edit } else { show }
         }
     }
@@ -90,7 +90,7 @@ struct MontantDemo: View {
     
     var body: some View {
         VStack(spacing:15) {
-                MontantView($montant, "", $edition, editable)
+                MontantView($montant, "label", $edition, editable)
 
           //  Text(montant.enlettres)
             
