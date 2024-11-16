@@ -9,7 +9,7 @@ import SwiftUI
 
 public struct JMAPicker : View {
     var vprompt: String = "Replanifier la date"
-    var hprompt = "date d'arrivée"
+    var hprompt = ""
     @Binding var jma:JMA
     @State private var edition: Bool = false
     var sheet = false
