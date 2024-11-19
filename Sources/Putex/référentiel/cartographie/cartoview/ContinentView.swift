@@ -38,7 +38,6 @@ struct ContinentView : View {
                     Button(action:add)
                     { Text("ajouter un territoire")}
                 }
-                
             }
         }
     }

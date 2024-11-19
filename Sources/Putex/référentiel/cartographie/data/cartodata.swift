@@ -83,9 +83,9 @@ let Europe = """
                         "parcelles":[{"id":254}]},
                         {"id":252, "numvoie":{"voie":"rue du 14 juillet 1789", "num":"61 bis","codepostal":"59113"},
                         "parcelles":[{"id":252}]},
-                        {"id":LA, "numvoie":{"voie":"rue JB Lebas", "num":"61","codepostal":"59113"},
+                        {"id":61, "numvoie":{"voie":"rue JB Lebas", "num":"61","codepostal":"59113"},
                         "parcelles":[{"id":61}]},
-                        {"id":LB, "numvoie":{"voie":"rue JB Lebas", "num":"63","codepostal":"59113"},
+                        {"id":63, "numvoie":{"voie":"rue JB Lebas", "num":"63","codepostal":"59113"},
                         "parcelles":[{"id":63}]}
                         ]
                     }
@@ -112,9 +112,9 @@ let Europe = """
                     ]
                 },
                 {"id":8,"nom":"Hauboudin", "quartiers":[
-                        {"id":1, "nom":"plage", 
+                        {"id":1, "nom":"canal", 
                             "terrains":[
-                                {"id":HA, "numvoie":{"voie":"chemin de halage", "num":"8","codepostal":"59125"},
+                                {"id":98, "numvoie":{"voie":"chemin de halage", "num":"8","codepostal":"59125"},
                                 "parcelles":[{"id":98}]}
                             ]
                         }
