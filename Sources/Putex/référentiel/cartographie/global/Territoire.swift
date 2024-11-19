@@ -4,6 +4,7 @@
 //
 //  Created by Herve Crespel on 02/11/2024.
 //
+import SwiftUI
 
 public struct Territoire : Codable, Identifiable {
 
@@ -19,6 +20,12 @@ public struct Territoire : Codable, Identifiable {
        let territoirelid = LID()
         lid = territoirelid
         id = territoirelid.territoire
+    }
+    
+    init(_ json:String) {
+        let jsonData = json.data(using: .utf8)!
+        let pays = try! JSONDecoder().decode(Territoire.self, from: jsonData)
+        self = pays
     }
 
     subscript(_ id:Int) -> Region? {

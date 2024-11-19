@@ -38,46 +38,19 @@ struct TerritoireView : View {
        } detail: {
             Text("Select an item")
         }
-     
-        
-      /*
-       
-       @State private var departmentId: Department.ID? // Single selection.
-       @State private var employeeIds: Set<Employee.ID> = [] // Multiple selection.
 
-       var body: some View {
-           NavigationSplitView {
-               List(model.departments, selection: $departmentId) { department in
-                   Text(department.name)
-               }
-           } content: {
-               if let department = model.department(id: departmentId) {
-                   List(department.employees, selection: $employeeIds) { employee in
-                       Text(employee.name)
-                   }
-               } else {
-                   Text("Select a department")
-               }
-           } detail: {
-               EmployeeDetails(for: employeeIds)
-           }
-       }
-
-       
-       HStack {
-            VStack {
-               // TextField("",text:$territoire.nom)
-                ForEach($territoire.regions){
-                    region in
-                    Button(action:{selected = region.wrappedValue})
-                    {
-                        Text(region.wrappedValue.nom).frame(width:100)
-                    }
-                }
-            }
-            Spacer()
-            RegionView(region:$selected)
-        }.frame(alignment:.leading)
-       */
     }
+}
+
+struct TerritoirePreview : View {
+    @State var territoire = Territoire(France)
+    
+    var body:some View {
+        TerritoireView(territoire: $territoire)
+            .frame(width:600,height:500)
+    }
+}
+
+#Preview {
+    TerritoirePreview()
 }
