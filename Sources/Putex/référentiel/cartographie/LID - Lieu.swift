@@ -9,7 +9,10 @@ import Foundation
 
 public struct LID : Codable, Identifiable {
     public static var NA = LID([0,0,0,0,0])
-    static var next = (one:0, two:0, three:0, four:0, five:0)
+    static var next = (zero:0, one:0, two:0, three:0, four:0, five:0)
+    static func continent() -> Int {
+        next.zero += 1 ; return next.zero
+    }
     static func territoire() -> Int {
         next.one += 1 ; return next.one
     }
@@ -27,7 +30,8 @@ public struct LID : Codable, Identifiable {
         next.five += 1 ; return next.five
     }
     
-    var territoire : Int
+    var continent : Int
+    var territoire : Int?
     var region : Int?
     var commune : Int?
     var quartier : Int?
@@ -36,59 +40,70 @@ public struct LID : Codable, Identifiable {
     // initialisation du niveau inférieur
     init(_ lid:LID? = nil) {
         if let parent = lid {
-            territoire = parent.territoire
-            if let second = parent.region {
-                region = second
-                if let third = parent.commune {
-                    commune = third
-                    if let fourth = parent.quartier {
-                        quartier = fourth
-                        terrain = LID.terrain()
+            continent = parent.continent
+            if let first = parent.territoire {
+                territoire = first
+                if let second = parent.region {
+                    region = second
+                    if let third = parent.commune {
+                        commune = third
+                        if let fourth = parent.quartier {
+                            quartier = fourth
+                            terrain = LID.terrain()
+                        } else {
+                            quartier = LID.quartier()
+                        }
                     } else {
-                        quartier = LID.quartier()
+                        commune = LID.commune()
                     }
                 } else {
-                    commune = LID.commune()
+                    region = LID.region()
                 }
             } else {
-                region = LID.region()
+                territoire = LID.territoire()
             }
         } else {
-            territoire = LID.territoire()
+            continent = LID.continent()
         }
     }
     
     public init(_ tab:[Int]) {
         let div = tab.count
         if div > 0 && tab[0] > 0 {
-            territoire = tab[0]
+            continent = tab[0]
             if div > 1 && tab[1] > 0 {
-                region = tab[1]
+                territoire = tab[1]
                 if div > 2 && tab[2] > 0  {
-                    commune = tab[2]
+                    region = tab[2]
                     if div > 3 && tab[3] > 0  {
-                        quartier = tab[3]
-                        if div == 5 && tab[4] > 0  {
-                            terrain = tab[4]
+                        commune = tab[3]
+                        if div > 4 && tab[4] > 0  {
+                            quartier = tab[4]
+                            if div == 6 && tab[5] > 0  {
+                                terrain = tab[5]
+                            }
                         }
                     }
                 }
             }
         } else {
-            territoire = LID.territoire()
+            continent = LID.continent()
         }
     }
     
     public var id: String {
-        var t =  String(territoire)
-        if let r = region {
-            t = t + "-" + String(r)
-            if let c = commune {
-                t = t + "-" + String(c)
-                if let q = quartier {
-                    t = t + "-" + String(q)
-                    if let p = terrain {
-                        t = t + "-" + String(p)
+        var t = String(continent)
+        if let co =  territoire {
+            t = t + "-" + String(co)
+            if let r = region {
+                t = t + "-" + String(r)
+                if let c = commune {
+                    t = t + "-" + String(c)
+                    if let q = quartier {
+                        t = t + "-" + String(q)
+                        if let p = terrain {
+                            t = t + "-" + String(p)
+                        }
                     }
                 }
             }
@@ -98,7 +113,7 @@ public struct LID : Codable, Identifiable {
 }
 
 public struct Lieu {
-    
+    public var continent : Continent?
     public var territoire : Territoire?
     public var region : Region?
     public var commune : Commune?
@@ -119,18 +134,24 @@ public struct Lieu {
     }
     
     public  init(_ lid:LID) {
-        let territoire_id = lid.territoire
-        if let territoire = Continent(Europe)[territoire_id] {
-            if lid.region != nil {
-                region = territoire[lid.region!]
-                if lid.commune != nil {
-                    let commune = region![lid.commune!]
-                    self.commune = commune
-                    if lid.quartier != nil {
-                        let quartier = commune![lid.quartier!]
-                        self.quartier = quartier
-                        if lid.terrain != nil {
-                            terrain = quartier![lid.terrain!]
+        let continent_id = lid.continent
+        if let continent = Continents(continents)[continent_id] {
+            self.continent = continent
+            if lid.territoire != nil {
+                let territoire = continent[lid.territoire!]
+                self.territoire = territoire
+                if lid.region != nil {
+                    let region = territoire![lid.region!]
+                    self.region = region
+                    if lid.commune != nil {
+                        let commune = region![lid.commune!]
+                        self.commune = commune
+                        if lid.quartier != nil {
+                            let quartier = commune![lid.quartier!]
+                            self.quartier = quartier
+                            if lid.terrain != nil {
+                                terrain = quartier![lid.terrain!]
+                            }
                         }
                     }
                 }

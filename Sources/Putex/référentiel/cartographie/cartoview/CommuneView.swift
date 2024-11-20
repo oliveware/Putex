@@ -7,7 +7,11 @@
 import SwiftUI
 
 struct CommuneView: View {
-    @Binding var commune: Commune
+    @Binding var lid:LID
+    var continent:Continent
+    var territoire: Territoire
+    var region: Region
+    @Binding var commune : Commune
     @Binding var quartier : Quartier
     @Binding var terrain : Terrain
     
@@ -20,14 +24,19 @@ struct CommuneView: View {
                         Text("quartiers")
                         ForEach($commune.quartiers){
                             item in
-                            Button(action:{quartier = item.wrappedValue})
+                            Button(action:{
+                                quartier = item.wrappedValue
+                                terrain = Terrain()
+                                lid = LID([continent.id, territoire.id, region.id, commune.id,
+                                           item.id])
+                            })
                             {
                                 Text(item.wrappedValue.nom).frame(width:100)
                             }
                         }
                     }
                     
-                    QuartierView(quartier:$quartier, terrain:$terrain)
+                    QuartierView(lid:$lid, continent:continent, territoire:territoire, region:region, commune:commune, quartier:$quartier, terrain:$terrain)
                 }.frame(alignment:.leading)
             }
         } else {
@@ -39,6 +48,11 @@ struct CommuneView: View {
 }
 
 struct QuartierView : View {
+    @Binding var lid:LID
+    var continent:Continent
+    var territoire: Territoire
+    var region: Region
+    var commune : Commune
     @Binding var quartier: Quartier
     @Binding var terrain : Terrain
     
@@ -49,7 +63,11 @@ struct QuartierView : View {
                     Text("terrains")
                     ForEach($quartier.terrains){
                         item in
-                        Button(action:{terrain = item.wrappedValue})
+                        Button(action:{
+                            terrain = item.wrappedValue
+                            lid = LID([continent.id, territoire.id, region.id, commune.id,
+                                       quartier.id, item.id])
+                        })
                         {
                             Text(item.wrappedValue.label).frame(width:100)
                         }

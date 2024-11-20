@@ -4,6 +4,7 @@
 //
 //  Created by Herve Crespel on 13/11/2024.
 //
+import SwiftUI
 
 public struct Terrain: Codable, Identifiable {
     
@@ -15,9 +16,15 @@ public struct Terrain: Codable, Identifiable {
     init(_ quartier:LID) {
         let terrainlid = LID(quartier)
         lid = terrainlid
-        id = terrainlid.terrain!
+        id = terrainlid.terrain ?? 0
     }
     init() { id = 0 }
+    
+    init(_ json:String) {
+        let jsonData = json.data(using: .utf8)!
+        let terrain = try! JSONDecoder().decode(Terrain.self, from: jsonData)
+        self = terrain
+    }
     
     // un terrain peut avoir deux adresses
     var numvoie =    NumVoie()

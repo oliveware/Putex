@@ -20,9 +20,10 @@ import SwiftUI
 }*/
 
 struct ContinentView : View {
-    @Binding var continent:Continent
+    @Binding var lid : LID
+    @State var continent:Continent
+    
     @State var selection = 0
-   
     @State var edition = false
     @State var creation = false
     
@@ -32,8 +33,9 @@ struct ContinentView : View {
                 TabView(selection: $selection) {
                     ForEach($continent.territoires){
                         territoire in
-                        TerritoireView(territoire:territoire)
+                        TerritoireView(lid:$lid, continent:$continent, territoire:territoire)
                             .tabItem{Text(territoire.wrappedValue.nom)}.tag(territoire.id)
+                            .onChange(of:territoire.id, {lid=LID([continent.id, territoire.id])})
                     }
                     Button(action:add)
                     { Text("ajouter un territoire")}
@@ -49,10 +51,11 @@ struct ContinentView : View {
 
 
 struct ContinentPreview : View {
-    @State var continent = Continent(Europe)
+    @State var lid = LID([])
+    var continent = Continents.Europe
     
     var body:some View {
-        ContinentView(continent: $continent)
+        ContinentView(lid:$lid, continent: continent)
             .frame(width:600,height:500)
     }
 }

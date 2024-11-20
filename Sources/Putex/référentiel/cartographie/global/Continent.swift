@@ -7,22 +7,23 @@
 
 import Foundation
 
-struct Continent : Codable {
-  //  static var monde = ["Europe":Continent(Europe)]
+public struct Continent : Codable {
     
+    var id:Int
     var nom = ""
     var territoires : [Territoire] = []
     
-    init(_ nom:String, _ lands: [Territoire]) {
+    init(_ id:Int, _ nom:String, _ lands: [Territoire]) {
+        self.id = id
         self.nom = nom
         territoires = lands
     }
     
-    init(_ json:String) {
+   /* init(_ json:String) {
         let jsonData = json.data(using: .utf8)!
         let carto = try! JSONDecoder().decode(Continent.self, from: jsonData)
         self = carto
-    }
+    }*/
     
     func insert(_ lieu: Lieu){
         
@@ -38,23 +39,30 @@ struct Continent : Codable {
         }
         return found
     }
-    
-   /* func parcelle(_ lid:Lid) -> Parcelle {
-        let territoire = territoires[lid.territoire]
-        let region = territoire.regions[lid.region]
-        let commune = region.communes[lid.commune]
-        let quartier = commune.quartiers[lid.quartier]
-        return quartier.parcelles[lid.parcelle]
-    }*/
 }
 
-/*
-extension Cartographie {
-    static var europe = Cartographie (
-        [Territoire.france,
-         ]
-    )
-}*/
+struct Continents: Codable {
+    static var Europe = Continents(continents).sept[1]
+    
+    var sept : [Continent]
+    
+    init(_ json:String) {
+        let jsonData = json.data(using: .utf8)!
+        let terre = try! JSONDecoder().decode(Continents.self, from: jsonData)
+        self = terre
+    }
+    
+    subscript(_ id:Int) -> Continent? {
+        var found : Continent?
+        for continent in sept {
+            if continent.id == id {
+                found = continent
+                break
+            }
+        }
+        return found
+    }
+}
 
 
 

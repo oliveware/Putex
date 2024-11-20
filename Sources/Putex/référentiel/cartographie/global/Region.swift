@@ -13,6 +13,7 @@ public struct Region: Codable, Identifiable {
     public var nom = ""
     var communes:[Commune] = []
    
+    init() {id = 0}
     init(_ territoire:LID) {
        let regionlid = LID(territoire)
         lid = regionlid

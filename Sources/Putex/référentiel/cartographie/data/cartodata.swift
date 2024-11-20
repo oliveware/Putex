@@ -5,11 +5,16 @@
 //  Created by Herve Crespel on 01/11/2024.
 //
 
-let Europe = """
-
-{   "nom":"Europe",
-    "territoires": [\(France)]
-}
+let continents = """
+{"sept" : [
+    {   "id":7, "nom":"Antartique", "territoires": [] },
+    {   "id":1, "nom":"Europe", "territoires": [\(France)] },
+    {   "id":2, "nom":"Amérique du nord", "territoires": [] },
+    {   "id":3, "nom":"Amérique du sud", "territoires": [] },
+    {   "id":4, "nom":"Océanie", "territoires": [] },
+    {   "id":5, "nom":"Asie", "territoires": [] },
+    {   "id":6, "nom":"Afrique", "territoires": [] }
+]}
 """
 
 let France = """
@@ -60,25 +65,37 @@ let France = """
             {"id":7, "nom":"Hauts de France",
             "communes":[
                 {"id":1,"nom":"Lambersart", "quartiers":[
-                    {"id":1,"nom":"bois blanc", 
+                    {"id":1,"nom":"Canteleu", 
                     "terrains":[
-                        {"id":395, "numvoie":{"voie":"avenue Hyppolite Peslin", "num":"4","codepostal":"59130"}, 
-                        "parcelles":[{"id":395}]},
-                        {"id":57, "numvoie":{"voie":"avenue de Soubise", "num":"11","codepostal":"59130"}, 
-                            "parcelles":[{"id":570}, {"id":571}, {"id":572}
+                        {"id":395, "numvoie":{"voie":"avenue Hyppolite Peslin", "num":"4", "codepostal":"59130"}, 
+                        "parcelles":[
+{"id":395, "surface":{"nombre":{"decimales":""},"quantité":"surface"}}
+]
+},
+                        {"id":57, "numvoie":{"voie":"avenue de Soubise", "num":"11", "codepostal":"59130"}, 
+                            "parcelles":[{"id":570, "surface":{"nombre":{"decimales":""},"quantité":"surface"}}, {"id":571, "surface":{"nombre":{"decimales":""},"quantité":"surface"}}, {"id":572, "surface":{"nombre":{"decimales":""},"quantité":"surface"}}
                             ]
                         },
                         {"id":58, "numvoie":{"voie":"avenue Watteau", "num":"1","codepostal":"59130"}, 
-                            "parcelles":[{"id":580}, {"id":581}, {"id":582}, {"id":583}, {"id":584}, {"id":585}, {"id":586}, {"id":587}, {"id":588}]}
+                            "parcelles":[
+{"id":580, "surface":{"nombre":{"decimales":""},"quantité":"surface"}}, 
+{"id":581, "surface":{"nombre":{"decimales":""},"quantité":"surface"}}, 
+{"id":582, "surface":{"nombre":{"decimales":""},"quantité":"surface"}}, 
+{"id":583, "surface":{"nombre":{"decimales":""},"quantité":"surface"}}, 
+{"id":584, "surface":{"nombre":{"decimales":""},"quantité":"surface"}}, 
+{"id":585, "surface":{"nombre":{"decimales":""},"quantité":"surface"}}, 
+{"id":586, "surface":{"nombre":{"decimales":""},"quantité":"surface"}}, 
+{"id":587, "surface":{"nombre":{"decimales":""},"quantité":"surface"}}, 
+{"id":588, "surface":{"nombre":{"decimales":""},"quantité":"surface"}}]}
                             ]
                         }
                     ]
                 }, 
                 {"id":2,"nom":"Lille", "quartiers":[
-                    {"id":1,"nom":"port", 
+                    {"id":1,"nom":"Vauban-Esquermes", 
                         "terrains":[
                             {"id":339, "numvoie":{"voie":"rue Bonte-Pollet", "num":"3","codepostal":"59000"},
-                            "parcelles":[{"id":339}]}
+                            "parcelles":[{"id":339, "surface":{"nombre":{"decimales":""},"quantité":"surface"}}]}
                         ]
                         }
                     ] 
@@ -87,18 +104,18 @@ let France = """
                 {"id":4,"nom":"Roubaix", "quartiers":[]}, 
                 {"id":5,"nom":"Seclin", 
                 "quartiers":[
-                    {"id":1,"nom":"Seclin centre", 
+                    {"id":11,"nom":"Seclin centre", 
                     "terrains":[
                         {"id":148, "numvoie":{"voie":"rue du 14 juillet 1789", "num":"67","codepostal":"59113"},
-                        "parcelles":[{"id":148}]},
+                        "parcelles":[{"id":148, "surface":{"nombre":{"decimales":""},"quantité":"surface"}}]},
                         {"id":254, "numvoie":{"voie":"rue du 14 juillet 1789", "num":"61 bis","codepostal":"59113"},
-                        "parcelles":[{"id":254}]},
+                        "parcelles":[{"id":254, "surface":{"nombre":{"decimales":""},"quantité":"surface"}}]},
                         {"id":252, "numvoie":{"voie":"rue du 14 juillet 1789", "num":"61 bis","codepostal":"59113"},
-                        "parcelles":[{"id":252}]},
+                        "parcelles":[{"id":252, "surface":{"nombre":{"decimales":""},"quantité":"surface"}}]},
                         {"id":61, "numvoie":{"voie":"rue JB Lebas", "num":"61","codepostal":"59113"},
-                        "parcelles":[{"id":61}]},
+                        "parcelles":[{"id":61, "surface":{"nombre":{"decimales":""},"quantité":"surface"}}]},
                         {"id":63, "numvoie":{"voie":"rue JB Lebas", "num":"63","codepostal":"59113"},
-                        "parcelles":[{"id":63}]}
+                        "parcelles":[{"id":63, "surface":{"nombre":{"decimales":""},"quantité":"surface"}}]}
                         ]
                     }
                 ]
@@ -108,7 +125,7 @@ let France = """
                         {"id":1,"nom":"Triolo", 
                         "terrains":[
                             {"id":139, "numvoie":{"voie":"allée du Ternois", "num":"3","codepostal":"59950"},
-                            "parcelles":[{"id":139}]}
+                            "parcelles":[{"id":139, "surface":{"nombre":{"decimales":""},"quantité":"surface"}}]}
                         ]
                         }
                     ]
@@ -118,7 +135,7 @@ let France = """
                         {"id":1, "nom":"plage", 
                             "terrains":[
                                 {"id":48, "numvoie":{"voie":"", "num":"","codepostal":"62"},
-                                "parcelles":[{"id":48}]}
+                                "parcelles":[{"id":48, "surface":{"nombre":{"decimales":""},"quantité":"surface"}}]}
                             ]
                         }
                     ]
@@ -127,7 +144,7 @@ let France = """
                         {"id":1, "nom":"canal", 
                             "terrains":[
                                 {"id":98, "numvoie":{"voie":"chemin de halage", "num":"8","codepostal":"59125"},
-                                "parcelles":[{"id":98}]}
+                                "parcelles":[{"id":98, "surface":{"nombre":{"decimales":""},"quantité":"surface"}}]}
                             ]
                         }
 ]},
@@ -135,7 +152,7 @@ let France = """
                         {"id":1, "nom":"plage", 
                             "terrains":[
                                 {"id":33, "numvoie":{"voie":"boulevard Georges Pompidou", "num":"327","codepostal":"59131"},
-                                "parcelles":[{"id":148}]}
+                                "parcelles":[{"id":148, "surface":{"nombre":{"decimales":""},"quantité":"surface"}}]}
                             ]
                         }
                     ]},
@@ -148,7 +165,7 @@ let France = """
                     {"id":11, "nom":"11 ième", 
                             "terrains":[
                                 {"id":60, "numvoie":{"voie":"avenue Claude Vellefaux", "num":"9","codepostal":"75010"},
-                                "parcelles":[{"id":60}]}
+                                "parcelles":[{"id":60, "surface":{"nombre":{"decimales":""},"quantité":"surface"}}]}
                             ]
                         }]}, 
                 {"id":2,"nom":"Boulogne-Billancourt", "quartiers":[]},

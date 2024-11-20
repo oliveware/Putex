@@ -7,58 +7,32 @@
 import SwiftUI
 
 struct RegionView: View {
-    @Binding var region:Region
+    @Binding var lid:LID
+    var continent:Continent
+    var territoire: Territoire
+    @Binding var region: Region
     @Binding var commune : Commune
     @Binding var quartier : Quartier
     @Binding var terrain : Terrain
-    var territoire:Territoire
-    var lid:LID {
-        LID([territoire.id,region.id,commune.id,quartier.id,terrain.id])
-    }
+    
     
     var body:some View {
         
         NavigationStack{
-     /*  NavigationSplitView {
-            List {
-                ForEach($region.communes) { item in
-                    NavigationLink {
-                        CommuneView(commune:item)
-                    } label: {
-                        Text(item.wrappedValue.nom)
-                    }
-                }
-              //  .onDelete(perform: deleteItems)
-            }
-#if os(macOS)
-            .navigationSplitViewColumnWidth(min: 0, ideal: 120)
-#endif
-
-        } detail: {
-            Text("Select an item")
-        }
-       */
             VStack {
-                GroupBox("LID") {
-                    VStack {
-                        Text(terrain.lid?.id ??
-                             (quartier.lid?.id ??
-                              (commune.lid?.id ??
-                               (region.lid?.id ?? "")
-                              )
-                             )
-                        )
+                HStack (spacing: 20) {
+                    GroupBox("Lieu") {
                         Text(lid.id)
                     }
-                }
-                if terrain.adresse[0] != " \n" {
-                    HStack{
-                        GroupBox("adresse") {
-                            Text(terrain.adresse[0] + " " + commune.nom)
-                        }
-                        if terrain.adresse[1] != "" {
-                            GroupBox("autre adresse") {
+                    if terrain.adresse[0] != " \n" {
+                        HStack{
+                            GroupBox("Adresse") {
                                 Text(terrain.adresse[0] + " " + commune.nom)
+                            }
+                            if terrain.adresse[1] != "" {
+                                GroupBox("autre adresse") {
+                                    Text(terrain.adresse[1] + " " + commune.nom)
+                                }
                             }
                         }
                     }
@@ -74,12 +48,13 @@ struct RegionView: View {
                                 commune = item.wrappedValue
                                 quartier = Quartier()
                                 terrain = Terrain()
+                                lid = LID([continent.id,territoire.id, region.id, item.id])
                             })
                             { Text(item.wrappedValue.nom).frame(width:120) }
                         }
                     }
                     
-                    CommuneView(commune:$commune, quartier:$quartier, terrain:$terrain)
+                    CommuneView(lid:$lid, continent:continent, territoire:territoire, region:region, commune:$commune, quartier:$quartier, terrain:$terrain)
                 }.frame(alignment:.leading)
                 Spacer()
             }
