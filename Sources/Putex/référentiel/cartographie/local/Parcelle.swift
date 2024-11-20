@@ -25,6 +25,16 @@ struct Parcelle: Codable, Identifiable {
 }
 
 import SwiftUI
+
+struct ParcelleShow: View {
+    @Binding var parcelle: Parcelle
+    var body: some View {
+        HStack(spacing:20){
+            Text("n° " + String(parcelle.id))
+            NumberView($parcelle.surface)
+        }
+    }
+}
     
 struct ParcelleEditor: View {
     @Binding var parcelle: Parcelle
@@ -38,10 +48,32 @@ struct ParcelleEditor: View {
     }
 }
 
+struct ParcelleView: View {
+    @Binding var parcelle: Parcelle
+    @Binding var edition : Bool
+    
+    var body: some View {
+        HStack{
+            if edition {
+                TextField("numéro", value : $parcelle.id, format: .number)
+                    .frame(width:120)
+            } else {
+                Text("n° " + String(parcelle.id))
+            }
+            NumberView($parcelle.surface)
+        }
+    }
+}
+
 struct ParceList: View {
     @Binding var parcelles: [Parcelle]
-    @State var parcelle = Parcelle(0)
+    @State var num:Int?
     @State var ajoût = false
+    @State var edition = false
+    
+    var ajoutable:Bool {
+        (num == nil ? true : num! > 0)
+    }
     
     var body: some View {
         Form {
@@ -50,18 +82,22 @@ struct ParceList: View {
                 HStack(spacing:20) {
                     Button(action:{delete(parcelle.id)})
                     {Image(systemName: "minus")}
+                    Spacer()
                     ParcelleEditor(parcelle: parcelle)
                 }
             }
             HStack {
             if ajoût {
+                if num != nil {if num! > 0 {
                     Button(action:{
-                        parcelles.append(parcelle)
+                        parcelles.append(Parcelle(num!))
                         ajoût = false
-                        parcelle = Parcelle(0)
+                        num = nil
                     })
-                    {Text("ajouter")}.disabled(parcelle.id < 1)
-                    ParcelleEditor(parcelle: $parcelle)
+                    {Image(systemName: "plus")}
+                }}
+                TextField("numéro",value: $num, format:.number)
+                    .frame(width:120)
                 
             } else {
                 Button(action:{

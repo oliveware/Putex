@@ -8,7 +8,7 @@
 import SwiftUI
 
 public struct TerrainShow: View {
-    var terrain:Terrain
+    @Binding var terrain:Terrain
     
     var commune:String {
         var nom = ""
@@ -26,7 +26,7 @@ public struct TerrainShow: View {
                 GroupBox("Adresse") {
                     Text(terrain.adresse[0] + " " + commune)
                 }
-                if terrain.adresse[1] != "" {
+                if terrain.adresse.count > 1 {
                     GroupBox("autre adresse") {
                         Text(terrain.adresse[1] + " " + commune)
                     }
@@ -34,10 +34,12 @@ public struct TerrainShow: View {
             }.padding(10)
         }
         GroupBox("Parcelles") {
-            VStack{
-                ForEach (terrain.parcelles) {
-                    parcelle in
-                    Text(parcelle.show).lineLimit(3)
+            ScrollView {
+                VStack(spacing:2){
+                    ForEach ($terrain.parcelles) {
+                        parcelle in
+                        ParcelleShow(parcelle: parcelle)
+                    }
                 }
             }
         }.padding(10)
@@ -58,7 +60,7 @@ public struct TerrainView: View {
             TerrainEditor($terrain, $edition)
         } else {
             VStack {
-                TerrainShow(terrain:terrain)
+                TerrainShow(terrain:$terrain)
                 if modifiable {
                     Button(action:{edition = true})
                     { Text("modifier") }
