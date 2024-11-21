@@ -11,12 +11,12 @@ public struct TerrainShow: View {
     @Binding var terrain:Terrain
     
     public var body: some View {
-        if terrain.adresse[0] != " \n" {
+        if terrain.numvoie.voie != "" {
             HStack (spacing:25){
                 GroupBox("Adresse") {
                     Text(terrain.adresse[0] + " " + terrain.commune)
                 }
-                if terrain.adresse.count > 1 {
+                if terrain.autrenumvoie != nil {
                     GroupBox("autre adresse") {
                         Text(terrain.adresse[1] + " " + terrain.commune)
                     }
@@ -75,7 +75,7 @@ public struct TerrainView: View {
             Button(action:{
                 edition.toggle()
             })
-            { Text(edition ? "valider les corrections" : "corriger")}
+            { Text(edition ? "valider les corrections" : "corriger")}.padding(20)
         }
     }
 }
@@ -169,7 +169,7 @@ struct TerrainPreview: View {
     
     var body: some View {
         TerrainView($terrain, modifiable:modifiable)
-            .frame(width:600,height:500)
+            .frame(minWidth:600,minHeight:600)
     }
 }
 
