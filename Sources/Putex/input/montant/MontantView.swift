@@ -14,7 +14,7 @@ public struct MontantView: View {
     @State var dot = ","
     
     @Binding var montant : Montant
-    @Binding var edition: Bool
+    @State var edition = false
     var editable = true
     var label = "montant"
     
@@ -23,10 +23,9 @@ public struct MontantView: View {
         return CGFloat(nbc < 1 ? 40 : nbc * 6)
     }
     
-    public init(_ m:Binding<Montant>,_ p:String = "",_ edit:Binding<Bool>, _ editable:Bool = true) {
+    public init(_ m:Binding<Montant>,_ p:String = "", _ editable:Bool = true) {
         _montant = m
         label = p
-        _edition = edit
         self.editable = editable
     }
     
@@ -84,13 +83,13 @@ public struct MontantView: View {
 // pour le catalogue des Hiware
 struct MontantDemo: View {
     @State var montant = Montant(12301,"€")
-    @State var edition = false
+   // @State var edition = false
     
     var editable = false
     
     var body: some View {
         VStack(spacing:15) {
-                MontantView($montant, "label", $edition, editable)
+                MontantView($montant, "label", editable)
 
           //  Text(montant.enlettres)
             

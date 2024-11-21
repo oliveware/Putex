@@ -18,8 +18,7 @@ public struct Nombre: Codable {
         entiere == nil && decimales == ""
     }
     
-    init() {
-    }
+    init() { }
     
     init(_ e:Int) {
         entiere = e

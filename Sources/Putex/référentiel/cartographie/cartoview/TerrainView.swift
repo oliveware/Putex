@@ -10,25 +10,15 @@ import SwiftUI
 public struct TerrainShow: View {
     @Binding var terrain:Terrain
     
-    var commune:String {
-        var nom = ""
-        if let lid = terrain.lid {
-            if let commune = Lieu(lid).commune {
-                nom = commune.nom
-            }
-        }
-        return nom
-    }
-    
     public var body: some View {
         if terrain.adresse[0] != " \n" {
-            HStack{
+            HStack (spacing:25){
                 GroupBox("Adresse") {
-                    Text(terrain.adresse[0] + " " + commune)
+                    Text(terrain.adresse[0] + " " + terrain.commune)
                 }
                 if terrain.adresse.count > 1 {
                     GroupBox("autre adresse") {
-                        Text(terrain.adresse[1] + " " + commune)
+                        Text(terrain.adresse[1] + " " + terrain.commune)
                     }
                 }
             }.padding(10)
@@ -40,13 +30,57 @@ public struct TerrainShow: View {
                         parcelle in
                         ParcelleShow(parcelle: parcelle)
                     }
-                }
+                }.padding(10)
             }
         }.padding(10)
+        
+        GroupBox("valeur"){
+            if terrain.valeur == nil {
+                Text("valeur à définir")
+            } else {
+                ValeurShow(valeur: terrain.valeur!)
+            }
+        }
+        
     }
 }
 
 public struct TerrainView: View {
+    @Binding var terrain:Terrain
+    @State var edition = false
+    var modifiable = false
+    
+    public init(_ terrain:Binding<Terrain>, modifiable:Bool = false) {
+        _terrain = terrain
+        self.modifiable = modifiable
+    }
+    public var body: some View {
+        VStack{
+            if edition {
+                AdresseView(first:$terrain.numvoie, autre:$terrain.autrenumvoie, commune:terrain.commune)
+                GroupBox("parcelles") {
+                    ParceList(parcelles: $terrain.parcelles).padding(10)
+                }.padding(20)
+                if let valeur:Binding<Valeur> = Binding($terrain.valeur) {
+                    GroupBox("valeur"){
+                        ValeurView(valeur: valeur)
+                    }
+                } else {
+                    Button(action:{terrain.valeur = Valeur()})
+                    { Text("définir la valeur")}
+                }
+            } else {
+                TerrainShow(terrain: $terrain)
+            }
+            Button(action:{
+                edition.toggle()
+            })
+            { Text(edition ? "valider les corrections" : "corriger")}
+        }
+    }
+}
+
+/*public struct TerrainView: View {
     @Binding var terrain:Terrain
     @State var edition = false
     var modifiable = false
@@ -68,9 +102,9 @@ public struct TerrainView: View {
             }
         }
     }
-}
+}*/
 
-public struct TerrainEditor: View {
+/*public struct TerrainEditor: View {
     @Binding var terrain:Terrain
     @Binding var edition:Bool
     
@@ -102,42 +136,9 @@ public struct TerrainEditor: View {
         }
         .padding(10)
     }
-}
-
-struct NumVoieEditor: View {
-    @Binding var numvoie:NumVoie
-    
-    var body:some View {
-        VStack {
-            TextField("voie      ", text:$numvoie.voie)
-            HStack {
-                TextField("numéro", text:$numvoie.num)
-                    .frame(width:100)
-                TextField("code postal", text:$numvoie.codepostal)
-            }
-        }.frame(alignment: .leading)
-    }
-}
-
-/*struct NumVoieEdit: View {
-    @Binding var numvoie:NumVoie?
-    
-    var body:some View {
-        if let optional: Binding<NumVoie> = Binding($numvoie) {
-            VStack {
-                TextField("voie ", text:optional.voie)
-                HStack {
-                    TextField("numéro", text:optional.num)
-                        .frame(width:100)
-                    
-                    TextField("code postal", text:optional.codepostal)
-                }
-            }.frame(alignment: .leading)
-        } else {
-            Button("autre adresse") { numvoie = NumVoie() }
-        }
-    }
 }*/
+
+
 
 let unterrain = """
 {"id":5758, 
@@ -168,7 +169,7 @@ struct TerrainPreview: View {
     
     var body: some View {
         TerrainView($terrain, modifiable:modifiable)
-            .frame(width:500)
+            .frame(width:600,height:500)
     }
 }
 

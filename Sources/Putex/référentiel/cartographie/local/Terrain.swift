@@ -29,12 +29,22 @@ public struct Terrain: Codable, Identifiable {
     // un terrain peut avoir deux adresses
     var numvoie =    NumVoie()
     var autrenumvoie: NumVoie?
+    var commune:String {
+        var nom = ""
+        if let lid = lid {
+            if let commune = Lieu(lid).commune {
+                nom = commune.nom
+            }
+        }
+        return nom
+    }
     public var adresse : [String] {
         return [numvoie.adresse, autrenumvoie?.adresse ?? ""]
     }
     
     func adresse(_ complement:String, _ autre:Bool = false) -> String {
-        autre ? (autrenumvoie?.adresse(complement) ?? "") : numvoie.adresse(complement)
+        let adresse = autre ? (autrenumvoie?.adresse(complement) ?? "") : numvoie.adresse(complement)
+        return adresse + " " + commune
     }
     
     var parcelles:[Parcelle] = []
@@ -56,6 +66,8 @@ public struct Terrain: Codable, Identifiable {
         case industrie  = "industrie"
     }
     var usage : Usage?
+    
+    var valeur : Valeur?
     
     
 }
