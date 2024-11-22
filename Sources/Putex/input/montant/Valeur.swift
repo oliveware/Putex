@@ -9,6 +9,17 @@ public struct Valeur : Codable {
     var acquisition = Estimation()
     var estimation = Estimation()
     var revente: Estimation?
+    
+    var potentiel:String {
+        (estimation.montant - acquisition.montant).euro
+    }
+    var plusvalue:Montant {
+        if revente == nil {
+            Montant(0)
+        } else {
+            (revente!.montant - acquisition.montant)
+        }
+    }
 }
 
 import SwiftUI
@@ -17,16 +28,18 @@ struct ValeurShow: View {
     
     var body: some View  {
         VStack {
-            if !valeur.acquisition.done {
+            if !valeur.acquisition.checked {
                 Text("valeur à définir")
             } else {
                 Text("acquisition : " + valeur.acquisition.entexte)
-                if !valeur.estimation.done {
+                if !valeur.estimation.checked {
                     Text("estimation à établir")
                 } else {
                     Text("estimation : " + valeur.estimation.entexte)
+                    Text("plus-value potentielle : " + valeur.potentiel).padding(.top,10)
                     if valeur.revente != nil {
-                        Text("revente : " + valeur.revente!.entexte)
+                        Text("revente : " + valeur.revente!.entexte).padding(.top,10)
+                        Text("plus-value : " + valeur.plusvalue.euro).padding(.top,5)
                     }
                 }
             }
@@ -44,17 +57,16 @@ struct ValeurView: View {
                 Form {
                     VStack {
                         EstimationView($valeur.acquisition, "acquisition")
-                        if !(valeur.acquisition.montant == Montant()) {
+                        if valeur.acquisition.checked {
                             EstimationView($valeur.estimation, "estimation")
-                            if let optional : Binding<Estimation> = Binding($valeur.revente) {
-                                EstimationView(optional, "revente")
-                            } else {
-                                
-                                if !(valeur.estimation.montant == Montant()) {
+                            if valeur.estimation.checked {
+                                Text("plus-value potentielle : " + valeur.potentiel).padding(.top,10)
+                                if let optional : Binding<Estimation> = Binding($valeur.revente) {
+                                    EstimationView(optional, "revente")
+                                } else {
                                     Button(action:{valeur.revente = Estimation()})
-                                    {Text("revendre")}
+                                    {Text("revendre")}.padding(10)
                                 }
-                                
                             }
                         }
                     }

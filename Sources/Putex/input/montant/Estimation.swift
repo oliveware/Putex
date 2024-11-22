@@ -9,7 +9,7 @@ public struct Estimation: Codable {
     var date: JMA
     public var montant: Montant
     var source: String?
-    var done:Bool = false
+    
     
     public init(_ e:Estimejson) {
         date = JMA(e.date)
@@ -28,6 +28,14 @@ public struct Estimation: Codable {
         } else {
             "\(montant.enchiffres) \t(\(date.entexte))"
         }
+    }
+    
+    private var unchecked:Bool?
+    var checked:Bool {
+        unchecked == nil ? false : !unchecked!
+    }
+    mutating func check() {
+        unchecked = montant.isnul
     }
 
 }

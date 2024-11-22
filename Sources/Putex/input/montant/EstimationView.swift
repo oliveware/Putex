@@ -43,14 +43,16 @@ public struct EstimationView: View {
                     }
                     Button(action:{
                         edition = false
-                        estimation.done = !estimation.montant.isnul
+                        estimation.check()
                     })
                     {Image(systemName: "checkmark")}
                 }
             } else {
                 HStack {
                     Text(estimation.entexte)
-                    Button(action:{edition = true})
+                    Button(action:{
+                        edition = true
+                    })
                     {Image(systemName: "pencil")}
                 }
             }
