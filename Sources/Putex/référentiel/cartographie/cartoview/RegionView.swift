@@ -24,14 +24,14 @@ struct RegionView: View {
                     GroupBox("Lieu") {
                         Text(lid.id)
                     }
-                    if terrain.adresse[0] != " \n" {
+                    if terrain.adresses[0] != " \n" {
                         HStack{
                             GroupBox("Adresse") {
-                                Text(terrain.adresse[0] + " " + commune.nom)
+                                Text(terrain.adresses[0])
                             }
-                            if terrain.adresse[1] != "" {
+                            if terrain.adresses[1] != "" {
                                 GroupBox("autre adresse") {
-                                    Text(terrain.adresse[1] + " " + commune.nom)
+                                    Text(terrain.adresses[1])
                                 }
                             }
                         }

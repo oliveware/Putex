@@ -38,8 +38,8 @@ public struct Terrain: Codable, Identifiable {
         }
         return nom
     }
-    public var adresse : [String] {
-        return [numvoie.adresse, autrenumvoie?.adresse ?? ""]
+    public var adresses : [String] {
+        return [adresse(""), adresse("",true)]
     }
     
     func adresse(_ complement:String, _ autre:Bool = false) -> String {

@@ -19,7 +19,9 @@ public struct NumVoie: Codable, Equatable {
     }
     
     func adresse(_ complement:String) -> String {
-        num + " " + voie + "\n" + complement + "\n" + codepostal
+        let line1 = num + " " + voie + "\n"
+        let line2 = complement == "" ? "" : complement + "\n"
+        return line1 + line2 + codepostal + " "
     }
     
     init() {}

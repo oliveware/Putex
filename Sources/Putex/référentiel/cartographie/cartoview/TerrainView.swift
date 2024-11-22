@@ -14,11 +14,11 @@ public struct TerrainShow: View {
         if terrain.numvoie.voie != "" {
             HStack (spacing:25){
                 GroupBox("Adresse") {
-                    Text(terrain.adresse[0] + " " + terrain.commune)
+                    Text(terrain.adresses[0])
                 }
                 if terrain.autrenumvoie != nil {
                     GroupBox("autre adresse") {
-                        Text(terrain.adresse[1] + " " + terrain.commune)
+                        Text(terrain.adresses[1])
                     }
                 }
             }.padding(10)
