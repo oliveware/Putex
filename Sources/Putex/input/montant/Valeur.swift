@@ -5,7 +5,7 @@
 //  Created by Herve Crespel on 21/11/2024.
 //
 
-struct Valeur : Codable {
+public struct Valeur : Codable {
     var acquisition = Estimation()
     var estimation = Estimation()
     var revente: Estimation?
@@ -33,27 +33,40 @@ struct ValeurShow: View {
         }
     }
 }
+
 struct ValeurView: View {
     @Binding var valeur:Valeur
     @State var edition = false
     
     var body: some View  {
-        Form {
-            VStack {
-                EstimationView($valeur.acquisition, "acquisition")
-                if !(valeur.acquisition.montant == Montant()) {
-                    EstimationView($valeur.estimation, "estimation")
-                    if let optional : Binding<Estimation> = Binding($valeur.revente) {
-                        EstimationView(optional, "revente")
-                    } else {
-                        
-                        if !(valeur.estimation.montant == Montant()) {
-                            Button(action:{valeur.revente = Estimation()})
-                            {Text("revendre")}
+        if edition {
+            HStack {
+                Form {
+                    VStack {
+                        EstimationView($valeur.acquisition, "acquisition")
+                        if !(valeur.acquisition.montant == Montant()) {
+                            EstimationView($valeur.estimation, "estimation")
+                            if let optional : Binding<Estimation> = Binding($valeur.revente) {
+                                EstimationView(optional, "revente")
+                            } else {
+                                
+                                if !(valeur.estimation.montant == Montant()) {
+                                    Button(action:{valeur.revente = Estimation()})
+                                    {Text("revendre")}
+                                }
+                                
+                            }
                         }
-                            
                     }
                 }
+                Button(action:{ edition = false })
+                {Image(systemName: "checkmark")}
+            }
+        } else {
+            HStack {
+                ValeurShow(valeur: valeur)
+                Button(action:{ edition = true })
+                {Image(systemName: "pencil")}
             }
         }
         

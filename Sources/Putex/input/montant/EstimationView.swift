@@ -23,34 +23,36 @@ public struct EstimationView: View {
     }
     
     public var body : some View {
-        if edition {
-            HStack {
-                Form{
-                    HStack {
-                        JMAPicker($estimation.date,"date",{})
-                        MontantView($estimation.montant, prompt)
-                    }
-                    if source {
-                        if let source : Binding<String> = Binding($estimation.source) {
-                            TextField("source", text:source)
-                        } else {
-                            Button(action:{estimation.source = ""})
-                            {Text("ajouter une source")}
+        GroupBox(prompt) {
+            if edition {
+                HStack {
+                    Form{
+                        HStack {
+                            JMAPicker($estimation.date,"",{})
+                            MontantView($estimation.montant, "")
                         }
+                        if source {
+                            if let source : Binding<String> = Binding($estimation.source) {
+                                TextField("source", text:source)
+                            } else {
+                                Button(action:{estimation.source = ""})
+                                {Text("ajouter une source")}
+                            }
+                        }
+                        
                     }
-                    
+                    Button(action:{
+                        edition = false
+                        estimation.done = !estimation.montant.isnul
+                    })
+                    {Image(systemName: "checkmark")}
                 }
-                Button(action:{
-                    edition = false
-                    estimation.done = !estimation.montant.isnul
-                })
-                {Image(systemName: "checkmark")}
-            }
-        } else {
-            HStack {
-                Text(prompt + " " + estimation.entexte)
-                Button(action:{edition = true})
-                {Image(systemName: "pencil")}
+            } else {
+                HStack {
+                    Text(estimation.entexte)
+                    Button(action:{edition = true})
+                    {Image(systemName: "pencil")}
+                }
             }
         }
     }
