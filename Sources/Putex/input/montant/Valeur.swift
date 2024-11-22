@@ -17,11 +17,11 @@ struct ValeurShow: View {
     
     var body: some View  {
         VStack {
-            if valeur.acquisition.montant == Montant() {
+            if !valeur.acquisition.done {
                 Text("valeur à définir")
             } else {
                 Text("acquisition : " + valeur.acquisition.entexte)
-                if valeur.estimation.montant == Montant() {
+                if !valeur.estimation.done {
                     Text("estimation à établir")
                 } else {
                     Text("estimation : " + valeur.estimation.entexte)
@@ -46,8 +46,12 @@ struct ValeurView: View {
                     if let optional : Binding<Estimation> = Binding($valeur.revente) {
                         EstimationView(optional, "revente")
                     } else {
-                        Button(action:{valeur.revente = Estimation()})
-                        {Text("revendre")}
+                        
+                        if !(valeur.estimation.montant == Montant()) {
+                            Button(action:{valeur.revente = Estimation()})
+                            {Text("revendre")}
+                        }
+                            
                     }
                 }
             }
@@ -61,7 +65,7 @@ struct ValeurPreview: View {
     @State var valeur = Valeur()
     
     var body: some View {
-        ValeurView(valeur:$valeur).padding(20).frame(width:600)
+        ValeurView(valeur:$valeur).padding(20).frame(width:600,height:300)
     }
 }
 

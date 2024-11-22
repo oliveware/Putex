@@ -8,7 +8,8 @@
 public struct Estimation: Codable {
     var date: JMA
     public var montant: Montant
-    var source: String = ""
+    var source: String?
+    var done:Bool = false
     
     public init(_ e:Estimejson) {
         date = JMA(e.date)
@@ -19,7 +20,6 @@ public struct Estimation: Codable {
     public init() {
         date = JMA.origine
         montant = Montant()
-        source = ""
     }
     
     public var entexte:String {
@@ -35,7 +35,7 @@ public struct Estimation: Codable {
 public struct Estimejson : Codable {
     var date: String
     var montant: String
-    var source: String = ""
+    var source: String?
     
     public init(_ e:Estimation) {
         date = e.date.astring
@@ -43,7 +43,7 @@ public struct Estimejson : Codable {
         source = e.source
     }
     
-    init(_ date:String, _ montant:String, _ source:String = "") {
+    init(_ date:String, _ montant:String, _ source:String? = nil) {
         self.date = date
         self.montant = montant
         self.source = source
