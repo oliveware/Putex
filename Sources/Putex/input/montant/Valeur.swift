@@ -28,7 +28,7 @@ public struct Valeur : Codable {
         self.revente = revente
     }
     
-    init() {}
+    public init() {}
     
     var potentiel:String {
         (estimation.montant - acquisition.montant).euro
