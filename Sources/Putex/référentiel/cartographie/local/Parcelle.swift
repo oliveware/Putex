@@ -15,6 +15,8 @@ struct Parcelle: Codable, Identifiable {
     
     var surface = Mesure(.aire)
     
+    var prixm2 : Estimation?
+    
     var show:String {
         var aire = "\t (surface non mesurée)"
         if surface.nombre.entiere != nil {

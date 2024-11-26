@@ -6,9 +6,29 @@
 //
 
 public struct Valeur : Codable {
+    
+    public static func + (_ a:Valeur, _ b:Valeur) -> Valeur {
+        let acquis = a.acquisition + b.acquisition
+        let estim = a.estimation + b.estimation
+        var vente : Estimation? = nil
+        if a.revente != nil || b.revente != nil {
+            vente = (a.revente ?? Estimation()) + (b.revente ?? Estimation())
+        }
+        return Valeur(acquis, estim, vente)
+    }
+    
     var acquisition = Estimation()
     var estimation = Estimation()
+    // revente != nil <=> revendu
     var revente: Estimation?
+    
+    init(_ acquisition: Estimation, _ estimation: Estimation, _ revente: Estimation? = nil) {
+        self.acquisition = acquisition
+        self.estimation = estimation
+        self.revente = revente
+    }
+    
+    init() {}
     
     var potentiel:String {
         (estimation.montant - acquisition.montant).euro

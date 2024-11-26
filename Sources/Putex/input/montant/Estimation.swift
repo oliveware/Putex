@@ -6,6 +6,12 @@
 //
 
 public struct Estimation: Codable {
+    public static func + (a:Estimation, b:Estimation) -> Estimation {
+        let date = a.date < b.date ? a.date : b.date
+        let montant = a.montant + b.montant
+        let source = (a.source ?? "") + " - " + (b.source ?? "")
+        return Estimation(date, montant, source)
+    }
     var date: JMA
     public var montant: Montant
     var source: String?
@@ -15,6 +21,12 @@ public struct Estimation: Codable {
         date = JMA(e.date)
         montant = Montant(e.montant)
         source = e.source
+    }
+    
+    init(_ date:JMA, _ montant:Montant, _ source:String) {
+        self.date = date
+        self.montant = montant
+        self.source = source
     }
     
     public init() {
