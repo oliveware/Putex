@@ -43,10 +43,14 @@ public struct Valeur : Codable {
 }
 
 import SwiftUI
-struct ValeurShow: View {
+public struct ValeurShow: View {
     var valeur:Valeur
     
-    var body: some View  {
+    public init(_ valeur:Valeur){
+        self.valeur = valeur
+    }
+    
+    public var body: some View  {
         VStack {
             if !valeur.acquisition.checked {
                 Text("valeur à définir")
@@ -67,11 +71,15 @@ struct ValeurShow: View {
     }
 }
 
-struct ValeurView: View {
+public struct ValeurView: View {
     @Binding var valeur:Valeur
     @State var edition = false
     
-    var body: some View  {
+    public init(_ valeur:Binding<Valeur>){
+        _valeur = valeur
+    }
+    
+    public var body: some View  {
         if edition {
             HStack {
                 Form {
@@ -96,7 +104,7 @@ struct ValeurView: View {
             }
         } else {
             HStack {
-                ValeurShow(valeur: valeur)
+                ValeurShow(valeur)
                 Button(action:{ edition = true })
                 {Image(systemName: "pencil")}
             }
@@ -110,7 +118,7 @@ struct ValeurPreview: View {
     @State var valeur = Valeur()
     
     var body: some View {
-        ValeurView(valeur:$valeur).padding(20).frame(width:600,height:300)
+        ValeurView($valeur).padding(20).frame(width:600,height:300)
     }
 }
 

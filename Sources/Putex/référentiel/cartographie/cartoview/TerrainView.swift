@@ -38,7 +38,7 @@ public struct TerrainShow: View {
             if terrain.valorisation == nil {
                 Text("valeur à définir")
             } else {
-                ValeurShow(valeur: terrain.valorisation!)
+                ValeurShow(terrain.valorisation!)
             }
         }
         
@@ -63,7 +63,7 @@ public struct TerrainView: View {
                 }.padding(20)
                 if let valeur:Binding<Valeur> = Binding($terrain.valorisation) {
                     GroupBox("valeur"){
-                        ValeurView(valeur: valeur)
+                        ValeurView(valeur)
                     }
                 } else {
                     Button(action:{terrain.valorisation = Valeur()})
