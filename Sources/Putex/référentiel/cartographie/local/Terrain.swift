@@ -53,7 +53,7 @@ public struct Terrain: Codable, Identifiable {
         var surface = Mesure(.aire)
         let zero = Mesure("0",.aire)
         for parcelle in parcelles {
-            surface = (surface + (parcelle.surface ?? zero)) ?? surface
+            surface = (surface + parcelle.surface) ?? surface
         }
         return surface
     }
@@ -67,7 +67,27 @@ public struct Terrain: Codable, Identifiable {
     }
     var usage : Usage?
     
-    var valeur : Valeur?
+    var valorisation : Valeur?
+    
+    public var valeur: Valeur {
+        if valorisation == nil {
+            var value = Montant()
+            var NaN :String = ""
+            var date = JMA(Date.now)
+            for parcelle in parcelles {
+                if let vp = parcelle.valeur {
+                    value = value + vp
+                    let datestim = parcelle.prixm2!.date
+                    if datestim < date { date = datestim }
+                } else {
+                    NaN = "incomplète"
+                }
+            }
+            return Valeur(Estimation(), Estimation(date, value, NaN ))
+        } else {
+            return valorisation!
+        }
+    }
     
     
 }
