@@ -9,7 +9,7 @@ public struct Montant: Codable {
     var nombre:Nombre
     var symbol:String = "€"
     
-    init() { nombre = Nombre()}
+    public init() { nombre = Nombre()}
     
     public init (_ m:Int, _ ds : String = "€") {
         nombre = Nombre(m,2)
