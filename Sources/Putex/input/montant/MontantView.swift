@@ -20,7 +20,7 @@ public struct MontantView: View {
     
     var width : CGFloat {
         let nbc = String(montant.cents).count + label.count + 3
-        return CGFloat(nbc < 1 ? 40 : nbc * 6)
+        return CGFloat(nbc < 1 ? 40 : nbc * 7)
     }
     
     public init(_ m:Binding<Montant>,_ p:String = "", _ editable:Bool = true) {
@@ -32,11 +32,12 @@ public struct MontantView: View {
     var editorwidth:CGFloat{
         var nbc = montant.nombre.enchiffres().count  + montant.symbol.count + 1
         if nbc < 5 { nbc = 5 }
-        return CGFloat(nbc * 8)
+        return CGFloat(nbc * 9)
     }
     
     var show: some View {
-        Text(label + " : " + montant.enchiffres)
+        let prompt = label == "" ? "" : label + " : "
+        return Text(prompt + montant.enchiffres)
     }
     
     var edit: some View {
@@ -52,7 +53,7 @@ public struct MontantView: View {
                 }
                 
                 NumberEditor($montant.nombre, .decimal(2), "")
-                    .frame(minWidth:editorwidth + 20)
+                    .frame(width:editorwidth + 20)
                 DevisePicker($montant.symbol)
                 
                 Button(action: {edition = false})
@@ -63,7 +64,7 @@ public struct MontantView: View {
                     Image(systemName: "pencil")
                 }
             }
-        }.frame(width:150+width)
+        }//.frame(width:150+width)
     }
     
     public var body: some View {
@@ -89,7 +90,7 @@ struct MontantDemo: View {
     
     var body: some View {
         VStack(spacing:15) {
-                MontantView($montant, "label", editable)
+                MontantView($montant, "estimation", editable)
 
           //  Text(montant.enlettres)
             

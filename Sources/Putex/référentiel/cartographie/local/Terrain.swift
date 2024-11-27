@@ -51,7 +51,7 @@ public struct Terrain: Codable, Identifiable {
     
     var surface:Mesure {
         var surface = Mesure(.aire)
-        let zero = Mesure("0",.aire)
+       // let zero = Mesure("0",.aire)
         for parcelle in parcelles {
             surface = (surface + parcelle.surface) ?? surface
         }

@@ -4,6 +4,7 @@
 //
 //  Created by Herve Crespel on 25/09/2024.
 //
+import Foundation
 
 public struct Estimation: Codable {
     public static func + (a:Estimation, b:Estimation) -> Estimation {
@@ -30,7 +31,7 @@ public struct Estimation: Codable {
     }
     
     public init() {
-        date = JMA.origine
+        date = JMA(Date.now)
         montant = Montant()
     }
     
