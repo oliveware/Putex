@@ -22,6 +22,17 @@ public struct Valeur : Codable {
     // revente != nil <=> revendu
     var revente: Estimation?
     
+    public var courante:Montant {
+        if revente == nil {
+            if estimation.montant == Montant() {
+                return acquisition.montant
+            } else {
+                return estimation.montant
+            }
+        } else {
+            return revente!.montant
+        }
+    }
     public var euro:String {
         if revente == nil {
             if estimation.montant == Montant() {
