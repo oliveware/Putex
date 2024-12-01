@@ -22,6 +22,18 @@ public struct Valeur : Codable {
     // revente != nil <=> revendu
     var revente: Estimation?
     
+    public var euro:String {
+        if revente == nil {
+            if estimation.montant == Montant() {
+                return acquisition.montant.euro
+            } else {
+                return estimation.montant.euro + "(estimation du \(estimation.date.entexte))"
+            }
+        } else {
+            return "revendu \(revente!.montant.euro)"
+        }
+    }
+    
     init(_ acquisition: Estimation, _ estimation: Estimation, _ revente: Estimation? = nil) {
         self.acquisition = acquisition
         self.estimation = estimation

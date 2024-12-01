@@ -25,6 +25,11 @@ public struct EnumPicker<T:Enumerable>: View {
         self._selected = selected
         vertical = vorh
     }
+    public init(_ cases:[T], _ selected:Binding<T>, _ vorh:Bool = false) {
+        self.cases = cases
+        self._selected = Binding(selected)
+        vertical = vorh
+    }
     
     public var body: some View {
         if vertical {
