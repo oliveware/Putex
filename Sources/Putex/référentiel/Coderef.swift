@@ -74,14 +74,24 @@ public struct Coderef: Codable, Identifiable {
         insert(Head(code, label))
     }
     
-    mutating func insert(_ item:Head) {
-        items.append(item)
+    mutating func insert(_ head:Head) {
+        var updated :[Head] = []
+        var found = false
+        for item in items {
+            if item.code == head.code {
+                updated.append(head)
+                found = true
+            } else {
+                updated.append(item)
+            }
+        }
+        if !found { updated.append(head)}
+        items = updated
     }
+    
     mutating func insert<T:Pickable>(_ item:T) {
-        items.append(Head(item))
+        insert(Head(item))
     }
-    
-    
     
     subscript(_ code:String) -> String {
         var found = "nil"
