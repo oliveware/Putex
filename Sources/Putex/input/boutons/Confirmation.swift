@@ -36,7 +36,7 @@ struct ConfirmationPanel : View {
             Text ("undefined action")
         } else {
             Spacer()
-            Text(action!.title).font(.title)
+            Text(action!.title).font(.title).padding(10)
             Text(action!.message)
             Spacer()
             HStack {
@@ -63,7 +63,7 @@ public struct ConfirmedButton: View {
     
     public init(_ kind:String, _ instance:String, _ action:@escaping () -> Void) {
         if kind == "minus" {
-            self.action = ActionToConfirm("Effacer \(instance)", "les données seront perdues", "confirmer la suppression", action)
+            self.action = ActionToConfirm("Effacer \(instance) ?", "Ses données seront définitivement perdues", "confirmer la suppression", action)
             iconame = "minus"
         }
     }
