@@ -98,7 +98,7 @@ struct CodePickerPreview : View {
     
     var body: some View {
         VStack {
-            Text("le choix retourne un code")
+            Text("le choix en sheet retourne un code")
                 .font(.title2)
                 .padding(20)
             CodePicker(table, $item, "", nil)

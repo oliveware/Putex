@@ -15,7 +15,7 @@ public struct NomPropre: View {
     public init(_ input: Binding<String>,_ prompt: String = "",_ help:String = "" ) {
         self.prompt = prompt
         aide = help
-        self._input = input
+        _input = input
     }
        
     public var body: some View {
@@ -29,8 +29,14 @@ public struct NomPropre: View {
     }
 }
 
-struct NomPropre_Previews: PreviewProvider {
-    static var previews: some View {
-        NomPropre(.constant(""), "truc")
+struct NomProprePreview: View {
+    @State var nom:String = ""
+    
+    var body: some View {
+        NomPropre($nom, "truc")
     }
+}
+
+#Preview {
+    NomProprePreview()
 }
