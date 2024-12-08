@@ -21,16 +21,16 @@ public struct ActionToConfirm {
 
 }
 
-public struct ConfirmationPanel : View {
+struct ConfirmationPanel : View {
     @Binding var confirmed: Bool
     var action: ActionToConfirm?
     
-    public init(_ action: ActionToConfirm?, _ confirmed:Binding<Bool>) {
+    init(_ action: ActionToConfirm?, _ confirmed:Binding<Bool>) {
         self.action = action
         _confirmed = confirmed
     }
     
-    public var body: some View {
+     var body: some View {
         VStack {
         if action == nil {
             Text ("undefined action")
@@ -50,7 +50,7 @@ public struct ConfirmationPanel : View {
     }
 }
 
-struct ConfirmedButton: View {
+public struct ConfirmedButton: View {
     @State private var onsheet = false
     var action: ActionToConfirm?
     var buttontext:String?
@@ -77,7 +77,7 @@ struct ConfirmedButton: View {
     }
     
     
-    var body: some View {
+    public var body: some View {
         Button(action: { onsheet = true })
         {label}
             .sheet(isPresented: $onsheet, content: {ConfirmationPanel(action,$onsheet)})
