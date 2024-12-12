@@ -38,10 +38,20 @@ public struct Coderef: Codable, Identifiable {
         Coderef(Mot("vide",nil))
     }
     
+    public enum Domain :String, Codable {
+        case article = "A"
+        case batiment = "B"
+        case company = "C"
+        case foncier = "F"
+        case human = "H"
+        case location = "L"
+        case tarif = "T"
+    }
+    
     static var nextcode = 0
-    public static func newcode(_ domain:String) -> String {
+    public static func newcode(_ domain:Domain) -> String {
         nextcode += 1
-        return "T-" + domain + String(nextcode)
+        return domain.rawValue + "#" + String(nextcode)
     }
     public var id : String { name.pluriel }
     var name : Mot
