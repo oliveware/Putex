@@ -10,7 +10,7 @@ import Foundation
 import SwiftUI
 
 // modèle pour générer le catalog avec generic
-struct Catalog :Codable {
+public struct Catalog :Codable {
     enum Kind : String,Codable {
         // kind = slide
         case quit       = "quittance"

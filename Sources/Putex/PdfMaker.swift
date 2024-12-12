@@ -9,14 +9,22 @@
 import SwiftUI
 
     @MainActor
-    struct PdfMaker: View {
+public struct PdfMaker: View {
         var rendus : [AnyView]
         var indice : Int = 1
         var root:String
         var white = true
         @Binding var catalog : Catalog
+    
+    public init(_ catalog:Binding<Catalog>, _ rendus:[AnyView], _ indice:Int, _ root:String, _ white:Bool = true) {
+        self.rendus = rendus
+        self.indice = indice
+        self.root = root
+        self.white = white
+        _catalog = catalog
+    }
 
-        var body: some View {
+        public var body: some View {
             VStack {
                 ScrollView {
                     VStack(spacing:10) {
