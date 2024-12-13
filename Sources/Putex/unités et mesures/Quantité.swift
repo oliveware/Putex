@@ -7,7 +7,7 @@
 import SwiftUI
 
 // nature de la chose mesurée
-public enum Quantité: String,Codable {
+public enum Quantité: String, Codable {
     
     static var utility :[Quantité] = [.eau, .elec, .hp, .hc, .gaz, .web, .mobile,.tv]
     static var loyer = "loyer"
@@ -15,15 +15,15 @@ public enum Quantité: String,Codable {
     static var nourriture = "nourriture"
     static var equipement = "équipement"
     
-    case mensuel = "nb mois"
-  //  case annuel = "nb années"
+    case mensuel = "mois"
+  //  case annuel = "année"
     
-    case eau = "eau"
-    case elec = "électricité"
-    case hc = "heures creuses"
-    case hp = "heures pleines"
-    case gaz = "gaz"
-    case web = "accès internet"
+    case eau    = "eau"
+    case elec   = "électricité"
+    case hc     = "heures creuses"
+    case hp     = "heures pleines"
+    case gaz    = "gaz"
+    case web    = "accès internet"
     case mobile = "réseau mobile"
   //  case cloud = "cloud"
     case tv = "télévision"

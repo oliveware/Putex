@@ -8,6 +8,23 @@ import SwiftUI
 
 // une mesure associe un nombre et une unité
 public struct Mesure: Codable {
+    public static func ratio(_ multiple:Mesure, _ unitaire:Mesure) -> Double? {
+        var r: Double?
+        let q = multiple.nombre.value / unitaire.nombre.value
+        if multiple.quantité == unitaire.quantité {
+            r = q
+        } else {
+            if multiple.quantité.unité == unitaire.quantité.unité {
+                r = q
+            } else {
+                if let ur = Unité.ratio(multiple.quantité.unité, unitaire.quantité.unité) {
+                    r = q * ur
+                }
+            }
+        }
+        return r
+    }
+    
     var nombre: Nombre
     var quantité: Quantité
     

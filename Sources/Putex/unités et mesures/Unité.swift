@@ -9,6 +9,14 @@ import Foundation
 import SwiftUI
 
 public enum Unité: String, Codable, Enumerable {
+    
+    static func ratio(_ multiple:Unité, _ unitaire:Unité) -> Double? {
+        var q: Double?
+        if multiple == unitaire { q = 1 } else {
+           if multiple == .m3 && unitaire == .l { q = 1000 }
+        }
+        return q
+    }
     static var all: [Unité] {
         Self.allCases
     }
@@ -19,11 +27,11 @@ public enum Unité: String, Codable, Enumerable {
     }
     public var id: Self {self}
     
-    case kwh   = "kWh"
-    case m   = "m"
-    case m2   = "m2"
-    case m3  = "m3"
-    case l   = "l"
+    case kwh    = "kWh"
+    case m      = "m"
+    case m2     = "m2"
+    case m3     = "m3"
+    case l      = "l"
     case jour   = "jour"
     case mois   = "mois"
     case unit   = "pièce"
@@ -69,7 +77,7 @@ public enum Unité: String, Codable, Enumerable {
         case .m2: return "m2"
         case .m3: return "m3"
         case .kwh: return "kWh"
-        case .jour: return "j"
+        case .jour: return "jour"
         case .mois: return "mois"
         case .unit : return ""
         }
