@@ -44,8 +44,9 @@ public struct Coderef: Codable, Identifiable {
         case company    = "C"
         case foncier    = "F"
         case human      = "H"
-        case local      = "P"     // Place
+        case local      = "L"
         case location   = "R"     // Rent
+        case payment    = "P"
         case tarif      = "T"
     }
     
