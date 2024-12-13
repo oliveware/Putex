@@ -39,13 +39,14 @@ public struct Coderef: Codable, Identifiable {
     }
     
     public enum Domain :String, Codable {
-        case article = "A"
-        case batiment = "B"
-        case company = "C"
-        case foncier = "F"
-        case human = "H"
-        case location = "L"
-        case tarif = "T"
+        case article    = "A"
+        case batiment   = "B"
+        case company    = "C"
+        case foncier    = "F"
+        case human      = "H"
+        case local      = "P"     // Place
+        case location   = "R"     // Rent
+        case tarif      = "T"
     }
     
     static var nextcode = 0

@@ -27,8 +27,9 @@ public struct Mesure: Codable {
     
     var nombre: Nombre
     var quantité: Quantité
+    public var unité: Unité {quantité.unité}
     
-    
+    public var value : Double { nombre.value }
     public var astring : String {
         quantité.unité.mesure(nombre.value)
     }
