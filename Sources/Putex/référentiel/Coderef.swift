@@ -48,6 +48,7 @@ public struct Coderef: Codable, Identifiable {
         case location   = "R"     // Rent
         case payment    = "P"
         case tarif      = "T"
+        case compte     = "W"
     }
     
     static var nextcode = 0
