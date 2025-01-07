@@ -8,10 +8,8 @@
 import SwiftUI
 
 public protocol Enumerable: CaseIterable, Hashable, Identifiable {
-   // static var all: [Self] {get}
     static var selector: String {get}
     var label: String {get}
-   
 }
 
 public struct EnumPicker<T:Enumerable>: View {
@@ -53,34 +51,25 @@ public struct EnumPicker<T:Enumerable>: View {
     }
 }
 
-struct BankPreview: View  {
-    @State var data : TypeCompteBancaire?
-    var body: some View {
-        VStack {
-            Text("le choix retourne un cas d'énumération")
-                .font(.title2)
-                .padding(20)
-            EnumPicker<TypeCompteBancaire>(TypeCompteBancaire.all, $data)
-                .frame(width:300, height:150)
-        }
-    }
-}
-#Preview("bancaire") {
-    BankPreview()
-}
-
-struct AnaPreview: View  {
-    @State var data : TypeCompteAnalytique?
+struct EnumPreview<T:Enumerable>: View  {
+    @State var data : T?
     var body: some View {
         VStack {
             Text("le choix retourne un cas")
                 .font(.title2)
                 .padding(20)
-            EnumPicker<TypeCompteAnalytique>(TypeCompteAnalytique.all, $data, true)
+            EnumPicker<T>(T.allCases as! [T], $data, true)
                 .frame(width:250, height:150)
         }
     }
 }
+
+#Preview("bancaire") {
+    EnumPreview<TypeCompteBancaire>()
+}
 #Preview("analytique") {
-    AnaPreview()
+    EnumPreview<TypeCompteAnalytique>()
+}
+#Preview("domain") {
+    EnumPreview<Webdomain>()
 }
