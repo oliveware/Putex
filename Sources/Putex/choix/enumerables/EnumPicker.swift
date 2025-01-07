@@ -14,39 +14,47 @@ public protocol Enumerable: CaseIterable, Hashable, Identifiable {
 
 public struct EnumPicker<T:Enumerable>: View {
     let cases: [T]
-    var prompt: String = ""
+    var prompt: Bool = false
     var vertical = false
     @Binding var selected: T?
     
-    public init(_ cases:[T], _ selected:Binding<T?>, _ vorh:Bool = false) {
+    public init(_ cases:[T], _ selected:Binding<T?>, _ vorh:Bool = false, _ prompt:Bool = false) {
         self.cases = cases
         self._selected = selected
         vertical = vorh
     }
-    public init(_ cases:[T], _ selected:Binding<T>, _ vorh:Bool = false) {
+    public init(_ cases:[T], _ selected:Binding<T>, _ vorh:Bool = false, _ prompt:Bool = false) {
         self.cases = cases
         self._selected = Binding(selected)
         vertical = vorh
     }
     
     public var body: some View {
-        if vertical {
-            VStack(alignment:.leading) {
-                Text(T.selector).font(.caption)
-                    .padding(.leading,10)
-                Picker("", selection:$selected) {
+        if prompt {
+            if vertical {
+                VStack(alignment:.leading) {
+                    Text(T.selector).font(.caption)
+                        .padding(.leading,10)
+                    Picker("", selection:$selected) {
+                        ForEach (cases) { item in
+                            Text(item.label).tag(item as T?)
+                        }
+                    }
+                }
+            } else {
+                Picker(T.selector, selection:$selected) {
+                    //  Text("\t\(T.selector)").tag(nil as T?)
                     ForEach (cases) { item in
                         Text(item.label).tag(item as T?)
                     }
-                }
+                }//.pickerStyle(.radioGroup)
             }
         } else {
-            Picker(T.selector, selection:$selected) {
-                //  Text("\t\(T.selector)").tag(nil as T?)
+            Picker("", selection:$selected) {
                 ForEach (cases) { item in
                     Text(item.label).tag(item as T?)
                 }
-            }//.pickerStyle(.radioGroup)
+            }
         }
     }
 }
