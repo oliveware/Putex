@@ -14,11 +14,12 @@ public struct JMAPicker : View {
     @State private var edition: Bool = false
     var sheet = false
     var vertical = false
-    @State private var date = Date.now
+    @State private var date : Date
     var todo: () -> Void
     
     public init(_ date:Binding<JMA>,_ p:String = "", _ todo: @escaping () -> Void, _ sheet:Bool = false, _ vertical: Bool = false) {
         _jma = date
+        self.date = date.wrappedValue.asDate
         if vertical {
             vprompt = p
             hprompt = ""
