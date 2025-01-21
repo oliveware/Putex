@@ -92,13 +92,13 @@ public struct CartoucheView: View {
         
     }
     public var horizontal: some View {
-        HStack(alignment: .top) {
+        HStack(alignment: .center) {
             if cartouche.titre != "" {
                 Text(cartouche.titre)
                     .font(.title2)
                     .padding(.trailing,3)
                     .multilineTextAlignment(.center)
-                   // .frame(width:135)
+                    .frame(width:150)
             }
             VStack {
                 ForEach(0..<cartouche.lines.count, id:\.self) {
@@ -118,7 +118,7 @@ public struct CartoucheView: View {
 }
 
 struct CartouchePreview: View {
-    var cartouche = Cartouche("très très long titre", ["ligne 1", "ligne 2", "ligne 3"])
+    var cartouche = Cartouche("direction générale des impôts", ["ligne 1", "ligne 2", "ligne 3"])
     
     var body: some View {
         CartoucheView(cartouche)
