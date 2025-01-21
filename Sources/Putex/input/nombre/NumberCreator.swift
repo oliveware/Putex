@@ -146,7 +146,7 @@ struct NumberCreator: View {
             if let naturel = Int(entiere) {
                 nombre = Nombre(naturel)
             } else {
-                print ("chiffres erronés")
+                print ("chiffres erronés : \(entiere)")
             }
         } else {
             if set == .relatif {
@@ -159,7 +159,7 @@ struct NumberCreator: View {
                 }
             }
         }
-        print(nombre)
+      //  print(nombre)
     }
     
     func cancel() {

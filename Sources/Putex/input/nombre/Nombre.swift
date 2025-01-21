@@ -105,7 +105,7 @@ public struct Nombre: Codable {
         if let deci = Double(decimales) {
             decimal = deci / Double(div(decimales.count))
         } else {
-            print("décimales erronées")
+            print("décimales erronées : \(decimales)")
         }
         if let entier = entiere {
             if entier < 0 { decimal = -decimal }
@@ -131,7 +131,7 @@ public struct Nombre: Codable {
             }
         } else {
             deci = 0
-            print("erreur : decimales incorrectes")
+            print("erreur : decimales incorrectes : \(decimales)")
         }
         if let entier = entiere {
             if entier < 0 {
@@ -205,7 +205,7 @@ public struct Nombre: Codable {
                         lettres += " et " + deci.enlettres + " " + (devise.cent?.quantifié(deci > 1 ) ?? "")
                     }
                 } else {
-                    print ("erreur nombre en lettres")
+                    print ("erreur nombre en lettres : \(entiere)")
                 }
             }
             return lettres
@@ -222,7 +222,7 @@ public struct Nombre: Codable {
                         lettres += " et \(iemes) de \(deci == 1 ? classifier.singulier : classifier.pluriel)"
                     }
                 } else {
-                    print ("erreur nombre en lettres")
+                    print ("erreur nombre en lettres : \(entiere)")
                 }
             }
             return lettres
