@@ -8,7 +8,9 @@
 import SwiftUI
 
 public struct Cartouche {
-    var lines: [String] = ["titre", "ligne 1", "ligne 2"]
+    var titre: String = ""
+    var lines: [String] = []
+    var horizontal = true
     
     var nbcar: Int = 0
     var linemax: Int {
@@ -18,23 +20,26 @@ public struct Cartouche {
                 let nbc = line.count
                 large = nbc > large ? nbc : large
             }
-            return large
         } else {
-            return nbcar
+            large = nbcar
         }
+        if horizontal { large += titre.count + 1 }
+        return large
     }
     
     public init(_ line:String) {
         lines = [line]
     }
     
-    public init(_ lines: [String] = ["titre", "ligne 1", "ligne 2"], _ size: Int = 0) {
+    public init(_ titre: String, _ lines: [String] = [], _ hor:Bool = true, _ size: Int = 10) {
+        self.titre = titre
         self.lines = lines
+        horizontal = hor
         nbcar = size
     }
     
     public var astring: String {
-        var cartouche = ""
+        var cartouche = "\(titre)\n\n"
         for line in lines {
             cartouche += "\(line)\n"
         }
@@ -64,27 +69,71 @@ public struct CartoucheView: View {
     var carwidth : Int = 12
     var carheight : Int = 25
     
-    public init(_ lines: [String] = ["titre", "ligne 1", "ligne 2"], _ size:Int = 0) {
-        cartouche = Cartouche(lines, size)
+    public init(_ titre:String, _ lines: [String] = [], _ hor:Bool = true, _ size:Int = 0) {
+        cartouche = Cartouche(titre, lines, hor, size)
     }
     public init(_ c: Cartouche) { cartouche = c }
     
-    public var body: some View {
+    public var vertical: some View {
         VStack {
+            if cartouche.titre != "" {
+                Text(cartouche.titre)
+                    .font(.title2)
+                    .padding(.bottom,3)
+            }
             ForEach(0..<cartouche.lines.count, id:\.self) {
                l in
                 Text(cartouche.lines[l])
-                    .font(l == 0 ? .title2 : .body)
-                    .padding(.bottom, l == 0 ? 3 : 0)
+                    .font(.body)
                     .multilineTextAlignment(.center)
             }
         }.frame(width: cartouche.width(carwidth), height: cartouche.height(carheight),  alignment: .center)
+            .padding(5)
         
+    }
+    public var horizontal: some View {
+        HStack(alignment: .top) {
+            if cartouche.titre != "" {
+                Text(cartouche.titre)
+                    .font(.title2)
+                    .padding(.trailing,3)
+            }
+            VStack {
+                ForEach(0..<cartouche.lines.count, id:\.self) {
+                    l in
+                    Text(cartouche.lines[l])
+                        .font(.body)
+                    
+                        .multilineTextAlignment(.center)
+                }
+            }
+        }.frame(width: cartouche.width(carwidth), height: cartouche.height(carheight))
+            .padding(5)
+        
+    }
+    public var body:some View {
+        if cartouche.horizontal { horizontal } else { vertical }
     }
 }
 
-struct CartoucheView_Previews: PreviewProvider {
-    static var previews: some View {
-        CartoucheView()
+struct CartouchePreview: View {
+    var cartouche = Cartouche("titre", ["ligne 1", "ligne 2", "ligne 3"])
+    
+    var body: some View {
+        CartoucheView(cartouche)
+    }
+}
+
+#Preview("horizontal") {
+    CartouchePreview()
+}
+#Preview("vertical") {
+    CartouchePreview(cartouche : Cartouche("titre", ["ligne 1", "ligne 2", "ligne 3"], false))
+}
+#Preview("sans titre") {
+    HStack {
+        CartouchePreview(cartouche : Cartouche("", ["ligne 1", "ligne 2", "ligne 3"], false))
+        
+        CartouchePreview(cartouche : Cartouche("", ["ligne 1", "ligne 2", "ligne 3"]))
     }
 }
