@@ -118,20 +118,22 @@ public struct Nombre: Codable {
     // arrondi ne concerne que les décimales
     public var cents: Int {
         var deci : Int
-        if let decint = Int(decimales) {
-            if decint < 100 {
-                deci = decint
-            } else {
-                let dec = Int(Double(decint)/100)
-                if dec < 10 {
-                    deci = 10 * dec
+        if decimales == "" { deci = 0 } else {
+            if let decint = Int(decimales) {
+                if decint < 100 {
+                    deci = decint
                 } else {
-                    deci = dec
+                    let dec = Int(Double(decint)/100)
+                    if dec < 10 {
+                        deci = 10 * dec
+                    } else {
+                        deci = dec
+                    }
                 }
+            } else {
+                deci = 0
+                print("erreur : decimales incorrectes : \(decimales)")
             }
-        } else {
-            deci = 0
-            print("erreur : decimales incorrectes : \(decimales)")
         }
         if let entier = entiere {
             if entier < 0 {
