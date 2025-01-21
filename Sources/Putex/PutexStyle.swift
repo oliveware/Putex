@@ -25,7 +25,7 @@ struct putexStyle: TextFieldStyle {
       // .focusable(true, onFocusChange: { _ in self.help=true})
         .opacity(90.0)
         .padding(1)
-        .font(Font.system(size: 12, weight: .medium, design: .serif))
+        .font(Font.system(size: 12, weight: .medium, design: .default))
         .lineLimit(1)
         .foregroundColor(Color.white)
         

@@ -19,13 +19,13 @@ public struct NomPropre: View {
     }
        
     public var body: some View {
-        VStack {
+        VStack (alignment:.leading, spacing:1){
            if prompt != "" {
-               Text(prompt).font(.caption)
+               Text(prompt).font(.caption).padding(.leading,10)
            }
            TextField(aide, text: $input)
                .textFieldStyle(putexStyle())
-       }
+        }.padding(5)
     }
 }
 
@@ -33,7 +33,7 @@ struct NomProprePreview: View {
     @State var nom:String = ""
     
     var body: some View {
-        NomPropre($nom, "truc")
+        NomPropre($nom, "nom propre")
     }
 }
 

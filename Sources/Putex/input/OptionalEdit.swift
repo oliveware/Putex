@@ -20,13 +20,11 @@ public struct OptionalEdit: View {
     
     public var body: some View {
         HStack {
-            Text(prompt)
             if let stringBinding: Binding<String> = Binding($string) {
+                Text(prompt)
                 TextField("" ,text:stringBinding)
-              //  Button("retirer") { string = nil }
-                
             } else {
-                Button("ajouter") { string = "" }
+                Button("ajouter \(prompt)") { string = "" }
             }
         }.frame(minWidth:large)
     }
@@ -42,5 +40,5 @@ struct OptionalPreview: View {
 }
 
 #Preview("edit") {
-    OptionalPreview()
+    OptionalPreview().padding(10)
 }
