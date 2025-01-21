@@ -97,14 +97,15 @@ public struct CartoucheView: View {
                 Text(cartouche.titre)
                     .font(.title2)
                     .padding(.trailing,3)
+                    .multilineTextAlignment(.center)
+                   // .frame(width:135)
             }
             VStack {
                 ForEach(0..<cartouche.lines.count, id:\.self) {
                     l in
                     Text(cartouche.lines[l])
                         .font(.body)
-                    
-                        .multilineTextAlignment(.center)
+                        .multilineTextAlignment(.leading)
                 }
             }
         }.frame(width: cartouche.width(carwidth), height: cartouche.height(carheight),  alignment: .leading)
@@ -117,7 +118,7 @@ public struct CartoucheView: View {
 }
 
 struct CartouchePreview: View {
-    var cartouche = Cartouche("titre", ["ligne 1", "ligne 2", "ligne 3"])
+    var cartouche = Cartouche("très très long titre", ["ligne 1", "ligne 2", "ligne 3"])
     
     var body: some View {
         CartoucheView(cartouche)
