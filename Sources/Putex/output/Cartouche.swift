@@ -87,8 +87,9 @@ public struct CartoucheView: View {
                     .font(.body)
                     .multilineTextAlignment(.center)
             }
-        }.frame(width: cartouche.width(carwidth), height: cartouche.height(carheight),  alignment: .leading)
-            .padding(5)
+        }.frame( alignment: .leading)
+            //.frame(width: cartouche.width(carwidth), height: cartouche.height(carheight),  alignment: .leading)
+            .padding(.horizontal,10)
         
     }
     public var horizontal: some View {
@@ -98,7 +99,7 @@ public struct CartoucheView: View {
                     .font(.title2)
                     .padding(.trailing,3)
                     .multilineTextAlignment(.center)
-                    .frame(width:150)
+                    .frame(width:CGFloat(17 * carwidth), alignment:.leading)
             }
             VStack {
                 ForEach(0..<cartouche.lines.count, id:\.self) {
@@ -108,8 +109,9 @@ public struct CartoucheView: View {
                         .multilineTextAlignment(.leading)
                 }
             }
-        }.frame(width: cartouche.width(carwidth), height: cartouche.height(carheight),  alignment: .leading)
-            .padding(5)
+        }.frame( alignment: .leading)
+        //.frame(width: cartouche.width(carwidth), height: cartouche.height(carheight),  alignment: .leading)
+            .padding(.horizontal,10)
         
     }
     public var body:some View {
