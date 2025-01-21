@@ -87,7 +87,7 @@ public struct CartoucheView: View {
                     .font(.body)
                     .multilineTextAlignment(.center)
             }
-        }.frame(width: cartouche.width(carwidth), height: cartouche.height(carheight),  alignment: .center)
+        }.frame(width: cartouche.width(carwidth), height: cartouche.height(carheight),  alignment: .leading)
             .padding(5)
         
     }
@@ -107,7 +107,7 @@ public struct CartoucheView: View {
                         .multilineTextAlignment(.center)
                 }
             }
-        }.frame(width: cartouche.width(carwidth), height: cartouche.height(carheight))
+        }.frame(width: cartouche.width(carwidth), height: cartouche.height(carheight),  alignment: .leading)
             .padding(5)
         
     }
