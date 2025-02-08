@@ -36,7 +36,9 @@ public struct JMA: Codable, Equatable {
         } else {
            return lhs.année < rhs.année
         }
-        
+    }
+    public static func > (_ lhs: JMA,_ rhs: JMA) -> Bool {
+        rhs < lhs
     }
     
     public static func + (_ date:JMA, _ delta:Int) -> JMA {
@@ -105,7 +107,7 @@ public struct JMA: Codable, Equatable {
         année * 12 + mois
     }
     
-    public var jour : Int
+    public var jour : Int = 0
     public var mois : Int
     public var année: Int
     
@@ -115,17 +117,35 @@ public struct JMA: Codable, Equatable {
         année = a < 100 ? 2000 + a : a
     }
     
-    public init(_ jma:String) {
+    public init(_ jma:String, _ format:String = "JJ/MM/A") {
         let date = jma.split(separator: "/")
+        var an:Int = 0
         if date.count == 3 {
-            jour = Int(date[0]) ?? 0
-            mois = Int(date[1]) ?? 0
-            let a = Int(date[2]) ?? 0
-            année = a < 100 ? 2000 + a : a
+            an = Int(date[2]) ?? 0
+        } else if date.count == 2 {
+            an = Int(date[1]) ?? 0
         } else {
             print ("\(jma) n'est pas une date")
             self = JMA.origine
         }
+        année = an < 100 ? 2000 + an : an
+        if format == "JJ/MM/A" {
+            jour = Int(date[0]) ?? 0
+            mois = Int(date[1]) ?? 0
+        } else if format == "MM/JJ/A" {
+            jour = Int(date[1]) ?? 0
+            mois = Int(date[0]) ?? 0
+        } else if format == "-M/A" {
+            mois = Int(date[0]) ?? 0
+            jour = 1
+        } else if format == "M-/A" {
+            mois = Int(date[0]) ?? 0
+            jour = nbj(mois)
+        } else {
+            print ("format incorrect \(format)")
+            self = JMA.origine
+        }
+        
     }
     
     public init(_ date :Date){

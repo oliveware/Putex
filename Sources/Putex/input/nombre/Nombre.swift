@@ -12,7 +12,7 @@ public struct Nombre: Codable {
         
     var entiere:Int?
     var decimales:String = ""
-    let base = 10 
+    //let base = 10
     
     public var isNaN: Bool {
         entiere == nil && decimales == ""
@@ -91,6 +91,7 @@ public struct Nombre: Codable {
     }
     
     func div(_ nbdec:Int) -> Int {
+        let base = 10
         var d = 1
         if nbdec > 0 {
             for _ in 0..<nbdec {
