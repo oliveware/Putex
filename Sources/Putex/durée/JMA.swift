@@ -185,6 +185,11 @@ public struct JMA: Codable, Equatable {
         }*/
     }
     
+    public var moisan: String {
+        let zois = mois < 10 ? "0\(mois)" : String(mois)
+        return zois + String(année)
+    }
+    
    public func jourindex(_ begin: JMA) -> Int {
         let datan = self.année
         var index = self.journum - begin.journum
