@@ -122,29 +122,36 @@ public struct JMA: Codable, Equatable {
         var an:Int = 0
         if date.count == 3 {
             an = Int(date[2]) ?? 0
+            année = an < 100 ? 2000 + an : an
+            if format == "JJ/MM/A" {
+                jour = Int(date[0]) ?? 0
+                mois = Int(date[1]) ?? 0
+            } else if format == "MM/JJ/A" {
+                jour = Int(date[1]) ?? 0
+                mois = Int(date[0]) ?? 0
+            } else {
+                print ("format incorrect \(format)")
+                self = JMA.origine
+            }
         } else if date.count == 2 {
             an = Int(date[1]) ?? 0
+            année = an < 100 ? 2000 + an : an
+            if format == "-M/A" {
+                mois = Int(date[0]) ?? 0
+                jour = 1
+            } else if format == "M-/A" {
+                mois = Int(date[0]) ?? 0
+                jour = nbj(mois)
+            } else {
+                print ("format incorrect \(format)")
+                self = JMA.origine
+            }
         } else {
             print ("\(jma) n'est pas une date")
             self = JMA.origine
         }
-        année = an < 100 ? 2000 + an : an
-        if format == "JJ/MM/A" {
-            jour = Int(date[0]) ?? 0
-            mois = Int(date[1]) ?? 0
-        } else if format == "MM/JJ/A" {
-            jour = Int(date[1]) ?? 0
-            mois = Int(date[0]) ?? 0
-        } else if format == "-M/A" {
-            mois = Int(date[0]) ?? 0
-            jour = 1
-        } else if format == "M-/A" {
-            mois = Int(date[0]) ?? 0
-            jour = nbj(mois)
-        } else {
-            print ("format incorrect \(format)")
-            self = JMA.origine
-        }
+
+       
         
     }
     
