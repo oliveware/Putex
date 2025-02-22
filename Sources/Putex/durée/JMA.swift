@@ -196,6 +196,15 @@ public struct JMA: Codable, Equatable {
         let zois = mois < 10 ? "0\(mois)" : String(mois)
         return zois + String(année)
     }
+    public func periode(_ précedente: Bool = false) -> String {
+        let moisan: String
+           if précedente {
+               moisan = mois == 1 ? JMA(1, 12, année-1).moisan : JMA(1, mois-1, année).moisan
+           } else {
+               moisan = self.moisan
+           }
+        return moisan
+    }
     
    public func jourindex(_ begin: JMA) -> Int {
         let datan = self.année
