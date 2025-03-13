@@ -21,7 +21,7 @@ public struct NumVoieEditor: View {
         Form {
             HStack {
                 TextField("numéro", text:$numvoie.num)
-                    .frame(width:100)
+                    .frame(width:150)
                 TextField("voie", text:$numvoie.voie)
                     .frame(width:300)
             }
@@ -29,5 +29,4 @@ public struct NumVoieEditor: View {
                 .frame(width:130)
         }.frame(alignment: .leading)
     }
-    
 }
