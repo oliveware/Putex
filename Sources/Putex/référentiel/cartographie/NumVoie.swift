@@ -49,7 +49,7 @@ public struct AdressePostale: Codable {
         self.l5 = l5
     }
     
-    var astring: String {
+    public var astring: String {
         var lines = l1 + "\n"
         if l2 != nil {lines = lines + l2! + "\n"}
         lines = lines + l3 + "\n"
@@ -58,10 +58,16 @@ public struct AdressePostale: Codable {
         return lines
     }
     
-    init(_ nom:String, _ numvoie:NumVoie, _ complement:String? = nil) {
+    public init(_ nom:String, _ numvoie:NumVoie, _ complement:String? = nil) {
         l1 = nom
         l2 = complement
         l3 = numvoie.num + " " + numvoie.voie
         l4 = numvoie.codepostal + "" //Commune[codepostal]
+    }
+    
+    public init() {
+        l1 = ""
+        l3 = ""
+        l4 = ""
     }
 }
