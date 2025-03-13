@@ -14,7 +14,7 @@ public struct NumVoie: Codable, Equatable {
     var num:    String = ""
     var codepostal:String = ""
     
-    var isNan: Bool {
+    var isNaN: Bool {
         voie == "" && num == ""
     }
     

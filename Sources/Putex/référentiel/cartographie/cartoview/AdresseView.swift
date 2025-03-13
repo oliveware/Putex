@@ -12,7 +12,7 @@ public struct NumVoieEditor: View {
     
     public init(_ numvoie:Binding<NumVoie>) {
         _numvoie = numvoie
-        edition = numvoie.isNaN
+        edition = numvoie.wrappedValue.isNaN
     }
    
     public var body :some View {
@@ -43,7 +43,7 @@ struct AdresseView: View {
                     
                     Button(action:{firstedit = true})
                     {Image(systemName: "pencil")}
-                        .sheet(isPresented: $firstedit, content: {NumVoieEditor(numvoie: $first)})
+                        .sheet(isPresented: $firstedit, content: {NumVoieEditor($first)})
                 }.padding(20)
             }
             if autre == nil {
@@ -60,7 +60,7 @@ struct AdresseView: View {
                         if let optional : Binding<NumVoie> = Binding($autre) {
                             Button(action:{autreedit = true})
                             {Image(systemName: "pencil")}
-                                .sheet(isPresented: $autreedit, content: {NumVoieEditor(numvoie: optional)})
+                                .sheet(isPresented: $autreedit, content: {NumVoieEditor(optional)})
                         }
                     }.padding(20)
                 }
