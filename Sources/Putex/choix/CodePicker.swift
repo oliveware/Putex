@@ -17,7 +17,7 @@ public struct CodePicker: View {
     @State var choice:String
     @State var open = false
     
-    public init(_ table:Coderef, _ selected:Binding<String?>, _ prompt:String?, _ choice:String?) {
+    public init(_ table:Coderef, _ selected:Binding<String?>, _ prompt:String? = nil, _ choice:String? = nil) {
         self.prompt = prompt ?? table.name.pluriel
         self.table = table
         _selected = selected

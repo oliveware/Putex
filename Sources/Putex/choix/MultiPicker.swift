@@ -45,7 +45,7 @@ public struct MultiPicker: View {
                     index in
                     let table = tables[index]
                     if show(index) {
-                        CodeChoice($open[index], table, $id, $choice,table.selector)
+                        CodeChoice($open[index], table, $id, $choice, table.selector)
                     }
                 }
             }
@@ -59,10 +59,11 @@ let bourse = Coderef.find("bourse")
 let tiers = Coderef.find("tiers")
 
 let banques = tables["banques"]!
+let agences = tables["agences"]!
 
 struct MultiPreview : View {
     @State var id:String?
-    var tables : [Coderef] = [banques, banques, tiers, banques]
+    var tables : [Coderef] = [banques, agences, tiers, banques]
     
     var body:some View {
         MultiPicker(tables, $id)
