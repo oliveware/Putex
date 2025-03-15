@@ -12,7 +12,7 @@ public protocol Lookable {
     var label:String {get set}
 
 }
-@Observable
+//@Observable
 class Looksample : Lookable {
     static var prompt = "sample"
     static var all : [Looksample] =
@@ -35,13 +35,13 @@ class Looksample : Lookable {
 }
 
 struct Lookcreator<T:Lookable>: View {
-     var item:T
+    @Binding var item:T
     @Binding var creation:Bool
     @State private var id:String = ""
     @State private var label:String = ""
     
-    init(_ item:T, _ creation:Binding<Bool>) {
-        self.item = item
+    init(_ item:Binding<T>, _ creation:Binding<Bool>) {
+        _item = item
         _creation = creation
     }
     
@@ -50,8 +50,8 @@ struct Lookcreator<T:Lookable>: View {
             TextField("id", text:$id)
             TextField("label", text:$label)
             Button(action:{
-              // item.id = id
-              //  item.label = label
+               item.id = id
+                item.label = label
                 creation = false
             }){
                 Text("done")
@@ -87,7 +87,7 @@ public struct ClassPicker<T:Lookable>: View {
                         index in
                         let item = items[index]
                         if item.label == "" && creation {
-                            Lookcreator(items[index], $creation)
+                            Lookcreator($items[index], $creation)
                         } else {
                             Button( action: {
                                 choose(item)
@@ -108,13 +108,13 @@ public struct ClassPicker<T:Lookable>: View {
     }
     
     func new(){
-        switch selected {
+       switch selected {
         case _ as Looksample:
             selected = Looksample("","") as! T
         default:
             print("erreur")
         }
-        
+        //selected = T()
         items.append(selected)
         creation = true
     }

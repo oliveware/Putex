@@ -108,7 +108,7 @@ public struct Coderef: Codable, Identifiable {
     }
     
     subscript(_ code:String) -> String {
-        var found = "nil"
+        var found = "NaN"
         for item in items {
             if item.code == code {
                 found = item.label

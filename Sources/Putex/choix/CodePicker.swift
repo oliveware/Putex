@@ -39,7 +39,7 @@ public struct CodePicker: View {
 
 
 struct CodePickerPreview : View {
-   var table = banques
+   var table = tables["banques"]!
     @State var item: String? = nil
     
     var body: some View {

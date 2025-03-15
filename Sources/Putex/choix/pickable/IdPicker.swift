@@ -53,7 +53,7 @@ public struct IdPicker<T:Pickable>: View {
 
 
 struct IdPickerPreview : View {
-    @State var table = banques
+    @State var table = tables["banques"]!
     @State var itemid: String = ""
     
     var body: some View {

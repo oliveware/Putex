@@ -62,7 +62,7 @@ public struct CodeChoice: View {
 }
 
 struct CodeChoicePreview : View {
-   var table = banques
+   var table = tables["banques"]!
     @State var code: String? = nil
     @State var label = "choisir une banque"
     @State var open = false

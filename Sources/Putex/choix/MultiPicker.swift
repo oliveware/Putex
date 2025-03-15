@@ -58,6 +58,7 @@ let epargne = Coderef.find("épargne")
 let bourse = Coderef.find("bourse")
 let tiers = Coderef.find("tiers")
 
+let banques = tables["banques"]!
 
 struct MultiPreview : View {
     @State var id:String?
