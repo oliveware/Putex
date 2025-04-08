@@ -7,16 +7,21 @@
 
 import Foundation
 
-public protocol Collectable : Codable {
+public protocol Collectable : Codable, Identifiable {
     static var unknown:Self {get}
-    var code:String {get set}
+    static var all:[Self] {get}
+
+    var id:String {get set}
     var label:String {get set}
 }
 
 public struct Collection<T:Collectable>:Codable {
-    var all:[T] = []
+   // private var all:[T] = []
     
-
+   /* public init() {
+        all = T.all
+    }
+    
     public init(_ json:String = "") {
         var jsonData: Data
         if json == "" {
@@ -24,15 +29,15 @@ public struct Collection<T:Collectable>:Codable {
         } else {
             jsonData = json.data(using: .utf8)!
         }
-        let devises = try! JSONDecoder().decode([T].self, from: jsonData)
-        all = devises
-    }
+        let articles = try! JSONDecoder().decode([T].self, from: jsonData)
+        all = articles
+    }*/
     
-   public subscript(_ code:String) -> T {
+   public subscript(_ id:String) -> T {
         var found : T?
-        for devise in all {
-            if devise.code == code {
-                found = devise
+       for article in T.all {
+            if article.id == id {
+                found = article
                 break
             }
         }
@@ -41,9 +46,9 @@ public struct Collection<T:Collectable>:Codable {
     
     public func find(_ label:String) -> T {
         var found : T?
-        for devise in all {
-            if devise.label == label {
-                found = devise
+        for article in T.all {
+            if article.label == label {
+                found = article
                 break
             }
         }
