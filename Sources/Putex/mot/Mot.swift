@@ -53,6 +53,9 @@ public struct Mot : Codable {
         genre = g
     }
     
+    public var selector : String { singulier }
+    public var tablename: String { pluriel }
+    
     public var indéterminé: String {
         (genre ?? .m).indéterminé + " " + singulier
     }
