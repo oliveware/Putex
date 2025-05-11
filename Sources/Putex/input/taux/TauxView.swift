@@ -7,7 +7,7 @@
 import SwiftUI
 
 
-struct TauxView : View {
+public struct TauxView : View {
     @Binding var taux:Taux
     @State var edition = true
     var prompt: String? = "pourcentage"
@@ -17,12 +17,12 @@ struct TauxView : View {
         return 150 + w * 8
     }
     
-    init(_ taux:Binding<Taux>, _ prompt:String? = nil) {
+    public init(_ taux:Binding<Taux>, _ prompt:String? = nil) {
         _taux = taux
         self.prompt = prompt
     }
     
-    var body: some View {
+   public var body: some View {
         NumberView($taux.value, .decimal(2), "%", prompt )
             .frame(minWidth:width)
             .padding(7)
