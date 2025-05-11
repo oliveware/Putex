@@ -12,7 +12,7 @@ import Foundation
 // https://freeDeviseapi.com/docs/currencies
 
 
-public class Devise: Equatable, Codable, Pickable {
+public class Devise: Equatable, Codable, Oxet {
     public static func == (lhs: Devise, rhs: Devise) -> Bool {
         lhs.code == rhs.code
     }

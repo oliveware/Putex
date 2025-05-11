@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-public struct ItemPicker<T:Pickable>: View {
+public struct ItemPicker<T:Oxet>: View {
     var width: CGFloat = 200
     var height: CGFloat = 65
     var items : [T]

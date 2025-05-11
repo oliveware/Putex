@@ -91,9 +91,9 @@ struct NumberPreview : View {
     @State var nombre : Nombre
     var set : NumberSet = .naturel
     var symbol: String
-    var label: String
+    var label: String?
     
-    public init(_ nombre:Nombre, _ set: NumberSet, _ symbol:String = "m2", _ label:String = "surface") {
+    public init(_ nombre:Nombre, _ set: NumberSet, _ symbol:String = "", _ label:String? = nil) {
         self.nombre = nombre
         self.set = set
         self.symbol = symbol
@@ -109,7 +109,7 @@ struct NumberPreview : View {
 
 
 #Preview  {
-    VStack {
+    VStack(alignment:.leading) {
         HStack {
             Text("édition").font(.title3).padding(20)
             Spacer()
@@ -118,6 +118,11 @@ struct NumberPreview : View {
             Text("nombre décimal").frame(width:100)
             NumberPreview(Nombre(), .decimal(2))
                 .frame(width:400)
+        }
+        HStack {
+            Text("surface").frame(width:100)
+            NumberPreview(Nombre(1325,2), .decimal(2), "m2", "surface")
+               .frame(width:300)
         }
         HStack {
             Text("nombre < 1000").frame(width:100)

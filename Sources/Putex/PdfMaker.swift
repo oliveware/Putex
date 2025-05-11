@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-    @MainActor
+@MainActor
 public struct PdfMaker: View {
         var rendus : [AnyView]
         var indice : Int = 1

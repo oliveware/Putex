@@ -5,15 +5,10 @@
 //  Created by Herve Crespel on 04/10/2024.
 //
 
-public protocol Pickable: Codable {
-    var id:String {get}
-    var label:String {get}
-    static var selector:String {get}
-}
 
 import SwiftUI
 
-public struct IdPicker<T:Pickable>: View {
+public struct IdPicker<T:Oxet>: View {
     var width: CGFloat = 200
     var height: CGFloat = 125
     var prompt:String

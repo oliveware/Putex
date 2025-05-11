@@ -5,24 +5,6 @@
 //  Created by Herve Crespel on 01/10/2024.
 //
 
-
-public struct Head: Codable, Identifiable, Pickable {
-    public static var selector = "item"
-    
-    public var id:String {code}
-    var code : String
-    public var label : String
-    
-    init(_ code:String, _ desc:String) {
-        self.code = code
-        label = desc
-    }
-    init<T:Pickable>(_ item:T) {
-        code = item.id
-        label = item.label
-    }
-}
-
 // le nom Coderef évite la confusion avec Foundation.Table
 //
 public struct Coderef: Codable, Identifiable {
@@ -73,7 +55,7 @@ public struct Coderef: Codable, Identifiable {
         self.items = items
         Coderef.all[name.pluriel] = self
     }
-    public init<T:Pickable>(_ tablename:Mot, _ items:[T]) {
+    public init<T:Oxet>(_ tablename:Mot, _ items:[T]) {
         name = tablename
         selector = tablename.singulier
         var heads: [Head] = []
@@ -103,7 +85,7 @@ public struct Coderef: Codable, Identifiable {
         items = updated
     }
     
-    mutating func insert<T:Pickable>(_ item:T) {
+    mutating func insert<T:Oxet>(_ item:T) {
         insert(Head(item))
     }
     
