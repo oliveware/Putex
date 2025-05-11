@@ -12,7 +12,7 @@ public struct Taux: Codable {
     var value: Nombre
     var historique : [Date:Nombre]
     
-    init() {
+    public init() {
         value = Nombre(0, 2)
         historique = [:]
     }
