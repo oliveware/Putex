@@ -43,7 +43,7 @@ struct GenrePicker: View {
 }
 
 public struct Mot : Codable {
-    static var inconnu = Mot("inconnu", "inconnus", .m)
+    public static var inconnu = Mot("inconnu", "inconnus", .m)
     var genre : Genre?
     var singulier:String
     var pluriel:String
