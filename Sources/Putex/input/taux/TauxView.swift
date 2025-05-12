@@ -43,10 +43,10 @@ struct TauxPreview: View {
     }
 }
 
-#Preview("edit") {
+#Preview("exemples") {
     VStack {
         TauxPreview("taux d'intérêt")
         TauxPreview("commission")
         TauxPreview()
-    }
+    }.padding(10)
 }

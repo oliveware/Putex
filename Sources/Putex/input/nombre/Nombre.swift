@@ -201,11 +201,11 @@ public struct Nombre: Codable {
     
     public func enlettres(_ devise:Devise) ->  String {
         if let entier = entiere {
-            var lettres = entier.enlettres + " " + (devise.mot?.quantifié(entier > 1) ?? "")
+            var lettres = entier.enlettres + " " + (devise.mot?.quantifié(entier) ?? "")
             if decimales != "" {
                 if let deci = Int(decimales) {
                     if deci > 0 {
-                        lettres += " et " + deci.enlettres + " " + (devise.cent?.quantifié(deci > 1 ) ?? "")
+                        lettres += " et " + deci.enlettres + " " + (devise.cent?.quantifié(deci) ?? "")
                     }
                 } else {
                     print ("erreur nombre en lettres : \(entiere)")

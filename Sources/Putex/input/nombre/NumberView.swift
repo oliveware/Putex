@@ -108,12 +108,9 @@ struct NumberPreview : View {
 }
 
 
-#Preview  {
+#Preview("exemples")  {
     VStack(alignment:.leading) {
-        HStack {
-            Text("édition").font(.title3).padding(20)
-            Spacer()
-        }
+
         HStack {
             Text("nombre décimal").frame(width:100)
             NumberPreview(Nombre(), .decimal(2))
@@ -134,7 +131,8 @@ struct NumberPreview : View {
             NumberPreview(Nombre(1784874782392925,4), .naturel, "km", "distance")
                .frame(width:400)
         }
-    }.frame(width:520, height:250)
+    }.frame(width:520)
+        .padding(20)
 }
 
 

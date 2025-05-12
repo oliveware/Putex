@@ -43,6 +43,7 @@ struct GenrePicker: View {
 }
 
 public struct Mot : Codable {
+    static var inconnu = Mot("inconnu", "inconnus", .m)
     var genre : Genre?
     var singulier:String
     var pluriel:String
@@ -69,8 +70,8 @@ public struct Mot : Codable {
         "les " + pluriel
     }
     
-    public func quantifié(_ plusieurs:Bool) -> String {
-        plusieurs ? pluriel : singulier
+    public func quantifié(_ nombre: Int) -> String {
+        nombre > 1 ? pluriel : singulier
     }
     
     public subscript(_ nb:Int = 1) -> String {
