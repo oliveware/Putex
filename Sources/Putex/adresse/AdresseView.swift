@@ -9,7 +9,7 @@ import SwiftUI
 struct AdresseView: View {
     @Binding var first: NumVoie
     @Binding var autre: NumVoie?
-    var commune:String
+    var commune:String = ""
     @State var firstedit = false
     @State var autreedit = false
     
@@ -45,6 +45,19 @@ struct AdresseView: View {
             }
         }.padding(10)
     }
+}
+    public struct AdressePreview: View {
+        @State var first = NumVoie()
+        @State var autre : NumVoie?
+        
+        public var body :some View {
+            AdresseView(first:$first, autre:$autre)
+        }
+    }
+
+    #Preview {
+        AdressePreview()
+    }
     
   /*  var editor: some View {
         HStack {
@@ -72,7 +85,7 @@ struct AdresseView: View {
             show
         }
     }*/
-}
+
 
 /*struct NumVoieEdit: View {
     @Binding var numvoie:NumVoie?

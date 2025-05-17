@@ -19,14 +19,24 @@ public struct NumVoieEditor: View {
    
     public var body :some View {
         Form {
-            HStack {
-                TextField("numéro", text:$numvoie.num)
-                    .frame(width:150)
-                TextField("voie", text:$numvoie.voie)
-                    .frame(width:300)
-            }
+            TextField("numéro", text:$numvoie.num)
+                .frame(width:100)
+            TextField("voie", text:$numvoie.voie)
+                .frame(width:200)
             TextField("code postal", text:$numvoie.codepostal)
                 .frame(width:130)
         }.frame(alignment: .leading)
     }
+}
+
+public struct NumVoiePreditor: View {
+    @State var numvoie = NumVoie()
+    
+    public var body :some View {
+        NumVoieEditor($numvoie)
+    }
+}
+
+#Preview {
+    NumVoiePreditor()
 }
