@@ -45,6 +45,7 @@ public struct OptionalEdit: View {
                     Text(fieldname)
                     TextField("" ,text:stringBinding)
                     Button(action:{ edition = false }) {Image(systemName: "checkmark")}
+                        .disabled(stringBinding.wrappedValue == "")
                     
                 } else {
                     Text(fieldname + " : " + stringBinding.wrappedValue)
