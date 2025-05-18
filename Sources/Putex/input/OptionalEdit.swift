@@ -7,24 +7,52 @@
 import SwiftUI
 
 public struct OptionalEdit: View {
-    var prompt:String
     @Binding var string:String?
-    var large:CGFloat
     
-    public init(_ p:String, _ optional:Binding<String?>, _ large:CGFloat = 80 ) {
-        prompt = p
+    private var buttontext:String
+    private var fieldname: String
+    @State private var edition:Bool
+
+    private var large:CGFloat
+    
+    public init(_ prompt:String, _ optional:Binding<String?>, _ large:CGFloat = 80 ) {
+        buttontext = "ajouter \(prompt)"
+        fieldname = prompt
         _string = optional
-        let plarge = p.count
+        if let input = optional.wrappedValue {
+            edition = input == ""
+        } else { edition = false}
+        let plarge = buttontext.count
+        self.large = large + 8*CGFloat(plarge > 8 ? plarge : 8)
+    }
+    
+    public init(_ mot:Mot, _ optional:Binding<String?>, _ large:CGFloat = 80 ) {
+        buttontext = "ajouter \(mot.indéterminé)"
+        fieldname = mot.singulier
+        _string = optional
+        if let input = optional.wrappedValue {
+            edition = input == ""
+        } else { edition = false}
+        let plarge = buttontext.count
         self.large = large + 8*CGFloat(plarge > 8 ? plarge : 8)
     }
     
     public var body: some View {
         HStack {
+
             if let stringBinding: Binding<String> = Binding($string) {
-                Text(prompt)
-                TextField("" ,text:stringBinding)
+                if edition {
+                    Text(fieldname)
+                    TextField("" ,text:stringBinding)
+                    Button(action:{ edition = false }) {Image(systemName: "checkmark")}
+                    
+                } else {
+                    Text(fieldname + " : " + stringBinding.wrappedValue)
+                    Button(action:{ edition = true }) {Image(systemName: "pencil")}
+                }
             } else {
-                Button("ajouter \(prompt)") { string = "" }
+                Button(buttontext) { string = ""
+                edition = true}
             }
         }.frame(minWidth:large)
     }
@@ -33,12 +61,29 @@ public struct OptionalEdit: View {
 
 struct OptionalPreview: View {
     @State var taux: String?
+    private var prompt:String?
+    private var mot: Mot?
+    
+    init(_ prompt:String) {
+        self.prompt = prompt
+    }
+    init(_ mot:Mot) {
+        self.mot = mot
+    }
     
     var body:some View {
-        OptionalEdit("commission", $taux)
+        if prompt != nil {
+            OptionalEdit(prompt!, $taux)
+        }
+        if mot != nil {
+            OptionalEdit(mot!, $taux)
+        }
     }
 }
 
-#Preview("edit") {
-    OptionalPreview().padding(10)
+#Preview {
+    VStack {
+        OptionalPreview("commission").padding(10)
+        OptionalPreview(Mot("commission","commissions",.f)).padding(10)
+    }
 }

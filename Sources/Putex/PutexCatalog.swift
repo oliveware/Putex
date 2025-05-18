@@ -53,7 +53,7 @@ public struct PutexCatalog: View {
                 
                 Version()
                     .tabItem { Text("version") }.tag(3)
-                OptionalPreview()
+                OptionalPreview("option")
                     .tabItem { Text("optional") }.tag(4)
             }
         }
