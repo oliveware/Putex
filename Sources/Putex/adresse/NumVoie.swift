@@ -18,13 +18,17 @@ public struct NumVoie: Codable, Equatable {
         voie == "" || num == "" || codepostal == ""
     }
     
-    var adresse:String {
+    public var isfull: Bool {
+        voie.count > 7 && num != "" && codepostal.count > 4
+    }
+    
+    public var adresse:String {
         num + " " + voie + "\n" + codepostal
     }
     
-    func adresse(_ complement:String) -> String {
+    public func adresse(_ complement:String? = nil) -> String {
         let line1 = num + " " + voie + "\n"
-        let line2 = complement == "" ? "" : complement + "\n"
+        let line2 = complement == nil ? "" : complement! + "\n"
         return line1 + line2 + codepostal + " "
     }
     
