@@ -14,11 +14,13 @@ public struct IdPicker<T:Oxet>: View {
     var prompt:String
     var items : [T]
     @Binding var selected : String
+    var done: () -> Void
     
-    public init(_ items:[T], _ selected:Binding<String>, _ prompt:String? ) {
+    public init(_ items:[T], _ selected:Binding<String>, _ prompt:String?, _ done: @escaping () -> Void ) {
         self.prompt = prompt ?? T.selector
         self.items = items
         _selected = selected
+        self.done = done
     }
     
     public var body: some View {
@@ -42,6 +44,7 @@ public struct IdPicker<T:Oxet>: View {
     
     func choose(_ item:T) {
         selected = item.id
+        done()
     }
 }
 
@@ -56,7 +59,7 @@ struct IdPickerPreview : View {
             Text("le choix retourne un id")
                 .font(.title2)
                 .padding(20)
-            IdPicker(table.items, $itemid, "banque")
+            IdPicker(table.items, $itemid, "banque", {})
                 .frame(width:300)
             if itemid != "" {
                 Text("id : " + itemid)
