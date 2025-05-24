@@ -86,7 +86,7 @@ public struct OptionalEditor: View {
 
             if let stringBinding: Binding<String> = Binding($string) {
                 if vertical {
-                    VStack {
+                    VStack(alignment:.leading) {
                         Text(fieldname).font(.caption)
                         TextField("" ,text:stringBinding)
                     }
