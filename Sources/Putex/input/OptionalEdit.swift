@@ -94,6 +94,8 @@ public struct OptionalEditor: View {
                     Text(fieldname)
                     TextField("" ,text:stringBinding)
                 }
+                Button(action:{string = nil})
+                {Image(systemName: "delete")}
             } else {
                 Button(buttontext) { string = "" }
             }
