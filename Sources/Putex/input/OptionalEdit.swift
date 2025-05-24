@@ -13,9 +13,10 @@ public struct OptionalEdit: View {
     private var fieldname: String
     @State private var edition:Bool
 
+    private var vertical:Bool
     private var large:CGFloat
     
-    public init(_ prompt:String, _ optional:Binding<String?>, _ large:CGFloat = 80 ) {
+    public init(_ prompt:String, _ optional:Binding<String?>, _ vertical:Bool = false, _ large:CGFloat = 80 ) {
         buttontext = "ajouter \(prompt)"
         fieldname = prompt
         _string = optional
@@ -23,10 +24,11 @@ public struct OptionalEdit: View {
             edition = input == ""
         } else { edition = false}
         let plarge = buttontext.count
+        self.vertical = vertical
         self.large = large + 8*CGFloat(plarge > 8 ? plarge : 8)
     }
     
-    public init(_ mot:Mot, _ optional:Binding<String?>, _ large:CGFloat = 80 ) {
+    public init(_ mot:Mot, _ optional:Binding<String?>, _ vertical:Bool = false, _ large:CGFloat = 80 ) {
         buttontext = "ajouter \(mot.indéterminé)"
         fieldname = mot.singulier
         _string = optional
@@ -34,6 +36,7 @@ public struct OptionalEdit: View {
             edition = input == ""
         } else { edition = false}
         let plarge = buttontext.count
+        self.vertical = vertical
         self.large = large + 8*CGFloat(plarge > 8 ? plarge : 8)
     }
     
@@ -54,6 +57,45 @@ public struct OptionalEdit: View {
             } else {
                 Button(buttontext) { string = ""
                 edition = true}
+            }
+        }.frame(minWidth:large)
+    }
+}
+
+public struct OptionalEditor: View {
+    @Binding var string:String?
+    
+    private var buttontext:String
+    private var fieldname: String
+
+    private var vertical:Bool
+    private var large:CGFloat
+    
+    public init(_ prompt:String, _ optional:Binding<String?>, _ vertical:Bool = false, _ large:CGFloat = 80 ) {
+        buttontext = "ajouter \(prompt)"
+        fieldname = prompt
+        _string = optional
+
+        let plarge = buttontext.count
+        self.vertical = vertical
+        self.large = large + 8*CGFloat(plarge > 8 ? plarge : 8)
+    }
+    
+    public var body: some View {
+        HStack {
+
+            if let stringBinding: Binding<String> = Binding($string) {
+                if vertical {
+                    VStack {
+                        Text(fieldname).font(.caption)
+                        TextField("" ,text:stringBinding)
+                    }
+                } else {
+                    Text(fieldname)
+                    TextField("" ,text:stringBinding)
+                }
+            } else {
+                Button(buttontext) { string = "" }
             }
         }.frame(minWidth:large)
     }
