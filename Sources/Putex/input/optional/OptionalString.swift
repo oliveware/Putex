@@ -37,23 +37,29 @@ public struct OptionalString: View {
     
     public var body: some View {
         HStack(alignment:.bottom) {
-
-            if let stringBinding: Binding<String> = Binding($string) {
+            if string == nil {
+                Button(buttontext) { string = "" }
+            } else {
+                
                 if vertical {
                     VStack(alignment:.leading) {
                         Text(fieldname).font(.caption)
-                        TextField("" ,text:stringBinding)
+                        TextField("" , text:Binding<String>(
+                            get: { string ?? "" },
+                            set: { string = $0 }
+                            ))
                     }
                 } else {
                     Text(fieldname)
-                    TextField("" ,text:stringBinding)
+                    TextField("" , text:Binding<String>(
+                        get: { string ?? "" },
+                        set: { string = $0 }
+                        ))
                 }
-               Button(action:{
-                   string = nil
+                Button(action:{
+                    string = nil
                 })
-                {Image(systemName: "delete")}
-            } else {
-                Button(buttontext) { string = "" }
+                {Image(systemName: "delete.left")}
             }
         }.frame(minWidth:large)
     }

@@ -42,33 +42,45 @@ public struct OptionalView: View {
     
     public var body: some View {
         HStack (alignment:.bottom) {
-            if let stringBinding: Binding<String> = Binding($string) {
+            if string == nil {
+                Button(buttontext) { 
+                    string = ""
+                    edition = true }
+            } else {
                 if edition {
                     if vertical {
                         VStack (alignment:.leading) {
                             Text(fieldname).font(.caption)
-                            TextField("" ,text:stringBinding)
+                            TextField("" , text:Binding<String>(
+                                get: { string ?? "" },
+                                set: { string = $0 }
+                                ))
                         }
                     } else {
                         Text(fieldname)
-                        TextField("" ,text:stringBinding)
+                        TextField("" , text:Binding<String>(
+                            get: { string ?? "" },
+                            set: { string = $0 }
+                            ))
                     }
                     Button(action:{ edition = false }) {Image(systemName: "checkmark")}
-                        .disabled(stringBinding.wrappedValue == "")
+                        .disabled(string == "")
                 } else {
                     if vertical {
                         VStack (alignment:.leading) {
                             Text(fieldname).font(.caption)
-                            Text(stringBinding.wrappedValue)
+                            Text(string!)
                         }
                     } else {
-                        Text(fieldname + " : " + stringBinding.wrappedValue)
+                        Text(fieldname + " : " + string!)
                     }
+                    Spacer()
                     Button(action:{ edition = true }) {Image(systemName: "pencil")}
+                    Button(action:{
+                        string = nil
+                    })
+                    {Image(systemName: "delete.left")}
                 }
-            } else {
-                Button(buttontext) { string = ""
-                edition = true}
             }
         }.frame(minWidth:large, alignment:.leading)
     }
