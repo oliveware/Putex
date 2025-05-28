@@ -70,8 +70,20 @@ public struct Mot : Codable {
         "les " + pluriel
     }
     
-    public func quantifié(_ nombre: Int) -> String {
-        nombre > 1 ? pluriel : singulier
+    public func quantifié(_ nombre: Int? = nil) -> String {
+        if let q:Int = nombre {
+            if q == 0 {
+                "aucun " + singulier
+            } else {
+                if q == 1 {
+                    singulier
+                } else {
+                    String(q) + " " + pluriel
+                }
+            }
+        } else {
+            pluriel
+        }
     }
     
     public subscript(_ nb:Int = 1) -> String {
