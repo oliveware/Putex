@@ -21,7 +21,7 @@ struct RegionView: View {
         NavigationStack{
             VStack {
                 HStack (spacing: 20) {
-                    GroupBox("Lieu") {
+                    GroupBox("LID") {
                         Text(lid.id)
                     }
                     if terrain.adresses[0] != " \n" {

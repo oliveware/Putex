@@ -21,7 +21,7 @@ import SwiftUI
 
 struct ContinentView : View {
     @Binding var lid : LID
-    @State var continent:Continent
+    @State var continent:Continent = Continents.Europe
     
     @State var selection = 0
     @State var edition = false
@@ -45,7 +45,7 @@ struct ContinentView : View {
     }
     func add() {
       //  selected = Territoire()
-      //  continent.territoires.append(selected)
+        continent.territoires.append(Territoire(lid))
     }
 }
 

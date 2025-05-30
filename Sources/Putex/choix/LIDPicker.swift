@@ -7,14 +7,28 @@
 import SwiftUI
 
 struct LIDPicker : View {
-    @State var lid = LID([])
+    @Binding var lid : LID
     @State var edit = false
     
     var body: some View {
         Button(action: {})
-        {Text("adresse")}
+        {Text(Lieu(lid).adresse(""))}
             .sheet(isPresented: $edit, content: {
-                ContinentView(lid: $lid, continent: Continents.Europe)
+                ContinentView(lid: $lid)
             })
     }
+}
+
+
+struct LIDPickerPreview : View {
+    @State var lid = LID([])
+    
+    var body:some View {
+        LIDPicker(lid:$lid)
+            .frame(width:600,height:500)
+    }
+}
+
+#Preview {
+    LIDPickerPreview()
 }
