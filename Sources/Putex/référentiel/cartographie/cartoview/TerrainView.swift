@@ -47,35 +47,48 @@ public struct TerrainShow: View {
 
 public struct TerrainView: View {
     @Binding var terrain:Terrain
-    @State var edition = false
+    @State var edition : Bool
+    @State private var lid = LID()
     var modifiable = false
     
     public init(_ terrain:Binding<Terrain>, modifiable:Bool = false) {
         _terrain = terrain
         self.modifiable = modifiable
+        edition = terrain.wrappedValue.lid == nil
     }
     public var body: some View {
-        VStack{
-            if edition {
-                AdresseView(first:$terrain.numvoie, autre:$terrain.autrenumvoie, commune:terrain.commune)
-                GroupBox("parcelles") {
-                    ParceList(parcelles: $terrain.parcelles).padding(10)
-                }.padding(20)
-                if let valeur:Binding<Valeur> = Binding($terrain.valorisation) {
-                    GroupBox("valeur"){
-                        ValeurView(valeur)
+        if terrain.lid == nil {
+            VStack {
+                LIDPicker(lid: $lid)
+                Button("valider", action:{
+                    terrain.lid = lid
+                    edition = true
+                    }
+                ).padding(20)
+            }
+        } else {
+            VStack{
+                if edition {
+                    AdresseView(first:$terrain.numvoie, autre:$terrain.autrenumvoie, commune:terrain.commune)
+                    GroupBox("parcelles") {
+                        ParceList(parcelles: $terrain.parcelles).padding(10)
+                    }.padding(20)
+                    if let valeur:Binding<Valeur> = Binding($terrain.valorisation) {
+                        GroupBox("valeur"){
+                            ValeurView(valeur)
+                        }
+                    } else {
+                        Button(action:{terrain.valorisation = Valeur()})
+                        { Text("définir la valeur")}
                     }
                 } else {
-                    Button(action:{terrain.valorisation = Valeur()})
-                    { Text("définir la valeur")}
+                    TerrainShow(terrain: $terrain)
                 }
-            } else {
-                TerrainShow(terrain: $terrain)
+                Button(action:{
+                    edition.toggle()
+                })
+                { Text(edition ? "valider les corrections" : "corriger")}.padding(20)
             }
-            Button(action:{
-                edition.toggle()
-            })
-            { Text(edition ? "valider les corrections" : "corriger")}.padding(20)
         }
     }
 }
@@ -173,6 +186,9 @@ struct TerrainPreview: View {
     }
 }
 
+#Preview("création") {
+    TerrainPreview(terrain:Terrain())
+}
 #Preview {
     TerrainPreview()
 }
