@@ -31,7 +31,12 @@ struct ParcelleEditor: View {
 
 struct ParcelleView: View {
     @Binding var parcelle: Parcelle
-    @State var edition = false
+    @State private var edition: Bool
+    
+    init(_ parcelle: Binding<Parcelle>) {
+        _parcelle = parcelle
+        edition = parcelle.wrappedValue.id == 0
+    }
     
     var body: some View {
         HStack{
@@ -74,16 +79,17 @@ struct ParceList: View {
                         parcelle in
                         HStack(spacing:20) {
                             Button(action:{delete(parcelle.id)})
-                            {Image(systemName: "trash")}
+                            {Image(systemName: "minus")}
                             Spacer()
-                            ParcelleView(parcelle: parcelle)
+                            ParcelleView(parcelle)
                         }
                     }
                 }
             
             HStack {
                 if ajoût {
-                    if num != nil {if num! > 0 {
+                    if num != nil {
+                        if num! > 0 {
                         Button(action:{
                             parcelles.append(Parcelle(num!))
                             ajoût = false
@@ -91,9 +97,10 @@ struct ParceList: View {
                         })
                         {Image(systemName: "plus")}
                     }}
+                    Spacer()
                     TextField("numéro",value: $num, format:.number)
                         .frame(width:120)
-                    
+                    Spacer()
                 } else {
                     Button(action:{
                         ajoût = true
@@ -133,7 +140,7 @@ struct ParceListPreview: View {
 
 
 #Preview ("liste") {
-    ParceListPreview()
+    ParceListPreview().padding(20)
 }
 
 #Preview {

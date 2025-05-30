@@ -51,6 +51,11 @@ public struct TerrainView: View {
     @State private var lid = LID()
     var modifiable = false
     
+   func done() {
+        terrain.lid = lid
+        edition = true
+    }
+    
     public init(_ terrain:Binding<Terrain>, modifiable:Bool = false) {
         _terrain = terrain
         self.modifiable = modifiable
@@ -59,12 +64,7 @@ public struct TerrainView: View {
     public var body: some View {
         if terrain.lid == nil {
             VStack {
-                LIDPicker(lid: $lid)
-                Button("valider", action:{
-                    terrain.lid = lid
-                    edition = true
-                    }
-                ).padding(20)
+                LIDPicker($lid, done)
             }
         } else {
             VStack{
