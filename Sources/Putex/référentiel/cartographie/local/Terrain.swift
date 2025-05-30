@@ -18,7 +18,7 @@ public struct Terrain: Codable, Identifiable {
         lid = terrainlid
         id = terrainlid.terrain ?? 0
     }
-    init() { id = 0 }
+    public init() { id = 0 }
     
     init(_ json:String) {
         let jsonData = json.data(using: .utf8)!
