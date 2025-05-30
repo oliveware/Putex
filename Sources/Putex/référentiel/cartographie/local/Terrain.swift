@@ -19,6 +19,9 @@ public struct Terrain: Codable, Identifiable {
         id = terrainlid.terrain ?? 0
     }
     public init() { id = 0 }
+    public var isNaN: Bool {
+        id == 0 || (lid == nil)
+    }
     
     init(_ json:String) {
         let jsonData = json.data(using: .utf8)!
