@@ -52,7 +52,7 @@ public struct TerrainView: View {
     var modifiable = false
     
    func done() {
-        terrain.lid = lid
+       terrain = Lieu(lid).terrain ?? Terrain()
         edition = true
     }
     
