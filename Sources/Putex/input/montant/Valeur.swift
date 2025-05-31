@@ -22,6 +22,10 @@ public struct Valeur : Codable {
     // revente != nil <=> revendu
     var revente: Estimation?
     
+    var isNaN: Bool {
+        !estimation.checked
+    }
+    
     public var courante:Montant {
         if revente == nil {
             if estimation.montant == Montant() {
@@ -79,17 +83,18 @@ public struct ValeurShow: View {
                 Text("valeur à définir")
             } else {
                 Text("acquisition : " + valeur.acquisition.entexte)
-                if !valeur.estimation.checked {
-                    Text("estimation à établir")
-                } else {
-                    Text("estimation : " + valeur.estimation.entexte)
-                    Text("plus-value potentielle : " + valeur.potentiel).padding(.top,10)
-                    if valeur.revente != nil {
-                        Text("revente : " + valeur.revente!.entexte).padding(.top,10)
-                        Text("plus-value : " + valeur.plusvalue.euro).padding(.top,5)
-                    }
+            }
+            if !valeur.estimation.checked {
+                Text("estimation à établir")
+            } else {
+                Text("estimation : " + valeur.estimation.entexte)
+                Text("plus-value potentielle : " + valeur.potentiel).padding(.top,10)
+                if valeur.revente != nil {
+                    Text("revente : " + valeur.revente!.entexte).padding(.top,10)
+                    Text("plus-value : " + valeur.plusvalue.euro).padding(.top,5)
                 }
             }
+            
         }
     }
 }
@@ -100,6 +105,7 @@ public struct ValeurView: View {
     
     public init(_ valeur:Binding<Valeur>){
         _valeur = valeur
+        edition = valeur.wrappedValue.isNaN
     }
     
     public var body: some View  {

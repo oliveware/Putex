@@ -6,7 +6,27 @@
 //
 import SwiftUI
 
-struct AdresseView: View {
+struct AdresseView : View {
+    @Binding var numvoie: NumVoie
+    @State private var edit = false
+    var commune:String = ""
+    
+    var body: some View {
+        HStack (spacing:20){
+            if edit {
+                NumVoieEditor($numvoie)
+                Button(action:{edit = false})
+                {Image(systemName: "checkmark")}
+            } else {
+                Text(numvoie.adresse + "  " + commune)
+                Button(action:{edit = true})
+                {Image(systemName: "pencil")}
+            }
+        }.padding(20)
+    }
+}
+
+struct AdresseDouble : View {
     @Binding var first: NumVoie
     @Binding var autre: NumVoie?
     var commune:String = ""
@@ -14,15 +34,9 @@ struct AdresseView: View {
     @State var autreedit = false
     
     var body: some View {
-        HStack(spacing:20){
+        VStack(alignment:.trailing, spacing:20 ){
             GroupBox("adresse") {
-                HStack (spacing:20){
-                    Text(first.adresse + "  " + commune)
-                    
-                    Button(action:{firstedit = true})
-                    {Image(systemName: "pencil")}
-                        .sheet(isPresented: $firstedit, content: {NumVoieEditor($first)})
-                }.padding(20)
+                AdresseView(numvoie:$first, commune:commune)
             }
             if autre == nil {
                 Button("autre adresse") {
@@ -30,17 +44,15 @@ struct AdresseView: View {
                     autreedit = true
                 }.padding(20)
             } else {
-                GroupBox("autre adresse") {
-                    HStack (spacing:20){
-                        Button(action:{autre = nil})
-                        {Image(systemName: "trash")}
-                        Text(autre!.adresse + "  " + commune)
-                        if let optional : Binding<NumVoie> = Binding($autre) {
-                            Button(action:{autreedit = true})
-                            {Image(systemName: "pencil")}
-                                .sheet(isPresented: $autreedit, content: {NumVoieEditor(optional)})
-                        }
-                    }.padding(20)
+                HStack (spacing:20){
+                    Button(action:{autre = nil})
+                    {Image(systemName: "minus")}
+                    GroupBox("autre adresse") {
+                        AdresseView(numvoie:Binding<NumVoie>(
+                            get: {autre ?? NumVoie()},
+                            set: { autre = $0 } ),
+                                commune:commune)
+                    }
                 }
             }
         }.padding(10)
@@ -51,12 +63,12 @@ struct AdresseView: View {
         @State var autre : NumVoie?
         
         public var body :some View {
-            AdresseView(first:$first, autre:$autre)
+            AdresseDouble(first:$first, autre:$autre)
         }
     }
 
     #Preview {
-        AdressePreview()
+        AdressePreview().frame(width:600)
     }
     
   /*  var editor: some View {

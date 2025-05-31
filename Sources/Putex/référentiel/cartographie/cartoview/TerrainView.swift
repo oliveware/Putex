@@ -11,36 +11,26 @@ public struct TerrainShow: View {
     @Binding var terrain:Terrain
     
     public var body: some View {
-        if terrain.numvoie.voie != "" {
-            HStack (spacing:25){
-                GroupBox("Adresse") {
-                    Text(terrain.adresses[0])
-                }
-                if terrain.autrenumvoie != nil {
-                    GroupBox("autre adresse") {
-                        Text(terrain.adresses[1])
+        HStack (alignment:.top, spacing:20) {
+            if terrain.numvoie.voie != "" {
+                VStack (spacing:25){
+                    GroupBox("Adresse") {
+                        Text(terrain.address).padding(10)
                     }
-                }
-            }.padding(10)
-        }
-        GroupBox("Parcelles") {
-            ScrollView {
+
+                }.padding(10)
+            }
+            
+            GroupBox("Parcelles") {
                 VStack(spacing:2){
                     ForEach ($terrain.parcelles) {
                         parcelle in
                         ParcelleShow(parcelle: parcelle)
                     }
                 }.padding(10)
-            }
-        }.padding(10)
-        
-        GroupBox("valeur"){
-            if terrain.valorisation == nil {
-                Text("valeur à définir")
-            } else {
-                ValeurShow(terrain.valorisation!)
-            }
+            }.padding(10)
         }
+       
         
     }
 }
@@ -51,8 +41,8 @@ public struct TerrainView: View {
     @State private var lid = LID()
     var modifiable = false
     
-   func done() {
-       terrain = Lieu(lid).terrain ?? Terrain()
+   func creator() {
+       terrain = Lieu(lid).terrain ?? Terrain(lid)
         edition = true
     }
     
@@ -61,35 +51,76 @@ public struct TerrainView: View {
         self.modifiable = modifiable
         edition = terrain.wrappedValue.lid == nil
     }
+    
+    var surface:Mesure {
+        var result = Mesure("0", .aire)
+        for parcelle in terrain.parcelles {
+            if let aire = result + parcelle.surface {
+                result = aire
+            }
+        }
+        return result
+    }
+    
+    public var valeur: some View {
+        Group {
+            if let valeur:Binding<Valeur> = Binding($terrain.valorisation) {
+                GroupBox("valeur"){
+                    ValeurView(valeur)
+                }
+            } else {
+                Button(action:{terrain.valorisation = Valeur()})
+                { Text("définir la valeur")}
+            }
+        }
+    }
+    
     public var body: some View {
         if terrain.lid == nil {
             VStack {
-                LIDPicker($lid, done)
+                LIDPicker($lid, creator)
             }
         } else {
             VStack{
+                HStack {
+                    valeur
+                    Spacer()
+                    Text("surface totale : " + surface.astring)
+                }.padding(20)
+                
                 if edition {
-                    AdresseView(first:$terrain.numvoie, autre:$terrain.autrenumvoie, commune:terrain.commune)
-                    GroupBox("parcelles") {
-                        ParceList(parcelles: $terrain.parcelles).padding(10)
-                    }.padding(20)
-                    if let valeur:Binding<Valeur> = Binding($terrain.valorisation) {
-                        GroupBox("valeur"){
-                            ValeurView(valeur)
-                        }
-                    } else {
-                        Button(action:{terrain.valorisation = Valeur()})
-                        { Text("définir la valeur")}
-                    }
+                    TerrainEditor($terrain)
                 } else {
                     TerrainShow(terrain: $terrain)
                 }
-                Button(action:{
-                    edition.toggle()
-                })
-                { Text(edition ? "valider les corrections" : "corriger")}.padding(20)
-            }
+                if modifiable {
+                    Button(action:{ edition.toggle() })
+                    { Text(edition ? "valider les corrections" : "corriger")}.padding(20)
+                }
+            }.frame(maxHeight:.infinity)
         }
+    }
+}
+
+public struct TerrainEditor: View {
+    @Binding var terrain:Terrain
+    
+    public init(_ terrain:Binding<Terrain>) {
+        _terrain = terrain
+    }
+    
+    public var body: some View {
+        HStack(alignment:.top) {
+            VStack(alignment: .leading) {
+                AdresseDouble(first:$terrain.numvoie, autre:$terrain.autrenumvoie, commune:terrain.commune)
+               
+            }
+        //    GroupBox("parcelles") {
+                ParceList(parcelles: $terrain.parcelles).padding(10)
+         //   }.padding(20)
+               
+        }.frame(alignment: .leading)
+        .padding(10)
     }
 }
 
@@ -117,39 +148,7 @@ public struct TerrainView: View {
     }
 }*/
 
-/*public struct TerrainEditor: View {
-    @Binding var terrain:Terrain
-    @Binding var edition:Bool
-    
-    public init(_ terrain:Binding<Terrain>, _ edition:Binding<Bool>) {
-        _terrain = terrain
-        _edition = edition
-    }
-    
-    public var body: some View {
-        ScrollView {
-            VStack {
-                
-                GroupBox ("adresse"){
-                    NumVoieEditor(numvoie: $terrain.numvoie)
-                }.padding(.bottom, 20)
-                if let optional: Binding<NumVoie> = Binding($terrain.autrenumvoie) {
-                    GroupBox ("autre adresse"){
-                        NumVoieEditor(numvoie: optional)
-                    }
-                } else {
-                    Button("autre adresse") { terrain.autrenumvoie = NumVoie() }
-                }
-                GroupBox("parcelles"){
-                    ParceList(parcelles:$terrain.parcelles)
-                }
-                Button(action:{edition = false})
-                { Text("valider") }
-            }.frame(alignment: .leading)
-        }
-        .padding(10)
-    }
-}*/
+/**/
 
 
 
@@ -182,7 +181,7 @@ struct TerrainPreview: View {
     
     var body: some View {
         TerrainView($terrain, modifiable:modifiable)
-            .frame(minWidth:600,minHeight:600)
+            .frame(minWidth:600,minHeight:500)
     }
 }
 

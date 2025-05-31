@@ -41,11 +41,19 @@ public struct Terrain: Codable, Identifiable {
         }
         return nom
     }
+    var address:String {
+        var string = autrenumvoie == nil ? "" : "\tprincipale\n"
+        string += adresse()
+        if autrenumvoie != nil {
+            string += "\n\n\tsecondaire\n" + adresse(nil,true)
+        }
+        return string
+    }
     public var adresses : [String] {
-        return [adresse(""), adresse("",true)]
+        return [adresse(), adresse(nil,true)]
     }
     
-    func adresse(_ complement:String, _ autre:Bool = false) -> String {
+    func adresse(_ complement:String? = nil, _ autre:Bool = false) -> String {
         let adresse = autre ? (autrenumvoie?.adresse(complement) ?? "") : numvoie.adresse(complement)
         return adresse + " " + commune
     }

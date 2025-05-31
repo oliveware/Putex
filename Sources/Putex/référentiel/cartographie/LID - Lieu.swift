@@ -120,7 +120,7 @@ public struct Lieu {
     public var quartier : Quartier?
     var terrain : Terrain?
     
-    public func adresse(_ complement:String,_ pays:Bool = false, _ autre:Bool = false) -> String {
+    public func adresse(_ complement:String? = nil,_ pays:Bool = false, _ autre:Bool = false) -> String {
         if terrain == nil {
             if commune == nil {
                 return territoire == nil ? "adresse" : territoire!.nom

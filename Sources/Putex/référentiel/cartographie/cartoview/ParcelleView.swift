@@ -71,20 +71,21 @@ struct ParceList: View {
         (num == nil ? true : num! > 0)
     }
     
+   
+    
     var body: some View {
-        Form {
-            VStack {
-                ScrollView {
-                    ForEach ($parcelles) {
-                        parcelle in
-                        HStack(spacing:20) {
-                            Button(action:{delete(parcelle.id)})
-                            {Image(systemName: "minus")}
-                            Spacer()
-                            ParcelleView(parcelle)
-                        }
+        
+        VStack {
+                ForEach ($parcelles) {
+                    parcelle in
+                    HStack(spacing:20) {
+                        Button(action:{delete(parcelle.id)})
+                        {Image(systemName: "minus")}
+                        Spacer()
+                        ParcelleView(parcelle)
                     }
                 }
+                
             
             HStack {
                 if ajoût {
@@ -108,8 +109,8 @@ struct ParceList: View {
                     {Text("ajouter une parcelle")}
                 }
             }.padding(.top,20)
-        }
-        }
+            }.frame(maxHeight:.infinity)
+        
     }
     
     func delete(_ id:Int){

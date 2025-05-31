@@ -10,16 +10,17 @@ public struct EstimationView: View {
     @Binding var estimation:Estimation
     var prompt : String
     var source = false
-    @State var edition = false
+    @State var edition :Bool
     
     public init(_ estimation:Binding<Estimation>, _ prompt:String = "estimation", _ source:Bool = false) {
         _estimation = estimation
         self.prompt = prompt
-        if let _ :Binding<String> = Binding($estimation.source) {
+        if let _ :Binding<String> = Binding(estimation.source) {
             self.source =  true
         }  else {
             self.source = source
         }
+        edition = !estimation.wrappedValue.checked
     }
     
     public var body : some View {

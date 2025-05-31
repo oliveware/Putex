@@ -29,7 +29,7 @@ struct LIDPicker : View {
         } else {
             
             HStack {
-                Text(Lieu(lid).adresse(""))
+                Text(Lieu(lid).adresse())
                 Button(action: {edit = true})
                 {Image(systemName: "pencil")}.padding(20)
             }
