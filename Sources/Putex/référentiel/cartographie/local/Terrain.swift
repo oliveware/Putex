@@ -20,7 +20,8 @@ public struct Terrain: Codable, Identifiable {
     }
     public init() { id = 0 }
     public var isNaN: Bool {
-        id == 0 || (lid == nil)
+       // id == 0 || (lid == nil)
+        lid == nil
     }
     
     init(_ json:String) {

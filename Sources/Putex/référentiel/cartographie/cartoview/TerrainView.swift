@@ -43,7 +43,8 @@ public struct TerrainView: View {
     
    func creator() {
        terrain = Lieu(lid).terrain ?? Terrain(lid)
-        edition = true
+       print (terrain.lid ?? "lid nil")
+    edition = true
     }
     
     public init(_ terrain:Binding<Terrain>, modifiable:Bool = false) {
