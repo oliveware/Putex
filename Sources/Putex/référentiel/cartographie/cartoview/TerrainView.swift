@@ -41,16 +41,11 @@ public struct TerrainView: View {
     @State private var lid = LID()
     var modifiable = false
     
-   func creator() {
-       terrain = Lieu(lid).terrain ?? Terrain(lid)
-       print (terrain.lid ?? "lid nil")
-    edition = true
-    }
-    
     public init(_ terrain:Binding<Terrain>, modifiable:Bool = false) {
         _terrain = terrain
-        self.modifiable = modifiable
-        edition = terrain.wrappedValue.lid == nil
+        let unchecked = !terrain.wrappedValue.checked
+        edition = unchecked
+        self.modifiable = unchecked ? true : modifiable
     }
     
     var surface:Mesure {
@@ -75,6 +70,12 @@ public struct TerrainView: View {
             }
         }
     }
+    
+    func creator() {
+        terrain = Lieu(lid).terrain ?? Terrain(lid)
+        print (terrain.lid ?? "lid nil")
+        edition = true
+     }
     
     public var body: some View {
         if terrain.lid == nil {

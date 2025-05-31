@@ -24,6 +24,10 @@ public struct Terrain: Codable, Identifiable {
         lid == nil
     }
     
+    var checked:Bool {
+        !numvoie.isNaN && parcelles.count > 0
+    }
+    
     init(_ json:String) {
         let jsonData = json.data(using: .utf8)!
         let terrain = try! JSONDecoder().decode(Terrain.self, from: jsonData)
