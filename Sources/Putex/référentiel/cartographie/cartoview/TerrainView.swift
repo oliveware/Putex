@@ -72,6 +72,7 @@ public struct TerrainView: View {
     }
     
     func creator() {
+        print (terrain, lid)
         terrain = Lieu(lid).terrain ?? Terrain(lid)
         print (terrain)
         edition = true
