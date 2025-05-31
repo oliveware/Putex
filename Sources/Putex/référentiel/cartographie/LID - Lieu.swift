@@ -123,7 +123,7 @@ public struct Lieu {
     public func adresse(_ complement:String? = nil,_ pays:Bool = false, _ autre:Bool = false) -> String {
         if terrain == nil {
             if commune == nil {
-                return territoire == nil ? "adresse" : territoire!.nom
+                return territoire == nil ? "définir l'adresse" : territoire!.nom
             } else {
                 return commune!.nom + " " + (pays ? territoire!.nom : "")
             }
