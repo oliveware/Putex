@@ -151,6 +151,7 @@ public struct Lieu {
                             self.quartier = quartier
                             if lid.terrain != nil {
                                 terrain = quartier![lid.terrain!]
+                                if terrain != nil {terrain!.lid = lid}
                             }
                         }
                     }

@@ -42,8 +42,9 @@ struct ParcelleView: View {
         HStack{
             if edition {
                 HStack {
-                    TextField("numéro", value : $parcelle.id, format: .number)
-                        .frame(width:120)
+                    Text("numéro ")
+                    TextField("", value : $parcelle.id, format: .number)
+                        .frame(width:60)
                     
                     Button(action:{edition = false})
                     {Image(systemName: "checkmark")}
@@ -78,7 +79,7 @@ struct ParceList: View {
         VStack {
                 ForEach ($parcelles) {
                     parcelle in
-                    HStack(spacing:20) {
+                    HStack(spacing:10) {
                         Button(action:{delete(parcelle.id)})
                         {Image(systemName: "minus")}
                         Spacer()
@@ -127,7 +128,7 @@ struct ParceList: View {
 struct ParcellePreview: View {
     @State var parcelle = Parcelle(999)
     var body:some View {
-        ParcelleEditor(parcelle:$parcelle)
+        ParcelleView($parcelle)
     }
 }
 
@@ -145,5 +146,5 @@ struct ParceListPreview: View {
 }
 
 #Preview {
-    ParcellePreview()
+    ParcellePreview().padding(20)
 }

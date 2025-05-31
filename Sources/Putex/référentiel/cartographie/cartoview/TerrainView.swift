@@ -118,9 +118,9 @@ public struct TerrainEditor: View {
                 AdresseDouble(first:$terrain.numvoie, autre:$terrain.autrenumvoie, commune:terrain.commune)
                
             }
-        //    GroupBox("parcelles") {
+            GroupBox("parcelles") {
                 ParceList(parcelles: $terrain.parcelles).padding(10)
-         //   }.padding(20)
+            }.padding(20)
                
         }.frame(alignment: .leading)
         .padding(10)
@@ -184,7 +184,7 @@ struct TerrainPreview: View {
     
     var body: some View {
         TerrainView($terrain, modifiable:modifiable)
-            .frame(minWidth:600,minHeight:500)
+            .frame(minWidth:700,minHeight:500)
     }
 }
 
