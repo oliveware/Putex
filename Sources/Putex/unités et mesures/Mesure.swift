@@ -92,6 +92,10 @@ extension Mesure {
 public struct MesureView :View {
     @Binding var mesure:Mesure
     
+    public init(_ mesure:Binding<Mesure>) {
+        _mesure = mesure
+    }
+    
     public var body: some View {
         NumberView($mesure)
     }
@@ -107,7 +111,7 @@ struct MesurePreview : View {
         VStack {
             NumberView($volume)
             
-            MesureView(mesure:$surface)
+            MesureView($surface)
             
             NumberView($hp)
             
