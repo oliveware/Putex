@@ -63,7 +63,7 @@ public struct ButtonStack: View {
     }
 }
 
-struct ButtonStackEditor : View {
+public struct ButtonStackEditor : View {
     @Binding var rows: [[String]]
     var mots:[Mot]
     var width = 200
@@ -77,14 +77,14 @@ struct ButtonStackEditor : View {
     var valider: () -> Void
     @FocusState private var focus
     
-    init(_ rows:Binding<[[String]]>, _ done:@escaping () -> Void,
+    public init(_ rows:Binding<[[String]]>, _ done:@escaping () -> Void,
          _ mots:[Mot] = []) {
         _rows = rows
         valider = done
         self.mots = mots
     }
     
-    var body: some View {
+    public var body: some View {
         VStack {
             if newrow {
                 TextField("", text:$label).frame(width:CGFloat(width))
