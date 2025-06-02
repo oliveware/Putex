@@ -22,7 +22,7 @@ struct ButtonRow: View {
         HStack (spacing:CGFloat(spacing)) {
             ForEach (0..<cols.count, id:\.self) {
                 col in
-                Button(action:{selected = (row:row, col:col)})
+                Button(action:{selected = (row:row,                                                          col:col)})
                 {Text(cols[col]).frame(width:colwidth)}
             }
         }
@@ -65,14 +65,24 @@ public struct ButtonStack: View {
 
 struct ButtonStackEditor : View {
     @Binding var rows: [[String]]
-    @State var bc = (row:0, col:0)
+    var mots:[Mot]
     var width = 200
     
+    @State private var bc = (row:0, col:0)
     @State private var newrow = false
     @State private var newcol = -1
     @State private var label = ""
     
+    
+    var valider: () -> Void
     @FocusState private var focus
+    
+    init(_ rows:Binding<[[String]]>, _ done:@escaping () -> Void,
+         _ mots:[Mot] = []) {
+        _rows = rows
+        valider = done
+        self.mots = mots
+    }
     
     var body: some View {
         VStack {
@@ -115,6 +125,8 @@ struct ButtonStackEditor : View {
                     }
                 }
             }
+            Button("valider", action:{ valider() }).padding(20)
+                .disabled(focus)
         }
     }
 }
@@ -125,11 +137,14 @@ struct ButtonStackPreview : View {
     
     @State var edition = false
     
+    func valider() {
+        edition = false
+    }
+    
     var body: some View {
         VStack(spacing:20) {
             if edition {
-                ButtonStackEditor(rows:$rows, bc:bc)
-                Button("valider", action:{edition = false})
+                ButtonStackEditor($rows, valider )
             } else {
                 HStack(spacing:50) {
                     ButtonStack($bc, rows)
@@ -141,9 +156,12 @@ struct ButtonStackPreview : View {
     }
 }
 
-#Preview {
+#Preview("vierge") {
+    ButtonStackPreview(rows:[])
+}
+#Preview("seclin") {
     ButtonStackPreview()
 }
-#Preview {
+#Preview("more") {
     ButtonStackPreview(rows : [["troisième"],["2g","2d"],["1a","1b", "1c"],["rdc1", "rdc2"]])
 }
