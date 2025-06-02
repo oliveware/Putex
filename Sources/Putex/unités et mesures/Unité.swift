@@ -50,23 +50,27 @@ public enum Unité: String, Codable, Enumerable {
     }
     
     public func mesure(_ value: Double) -> String {
-        switch self {
-        case .kwh:
-            return Measurement(value:value, unit:UnitEnergy.kilowattHours).formatted()
-        case .l :
-            return Measurement(value:value, unit:UnitVolume.liters).formatted()
-        case .m :
-            return Measurement(value:value, unit:UnitLength.meters).formatted()
-        case .m2 :
-            return Measurement(value:value, unit:UnitArea.squareMeters).formatted()
-        case .m3 :
-            return Measurement(value:value, unit:UnitVolume.cubicMeters).formatted()
-        case .jour:
-            return "jour"
-        case .mois :
-            return "mois"
-        default:
-            return "pièce"
+        if value == 0 {
+            return "0 " + self.rawValue
+        } else {
+            switch self {
+            case .kwh:
+                return Measurement(value:value, unit:UnitEnergy.kilowattHours).formatted()
+            case .l :
+                return Measurement(value:value, unit:UnitVolume.liters).formatted()
+            case .m :
+                return Measurement(value:value, unit:UnitLength.meters).formatted()
+            case .m2 :
+                return Measurement(value:value, unit:UnitArea.squareMeters).formatted()
+            case .m3 :
+                return Measurement(value:value, unit:UnitVolume.cubicMeters).formatted()
+            case .jour:
+                return "jour"
+            case .mois :
+                return "mois"
+            default:
+                return "pièce"
+            }
         }
     }
     
