@@ -65,7 +65,7 @@ public struct ButtonStack: View {
 
 public struct ButtonStackEditor : View {
     @Binding var rows: [[String]]
-    var mots:[Mot]
+    var mots:[Mot] = [Mot("ligne","lignes",.f),Mot("colonne","colonnes",.f)]
     var width = 200
     
     @State private var bc = (row:0, col:0)
@@ -78,10 +78,12 @@ public struct ButtonStackEditor : View {
     @FocusState private var focus
     
     public init(_ rows:Binding<[[String]]>, _ done:@escaping () -> Void,
-         _ mots:[Mot] = []) {
+         _ mots:[Mot]? = nil) {
         _rows = rows
         valider = done
-        self.mots = mots
+        if mots != nil {
+            self.mots = mots!
+        }
     }
     
     public var body: some View {
@@ -125,8 +127,12 @@ public struct ButtonStackEditor : View {
                     }
                 }
             }
-            Button("valider", action:{ valider() }).padding(20)
-                .disabled(focus)
+            if rows.count == 0 {
+                Text("ajouter " + mots[0].indéterminé)
+            } else {
+                Button("valider", action:{ valider() }).padding(20)
+                    .disabled(focus)
+            }
         }
     }
 }
