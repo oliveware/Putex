@@ -103,10 +103,12 @@ public struct Nombre: Codable {
     
     public var value : Double {
         var decimal : Double = 0
-        if let deci = Double(decimales) {
-            decimal = deci / Double(div(decimales.count))
-        } else {
-            print("décimales erronées : \(decimales)")
+        if decimales != "" {
+            if let deci = Double(decimales) {
+                decimal = deci / Double(div(decimales.count))
+            } else {
+                print("décimales erronées : \(decimales)")
+            }
         }
         if let entier = entiere {
             if entier < 0 { decimal = -decimal }
