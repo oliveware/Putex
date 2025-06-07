@@ -25,7 +25,7 @@ public struct Mesure: Codable {
         return r
     }
     
-    var nombre: Nombre
+    public var nombre: Nombre
     var quantité: Quantité
     public var unité: Unité {quantité.unité}
     
