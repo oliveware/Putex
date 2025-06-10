@@ -34,7 +34,7 @@ public struct Terrain: Codable, Identifiable {
         self = terrain
     }
     
-    // un terrain peut avoir deux adresses
+    // un terrain peut avoir deux adresses géographiques
     var numvoie =    NumVoie()
     var autrenumvoie: NumVoie?
     var commune:String {
@@ -82,6 +82,7 @@ public struct Terrain: Codable, Identifiable {
         case industrie  = "industrie"
     }
     var usage : Usage?
+    
     
     var valorisation : Valeur?
     

@@ -11,28 +11,18 @@ public struct TerrainShow: View {
     @Binding var terrain:Terrain
     
     public var body: some View {
-        HStack (alignment:.top, spacing:20) {
+        VStack ( spacing:20) {
             if terrain.numvoie.voie != "" {
-                VStack (spacing:25){
-                    GroupBox("Adresse") {
-                        Text(terrain.address).padding(10)
-                    }
-
-                }.padding(10)
+                GroupBox("Adresse") {
+                    Text(terrain.address).padding(10)
+                }
             }
             
             GroupBox("Parcelles") {
-                VStack(spacing:2){
-                    ForEach ($terrain.parcelles) {
-                        parcelle in
-                        ParcelleShow(parcelle: parcelle)
-                    }
+                ParceList(parcelles: $terrain.parcelles).padding(10)
                 }.padding(10)
             }.padding(10)
         }
-       
-        
-    }
 }
 
 public struct TerrainView: View {
@@ -48,15 +38,7 @@ public struct TerrainView: View {
         self.modifiable = unchecked ? true : modifiable
     }
     
-    var surface:Mesure {
-        var result = Mesure("0", .aire)
-        for parcelle in terrain.parcelles {
-            if let aire = result + parcelle.surface {
-                result = aire
-            }
-        }
-        return result
-    }
+  
     
     public var valeur: some View {
         Group {
@@ -85,11 +67,8 @@ public struct TerrainView: View {
             }
         } else {
             VStack{
-                HStack {
-                    valeur
-                    Spacer()
-                    Text("surface totale : " + surface.astring)
-                }.padding(20)
+                valeur
+               .padding(20)
                 
                 if edition {
                     TerrainEditor($terrain)

@@ -9,10 +9,22 @@ import SwiftUI
 
 struct ParcelleShow: View {
     @Binding var parcelle: Parcelle
+    @State var edition: Bool
+    
+    init(_ parcelle:Binding<Parcelle>) {
+        _parcelle = parcelle
+        edition = parcelle.wrappedValue.surface.value == 0
+    }
+    
     var body: some View {
         HStack(spacing:50){
             Text("n° " + String(parcelle.id))
-            NumberView($parcelle.surface)
+            Spacer()
+            if edition {
+                NumberView($parcelle.surface)
+            } else {
+                Text(parcelle.surface.astring)
+            }
         }
     }
 }
@@ -22,8 +34,10 @@ struct ParcelleEditor: View {
     
     var body: some View {
         HStack{
+            Text("numéro ")
             TextField("numéro", value : $parcelle.id, format: .number)
                 .frame(width:150)
+            Spacer()
             NumberView($parcelle.surface)
         }
     }
@@ -31,33 +45,22 @@ struct ParcelleEditor: View {
 
 struct ParcelleView: View {
     @Binding var parcelle: Parcelle
+    @Binding private var correction: Bool
     @State private var edition: Bool
     
-    init(_ parcelle: Binding<Parcelle>) {
+    init(_ parcelle: Binding<Parcelle>, _ correction:Binding<Bool>) {
         _parcelle = parcelle
+        _correction = correction
         edition = parcelle.wrappedValue.id == 0
     }
     
     var body: some View {
         HStack{
             if edition {
-                HStack {
-                    Text("numéro ")
-                    TextField("", value : $parcelle.id, format: .number)
-                        .frame(width:60)
-                    
-                    Button(action:{edition = false})
-                    {Image(systemName: "checkmark")}
-                }
+                ParcelleEditor(parcelle: $parcelle)
             } else {
-                HStack {
-                    Text("n° " + String(parcelle.id))
-                    Button(action:{edition = true})
-                    {Image(systemName: "pencil")}
-                }
+                ParcelleShow($parcelle)
             }
-            Spacer()
-            NumberView($parcelle.surface)
         }
     }
 }
@@ -72,44 +75,56 @@ struct ParceList: View {
         (num == nil ? true : num! > 0)
     }
     
-   
+    var surface:Mesure {
+        var result = Mesure("0", .aire)
+        for parcelle in parcelles {
+            if let aire = result + parcelle.surface {
+                result = aire
+            }
+        }
+        return result
+    }
     
     var body: some View {
         
         VStack {
-                ForEach ($parcelles) {
-                    parcelle in
-                    HStack(spacing:10) {
+            Text("surface totale : " + surface.astring).padding(10)
+            ForEach ($parcelles) {
+                parcelle in
+                HStack(spacing:10) {
+                    if edition {
                         Button(action:{delete(parcelle.id)})
                         {Image(systemName: "minus")}
                         Spacer()
-                        ParcelleView(parcelle)
                     }
+                    ParcelleView(parcelle, $edition)
                 }
-                
+            }
             
-            HStack {
-                if ajoût {
-                    if num != nil {
-                        if num! > 0 {
+            if edition {
+                HStack {
+                    if ajoût {
+                        if num != nil {
+                            if num! > 0 {
+                                Button(action:{
+                                    parcelles.append(Parcelle(num!))
+                                    ajoût = false
+                                    num = nil
+                                })
+                                {Image(systemName: "plus")}
+                            }}
+                        Spacer()
+                        TextField("numéro",value: $num, format:.number)
+                            .frame(width:120)
+                        Spacer()
+                    } else {
                         Button(action:{
-                            parcelles.append(Parcelle(num!))
-                            ajoût = false
-                            num = nil
+                            ajoût = true
                         })
-                        {Image(systemName: "plus")}
-                    }}
-                    Spacer()
-                    TextField("numéro",value: $num, format:.number)
-                        .frame(width:120)
-                    Spacer()
-                } else {
-                    Button(action:{
-                        ajoût = true
-                    })
-                    {Text("ajouter une parcelle")}
-                }
-            }.padding(.top,20)
+                        {Text("ajouter une parcelle")}
+                    }
+                }.padding(.top,20)
+            }
             }.frame(maxHeight:.infinity)
         
     }
@@ -127,8 +142,9 @@ struct ParceList: View {
 
 struct ParcellePreview: View {
     @State var parcelle = Parcelle(999)
+    @State var correction = false
     var body:some View {
-        ParcelleView($parcelle)
+        ParcelleView($parcelle, $correction)
     }
 }
 

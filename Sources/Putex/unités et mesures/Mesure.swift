@@ -108,7 +108,7 @@ struct MesurePreview : View {
     @State var mensuel = Mesure(.mensuel)
     
     var body:some View {
-        VStack {
+        VStack(alignment:.trailing) {
             NumberView($volume)
             
             MesureView($surface)
@@ -116,7 +116,7 @@ struct MesurePreview : View {
             NumberView($hp)
             
             NumberView($mensuel)
-        } .frame(width:250)
+        } .padding()
     }
 }
 
