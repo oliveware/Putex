@@ -14,7 +14,6 @@ struct TerritoireView : View {
     @State var commune = Commune()
     @State var quartier = Quartier()
     @State var terrain = Terrain()
-    @State var filtre = false
     
 
     var body:some View {

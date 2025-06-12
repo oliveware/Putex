@@ -16,6 +16,7 @@ struct RegionView: View {
     @Binding var terrain : Terrain
     
     @State private var choix = true
+    @State private var ajout = false
     
     var body:some View {
         
@@ -23,12 +24,17 @@ struct RegionView: View {
             VStack(alignment:.leading) {
         
                 HStack(alignment:.top)  {
-                    VStack {
+                    VStack(alignment:.leading) {
                         Text("commune")
-                        if !choix {
+                        if !choix && !(commune.nom == "") {
                             HStack {
                                 Text(commune.nom).frame(width:120)
-                                Button(action:{ choix = true })
+                                Button(action:{
+                                    commune = Commune()
+                                    quartier = Quartier()
+                                    terrain = Terrain()
+                                    choix = true
+                                })
                                 {Image(systemName: "chevron.down") }
                             }
                         } else {
@@ -51,7 +57,7 @@ struct RegionView: View {
                     }
                     
                     CommuneView(lid:$lid, continent:continent, territoire:territoire, region:region, commune:$commune, quartier:$quartier, terrain:$terrain)
-                }.frame(alignment:.leading)
+                }.frame(alignment:.leading).padding(20)
                 
                 HStack (spacing: 20) {
                     GroupBox("LID") {
@@ -69,7 +75,7 @@ struct RegionView: View {
                             }
                         }
                     }
-                }
+                }.padding(20)
                 
             }
        }
@@ -77,7 +83,9 @@ struct RegionView: View {
     }
     
     func add() {
-        region.communes.append(Commune())
-        commune = region.communes.last!
+        let new = Commune(lid)
+        region.communes.append(new)
+        commune = new
+        ajout = true
     }
 }
