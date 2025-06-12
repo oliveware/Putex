@@ -10,6 +10,9 @@ import Foundation
 public struct Continent : Codable {
     
     var id:Int
+    var lid:LID {
+        LID([id])
+    }
     var nom = ""
     var territoires : [Territoire] = []
     
@@ -27,6 +30,9 @@ public struct Continent : Codable {
     
     func insert(_ lieu: Lieu){
         
+    }
+    mutating func add() {
+        territoires.append(Territoire(lid))
     }
     
     subscript(_ id:Int) -> Territoire? {
@@ -50,6 +56,7 @@ struct Continents: Codable {
         let jsonData = json.data(using: .utf8)!
         let terre = try! JSONDecoder().decode(Continents.self, from: jsonData)
         self = terre
+        LID.nextinit(terre.sept)
     }
     
     subscript(_ id:Int) -> Continent? {

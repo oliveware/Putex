@@ -42,7 +42,11 @@ public struct Terrain: Codable, Identifiable {
         if let lid = lid {
             if let commune = Lieu(lid).commune {
                 nom = commune.nom
+            } else {
+                nom = "!commune"
             }
+        } else {
+            nom = "!lid"
         }
         return nom
     }

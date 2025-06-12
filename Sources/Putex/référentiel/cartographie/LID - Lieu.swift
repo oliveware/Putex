@@ -10,6 +10,30 @@ import Foundation
 public struct LID : Codable, Identifiable {
     public static var NA = LID([0,0,0,0,0])
     static var next = (zero:0, one:0, two:0, three:0, four:0, five:0)
+    static func nextinit(_ continents: [Continent]) {
+        var zero = continents.count
+        var one = 0
+        var two = 0
+        var three = 0
+        var four = 0
+        var five = 0
+        for continent in continents {
+            one += continent.territoires.count
+            for territoire in continent.territoires {
+                two += territoire.regions.count
+                for region in territoire.regions {
+                    three += region.communes.count
+                    for commune in region.communes {
+                        four += commune.quartiers.count
+                        for quartier in commune.quartiers {
+                            five += quartier.terrains.count
+                        }
+                    }
+                }
+            }
+        }
+        next = (zero:zero, one:one, two:two, three:three, four:four, five:five)
+    }
     static func continent() -> Int {
         next.zero += 1 ; return next.zero
     }

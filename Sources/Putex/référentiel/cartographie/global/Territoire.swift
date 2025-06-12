@@ -38,6 +38,10 @@ public struct Territoire : Codable, Identifiable {
         }
         return found
     }
+    
+    mutating func add() {
+        regions.append(Region(lid ?? LID()))
+    }
 }
 
 /*

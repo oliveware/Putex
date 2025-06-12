@@ -78,15 +78,15 @@ let France = """
                         },
                         {"id":58, "numvoie":{"voie":"avenue Watteau", "num":"1","codepostal":"59130"}, 
                             "parcelles":[
-{"id":580, "surface":{"nombre":{"decimales":""},"quantité":"surface"}}, 
-{"id":581, "surface":{"nombre":{"decimales":""},"quantité":"surface"}}, 
-{"id":582, "surface":{"nombre":{"decimales":""},"quantité":"surface"}}, 
-{"id":583, "surface":{"nombre":{"decimales":""},"quantité":"surface"}}, 
-{"id":584, "surface":{"nombre":{"decimales":""},"quantité":"surface"}}, 
-{"id":585, "surface":{"nombre":{"decimales":""},"quantité":"surface"}}, 
-{"id":586, "surface":{"nombre":{"decimales":""},"quantité":"surface"}}, 
-{"id":587, "surface":{"nombre":{"decimales":""},"quantité":"surface"}}, 
-{"id":588, "surface":{"nombre":{"decimales":""},"quantité":"surface"}}]}
+{"id":580, "surface":{"nombre":{"entiere":14, "decimales":""},"quantité":"surface"}}, 
+{"id":581, "surface":{"nombre":{"entiere":14, "decimales":""},"quantité":"surface"}}, 
+{"id":582, "surface":{"nombre":{"entiere":14, "decimales":""},"quantité":"surface"}}, 
+{"id":583, "surface":{"nombre":{"entiere":14, "decimales":""},"quantité":"surface"}}, 
+{"id":584, "surface":{"nombre":{"entiere":11, "decimales":""},"quantité":"surface"}}, 
+{"id":585, "surface":{"nombre":{"entiere":11, "decimales":""},"quantité":"surface"}}, 
+{"id":586, "surface":{"nombre":{"entiere":11, "decimales":""},"quantité":"surface"}}, 
+{"id":587, "surface":{"nombre":{"entiere":11, "decimales":""},"quantité":"surface"}}, 
+{"id":588, "surface":{"nombre":{"entiere":84, "decimales":""},"quantité":"surface"}}]}
                             ]
                         }
                     ]

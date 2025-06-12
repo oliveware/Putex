@@ -12,6 +12,16 @@ public struct Region: Codable, Identifiable {
     
     public var nom = ""
     var communes:[Commune] = []
+    
+    var avecterrains: Bool {
+        var found = false
+        for commune in communes {
+            if commune.avecterrains {
+                found = true
+            }
+        }
+        return found
+    }
    
     init() {id = 0}
     init(_ territoire:LID) {

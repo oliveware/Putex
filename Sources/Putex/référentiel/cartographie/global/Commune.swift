@@ -12,6 +12,16 @@ public struct Commune: Codable, Identifiable {
     
     public var nom = ""
     var quartiers:[Quartier] = []
+    
+    var avecterrains: Bool {
+        var found = false
+        for quartier in quartiers {
+            if quartier.terrains.count > 0 {
+                found = true
+            }
+        }
+        return found
+    }
    
     init(_ region:LID) {
         let communelid = LID(region)

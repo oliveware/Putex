@@ -29,7 +29,7 @@ struct ContinentView : View {
     
     var body:some View {
         GroupBox(continent.nom) {
-            HStack {
+            VStack {
                 TabView(selection: $selection) {
                     ForEach($continent.territoires){
                         territoire in
@@ -37,15 +37,17 @@ struct ContinentView : View {
                             .tabItem{Text(territoire.wrappedValue.nom)}.tag(territoire.id)
                             .onChange(of:territoire.id, {lid=LID([continent.id, territoire.id])})
                     }
-                    Button(action:add)
-                    { Text("ajouter un territoire")}
+                    
                 }
+              //  Button("ajouter un territoire",action:add)
+               
             }
         }
     }
     func add() {
+        continent.add()
       //  selected = Territoire()
-        continent.territoires.append(Territoire(lid))
+      //  continent.territoires.append(Territoire($continent.lid))
     }
 }
 

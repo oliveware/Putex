@@ -14,28 +14,34 @@ struct TerritoireView : View {
     @State var commune = Commune()
     @State var quartier = Quartier()
     @State var terrain = Terrain()
+    @State var filtre = false
+    
 
     var body:some View {
         NavigationSplitView {
             List {
                 ForEach($territoire.regions) { item in
-                    NavigationLink {
-                        RegionView(lid:$lid,  continent:continent, territoire:territoire, region:item, commune:$commune, quartier:$quartier, terrain:$terrain )
-                            .onChange(of:item.id) {
-                                region = item.wrappedValue
-                                commune = Commune()
-                                quartier = Quartier()
-                                terrain = Terrain()
-                                lid = LID([continent.id, territoire.id, item.id])
-                            }
-                    } label: {
-                        Text(item.wrappedValue.nom)
+                    if item.wrappedValue.avecterrains {
+                        NavigationLink {
+                            RegionView(lid:$lid,  continent:continent, territoire:territoire, region:item, commune:$commune, quartier:$quartier, terrain:$terrain )
+                                .onChange(of:item.id) {
+                                    region = item.wrappedValue
+                                    commune = Commune()
+                                    quartier = Quartier()
+                                    terrain = Terrain()
+                                    lid = LID([continent.id, territoire.id, item.id])
+                                }
+                        } label: {
+                            Text(item.wrappedValue.nom)
+                        }
                     }
+                    
                 }
               //  .onDelete(perform: deleteItems)
             }
+
 #if os(macOS)
-            .navigationSplitViewColumnWidth(min: 130, ideal: 120)
+            .navigationSplitViewColumnWidth(min: 130, ideal: 150)
 #endif
 
        } detail: {

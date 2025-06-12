@@ -15,30 +15,52 @@ struct CommuneView: View {
     @Binding var quartier : Quartier
     @Binding var terrain : Terrain
     
+    @State private var choix = false
+    
+    func choisir() {
+        if commune.quartiers.count == 1 {
+            let quart = commune.quartiers[0]
+            quartier = quart
+            terrain = Terrain()
+            lid = LID([continent.id, territoire.id, region.id, commune.id, quart.id])
+        } else {
+            choix = true
+        }
+    }
+    
     var body:some View {
         if commune.quartiers.count > 0 {
-            GroupBox(commune.nom) {
-                HStack {
+                HStack(alignment:.top)  {
                     VStack {
                         // TextField("",text:$commune.nom)
-                        Text("quartiers")
-                        ForEach($commune.quartiers){
-                            item in
-                            Button(action:{
-                                quartier = item.wrappedValue
-                                terrain = Terrain()
-                                lid = LID([continent.id, territoire.id, region.id, commune.id,
-                                           item.id])
-                            })
-                            {
-                                Text(item.wrappedValue.nom).frame(width:100)
+                        Text("quartier")
+                        if !choix {
+                            HStack {
+                                Text(quartier.nom).frame(width:150).padding(3)
+                                if commune.quartiers.count > 1 {
+                                    Button(action:{ choix = true })
+                                    {Image(systemName: "chevron.down") }
+                                }
+                            }
+                        } else {
+                            ForEach($commune.quartiers){
+                                item in
+                                Button(action:{
+                                    quartier = item.wrappedValue
+                                    terrain = Terrain()
+                                    lid = LID([continent.id, territoire.id, region.id, commune.id, item.id])
+                                    choix = false
+                                })
+                                {
+                                    Text(item.wrappedValue.nom).frame(width:100)
+                                }
                             }
                         }
                     }
                     
                     QuartierView(lid:$lid, continent:continent, territoire:territoire, region:region, commune:commune, quartier:$quartier, terrain:$terrain)
                 }.frame(alignment:.leading)
-            }
+            
         } else {
             if commune.nom != "" {
                 Text("aucun quartier défini à " + commune.nom).padding(20)
@@ -67,6 +89,7 @@ struct QuartierView : View {
                             terrain = item.wrappedValue
                             lid = LID([continent.id, territoire.id, region.id, commune.id,
                                        quartier.id, item.id])
+                            terrain.lid = lid
                         })
                         {
                             Text(item.wrappedValue.label).frame(width:100)
