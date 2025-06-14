@@ -7,6 +7,7 @@
 
 public struct Head: Codable, Identifiable, Oxet {
     public static var selector = "item"
+    public static var warning = "collection vide"
     
     public var id:String {code}
     var code : String

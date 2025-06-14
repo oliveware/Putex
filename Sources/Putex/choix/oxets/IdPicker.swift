@@ -25,20 +25,24 @@ public struct IdPicker<T:Oxet>: View {
     
     public var body: some View {
         VStack {
-            Text(prompt)
-            ScrollView {
-                VStack(spacing:2){
-                    ForEach(0..<items.count, id: \.self) {
-                        index in
-                        Button( action: {
-                            choose(items[index])
-                        }){
-                            Text(items[index].label)
-                                .frame(width:width)
+            if items.count == 0 {
+                Text(T.warning)
+            } else {
+                Text(prompt)
+                ScrollView {
+                    VStack(spacing:2){
+                        ForEach(0..<items.count, id: \.self) {
+                            index in
+                            Button( action: {
+                                choose(items[index])
+                            }){
+                                Text(items[index].label)
+                                    .frame(width:width)
+                            }
                         }
-                    }
-                }.frame(alignment: .center)
-            }.frame(height:height)
+                    }.frame(alignment: .center)
+                }.frame(height:height)
+            }
         }
     }
     

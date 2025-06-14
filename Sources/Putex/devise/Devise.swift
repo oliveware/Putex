@@ -20,6 +20,7 @@ public class Devise: Equatable, Codable, Oxet {
     public var id:String {code}
     public var label:String {name}
     public static var selector = "devise"
+    public static var warning = "aucune devise n'est définie"
 
     public static var all = Deviset(deviseref)
     static let unknown = Devise("devise inconnue")
