@@ -27,6 +27,7 @@ public struct Coderef: Codable, Identifiable {
         case foncier    = "F"
         case human      = "H"
         case local      = "L"
+        case offre      = "O"
         case piece      = "Q"
         case location   = "R"     // Rent
         case payment    = "P"
