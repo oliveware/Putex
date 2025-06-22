@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+// Drop-down list
 public struct Choice: View {
     var prompt = ""
     var width: CGFloat = 120
