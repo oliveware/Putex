@@ -25,6 +25,7 @@ public struct Coderef: Codable, Identifiable {
         case batiment   = "B"
         case company    = "C"
         case foncier    = "F"
+        case equipement = "E"
         case human      = "H"
         case local      = "L"
         case offre      = "O"
@@ -34,6 +35,7 @@ public struct Coderef: Codable, Identifiable {
         case tarif      = "T"
         case taxation   = "U"
         case compte     = "W"
+        case appareil   = "Z"
     }
     
     static var nextcode = 0
