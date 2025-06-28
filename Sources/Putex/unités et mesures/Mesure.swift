@@ -58,6 +58,13 @@ extension Mesure {
            return false
         }
     }
+    public static func <= (a:Mesure, b:Mesure) -> Bool {
+        if a.quantité == b.quantité {
+           return a.nombre <= b.nombre
+        } else {
+           return false
+        }
+    }
     public static func - (a:Mesure, b:Mesure) -> Mesure? {
         if a.quantité == b.quantité {
             return Mesure(a.nombre - b.nombre, a.quantité)
