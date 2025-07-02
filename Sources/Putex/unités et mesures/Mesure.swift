@@ -51,6 +51,10 @@ extension Mesure {
         quantité = q
     }
     
+    public static func == (a:Mesure, b:Mesure) -> Bool {
+        a.value == b.value && a.quantité == b.quantité
+    }
+    
     public static func > (a:Mesure, b:Mesure) -> Bool {
         if a.quantité == b.quantité {
            return a.nombre > b.nombre
