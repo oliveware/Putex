@@ -18,6 +18,7 @@ public enum Quantité: String, Codable {
     case mensuel = "mois"
   //  case annuel = "année"
     
+    case piece  = "pièce"
     case eau    = "eau"
     case elec   = "électricité"
     case hc     = "heures creuses"
@@ -34,6 +35,7 @@ public enum Quantité: String, Codable {
     
     public var unité: Unité {
         switch self {
+        case .piece: return .unit
         case .aire: return .m2
         case .volume: return .m3
         case .elec,.hp,.hc : return .kwh
@@ -49,7 +51,7 @@ public enum Quantité: String, Codable {
         case .aire   : return "surface"
        // case .jour   : return "nb de jours"
         case .mensuel   : return "abonnement"
-        //case .unit   : return "nb de pièces"
+        case .piece   : return "nb de pièces"
         default: return "label"
         }
     }
@@ -58,7 +60,7 @@ public enum Quantité: String, Codable {
         switch self {
         case .aire: return .decimal(2)
         case .volume,.gaz: return .decimal(3)
-        case .elec,.hp,.hc,.eau, .mensuel,.web,.mobile,.tv : return .naturel
+        case .elec,.hp,.hc,.eau, .mensuel,.web,.mobile,.tv, .piece : return .naturel
       //  case .annuel: return .an
         }
     }
