@@ -21,6 +21,7 @@ public struct JMA: Codable, Equatable {
     public static let moisfr = ["janvier","février","mars","avril","mai","juin",
         "juillet","août","septembre","octobre","novembre","décembre"]
     public static let origine = JMA(1,1,2000)
+    public static var now = JMA(Date.now)
     
     public static func == (_ lhs: JMA,_ rhs: JMA) -> Bool {
         return lhs.jour == rhs.jour && lhs.mois == rhs.mois && lhs.année == rhs.année
