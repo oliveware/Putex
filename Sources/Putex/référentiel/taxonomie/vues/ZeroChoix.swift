@@ -1,31 +1,31 @@
 //
-//  OneVue.swift
+//  ZeroVue.swift
 //  Taxonomie
 //
 //  Created by Herve Crespel on 08/07/2025.
 //
 import SwiftUI
 
-struct OneChoix : View {
+struct ZeroChoix : View {
     @Binding var choix:Int
-    var nivzero: Nivzero
-    @Binding var nivone: Nivone
+    @Binding var nivzero : Nivzero
+    var set : Taxonomy
     
     var body:some View {
-        if choix == 1 {
+        if choix == 0 {
             ScrollView {
-                ForEach(nivzero.one){
+                ForEach(set.items){
                     item in
-                    Button(action:{ nivone = item })
+                    Button(action:{ nivzero = item })
                     {Text(item.nom)}
                 }
             }
         } else {
             Button(action:{
-                choix = 1
-                nivone = Nivone()
+                choix = 0
+                nivzero = Nivzero()
             })
-            { Text(nivone.nom) }
+            { Text(nivzero.nom) }
         }
     }
 }

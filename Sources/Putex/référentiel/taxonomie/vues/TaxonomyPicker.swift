@@ -8,9 +8,9 @@
 import SwiftUI
 
 public struct TaxonomyPicker: View {
-    
+    var taxonomy:Taxonomy
     @Binding var tid:TID
-    var nivzero  : Nivzero
+    @State var nivzero  = Nivzero()
     @State var nivone   = Nivone()
     @State var nivtwo   = Nivtwo()
     @State var nivthree = Nivthree()
@@ -20,8 +20,9 @@ public struct TaxonomyPicker: View {
     //@State var selected : (niv:Int, index:Int) = (niv: 0, index: 0)
     @State private var choix = 0
     
-    public init(_ tid:Binding<TID>) {
+    public init(_ tid:Binding<TID>, _ taxonomy:Taxonomy? = nil) {
         _tid = tid
+        self.taxonomy = taxonomy ?? Taxonomy(taxonomie)
         let niveau = Niveau(tid.wrappedValue)
         nivzero = niveau.nivzero ?? Nivzero()
         nivone = niveau.nivone ?? Nivone()
@@ -33,6 +34,13 @@ public struct TaxonomyPicker: View {
     
     func suivant() {
         switch choix {
+        case 0 :
+            nivone = .init()
+            nivtwo = .init()
+            nivthree = .init()
+            nivfour = .init()
+            nivfive = .init()
+            choix = 2
         case 1 :
             nivtwo = .init()
             nivthree = .init()
@@ -58,6 +66,13 @@ public struct TaxonomyPicker: View {
     
     public var body:some View {
             HStack(alignment: .top) {
+                Text("taxonomie : ")
+                ZeroChoix(choix:$choix, nivzero: $nivzero, set: taxonomy)
+                    .onChange(of:nivzero.id, {
+                        suivant()
+                        tid = TID([nivzero.id])
+                    })
+                if choix > 0 {
                 OneChoix(choix:$choix, nivzero:nivzero, nivone:$nivone)
                     .onChange(of:nivone.id, {
                         suivant()
@@ -82,6 +97,7 @@ public struct TaxonomyPicker: View {
                                     tid = TID([nivzero.id, nivone.id, nivtwo.id, nivthree.id, nivfour.id])
                                 })
                         }
+                    }
                 }
             }
         }
@@ -89,13 +105,15 @@ public struct TaxonomyPicker: View {
 }
 
 struct ClassPreview: View {
-    @State var tid = TID([0])
+    @State var tid = TID()
     
     var body:some View {
         TaxonomyPicker($tid).frame(width:500, height:300)
     }
 }
-
+#Preview("vierge") {
+    ClassPreview(tid : TID([1]))
+}
 #Preview("produit") {
     ClassPreview(tid : TID([1]))
 }

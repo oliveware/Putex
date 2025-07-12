@@ -7,13 +7,13 @@
 import Foundation
 
 
-struct Globalset: Codable {
+public struct Taxonomy: Codable {
     
     var items : [Nivzero]
     
-    init(_ json:String) {
+   public init(_ json:String) {
         let jsonData = json.data(using: .utf8)!
-        let set = try! JSONDecoder().decode(Globalset.self, from: jsonData)
+        let set = try! JSONDecoder().decode(Taxonomy.self, from: jsonData)
         self = set
         TID.nextinit(set.items)
     }

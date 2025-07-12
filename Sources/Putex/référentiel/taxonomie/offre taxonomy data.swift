@@ -125,6 +125,7 @@ public let taxonomie = """
                 {"id":2,"nom":"locataire", "four":[]}
                 ]
             },
+            {"id":4,"nom":"multiple", "three":[]},
             {"id":5,"nom":"réparation", "three":[]}
         ]},
         {"id":3, "nom":"médecin", "two":[]} 
@@ -145,7 +146,6 @@ public let taxonomie = """
         {"id":3,"nom":"taxe foncière", "two":[]},
         {"id":4,"nom":"TVA", "two":[]}
     ]}
-
 ]}
 """
 

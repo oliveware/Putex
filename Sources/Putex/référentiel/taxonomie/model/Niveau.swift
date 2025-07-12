@@ -28,7 +28,7 @@ public struct Niveau {
     
     public  init(_ tid:TID) {
         let nivzero_id = tid.nivzero
-        if let nivzero = Globalset(taxonomie)[nivzero_id] {
+        if let nivzero = Taxonomy(taxonomie)[nivzero_id] {
             self.nivzero = nivzero
             if tid.nivone != nil {
                 let nivone = nivzero[tid.nivone!]

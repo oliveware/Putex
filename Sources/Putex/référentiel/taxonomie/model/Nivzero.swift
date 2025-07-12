@@ -7,10 +7,10 @@
 
 import Foundation
 
-public struct Nivzero : Codable {
+public struct Nivzero : Codable, Identifiable {
     static var nom = "zero"
     
-    var id:Int
+    public var id:Int
     var tid:TID {
         TID([id])
     }
