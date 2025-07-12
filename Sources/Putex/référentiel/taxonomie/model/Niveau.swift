@@ -13,18 +13,28 @@ public struct Niveau {
     public var nivfour  : Nivfour?
     var nivfive         : Nivfive?
     
-    /*public func adresse(_ complement:String? = nil,_ pays:Bool = false, _ autre:Bool = false) -> String {
-        if nivfive == nil {
-            if nivthree == nil {
-                return nivone == nil ? "définir l'adresse" : nivone!.nom
-            } else {
-                return nivthree!.nom + " " + (pays ? nivone!.nom : "")
+    var show: String {
+        var string = ""
+        if let zero = nivzero {
+            string = zero.nom
+            if let one = nivone {
+                string = string + "-" + one.nom
+                if let two = nivtwo {
+                    string = string + "-" + two.nom
+                    if let three = nivthree {
+                        string = string + "-" + three.nom
+                        if let four = nivfour {
+                            string = string + "-" + four.nom
+                            if let five = nivfive {
+                                string = string + "-" + five.nom
+                            }
+                        }
+                    }
+                }
             }
-        } else {
-            let adresse = nivfive!.adresse(complement, autre) + " " + nivthree!.nom
-            return adresse + (pays ? "\n" + nivone!.nom : "")
         }
-    }*/
+        return string
+    }
     
     public  init(_ tid:TID) {
         let nivzero_id = tid.nivzero

@@ -8,26 +8,24 @@ import SwiftUI
 
 struct ThreeChoix : View {
     @Binding var choix:Int
-    var nivtwo: Nivtwo
+    @Binding var nivtwo: Nivtwo
     @Binding var nivthree: Nivthree
     
     var body:some View {
         if choix == 3 {
-            GroupBox {
-                ScrollView {
-                    ForEach(nivtwo.three){
-                        item in
-                        Button(action:{
-                            nivthree = item
-                        })
-                        {Text(item.nom)}
-                    }
+            ScrollView {
+                ForEach(nivtwo.three){
+                    item in
+                    Button(action:{
+                        nivthree = item
+                    })
+                    {Text(item.nom)}
                 }
             }
         } else {
             Button(action:{
                 choix = 3
-                nivthree = Nivthree()
+               // nivthree = Nivthree()
             })
             { Text(nivthree.nom) }
         }

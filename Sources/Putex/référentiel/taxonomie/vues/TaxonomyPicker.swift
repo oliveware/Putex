@@ -40,7 +40,7 @@ public struct TaxonomyPicker: View {
             nivthree = .init()
             nivfour = .init()
             nivfive = .init()
-            choix = 2
+            choix = 1
         case 1 :
             nivtwo = .init()
             nivthree = .init()
@@ -73,25 +73,25 @@ public struct TaxonomyPicker: View {
                         tid = TID([nivzero.id])
                     })
                 if choix > 0 {
-                OneChoix(choix:$choix, nivzero:nivzero, nivone:$nivone)
+                OneChoix(choix:$choix, nivzero:$nivzero, nivone:$nivone)
                     .onChange(of:nivone.id, {
                         suivant()
                         tid = TID([nivzero.id, nivone.id])
                     })
                 if choix > 1 {
-                    TwoChoix(choix:$choix, nivone:nivone, nivtwo: $nivtwo)
+                    TwoChoix(choix:$choix, nivone:$nivone, nivtwo: $nivtwo)
                         .onChange(of:nivtwo.id, {
                             suivant()
                             tid = TID([nivzero.id, nivone.id, nivtwo.id])
                         })
                     if choix > 2 && nivtwo.three.count > 0 {
-                        ThreeChoix(choix:$choix, nivtwo: nivtwo, nivthree: $nivthree)
+                        ThreeChoix(choix:$choix, nivtwo: $nivtwo, nivthree: $nivthree)
                             .onChange(of:nivthree.id, {
                                 suivant()
                                 tid = TID([nivzero.id, nivone.id, nivtwo.id, nivthree.id])
                             })
                         if choix > 3 && nivthree.four.count > 0 {
-                            FourChoix(choix:$choix, nivthree: nivthree, nivfour:$nivfour)
+                            FourChoix(choix:$choix, nivthree: $nivthree, nivfour:$nivfour)
                                 .onChange(of:nivfour.id, {
                                     suivant()
                                     tid = TID([nivzero.id, nivone.id, nivtwo.id, nivthree.id, nivfour.id])
@@ -118,10 +118,10 @@ struct ClassPreview: View {
     ClassPreview(tid : TID([1]))
 }
 #Preview("service") {
-    ClassPreview(tid : TID([2]))
+    ClassPreview(tid : TID([2,1,1]))
 }
 #Preview("cotisation") {
-    ClassPreview(tid : TID([3]))
+    ClassPreview(tid : TID([3,1]))
 }
 
 #Preview("impôt") {

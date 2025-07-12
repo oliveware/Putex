@@ -9,7 +9,7 @@ import SwiftUI
 
 struct FiveChoix : View {
     @Binding var choix:Int
-    var nivfour: Nivfour
+    @Binding var nivfour: Nivfour
     @Binding var nivfive: Nivfive
     
     var body:some View {
@@ -28,7 +28,7 @@ struct FiveChoix : View {
         } else {
             Button(action:{
                 choix = 3
-                nivfive = Nivfive()
+              // nivfive = Nivfive()
             })
             { Text(nivfive.nom) }
         }

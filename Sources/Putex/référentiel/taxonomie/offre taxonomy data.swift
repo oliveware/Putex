@@ -108,7 +108,7 @@ public let taxonomie = """
         ] 
     },
     {"id":2, "nom":"service", "one": [
-        {"id":1, "nom":"locatioo", "two":[
+        {"id":1, "nom":"location", "two":[
             {"id":1, "nom":"logement", "three":[
                 {"id":1,"nom":"non meublé", "four":[]},
                 {"id":2,"nom":"meublé", "four":[]}

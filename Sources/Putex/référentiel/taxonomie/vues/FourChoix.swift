@@ -8,7 +8,7 @@ import SwiftUI
 
 struct FourChoix : View {
     @Binding var choix:Int
-    var nivthree: Nivthree
+    @Binding var nivthree: Nivthree
     @Binding var nivfour: Nivfour
 
     var body:some View {

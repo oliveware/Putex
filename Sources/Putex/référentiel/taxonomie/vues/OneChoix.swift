@@ -8,7 +8,7 @@ import SwiftUI
 
 struct OneChoix : View {
     @Binding var choix:Int
-    var nivzero: Nivzero
+    @Binding var nivzero: Nivzero
     @Binding var nivone: Nivone
     
     var body:some View {
@@ -23,7 +23,7 @@ struct OneChoix : View {
         } else {
             Button(action:{
                 choix = 1
-                nivone = Nivone()
+                
             })
             { Text(nivone.nom) }
         }
