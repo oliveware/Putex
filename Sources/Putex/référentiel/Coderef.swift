@@ -24,17 +24,18 @@ public struct Coderef: Codable, Identifiable {
         case article    = "A"
         case batiment   = "B"
         case company    = "C"
-        case foncier    = "F"
         case equipement = "E"
+        case foncier    = "F"
         case human      = "H"
         case local      = "L"
         case offre      = "O"
+        case cataloffre = "OC"
+        case payment    = "P"
         case piece      = "Q"
         case location   = "R"     // Rent
-        case payment    = "P"
         case tarif      = "T"
-        case taxation   = "U"
         case compte     = "W"
+        case taxation   = "X"
         case appareil   = "Z"
     }
     
