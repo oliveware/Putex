@@ -61,7 +61,7 @@ public struct TID : Codable, Identifiable, Equatable{
     var nivfive : Int?
     
     // initialisation du niveau inférieur
-    init(_ tid:TID? = nil) {
+    public init(_ tid:TID? = nil) {
         if let parent = tid {
             nivzero = parent.nivzero
             if let first = parent.nivone {
