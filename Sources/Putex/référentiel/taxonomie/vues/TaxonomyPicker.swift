@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct TaxonomyPicker: View {
+public struct TaxonomyPicker: View {
     
     @Binding var tid:TID
     var nivzero  : Nivzero
@@ -20,7 +20,7 @@ struct TaxonomyPicker: View {
     //@State var selected : (niv:Int, index:Int) = (niv: 0, index: 0)
     @State private var choix = 0
     
-    init(_ tid:Binding<TID>) {
+    public init(_ tid:Binding<TID>) {
         _tid = tid
         let niveau = Niveau(tid.wrappedValue)
         nivzero = niveau.nivzero ?? Nivzero()
@@ -56,7 +56,7 @@ struct TaxonomyPicker: View {
         }
     }
     
-    var body:some View {
+    public var body:some View {
         VStack {
             Text("choix d'un " + nivzero.nom)
             HStack(alignment: .top) {
