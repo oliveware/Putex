@@ -57,8 +57,6 @@ public struct TaxonomyPicker: View {
     }
     
     public var body:some View {
-        VStack {
-            Text("choix d'un " + nivzero.nom)
             HStack(alignment: .top) {
                 OneChoix(choix:$choix, nivzero:nivzero, nivone:$nivone)
                     .onChange(of:nivone.id, {
@@ -84,7 +82,6 @@ public struct TaxonomyPicker: View {
                                     tid = TID([nivzero.id, nivone.id, nivtwo.id, nivthree.id, nivfour.id])
                                 })
                         }
-                    }
                 }
             }
         }
