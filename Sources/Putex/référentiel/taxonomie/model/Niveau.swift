@@ -13,7 +13,7 @@ public struct Niveau {
     public var nivfour  : Nivfour?
     var nivfive         : Nivfive?
     
-    var show: String {
+    public var show: String {
         var string = ""
         if let zero = nivzero {
             string = zero.nom
@@ -36,7 +36,7 @@ public struct Niveau {
         return string
     }
     
-    public  init(_ tid:TID) {
+    public init(_ tid:TID) {
         let nivzero_id = tid.nivzero
         if let nivzero = Taxonomy(taxonomie)[nivzero_id] {
             self.nivzero = nivzero
