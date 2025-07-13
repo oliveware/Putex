@@ -13,21 +13,23 @@ struct FiveChoix : View {
     @Binding var nivfive: Nivfive
     
     var body:some View {
-        if choix == 3 {
-            GroupBox {
-                ScrollView {
-                    ForEach(nivfour.five){
-                        item in
-                        Button(action:{
+        if choix == 5 {
+            ScrollView {
+                ForEach(nivfour.five){
+                    item in
+                    Button(action:{
+                        if nivfive == item {
+                            choix = 6
+                        } else {
                             nivfive = item
-                        })
-                        {Text(item.nom)}
-                    }
+                        }
+                    })
+                    {Text(item.nom)}
                 }
             }
         } else {
             Button(action:{
-                choix = 3
+                choix = 5
               // nivfive = Nivfive()
             })
             { Text(nivfive.nom) }

@@ -13,13 +13,17 @@ struct FourChoix : View {
 
     var body:some View {
         if choix == 4 {
-            GroupBox {
-                ScrollView {
-                    ForEach(nivthree.four){
-                        item in
-                        Button(action:{ nivfour = item })
-                        {Text(item.nom)}
-                    }
+            ScrollView {
+                ForEach(nivthree.four){
+                    item in
+                    Button(action:{
+                        if  nivfour == item {
+                            choix = 5
+                        } else {
+                            nivfour = item
+                        }
+                    })
+                    {Text(item.nom)}
                 }
             }
         } else {

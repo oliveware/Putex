@@ -37,27 +37,26 @@ public let taxonomie = """
                     }
                 ]
             },
-            {"id":2, "nom":"consommable",
-                "two":[
+            {"id":2, "nom":"consommable", "two":[
                     {"id":1, "nom":"nourriture", "three":[
                             {"id":1,"nom":"riz", "four":[]}, 
                             {"id":2,"nom":"pain", "four":[]},
                             {"id":3,"nom":"fruits", "four":[
                                 {"id":1,"nom":"abricot","five":[]},
                                 {"id":2,"nom":"ananas","five":[]},
-                                {"id":2,"nom":"avocat","five":[]},
-                                {"id":2,"nom":"citron","five":[]},
-                                {"id":2,"nom":"clémentine","five":[]},
-                                {"id":2,"nom":"datte","five":[]},
-                                {"id":2,"nom":"figue","five":[]},
-                                {"id":2,"nom":"fraise","five":[]},
-                                {"id":2,"nom":"kiwi","five":[]},
-                                {"id":2,"nom":"orange","five":[]},
-                                {"id":1,"nom":"pomme","five":[]},
-                                {"id":2,"nom":"poire","five":[]},
-                                {"id":2,"nom":"pomelos","five":[]},
-                                {"id":2,"nom":"prune","five":[]},
-                                {"id":3,"nom":"cerise","five":[]}
+                                {"id":3,"nom":"avocat","five":[]},
+                                {"id":4,"nom":"citron","five":[]},
+                                {"id":5,"nom":"clémentine","five":[]},
+                                {"id":6,"nom":"datte","five":[]},
+                                {"id":7,"nom":"figue","five":[]},
+                                {"id":8,"nom":"fraise","five":[]},
+                                {"id":9,"nom":"kiwi","five":[]},
+                                {"id":10,"nom":"orange","five":[]},
+                                {"id":11,"nom":"pomme","five":[]},
+                                {"id":12,"nom":"poire","five":[]},
+                                {"id":13,"nom":"pomelos","five":[]},
+                                {"id":14,"nom":"prune","five":[]},
+                                {"id":15,"nom":"cerise","five":[]}
                                 ]
                             },
                             {"id":4,"nom":"légumes", "four":[

@@ -7,7 +7,13 @@
 
 import Foundation
 
-public struct Nivfour : Codable, Identifiable {
+public struct Nivfour : Codable, Identifiable, Hashable {
+    static public func ==  (_ a:Nivfour, _ b:Nivfour) -> Bool {
+        a.id == b.id
+    }
+    public func hash (into hasher: inout Hasher) {
+        hasher.combine(nom + String(id))
+    }
     
     public var id:Int
     var tid:TID?

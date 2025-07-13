@@ -25,10 +25,12 @@ public struct NiveauView : View {
             { TaxonomyPicker($tid, taxonomy) }
         } else {
             HStack {
-                Text(Niveau(tid).show)
+                Text(Niveau(tid).show(" | "))
                 Spacer()
                 Button(action:{edition = true})
                 {Image(systemName: "pencil")}
+                    .sheet(isPresented: $edition)
+                { TaxonomyPicker($tid, taxonomy) }
             }
         }
     }
@@ -37,7 +39,7 @@ public struct NiveauView : View {
 
 struct NiveauPreview: View {
     var taxonomy = Taxonomy(taxonomie)
-    @State var tid = TID()
+    @State var tid : TID
     
     var body:some View {
         NiveauView($tid, taxonomy).frame(width:300, height:200).padding()

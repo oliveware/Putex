@@ -17,7 +17,11 @@ struct ThreeChoix : View {
                 ForEach(nivtwo.three){
                     item in
                     Button(action:{
-                        nivthree = item
+                        if nivthree == item {
+                            choix = 4
+                        } else {
+                            nivthree = item
+                        }
                     })
                     {Text(item.nom)}
                 }

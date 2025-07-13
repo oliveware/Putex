@@ -5,7 +5,7 @@
 //  Created by Herve Crespel on 07/07/2025.
 //
 
-public struct Niveau {
+struct Niveau {
     public var nivzero  : Nivzero?
     public var nivone   : Nivone?
     public var nivtwo   : Nivtwo?
@@ -13,20 +13,20 @@ public struct Niveau {
     public var nivfour  : Nivfour?
     var nivfive         : Nivfive?
     
-    public var show: String {
+    func show(_ sep:String = "-") -> String {
         var string = ""
         if let zero = nivzero {
             string = zero.nom
             if let one = nivone {
-                string = string + "-" + one.nom
+                string = string + sep + one.nom
                 if let two = nivtwo {
-                    string = string + "-" + two.nom
+                    string = string + sep + two.nom
                     if let three = nivthree {
-                        string = string + "-" + three.nom
+                        string = string + sep + three.nom
                         if let four = nivfour {
-                            string = string + "-" + four.nom
+                            string = string + sep + four.nom
                             if let five = nivfive {
-                                string = string + "-" + five.nom
+                                string = string + sep + five.nom
                             }
                         }
                     }
@@ -36,7 +36,7 @@ public struct Niveau {
         return string
     }
     
-    public init(_ tid:TID) {
+    init(_ tid:TID) {
         let nivzero_id = tid.nivzero
         if let nivzero = Taxonomy(taxonomie)[nivzero_id] {
             self.nivzero = nivzero

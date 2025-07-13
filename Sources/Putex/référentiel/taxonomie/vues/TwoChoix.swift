@@ -16,7 +16,13 @@ struct TwoChoix : View {
             ScrollView {
                 ForEach(nivone.two){
                     item in
-                    Button(action:{ nivtwo = item })
+                    Button(action:{
+                        if  nivtwo == item {
+                            choix = 3
+                        } else {
+                            nivtwo = item
+                        }
+                    })
                     {Text(item.nom)}
                 }
             }

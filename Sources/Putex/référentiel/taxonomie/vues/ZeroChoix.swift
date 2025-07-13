@@ -23,7 +23,6 @@ struct ZeroChoix : View {
         } else {
             Button(action:{
                 choix = 0
-               
             })
             { Text(nivzero.nom) }
         }

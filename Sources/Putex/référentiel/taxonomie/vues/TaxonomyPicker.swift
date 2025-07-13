@@ -96,6 +96,13 @@ public struct TaxonomyPicker: View {
                                     suivant()
                                     tid = TID([nivzero.id, nivone.id, nivtwo.id, nivthree.id, nivfour.id])
                                 })
+                            if choix > 4 && nivfour.five.count > 0 {
+                                FiveChoix(choix:$choix, nivfour:$nivfour, nivfive:$nivfive)
+                                    .onChange(of:nivfive.id, {
+                                        choix = 7
+                                        tid = TID([nivzero.id, nivone.id, nivtwo.id, nivthree.id, nivfour.id, nivfive.id])
+                                    })
+                            }
                         }
                     }
                 }
