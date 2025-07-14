@@ -8,7 +8,7 @@
 import Foundation
 
 public struct TID : Codable, Identifiable, Equatable{
-    public static var NA = TID([0,0,0,0,0])
+    public static var NA = TID([0,0,0,0,0,0])
     private static var next = (zero:0, one:0, two:0, three:0, four:0, five:0)
     static func nextinit(_ nivzeros: [Nivzero]) {
         let zero = nivzeros.count
@@ -133,6 +133,32 @@ public struct TID : Codable, Identifiable, Equatable{
             }
         }
         return t
+    }
+    
+    public func belongsto(_ tid:TID) -> Bool {
+        var belong = tid.nivzero == nivzero
+        if belong {
+            if let first = tid.nivone {
+                if first == nivone {
+                    if let second = tid.nivtwo {
+                        if second == nivtwo {
+                            if let third = tid.nivthree {
+                                if third == nivthree {
+                                    if let fourth = tid.nivfour {
+                                        if fourth == nivfour {
+                                            if let fifth = tid.nivfive {
+                                                belong = fifth == nivfive
+                                            }
+                                        } else { belong = false }
+                                    }
+                                } else { belong = false }
+                            }
+                        } else { belong = false }
+                    }
+                } else { belong = false }
+            }
+        }
+        return belong
     }
     
     public static func == (a:TID, b:TID) -> Bool {
