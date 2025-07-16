@@ -134,6 +134,10 @@ public struct TID : Codable, Identifiable, Equatable{
         }
         return t
     }
+    
+    public func show(sep:String = "-")->String {
+        Niveau(self).show(sep)
+    }
     public var tab: [Int] {
         var t : [Int] = [nivzero]
         if let co =  nivone {
