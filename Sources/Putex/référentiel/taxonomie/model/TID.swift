@@ -134,6 +134,25 @@ public struct TID : Codable, Identifiable, Equatable{
         }
         return t
     }
+    public var tab: [Int] {
+        var t : [Int] = [nivzero]
+        if let co =  nivone {
+            t.append(co)
+            if let r = nivtwo {
+                t.append(r)
+                if let c = nivthree {
+                    t.append(c)
+                    if let q = nivfour {
+                        t.append(q)
+                        if let p = nivfive {
+                            t.append(p)
+                        }
+                    }
+                }
+            }
+        }
+        return t
+    }
     
     public func belongsto(_ tid:TID) -> Bool {
         var belong = tid.nivzero == nivzero

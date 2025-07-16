@@ -36,6 +36,29 @@ struct Niveau {
         return string
     }
     
+    var nom: String {
+        var string = ""
+        if let zero = nivzero {
+            string = zero.nom
+            if let one = nivone {
+                string = one.nom
+                if let two = nivtwo {
+                    string = two.nom
+                    if let three = nivthree {
+                        string = three.nom
+                        if let four = nivfour {
+                            string = four.nom
+                            if let five = nivfive {
+                                string = five.nom
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return string
+    }
+    
     init(_ tid:TID) {
         let nivzero_id = tid.nivzero
         if let nivzero = Taxonomy(taxonomie)[nivzero_id] {
