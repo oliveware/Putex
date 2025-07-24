@@ -20,15 +20,15 @@ public struct Nivone : Codable, Identifiable, Hashable {
     var tid:TID?
     
     public var nom = "choisir"
-    public var pays:String { nom }
+   // public var pays:String { nom }
     
     var two:[Nivtwo] = []
     
-    init() {id = 0}
+    init() {id = -1}
     init(_ nivzero:TID) {
        let nivonetid = TID(nivzero)
         tid = nivonetid
-        id = nivonetid.nivone!
+        id = nivonetid.one!
     }
     
     init(_ json:String) {

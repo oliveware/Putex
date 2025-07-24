@@ -1,4 +1,11 @@
 //
+//  TIDPicker.swift
+//  Putex
+//
+//  Created by Herve Crespel on 17/07/2025.
+//
+
+//
 //  Classifier.swift
 //  Taxonomie
 //
@@ -7,23 +14,23 @@
 
 import SwiftUI
 
-public struct TaxonomyPicker: View {
+public struct TIDPicker: View {
     var taxonomy:Taxonomy
     @Binding var tid:TID
     @State var nivzero  : Nivzero
     @State var nivone   : Nivone
     @State var nivtwo   : Nivtwo
-    @State var nivthree = Nivthree()
-    @State var nivfour  = Nivfour()
-    @State var nivfive  = Nivfive()
+    @State var nivthree : Nivthree
+    @State var nivfour  : Nivfour
+    @State var nivfive  : Nivfive
     
     //@State var selected : (niv:Int, index:Int) = (niv: 0, index: 0)
     @State private var choix = 0
     
     public init(_ tid:Binding<TID>, _ taxonomy:Taxonomy? = nil) {
         _tid = tid
-        let classif = taxonomy ?? Taxonomy(taxonomie)
-        let niveau = Niveau(classif, tid.wrappedValue)
+        self.taxonomy = taxonomy ?? Taxonomy(taxonomie)
+        let niveau = Niveau(tid.wrappedValue)
         nivzero = niveau.zero ?? Nivzero()
         nivone = niveau.one ?? Nivone()
         nivtwo = niveau.two ?? Nivtwo()
@@ -32,75 +39,56 @@ public struct TaxonomyPicker: View {
         nivfive = niveau.five ?? Nivfive()
     }
     
-    func suivant() {
-        switch choix {
-        case 0 :
-            nivone = .init()
-            nivtwo = .init()
-            nivthree = .init()
-            nivfour = .init()
-            nivfive = .init()
-            choix = 1
-        case 1 :
-            nivtwo = .init()
-            nivthree = .init()
-            nivfour = .init()
-            nivfive = .init()
-            choix = 2
-        case 2 :
-            nivthree = .init()
-            nivfour = .init()
-            nivfive = .init()
-            choix = 3
-        case 3 :
-            nivfour = .init()
-            nivfive = .init()
-            choix = 4
-        case 4 :
-            nivfive = .init()
-            choix = 5
-        default:
-            choix = 0
+    func reset(_ level:Int) {
+        if level > 4 { nivfive = .init() }
+        if level > 3 { nivfour = .init() }
+        if level > 2 { nivthree = .init() }
+        if level > 1 { nivtwo = .init() }
+        if level > 0 { nivone = .init() }
         }
-    }
     
     public var body:some View {
             HStack(alignment: .top) {
                 Text("taxonomie : ")
                 ZeroChoix(choix:$choix, nivzero: $nivzero, set: taxonomy)
                     .onChange(of:nivzero.id, {
-                        suivant()
                         tid = TID([nivzero.id])
+                        choix = 1
+                        reset(1)
                     })
                 if choix > 0 {
                 OneChoix(choix:$choix, nivzero:$nivzero, nivone:$nivone)
                     .onChange(of:nivone.id, {
-                        suivant()
                         tid = TID([nivzero.id, nivone.id])
+                        choix = nivone.two.isEmpty ? 7 : 2
+                        reset(2)
                     })
                 if choix > 1 {
                     TwoChoix(choix:$choix, nivone:$nivone, nivtwo: $nivtwo)
                         .onChange(of:nivtwo.id, {
-                            suivant()
                             tid = TID([nivzero.id, nivone.id, nivtwo.id])
+                            choix = nivtwo.three.isEmpty ? 7 : 3
+                            reset(3)
                         })
-                    if choix > 2 && nivtwo.three.count > 0 {
+                    if choix > 2  {
                         ThreeChoix(choix:$choix, nivtwo: $nivtwo, nivthree: $nivthree)
                             .onChange(of:nivthree.id, {
-                                suivant()
                                 tid = TID([nivzero.id, nivone.id, nivtwo.id, nivthree.id])
+                                choix = nivthree.four.isEmpty ? 7 : 4
+                                reset(4)
                             })
-                        if choix > 3 && nivthree.four.count > 0 {
+                        if choix > 3 {
                             FourChoix(choix:$choix, nivthree: $nivthree, nivfour:$nivfour)
                                 .onChange(of:nivfour.id, {
-                                    suivant()
                                     tid = TID([nivzero.id, nivone.id, nivtwo.id, nivthree.id, nivfour.id])
+                                    choix = nivfour.five.isEmpty ? 7 : 5
+                                    reset(5)
                                 })
-                            if choix > 4 && nivfour.five.count > 0 {
+                            if choix > 4  {
                                 FiveChoix(choix:$choix, nivfour:$nivfour, nivfive:$nivfive)
                                     .onChange(of:nivfive.id, {
-                                        choix = 7
                                         tid = TID([nivzero.id, nivone.id, nivtwo.id, nivthree.id, nivfour.id, nivfive.id])
+                                        choix = 7
                                     })
                             }
                         }
@@ -111,32 +99,26 @@ public struct TaxonomyPicker: View {
     }
 }
 
-struct ClassPreview: View {
+struct ClassePreview: View {
     @State var tid = TID()
     
     var body:some View {
-        VStack {
-            TaxonomyPicker($tid).frame(width:500, height:300)
-            Text(String(tid.two ?? -1))
-            Text(Niveau(tid).nom)
-            Text(tid.id)
-            Text(Niveau(tid).show())
-        }.padding()
+        TIDPicker($tid).frame(width:500, height:300).padding()
     }
 }
 #Preview("vierge") {
-    ClassPreview(tid : TID([1]))
+    ClassePreview(tid : TID([1]))
 }
 #Preview("produit") {
-    ClassPreview(tid : TID([1]))
+    ClassePreview(tid : TID([1]))
 }
 #Preview("service") {
-    ClassPreview(tid : TID([2,1,1]))
+    ClassePreview(tid : TID([2,1,1]))
 }
 #Preview("cotisation") {
-    ClassPreview(tid : TID([3,1]))
+    ClassePreview(tid : TID([3,1]))
 }
 
 #Preview("impôt") {
-    ClassPreview(tid : TID([4]))
+    ClassePreview(tid : TID([4]))
 }

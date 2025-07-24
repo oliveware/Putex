@@ -27,8 +27,10 @@ struct FourChoix : View {
                 }
             }
         } else {
-            Button(action:{ choix = 4 })
-            { Text(nivfour.nom) }
+            if nivfour.nom != "" {
+                Button(action:{ choix = 4 })
+                { Text(nivfour.nom) }
+            }
         }
     }
 }

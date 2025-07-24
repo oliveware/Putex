@@ -18,11 +18,11 @@ struct Nivfive: Codable, Identifiable,Hashable {
     
     var nom:String = ""
     
-    init() {id = 0}
+    init() {id = -1}
     init(_ nivfour:TID) {
         let nivfiveid = TID(nivfour)
         tid = nivfiveid
-        id = nivfiveid.nivfive!
+        id = nivfiveid.five!
     }
     
 }

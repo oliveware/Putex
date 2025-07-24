@@ -28,11 +28,10 @@ struct FiveChoix : View {
                 }
             }
         } else {
-            Button(action:{
-                choix = 5
-              // nivfive = Nivfive()
-            })
-            { Text(nivfive.nom) }
+            if nivfive.nom != "" {
+                Button(action:{ choix = 5 })
+                { Text(nivfive.nom) }
+            }
         }
     }
 }

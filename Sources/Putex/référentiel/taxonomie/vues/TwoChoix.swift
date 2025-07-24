@@ -27,11 +27,10 @@ struct TwoChoix : View {
                 }
             }
         } else {
-            Button(action:{
-                choix = 2
-               // nivtwo = Nivtwo()
-            })
-            { Text(nivtwo.nom) }
+            if nivtwo.nom != "" {
+                Button(action:{ choix = 2 })
+                { Text(nivtwo.nom) }
+            }
         }
     }
 }

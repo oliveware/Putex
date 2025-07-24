@@ -23,7 +23,7 @@ public struct Nivzero : Codable, Identifiable, Hashable {
     var nom = ""
     var one : [Nivone] = []
     
-    init() {id = 0}
+    init() {id = -1}
     init(_ id:Int, _ nom:String, _ nivone: [Nivone]) {
         self.id = id
         self.nom = nom

@@ -6,27 +6,27 @@
 //
 
 struct Niveau {
-    public var nivzero  : Nivzero?
-    public var nivone   : Nivone?
-    public var nivtwo   : Nivtwo?
-    public var nivthree : Nivthree?
-    public var nivfour  : Nivfour?
-    var nivfive         : Nivfive?
+    public var zero  : Nivzero?
+    public var one   : Nivone?
+    public var two   : Nivtwo?
+    public var three : Nivthree?
+    public var four  : Nivfour?
+    var five         : Nivfive?
     
     func show(_ sep:String = "-") -> String {
         var string = ""
-        if let zero = nivzero {
-            string = zero.nom
-            if let one = nivone {
-                string = string + sep + one.nom
-                if let two = nivtwo {
-                    string = string + sep + two.nom
-                    if let three = nivthree {
-                        string = string + sep + three.nom
-                        if let four = nivfour {
-                            string = string + sep + four.nom
-                            if let five = nivfive {
-                                string = string + sep + five.nom
+        if let zeroniv = zero {
+            string = zeroniv.nom
+            if let oneniv = one {
+                string = string + sep + oneniv.nom
+                if let twoniv = two {
+                    string = string + sep + twoniv.nom
+                    if let threeniv = three {
+                        string = string + sep + threeniv.nom
+                        if let fourniv = four {
+                            string = string + sep + fourniv.nom
+                            if let fiveniv = five {
+                                string = string + sep + fiveniv.nom
                             }
                         }
                     }
@@ -38,18 +38,18 @@ struct Niveau {
     
     var nom: String {
         var string = ""
-        if let zero = nivzero {
-            string = zero.nom
-            if let one = nivone {
-                string = one.nom
-                if let two = nivtwo {
-                    string = two.nom
-                    if let three = nivthree {
-                        string = three.nom
-                        if let four = nivfour {
-                            string = four.nom
-                            if let five = nivfive {
-                                string = five.nom
+        if let zeroniv = zero {
+            string = zeroniv.nom
+            if let oneniv = one {
+                string = oneniv.nom
+                if let twoniv = two {
+                    string = twoniv.nom
+                    if let threeniv = three {
+                        string = threeniv.nom
+                        if let fourniv = four {
+                            string = fourniv.nom
+                            if let fiveniv = five {
+                                string = fiveniv.nom
                             }
                         }
                     }
@@ -59,25 +59,21 @@ struct Niveau {
         return string
     }
     
-    init(_ tid:TID) {
-        let nivzero_id = tid.nivzero
-        if let nivzero = Taxonomy(taxonomie)[nivzero_id] {
-            self.nivzero = nivzero
-            if tid.nivone != nil {
-                let nivone = nivzero[tid.nivone!]
-                self.nivone = nivone
-                if tid.nivtwo != nil {
-                    let nivtwo = nivone![tid.nivtwo!]
-                    self.nivtwo = nivtwo
-                    if tid.nivthree != nil {
-                        let nivthree = nivtwo![tid.nivthree!]
-                        self.nivthree = nivthree
-                        if tid.nivfour != nil {
-                            let nivfour = nivthree![tid.nivfour!]
-                            self.nivfour = nivfour
-                            if tid.nivfive != nil {
-                                nivfive = nivfour![tid.nivfive!]
-                                if nivfive != nil {nivfive!.tid = tid}
+    init(_ taxonomie:Taxonomy, _ tid:TID) {
+        let zero_id = tid.zero
+        if let nivzero = taxonomie[zero_id] {
+            zero = nivzero
+            if let nivone = tid.one {
+                one = nivzero[nivone]
+                if let nivtwo = tid.two {
+                    two = one![nivtwo]
+                    if let nivthree = tid.three {
+                        three = two![nivthree]
+                        if let nivfour = tid.four {
+                            four = three![nivfour]
+                            if let nivfive = tid.five {
+                                five = four![nivfive]
+                                if five != nil {five!.tid = tid}
                             }
                         }
                     }

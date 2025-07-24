@@ -22,11 +22,11 @@ public struct Nivfour : Codable, Identifiable, Hashable {
     
     var five:[Nivfive] = []
     
-    init() {id = 0}
+    init() {id = -1}
     init(_ nivthree:TID) {
        let nivfourid = TID(nivthree)
         tid = nivfourid
-        id = nivfourid.nivfour!
+        id = nivfourid.four!
     }
     
     init(_ json:String) {

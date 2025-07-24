@@ -27,11 +27,10 @@ struct ThreeChoix : View {
                 }
             }
         } else {
-            Button(action:{
-                choix = 3
-               // nivthree = Nivthree()
-            })
-            { Text(nivthree.nom) }
+            if nivthree.nom != "" {
+                Button(action:{ choix = 3 })
+                { Text(nivthree.nom) }
+            }
         }
     }
 }
