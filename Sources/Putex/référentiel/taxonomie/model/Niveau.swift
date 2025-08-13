@@ -59,9 +59,10 @@ struct Niveau {
         return string
     }
     
-    init(_ taxonomie:Taxonomy, _ tid:TID) {
+    init(_ tid:TID, _ taxonomy:Taxonomy? = nil) {
+        let taxons = taxonomy ?? Taxonomy(taxonomie)
         let zero_id = tid.zero
-        if let nivzero = taxonomie[zero_id] {
+        if let nivzero = taxons[zero_id] {
             zero = nivzero
             if let nivone = tid.one {
                 one = nivzero[nivone]
@@ -81,27 +82,6 @@ struct Niveau {
             }
         }
      }
-    
-   
-    
- /*  public  init(_ tid:[Int]) {
-        nivone = Nivzero.europe[tid[0]]
-        if tid.count > 1 {
-            nivtwo = nivone[tid[1]]
-        }
-        if tid.count > 2 {
-            nivthree = nivtwo![tid[2]]
-        }
-        if tid.count > 3 {
-            nivfour = nivthree![tid[3]]
-        }
-        if tid.count > 4 {
-            nivfive = nivfour![tid[4]]
-        }
-       /* if tid.count > 5 {
-            batiment = nivfive![tid[5]]
-        }*/
-    }
- */
+
    
 }

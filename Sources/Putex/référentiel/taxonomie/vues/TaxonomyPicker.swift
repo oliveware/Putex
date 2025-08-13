@@ -22,8 +22,8 @@ public struct TaxonomyPicker: View {
     
     public init(_ tid:Binding<TID>, _ taxonomy:Taxonomy? = nil) {
         _tid = tid
-        let classif = taxonomy ?? Taxonomy(taxonomie)
-        let niveau = Niveau(classif, tid.wrappedValue)
+        self.taxonomy = taxonomy ?? Taxonomy(taxonomie)
+        let niveau = Niveau(tid.wrappedValue, taxonomy)
         nivzero = niveau.zero ?? Nivzero()
         nivone = niveau.one ?? Nivone()
         nivtwo = niveau.two ?? Nivtwo()
