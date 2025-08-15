@@ -88,7 +88,12 @@ struct ParceList: View {
     var body: some View {
         
         VStack {
-            Text("surface totale : " + surface.astring).padding(10)
+            if surface.value > 0  && parcelles.count > 1 {
+                HStack {
+                    Spacer()
+                    Text("surface totale : " + surface.astring)
+                }.padding(20)
+            }
             ForEach ($parcelles) {
                 parcelle in
                 HStack(spacing:10) {
@@ -150,17 +155,22 @@ struct ParcellePreview: View {
 
 struct ParceListPreview: View {
     @State var parcelles : [Parcelle] = [Parcelle(999)]
+    var edition = false
     var body:some View {
-        ParceList(parcelles:$parcelles).frame(width:400,height:150)
+        ParceList(parcelles:$parcelles, edition:edition).frame(width:400,height:150)
     }
-}
-
-
-
-#Preview ("liste") {
-    ParceListPreview().padding(20)
 }
 
 #Preview {
     ParcellePreview().padding(20)
 }
+
+
+#Preview ("liste") {
+    ParceListPreview().padding(20)
+}
+#Preview ("liste éditable") {
+    ParceListPreview(parcelles:[Parcelle(123)],edition:true)
+        .padding(20)
+}
+
