@@ -70,6 +70,7 @@ struct ParceList: View {
     @State var num:Int?
     @State var ajoût = false
     @State var edition = false
+    @State var suppression = false
     
     var ajoutable:Bool {
         (num == nil ? true : num! > 0)
@@ -97,7 +98,7 @@ struct ParceList: View {
             ForEach ($parcelles) {
                 parcelle in
                 HStack(spacing:10) {
-                    if edition {
+                    if suppression {
                         Button(action:{delete(parcelle.id)})
                         {Image(systemName: "minus")}
                         Spacer()
@@ -109,6 +110,9 @@ struct ParceList: View {
             if edition {
                 HStack {
                     if ajoût {
+                        Spacer()
+                        TextField("numéro",value: $num, format:.number)
+                            .frame(width:120)
                         if num != nil {
                             if num! > 0 {
                                 Button(action:{
@@ -116,17 +120,24 @@ struct ParceList: View {
                                     ajoût = false
                                     num = nil
                                 })
-                                {Image(systemName: "plus")}
-                            }}
-                        Spacer()
-                        TextField("numéro",value: $num, format:.number)
-                            .frame(width:120)
+                                {Image(systemName: "checkmark")}
+                                    .padding(.leading,20)
+                            }
+                        }
                         Spacer()
                     } else {
-                        Button(action:{
-                            ajoût = true
-                        })
-                        {Text("ajouter une parcelle")}
+                        HStack {
+                            Button(action:{
+                                suppression.toggle()
+                            })
+                            {Image(systemName:"minus")}
+                            Spacer()
+                            Button(action:{
+                                ajoût = true
+                            })
+                            {Text("ajouter une parcelle")}
+                            Spacer()
+                        }
                     }
                 }.padding(.top,20)
             }
@@ -142,6 +153,7 @@ struct ParceList: View {
             }
         }
         parcelles = liste
+        suppression = false
     }
 }
 
@@ -154,7 +166,7 @@ struct ParcellePreview: View {
 }
 
 struct ParceListPreview: View {
-    @State var parcelles : [Parcelle] = [Parcelle(999)]
+    @State var parcelles : [Parcelle] = [Parcelle(200),Parcelle(199)]
     var edition = false
     var body:some View {
         ParceList(parcelles:$parcelles, edition:edition).frame(width:400,height:150)
@@ -170,7 +182,7 @@ struct ParceListPreview: View {
     ParceListPreview().padding(20)
 }
 #Preview ("liste éditable") {
-    ParceListPreview(parcelles:[Parcelle(123)],edition:true)
+    ParceListPreview(parcelles:[Parcelle(123),Parcelle(124),Parcelle(125)],edition:true)
         .padding(20)
 }
 
