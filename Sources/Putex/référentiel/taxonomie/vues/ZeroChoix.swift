@@ -16,15 +16,18 @@ struct ZeroChoix : View {
             ScrollView {
                 ForEach(set.items){
                     item in
-                    Button(action:{ nivzero = item })
+                    Button(action:{
+                        nivzero = item
+                        if item.one.count > 0 {
+                            choix = 1
+                        }
+                    })
                     {Text(item.nom)}
                 }
             }
         } else {
-            if nivzero.nom != "" {
-                Button(action:{ choix = 0 })
-                { Text(nivzero.nom) }
-            }
+            Button(action:{ choix = 0 })
+            { Text(nivzero.nom) }
         }
     }
 }

@@ -18,20 +18,15 @@ struct FiveChoix : View {
                 ForEach(nivfour.five){
                     item in
                     Button(action:{
-                        if nivfive == item {
-                            choix = 6
-                        } else {
-                            nivfive = item
-                        }
+                        choix = 6
+                        nivfive = item
                     })
                     {Text(item.nom)}
                 }
             }
         } else {
-            if nivfive.nom != "" {
-                Button(action:{ choix = 5 })
-                { Text(nivfive.nom) }
-            }
+            Button(action:{ choix = 5 })
+            { Text(nivfive.nom) }
         }
     }
 }

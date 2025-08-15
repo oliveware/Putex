@@ -17,20 +17,17 @@ struct ThreeChoix : View {
                 ForEach(nivtwo.three){
                     item in
                     Button(action:{
-                        if nivthree == item {
+                        nivthree = item
+                        if item.four.count > 0 {
                             choix = 4
-                        } else {
-                            nivthree = item
                         }
                     })
                     {Text(item.nom)}
                 }
             }
         } else {
-            if nivthree.nom != "" {
                 Button(action:{ choix = 3 })
                 { Text(nivthree.nom) }
-            }
         }
     }
 }

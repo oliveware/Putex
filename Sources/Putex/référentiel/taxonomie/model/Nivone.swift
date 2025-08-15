@@ -19,7 +19,7 @@ public struct Nivone : Codable, Identifiable, Hashable {
     public var id:Int
     var tid:TID?
     
-    public var nom = "choisir"
+    public var nom = ""
    // public var pays:String { nom }
     
     var two:[Nivtwo] = []

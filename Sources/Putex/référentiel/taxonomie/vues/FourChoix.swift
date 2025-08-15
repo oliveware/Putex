@@ -17,20 +17,17 @@ struct FourChoix : View {
                 ForEach(nivthree.four){
                     item in
                     Button(action:{
-                        if  nivfour == item {
+                        nivfour = item
+                        if item.five.count > 0 {
                             choix = 5
-                        } else {
-                            nivfour = item
                         }
                     })
                     {Text(item.nom)}
                 }
             }
         } else {
-            if nivfour.nom != "" {
                 Button(action:{ choix = 4 })
                 { Text(nivfour.nom) }
-            }
         }
     }
 }

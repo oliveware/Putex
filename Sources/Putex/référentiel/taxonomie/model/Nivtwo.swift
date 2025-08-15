@@ -18,7 +18,7 @@ public struct Nivtwo : Codable, Identifiable, Hashable {
     public var id:Int
     var tid:TID?
     
-    public var nom = "choisir"
+    public var nom = ""
     
     var three:[Nivthree] = []
     

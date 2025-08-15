@@ -32,8 +32,8 @@ public struct TaxonomyPicker: View {
         nivfive = niveau.five ?? Nivfive()
     }
     
-    func suivant() {
-        switch choix {
+    func suivant(_ step:Int) {
+        switch step {
         case 0 :
             nivone = .init()
             nivtwo = .init()
@@ -59,47 +59,49 @@ public struct TaxonomyPicker: View {
         case 4 :
             nivfive = .init()
             choix = 5
+        case 5 :
+            choix = 6
         default:
-            choix = 0
+            break
         }
     }
     
     public var body:some View {
             HStack(alignment: .top) {
-                Text("taxonomie : ")
+                Text("choix : \(choix)")
                 ZeroChoix(choix:$choix, nivzero: $nivzero, set: taxonomy)
                     .onChange(of:nivzero.id, {
-                        suivant()
+                        suivant(0)
                         tid = TID([nivzero.id])
                     })
                 if choix > 0 {
                 OneChoix(choix:$choix, nivzero:$nivzero, nivone:$nivone)
                     .onChange(of:nivone.id, {
-                        suivant()
+                        suivant(1)
                         tid = TID([nivzero.id, nivone.id])
                     })
                 if choix > 1 {
                     TwoChoix(choix:$choix, nivone:$nivone, nivtwo: $nivtwo)
                         .onChange(of:nivtwo.id, {
-                            suivant()
+                            suivant(2)
                             tid = TID([nivzero.id, nivone.id, nivtwo.id])
                         })
                     if choix > 2 && nivtwo.three.count > 0 {
                         ThreeChoix(choix:$choix, nivtwo: $nivtwo, nivthree: $nivthree)
                             .onChange(of:nivthree.id, {
-                                suivant()
+                                suivant(3)
                                 tid = TID([nivzero.id, nivone.id, nivtwo.id, nivthree.id])
                             })
                         if choix > 3 && nivthree.four.count > 0 {
                             FourChoix(choix:$choix, nivthree: $nivthree, nivfour:$nivfour)
                                 .onChange(of:nivfour.id, {
-                                    suivant()
+                                    suivant(4)
                                     tid = TID([nivzero.id, nivone.id, nivtwo.id, nivthree.id, nivfour.id])
                                 })
                             if choix > 4 && nivfour.five.count > 0 {
                                 FiveChoix(choix:$choix, nivfour:$nivfour, nivfive:$nivfive)
                                     .onChange(of:nivfive.id, {
-                                        choix = 7
+                                        suivant(5)
                                         tid = TID([nivzero.id, nivone.id, nivtwo.id, nivthree.id, nivfour.id, nivfive.id])
                                     })
                             }
@@ -125,7 +127,7 @@ struct ClassPreview: View {
     }
 }
 #Preview("vierge") {
-    ClassPreview(tid : TID([1]))
+    ClassPreview(tid : TID([]))
 }
 #Preview("produit") {
     ClassPreview(tid : TID([1]))

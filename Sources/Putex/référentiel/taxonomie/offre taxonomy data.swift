@@ -18,13 +18,24 @@ public let taxonomie = """
                         ]
                     },
                     {"id":2, "nom":"mobilier", "three":[
-                            {"id":1,"nom":"chaise", "four":[]}, 
+                            {"id":1,"nom":"siège", "four":[
+                                {"id":1,"nom":"chaise", "five":[]},
+                                {"id":2,"nom":"tabouret", "five":[]},
+                                {"id":3,"nom":"fauteuil", "five":[]},
+                                {"id":4,"nom":"canapé", "five":[]},
+                                {"id":5,"nom":"pouf", "five":[]}
+                                ]}, 
                             {"id":2,"nom":"table", "four":[]},
-                            {"id":3,"nom":"armoire", "four":[]}
+                            {"id":3,"nom":"armoire", "four":[]},
+                            {"id":4,"nom":"lit", "four":[]},
+                            {"id":5,"nom":"bureau", "four":[]},
+                            {"id":9,"nom":"tapis", "four":[]}
                         ]
                     },
                     {"id":3, "nom":"chauffage", "three":[
-                            {"id":1,"nom":"radiateur", "four":[]}
+                            {"id":1,"nom":"radiateur", "four":[]},
+                            {"id":2,"nom":"chaudière", "four":[]},
+                            {"id":3,"nom":"pompe à chaleur", "four":[]}
                         ]
                     },
                     {"id":4, "nom":"sanitaire", "three":[
@@ -127,7 +138,22 @@ public let taxonomie = """
             {"id":4,"nom":"multiple", "three":[]},
             {"id":5,"nom":"réparation", "three":[]}
         ]},
-        {"id":3, "nom":"médecin", "two":[]} 
+        {"id":3, "nom":"santé", "two":[
+            {"id":1, "nom":"médecin", "three":[
+                {"id":1, "nom":"généraliste", "four":[]},
+                {"id":2, "nom":"radiologue", "four":[]},
+                {"id":3, "nom":"cardiologue", "four":[]},
+                {"id":4, "nom":"dermatologue", "four":[]},
+                {"id":5, "nom":"anesthésie", "four":[]},
+                {"id":6, "nom":"chirurgie", "four":[]}
+            ]},
+            {"id":2, "nom":"pharmacie", "three":[]},
+            {"id":3, "nom":"infirmier", "three":[]},
+            {"id":4, "nom":"analyses", "three":[]},
+            {"id":5, "nom":"ambulance", "three":[]},
+            {"id":6, "nom":"hôpital", "three":[]}
+            ]
+        } 
     ]},
     {"id":3, "nom":"cotisation", "one":[
         {"id":1, "nom":"socicale", "two":[
