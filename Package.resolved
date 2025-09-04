@@ -1,0 +1,15 @@
+{
+  "originHash" : "1425c968c8f321b1314aa510a94297034fdb6dd724f221bfcf03977f8da06638",
+  "pins" : [
+    {
+      "identity" : "fichiers",
+      "kind" : "remoteSourceControl",
+      "location" : "http://github.com/oliveware/Fichiers",
+      "state" : {
+        "branch" : "main",
+        "revision" : "ecffa3bc4e8248d59118ccdec3c3a14a1d8a10db"
+      }
+    }
+  ],
+  "version" : 3
+}

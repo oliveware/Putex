@@ -115,10 +115,11 @@ public struct TaxonomyPicker: View {
 
 struct ClassPreview: View {
     @State var tid = TID()
+    var taxons = besoins
     
     var body:some View {
         VStack {
-            TaxonomyPicker($tid).frame(width:500, height:300)
+            TaxonomyPicker($tid, Taxonomy(taxons)).frame(width:500, height:300)
             Text(String(tid.two ?? -1))
             Text(Niveau(tid).nom)
             Text(tid.id)

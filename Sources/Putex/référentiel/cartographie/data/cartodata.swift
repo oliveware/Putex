@@ -4,11 +4,12 @@
 //
 //  Created by Herve Crespel on 01/11/2024.
 //
+import Fichiers
 
 let continents = """
 {"sept" : [
     {   "id":7, "nom":"Antartique", "territoires": [] },
-    {   "id":1, "nom":"Europe", "territoires": [\(France)] },
+    {   "id":1, "nom":"Europe", "territoires": [\(FR)] },
     {   "id":2, "nom":"Amérique du nord", "territoires": [] },
     {   "id":3, "nom":"Amérique du sud", "territoires": [] },
     {   "id":4, "nom":"Océanie", "territoires": [] },
@@ -17,7 +18,11 @@ let continents = """
 ]}
 """
 
-let France = """
+let countries = ClassCache<Territoire>()
+let France = countries.read("France")
+let Deutschland = countries.read("Deutschland")
+
+let FR = """
 {"id":1, "nom":"France",
         "regions":[
             {"id":1, "nom":"Auvergne-Rhône-Alpes",

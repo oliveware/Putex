@@ -12,11 +12,17 @@ let package = Package(
             name: "Putex",
             targets: ["Putex"]),
     ],
+    dependencies: [
+        // Dependencies declare other packages that this package depends on.
+        .package(url: "http://github.com/oliveware/Fichiers", branch: "main")
+    ],
     targets: [
         // Targets are the basic building blocks of a package, defining a module or a test suite.
         // Targets can depend on other targets in this package and products from dependencies.
         .target(
-            name: "Putex"),
+            name: "Putex",
+            dependencies:["Fichiers"]
+        ),
         .testTarget(
             name: "PutexTests",
             dependencies: ["Putex"]),
