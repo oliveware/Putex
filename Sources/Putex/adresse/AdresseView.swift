@@ -8,15 +8,23 @@ import SwiftUI
 
 struct AdresseView : View {
     @Binding var numvoie: NumVoie
-    @State private var edit = false
+    @Binding private var edit: Bool
     var commune:String = ""
+    
+    init(_ numvoie: Binding<NumVoie>, _ commune:String, _ edit:Binding<Bool>) {
+        _numvoie = numvoie
+        self.commune = commune
+        _edit = edit
+    }
     
     var body: some View {
         HStack (spacing:20){
             if edit {
                 NumVoieEditor($numvoie)
-                Button(action:{edit = false})
-                {Image(systemName: "checkmark")}
+                if numvoie.isfull {
+                    Button(action:{edit = false})
+                    {Image(systemName: "checkmark")}
+                }
             } else {
                 Text(numvoie.adresse + "  " + commune)
                 Button(action:{edit = true})
@@ -29,46 +37,67 @@ struct AdresseView : View {
 struct AdresseDouble : View {
     @Binding var numvoie: [NumVoie]
     var commune:String = ""
-    //@State var firstedit = false
-    //@State var autreedit = false
+    @State var firstedit : Bool
+    @State var autreedit : Bool
+    
+    init(_ numvoie: Binding<[NumVoie]>, _ commune:String) {
+        _numvoie = numvoie
+        self.commune = commune
+        if numvoie.wrappedValue.count > 0 {
+            firstedit = numvoie[0].wrappedValue.isNaN
+            if numvoie.wrappedValue.count > 1 {
+                autreedit = numvoie[1].wrappedValue.isNaN
+            } else {
+                autreedit = false
+            }
+        } else {
+            firstedit = false
+            autreedit = false
+        }
+    }
     
     var body: some View {
-        VStack(alignment:.trailing, spacing:20 ){
+        VStack(alignment:.leading, spacing:20 ){
             if numvoie.count > 0 {
                 GroupBox("adresse") {
-                    AdresseView(numvoie:$numvoie[0], commune:commune)
+                    AdresseView($numvoie[0], commune, $firstedit)
                 }
-                if numvoie.count > 1 {
-                    HStack (spacing:20){
-                        Button( action:{
-                            let first = numvoie[0]
-                            numvoie = [first]
+                if !numvoie[0].isNaN {
+                    if numvoie.count > 1 {
+                        HStack (spacing:20){
+                            
+                            GroupBox("autre adresse") {
+                                AdresseView($numvoie[1], commune, $autreedit)
                             }
-                        )
-                        {Image(systemName: "minus")}
-                        GroupBox("autre adresse") {
-                            AdresseView(numvoie:$numvoie[1], commune:commune)
+                            Button( action:{
+                                let first = numvoie[0]
+                                numvoie = [first]
+                            }
+                            )
+                            {Image(systemName: "minus")}
                         }
+                    } else {
+                        Button("autre adresse") {
+                            numvoie.append(NumVoie())
+                            autreedit = true
+                        }.disabled(!numvoie[0].isfull)
+                        .padding(20)
                     }
-                } else {
-                    Button("autre adresse") {
-                        numvoie.append(NumVoie())
-                    }.padding(20)
                 }
             }
         }.padding(10)
     }
 }
     public struct AdressePreview: View {
-        @State var numvoie = [NumVoie(), NumVoie()]
+        @State var numvoie = [NumVoie()]
         
         public var body :some View {
-            AdresseDouble(numvoie:$numvoie)
+            AdresseDouble($numvoie, "commune")
         }
     }
 
     #Preview {
-        AdressePreview().frame(width:600)
+        AdressePreview().frame(width:600, height:400)
     }
     
   /*  var editor: some View {

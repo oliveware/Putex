@@ -40,7 +40,7 @@ struct ParcelleEditor: View {
             Spacer()
             NumberView($parcelle.surface)
         }
-        AdresseDouble(numvoie:$parcelle.numvoie, commune:parcelle.commune)
+        AdresseDouble($parcelle.numvoie, parcelle.commune)
     }
 }
 
