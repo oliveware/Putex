@@ -8,7 +8,7 @@
 import Foundation
 
 public struct LID : Codable, Identifiable {
-    public static var NA = LID([0,0,0,0,0])
+    public static var NA = LID([0,0,0,0,0,0])
     static var next = (zero:0, one:0, two:0, three:0, four:0, five:0)
     static func nextinit(_ continents: [Continent]) {
         var zero = continents.count
@@ -26,7 +26,7 @@ public struct LID : Codable, Identifiable {
                     for commune in region.communes {
                         four += commune.quartiers.count
                         for quartier in commune.quartiers {
-                            five += quartier.terrains.count
+                            five += quartier.parcelles.count
                         }
                     }
                 }
@@ -50,7 +50,7 @@ public struct LID : Codable, Identifiable {
     static func quartier() -> Int {
         next.four += 1 ; return next.four
     }
-    static func terrain() -> Int {
+    static func parcelle() -> Int {
         next.five += 1 ; return next.five
     }
     
@@ -59,7 +59,19 @@ public struct LID : Codable, Identifiable {
     var region : Int?
     var commune : Int?
     var quartier : Int?
-    var terrain : Int?
+    var parcelle : Int?
+    
+    static func == (_ a:LID, _ b: LID) -> Bool {
+        a.continent == b.continent &&
+        a.territoire == b.territoire &&
+        a.region == b.region &&
+        a.commune == b.commune &&
+        a.quartier == b.quartier &&
+        a.parcelle == b.parcelle
+    }
+    static func != (_ a:LID, _ b: LID) -> Bool {
+        !(a == b)
+    }
     
     // initialisation du niveau inférieur
     init(_ lid:LID? = nil) {
@@ -73,7 +85,7 @@ public struct LID : Codable, Identifiable {
                         commune = third
                         if let fourth = parent.quartier {
                             quartier = fourth
-                            terrain = LID.terrain()
+                            parcelle = LID.parcelle()
                         } else {
                             quartier = LID.quartier()
                         }
@@ -104,7 +116,7 @@ public struct LID : Codable, Identifiable {
                         if div > 4 && tab[4] > 0  {
                             quartier = tab[4]
                             if div == 6 && tab[5] > 0  {
-                                terrain = tab[5]
+                                parcelle = tab[5]
                             }
                         }
                     }
@@ -125,7 +137,7 @@ public struct LID : Codable, Identifiable {
                     t = t + "-" + String(c)
                     if let q = quartier {
                         t = t + "-" + String(q)
-                        if let p = terrain {
+                        if let p = parcelle {
                             t = t + "-" + String(p)
                         }
                     }
@@ -142,17 +154,17 @@ public struct Lieu {
     public var region : Region?
     public var commune : Commune?
     public var quartier : Quartier?
-    var terrain : Terrain?
+    var parcelle : Parcelle?
     
     public func adresse(_ complement:String? = nil,_ pays:Bool = false, _ autre:Bool = false) -> String {
-        if terrain == nil {
+        if parcelle == nil {
             if commune == nil {
                 return territoire == nil ? "définir l'adresse" : territoire!.nom
             } else {
                 return commune!.nom + " " + (pays ? territoire!.nom : "")
             }
         } else {
-            let adresse = terrain!.adresse(complement, autre) + " " + commune!.nom
+            let adresse = parcelle!.adresse(complement, autre) + " " + commune!.nom
             return adresse + (pays ? "\n" + territoire!.nom : "")
         }
     }
@@ -173,9 +185,9 @@ public struct Lieu {
                         if lid.quartier != nil {
                             let quartier = commune![lid.quartier!]
                             self.quartier = quartier
-                            if lid.terrain != nil {
-                                terrain = quartier![lid.terrain!]
-                                if terrain != nil {terrain!.lid = lid}
+                            if lid.parcelle != nil {
+                                parcelle = quartier![lid.parcelle!]
+                                if parcelle != nil {parcelle!.lid = lid}
                             }
                         }
                     }

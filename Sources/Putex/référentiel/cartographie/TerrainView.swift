@@ -10,25 +10,43 @@ import SwiftUI
 public struct TerrainShow: View {
     @Binding var terrain:Terrain
     
+    var parcelles : [Parcelle] {
+        var parc: [Parcelle] = []
+        for lid in terrain.parcelles {
+            if let parcelle = Lieu(lid).parcelle {
+                parc.append(parcelle)
+            }
+        }
+        return parc
+    }
+    
     public var body: some View {
         VStack ( spacing:20) {
-            if terrain.numvoie.voie != "" {
+            if terrain.checked {
                 GroupBox("Adresse") {
-                    Text(terrain.address).padding(10)
+                    Text(terrain.cartoucheAdresses()).padding(10)
                 }
             }
             
             GroupBox("Parcelles") {
-                ParceList(parcelles: $terrain.parcelles).padding(10)
-                }.padding(10)
+                
+                ForEach(parcelles) {
+                    parcelle in
+                    HStack (spacing:30){
+                        Text("n° " + String(parcelle.id))
+                        Text(parcelle.surface.astring)
+                    }
+                }
+            
             }.padding(10)
-        }
+        }.padding(10)
+    }
 }
 
 public struct TerrainView: View {
     @Binding var terrain:Terrain
     @State var edition : Bool
-    @State private var lid = LID()
+   
     var modifiable = false
     
     public init(_ terrain:Binding<Terrain>, modifiable:Bool = false) {
@@ -53,34 +71,23 @@ public struct TerrainView: View {
         }
     }
     
-    func creator() {
-        //print (terrain, lid)
-        terrain = Lieu(lid).terrain ?? Terrain(lid)
-        //print (terrain)
-        edition = true
-     }
+    
     
     public var body: some View {
-        if terrain.lid == nil {
-            VStack {
-                LIDPicker($lid, creator)
+        VStack{
+            valeur
+           .padding(20)
+            
+            if edition {
+                TerrainEditor($terrain)
+            } else {
+                TerrainShow(terrain: $terrain)
             }
-        } else {
-            VStack{
-                valeur
-               .padding(20)
-                
-                if edition {
-                    TerrainEditor($terrain)
-                } else {
-                    TerrainShow(terrain: $terrain)
-                }
-                if modifiable {
-                    Button(action:{ edition.toggle() })
-                    { Text(edition ? "valider les corrections" : "corriger")}.padding(20)
-                }
-            }.frame(maxHeight:.infinity)
-        }
+            if modifiable {
+                Button(action:{ edition.toggle() })
+                { Text(edition ? "valider les corrections" : "corriger")}.padding(20)
+            }
+        }.frame(maxHeight:.infinity)
     }
 }
 
@@ -93,13 +100,7 @@ public struct TerrainEditor: View {
     
     public var body: some View {
         HStack(alignment:.top) {
-            VStack(alignment: .leading) {
-                AdresseDouble(first:$terrain.numvoie, autre:$terrain.autrenumvoie, commune:terrain.commune)
-               
-            }
-            GroupBox("parcelles") {
-                ParceList(parcelles: $terrain.parcelles).padding(10)
-            }.padding(20)
+           Text("ajouter une parcelle")
                
         }.frame(alignment: .leading)
         .padding(10)

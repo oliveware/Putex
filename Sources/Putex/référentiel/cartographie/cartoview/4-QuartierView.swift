@@ -14,20 +14,20 @@ struct QuartierView : View {
     var region: Region
     var commune : Commune
     @Binding var quartier: Quartier
-    @Binding var terrain : Terrain
+    @Binding var parcelle : Parcelle
     
     var body:some View {
-        if quartier.terrains.count > 0 {
+        if quartier.parcelles.count > 0 {
             HStack {
                 VStack {
                     Text("terrains")
-                    ForEach($quartier.terrains){
+                    ForEach($quartier.parcelles){
                         item in
                         Button(action:{
-                            terrain = item.wrappedValue
+                            parcelle = item.wrappedValue
                             lid = LID([continent.id, territoire.id, region.id, commune.id,
                                        quartier.id, item.id])
-                            terrain.lid = lid
+                            parcelle.lid = lid
                         })
                         {
                             Text(item.wrappedValue.label).frame(width:100)

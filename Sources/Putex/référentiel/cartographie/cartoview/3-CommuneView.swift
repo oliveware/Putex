@@ -13,7 +13,7 @@ struct CommuneView: View {
     var region: Region
     @Binding var commune : Commune
     @Binding var quartier : Quartier
-    @Binding var terrain : Terrain
+    @Binding var parcelle : Parcelle
     
     @State private var choix = false
     
@@ -21,7 +21,7 @@ struct CommuneView: View {
         if commune.quartiers.count == 1 {
             let quart = commune.quartiers[0]
             quartier = quart
-            terrain = Terrain()
+            parcelle = Parcelle()
             lid = LID([continent.id, territoire.id, region.id, commune.id, quart.id])
         } else {
             choix = true
@@ -47,7 +47,7 @@ struct CommuneView: View {
                                 item in
                                 Button(action:{
                                     quartier = item.wrappedValue
-                                    terrain = Terrain()
+                                    parcelle = Parcelle()
                                     lid = LID([continent.id, territoire.id, region.id, commune.id, item.id])
                                     choix = false
                                 })
@@ -58,7 +58,7 @@ struct CommuneView: View {
                         }
                     }
                     
-                    QuartierView(lid:$lid, continent:continent, territoire:territoire, region:region, commune:commune, quartier:$quartier, terrain:$terrain)
+                    QuartierView(lid:$lid, continent:continent, territoire:territoire, region:region, commune:commune, quartier:$quartier, parcelle:$parcelle)
                 }.frame(alignment:.leading)
             
         } else {

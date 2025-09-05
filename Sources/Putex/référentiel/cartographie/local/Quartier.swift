@@ -12,7 +12,8 @@ public struct Quartier: Codable, Identifiable {
     
     var nom = ""
     
-    var terrains:[Terrain] = []
+    //var terrains:[Terrain] = []
+    var parcelles:[Parcelle] = []
     
     init(_ commune:LID) {
         let quartierlid = LID(commune)
@@ -21,11 +22,11 @@ public struct Quartier: Codable, Identifiable {
     }
     init() { id = 0}
     
-    subscript(_ id:Int) -> Terrain? {
-        var found : Terrain?
-        for terrain in terrains {
-            if terrain.id == id {
-                found = terrain
+    subscript(_ id:Int) -> Parcelle? {
+        var found : Parcelle?
+        for parcelle in parcelles {
+            if parcelle.id == id {
+                found = parcelle
                 break
             }
         }

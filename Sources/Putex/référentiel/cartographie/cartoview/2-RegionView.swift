@@ -13,7 +13,7 @@ struct RegionView: View {
     @Binding var region: Region
     @Binding var commune : Commune
     @Binding var quartier : Quartier
-    @Binding var terrain : Terrain
+    @Binding var parcelle : Parcelle
     
     @State private var choix = true
     @State private var ajout = false
@@ -32,7 +32,7 @@ struct RegionView: View {
                                 Button(action:{
                                     commune = Commune()
                                     quartier = Quartier()
-                                    terrain = Terrain()
+                                    parcelle = Parcelle()
                                     choix = true
                                 })
                                 {Image(systemName: "chevron.down") }
@@ -47,7 +47,7 @@ struct RegionView: View {
                                     } else {
                                         quartier = Quartier()
                                     }
-                                    terrain = Terrain()
+                                    parcelle = Parcelle()
                                     lid = LID([continent.id,territoire.id, region.id, item.id])
                                     choix = false
                                 })
@@ -56,21 +56,21 @@ struct RegionView: View {
                         }
                     }
                     
-                    CommuneView(lid:$lid, continent:continent, territoire:territoire, region:region, commune:$commune, quartier:$quartier, terrain:$terrain)
+                    CommuneView(lid:$lid, continent:continent, territoire:territoire, region:region, commune:$commune, quartier:$quartier, parcelle:$parcelle)
                 }.frame(alignment:.leading).padding(20)
                 
                 HStack (spacing: 20) {
                     GroupBox("LID") {
                         Text(lid.id)
                     }
-                    if !terrain.numvoie.isNaN {
+                    if parcelle.numvoie.count > 0 {
                         VStack{
                             GroupBox("Adresse") {
-                                Text(terrain.adresse())
+                                Text(parcelle.adresse())
                             }
-                            if terrain.autrenumvoie != nil {
+                            if parcelle.numvoie.count > 1 {
                                 GroupBox("autre adresse") {
-                                    Text(terrain.adresse(nil,true))
+                                    Text(parcelle.adresse(nil,true))
                                 }
                             }
                         }

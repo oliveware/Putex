@@ -16,7 +16,7 @@ public struct Commune: Codable, Identifiable {
     var avecterrains: Bool {
         var found = false
         for quartier in quartiers {
-            if quartier.terrains.count > 0 {
+            if quartier.parcelles.count > 0 {
                 found = true
             }
         }

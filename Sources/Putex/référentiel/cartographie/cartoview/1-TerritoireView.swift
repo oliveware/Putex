@@ -13,7 +13,7 @@ struct TerritoireView : View {
     @State var region = Region()
     @State var commune = Commune()
     @State var quartier = Quartier()
-    @State var terrain = Terrain()
+    @State var parcelle = Parcelle()
     
 
     var body:some View {
@@ -22,12 +22,12 @@ struct TerritoireView : View {
                 ForEach($territoire.regions) { item in
                     if item.wrappedValue.avecterrains {
                         NavigationLink {
-                            RegionView(lid:$lid,  continent:continent, territoire:territoire, region:item, commune:$commune, quartier:$quartier, terrain:$terrain )
+                            RegionView(lid:$lid,  continent:continent, territoire:territoire, region:item, commune:$commune, quartier:$quartier, parcelle:$parcelle )
                                 .onChange(of:item.id) {
                                     region = item.wrappedValue
                                     commune = Commune()
                                     quartier = Quartier()
-                                    terrain = Terrain()
+                                    parcelle = Parcelle()
                                     lid = LID([continent.id, territoire.id, item.id])
                                 }
                         } label: {

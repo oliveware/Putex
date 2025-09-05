@@ -27,43 +27,43 @@ struct AdresseView : View {
 }
 
 struct AdresseDouble : View {
-    @Binding var first: NumVoie
-    @Binding var autre: NumVoie?
+    @Binding var numvoie: [NumVoie]
     var commune:String = ""
-    @State var firstedit = false
-    @State var autreedit = false
+    //@State var firstedit = false
+    //@State var autreedit = false
     
     var body: some View {
         VStack(alignment:.trailing, spacing:20 ){
-            GroupBox("adresse") {
-                AdresseView(numvoie:$first, commune:commune)
-            }
-            if autre == nil {
-                Button("autre adresse") {
-                    autre = NumVoie()
-                    autreedit = true
-                }.padding(20)
-            } else {
-                HStack (spacing:20){
-                    Button(action:{autre = nil})
-                    {Image(systemName: "minus")}
-                    GroupBox("autre adresse") {
-                        AdresseView(numvoie:Binding<NumVoie>(
-                            get: {autre ?? NumVoie()},
-                            set: { autre = $0 } ),
-                                commune:commune)
+            if numvoie.count > 0 {
+                GroupBox("adresse") {
+                    AdresseView(numvoie:$numvoie[0], commune:commune)
+                }
+                if numvoie.count > 1 {
+                    HStack (spacing:20){
+                        Button( action:{
+                            let first = numvoie[0]
+                            numvoie = [first]
+                            }
+                        )
+                        {Image(systemName: "minus")}
+                        GroupBox("autre adresse") {
+                            AdresseView(numvoie:$numvoie[1], commune:commune)
+                        }
                     }
+                } else {
+                    Button("autre adresse") {
+                        numvoie.append(NumVoie())
+                    }.padding(20)
                 }
             }
         }.padding(10)
     }
 }
     public struct AdressePreview: View {
-        @State var first = NumVoie()
-        @State var autre : NumVoie?
+        @State var numvoie = [NumVoie(), NumVoie()]
         
         public var body :some View {
-            AdresseDouble(first:$first, autre:$autre)
+            AdresseDouble(numvoie:$numvoie)
         }
     }
 

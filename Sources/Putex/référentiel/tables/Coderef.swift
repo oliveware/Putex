@@ -26,6 +26,7 @@ public struct Coderef: Codable, Identifiable {
         case company    = "C"
         case equipement = "E"
         case foncier    = "F"
+        case terrain    = "FT"
         case human      = "H"
         case local      = "L"
         case offre      = "O"

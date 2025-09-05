@@ -40,6 +40,7 @@ struct ParcelleEditor: View {
             Spacer()
             NumberView($parcelle.surface)
         }
+        AdresseDouble(numvoie:$parcelle.numvoie, commune:parcelle.commune)
     }
 }
 
@@ -47,6 +48,7 @@ struct ParcelleView: View {
     @Binding var parcelle: Parcelle
     @Binding private var correction: Bool
     @State private var edition: Bool
+    @State private var lid = LID()
     
     init(_ parcelle: Binding<Parcelle>, _ correction:Binding<Bool>) {
         _parcelle = parcelle
@@ -54,12 +56,25 @@ struct ParcelleView: View {
         edition = parcelle.wrappedValue.id == 0
     }
     
+    func creator() {
+        //print (terrain, lid)
+        parcelle = Lieu(lid).parcelle ?? Parcelle()
+        //print (terrain)
+        edition = true
+     }
+    
     var body: some View {
-        HStack{
-            if edition {
-                ParcelleEditor(parcelle: $parcelle)
-            } else {
-                ParcelleShow($parcelle)
+        if parcelle.lid == nil {
+            VStack {
+                LIDPicker($lid, creator)
+            }
+        } else {
+            HStack{
+                if edition {
+                    ParcelleEditor(parcelle: $parcelle)
+                } else {
+                    ParcelleShow($parcelle)
+                }
             }
         }
     }
