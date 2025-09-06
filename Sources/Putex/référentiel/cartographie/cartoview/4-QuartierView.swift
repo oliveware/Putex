@@ -20,7 +20,7 @@ struct QuartierView : View {
         if quartier.parcelles.count > 0 {
             HStack {
                 VStack {
-                    Text("terrains")
+                    Text("parcelles")
                     ForEach($quartier.parcelles){
                         item in
                         Button(action:{

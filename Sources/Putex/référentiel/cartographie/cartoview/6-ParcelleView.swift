@@ -190,6 +190,7 @@ struct ParceListPreview: View {
 
 #Preview {
     ParcellePreview().padding(20)
+        .frame(width:600, height:400)
 }
 
 

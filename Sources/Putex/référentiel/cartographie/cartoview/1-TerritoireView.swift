@@ -52,7 +52,7 @@ struct TerritoireView : View {
 
 struct TerritoirePreview : View {
     @State var continent = Continents.Europe
-    @State var territoire = Deutschland ?? Territoire(FR)
+    @State var territoire = France ?? Territoire(FR)
     @State var lid = LID([1])
     
     var body:some View {
