@@ -19,7 +19,7 @@ let continents = """
 """
 
 let countries = ClassCache<Territoire>()
-let France = countries.read("France")
+let France = countries.read("France-cadastre")
 let Deutschland = countries.read("Deutschland")
 
 let FR = """
@@ -154,10 +154,12 @@ let FR = """
                         }
 ]},
                 {"id":9,"nom":"Bray-Dunes", "quartiers":[
-                        {"id":1, "nom":"plage", 
+                        {"id":1, "nom":"plage (AB)", 
                             "terrains":[
-                                {"id":33, "numvoie":{"voie":"boulevard Georges Pompidou", "num":"327","codepostal":"59131"},
-                                "parcelles":[{"id":148, "surface":{"nombre":{"decimales":""},"quantité":"surface"}}]}
+                                {"id":1, "numvoie":{"voie":"boulevard Georges Pompidou", "num":"327","codepostal":"59131"},
+                                "parcelles":[{"id":33, "surface":{"nombre":{"decimales":""},"quantité":"surface"}}]},
+                                {"id":2, "numvoie":{"voie":"boulevard Georges Pompidou", "num":"366","codepostal":"59131"},
+                                "parcelles":[{"id":588, "surface":{"nombre":{"decimales":""},"quantité":"surface"}}]}
                             ]
                         }
                     ]},
