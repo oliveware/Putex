@@ -13,7 +13,7 @@ struct NumberEditor: View {
     var dot = ","
     
     @Binding var nombre: Nombre
-    @State var set : NumberSet
+    @State var nbdec : Int
     var classifier: String = ""
     var autovalide = false
     
@@ -31,7 +31,7 @@ struct NumberEditor: View {
     
     public init(_ nombre:Binding<Nombre>, _ set: NumberSet, _ classifier:String = "") {
         _nombre = nombre
-        self.set = set
+        nbdec = set.nbdec
         self.classifier = classifier
       //  localedot = locale.decimalSeparator ?? ","
     }
@@ -40,7 +40,7 @@ struct NumberEditor: View {
         HStack(spacing:0){
             TextField("", value:$nombre.entiere, format:.number)
                 .frame(width: width(entierestring), alignment: .trailing )
-            if nombre.decimales != ""  || set.nbdec > 0 {
+            if nombre.decimales != ""  || nbdec > 0 {
                 Text(dot)
                 TextField("", text:$nombre.decimales)
                     .frame(width: width(nombre.decimales) )

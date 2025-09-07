@@ -64,7 +64,7 @@ public struct Nombre: Codable {
         if nbdec == 0 {
             entiere = n
         } else {
-            let div = div(nbdec)
+            let div = Nombre.div(nbdec)
             let reste = n % div
             entiere = (n - reste) / div
             var deci = negative ? String(-reste) : String(reste)
@@ -75,8 +75,13 @@ public struct Nombre: Codable {
         if negative { entiere = -entiere! }
     }
     
-    public init(_ d:Double) {
-        entiere = Int(d)
+    public init(_ d:Double, _ nbdec:Int = 2) {
+        let div = Nombre.div(nbdec)
+        let nombre = Int( d * Double(div))
+        self.init( nombre, nbdec )
+        
+        
+        /*entiere = Int(d)
         
         let chiffres = String(d)
         if let index = chiffres.firstIndex(of: ",") {
@@ -87,10 +92,10 @@ public struct Nombre: Codable {
             } else {
                 decimales = ""
             }
-        }
+        }*/
     }
     
-    func div(_ nbdec:Int) -> Int {
+    static private func div(_ nbdec:Int) -> Int {
         let base = 10
         var d = 1
         if nbdec > 0 {
@@ -105,7 +110,7 @@ public struct Nombre: Codable {
         var decimal : Double = 0
         if decimales != "" {
             if let deci = Double(decimales) {
-                decimal = deci / Double(div(decimales.count))
+                decimal = deci / Double(Nombre.div(decimales.count))
             } else {
                 print("décimales erronées : \(decimales)")
             }

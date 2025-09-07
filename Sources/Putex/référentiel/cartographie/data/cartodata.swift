@@ -154,12 +154,12 @@ let FR = """
                         }
 ]},
                 {"id":9,"nom":"Bray-Dunes", "quartiers":[
-                        {"id":1, "nom":"plage (AB)", 
+                        {"id":1, "nom":"plage", "cadastre":"000 AB",
                             "terrains":[
                                 {"id":1, "numvoie":{"voie":"boulevard Georges Pompidou", "num":"327","codepostal":"59131"},
                                 "parcelles":[{"id":33, "surface":{"nombre":{"decimales":""},"quantité":"surface"}}]},
-                                {"id":2, "numvoie":{"voie":"boulevard Georges Pompidou", "num":"366","codepostal":"59131"},
-                                "parcelles":[{"id":588, "surface":{"nombre":{"decimales":""},"quantité":"surface"}}]}
+                                {"id":2, "numvoie":{"voie":"boulevard Georges Pompidou", "num":"390","codepostal":"59131"},
+                                "parcelles":[{"id":465, "surface":{"nombre":{"decimales":""},"quantité":"surface"}}]}
                             ]
                         }
                     ]},

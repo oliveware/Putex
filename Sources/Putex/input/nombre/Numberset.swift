@@ -29,8 +29,12 @@ public enum NumberSet: Codable,Enumerable {
         switch self {
         case .naturel, .relatif:
             return 0
+        case .decimal(1):
+            return 1
         case .decimal(2):
             return 2
+        case .decimal(3):
+            return 3
         case .decimal(4):
             return 4
         default:

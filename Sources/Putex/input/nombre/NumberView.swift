@@ -110,6 +110,12 @@ struct NumberPreview : View {
 
 #Preview("exemples")  {
     VStack(alignment:.leading) {
+        
+        HStack {
+            Text("double").frame(width:100)
+            NumberPreview(Nombre(1000/3.0, 3), .decimal(3))
+                .frame(width:400)
+        }
 
         HStack {
             Text("nombre décimal").frame(width:100)
@@ -118,12 +124,12 @@ struct NumberPreview : View {
         }
         HStack {
             Text("surface").frame(width:100)
-            NumberPreview(Nombre(1325,2), .decimal(2), "m2", "surface")
+            NumberPreview(Nombre(1327,2), .decimal(2), "m2", "surface")
                .frame(width:300)
         }
         HStack {
             Text("nombre < 1000").frame(width:100)
-            NumberPreview(Nombre(1325,2), .decimal(2), "m", "estimation")
+            NumberPreview(Nombre(1325,2), .decimal(3), "m", "estimation")
                .frame(width:300)
         }
         HStack {
