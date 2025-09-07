@@ -5,6 +5,11 @@
 //  Created by Herve Crespel on 02/11/2024.
 //
 
+struct AssociationCommunes {
+    var nom = ""        // nom de ville pricipale
+    var associées: [String] = []
+}
+
 public struct Commune: Codable, Identifiable {
     
     public var id:Int
@@ -12,6 +17,8 @@ public struct Commune: Codable, Identifiable {
     
     public var nom = ""
     var quartiers:[Quartier] = []
+    
+    var tutelle: String?        // nom de l'association de communes
     
     var avecterrains: Bool {
         var found = false

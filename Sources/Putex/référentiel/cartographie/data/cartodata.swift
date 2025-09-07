@@ -97,13 +97,13 @@ let FR = """
                     ]
                 }, 
                 {"id":2,"nom":"Lille", "quartiers":[
-                    {"id":1,"nom":"Vauban-Esquermes", 
-                        "terrains":[
-                            {"id":339, "numvoie":{"voie":"rue Bonte-Pollet", "num":"3","codepostal":"59000"},
-                            "parcelles":[{"id":339, "surface":{"nombre":{"decimales":""},"quantité":"surface"}}]}
-                        ]
+                        {"id":1,"nom":"Vauban-Esquermes", 
+                            "terrains":[
+                                {"id":339, "numvoie":{"voie":"rue Bonte-Pollet", "num":"3","codepostal":"59000"},
+                                "parcelles":[{"id":339, "surface":{"nombre":{"decimales":""},"quantité":"surface"}}]}
+                            ]
                         }
-                    ] 
+                    ]
                 },
                 {"id":3,"nom":"Amiens", "quartiers":[]}, 
                 {"id":4,"nom":"Roubaix", "quartiers":[]}, 
@@ -127,12 +127,14 @@ let FR = """
                 }, 
                 {"id":6,"nom":"Villeneuve d'Ascq", 
                     "quartiers":[
-                        {"id":1,"nom":"Triolo", 
-                        "terrains":[
+                        {"id":1,"nom":"Triolo", "terrains":[
                             {"id":139, "numvoie":{"voie":"allée du Ternois", "num":"3","codepostal":"59950"},
                             "parcelles":[{"id":139, "surface":{"nombre":{"decimales":""},"quantité":"surface"}}]}
-                        ]
-                        }
+                            ]
+                        },
+                        {"id":2, "nom":"Hotel de ville", "terrains":[]},
+                        {"id":4, "nom":"Chateau", "terrains":[]},
+                        {"id":5, "nom":"Cousinerie", "terrains":[]}
                     ]
                 }, 
                 {"id":7,"nom":"Hardelot", 
@@ -145,25 +147,26 @@ let FR = """
                         }
                     ]
                 },
-                {"id":8,"nom":"Hauboudin", "quartiers":[
-                        {"id":1, "nom":"canal", 
-                            "terrains":[
+                {"id":8,"nom":"Haubourdin", "quartiers":[
+                        {"id":1, "nom":"canal", "terrains":[
                                 {"id":98, "numvoie":{"voie":"chemin de halage", "num":"8","codepostal":"59125"},
                                 "parcelles":[{"id":98, "surface":{"nombre":{"decimales":""},"quantité":"surface"}}]}
                             ]
                         }
-]},
+                    ]
+                },
                 {"id":9,"nom":"Bray-Dunes", "quartiers":[
-                        {"id":1, "nom":"plage", "cadastre":"000 AB",
-                            "terrains":[
-                                {"id":1, "numvoie":{"voie":"boulevard Georges Pompidou", "num":"327","codepostal":"59131"},
-                                "parcelles":[{"id":33, "surface":{"nombre":{"decimales":""},"quantité":"surface"}}]},
-                                {"id":2, "numvoie":{"voie":"boulevard Georges Pompidou", "num":"390","codepostal":"59131"},
-                                "parcelles":[{"id":465, "surface":{"nombre":{"decimales":""},"quantité":"surface"}}]}
+                        {"id":1, "nom":"plage", "terrains":[
+                                {"id":1, "numvoie":{"voie":"boulevard Georges Pompidou", "num":"390","codepostal":"59131"},
+                                "parcelles":[{"id":465, "cadastre":"AB", "surface":{"nombre":{"decimales":""},"quantité":"surface"}}]}
                             ]
                         }
                     ]},
-                {"id":10,"nom":"Lomme", "quartiers":[]}
+                {"id":10,"nom":"Lomme", "tutelle":"Lille", "quartiers":[
+                        {"id":1, "nom":"Bourg", "terrains":[]},
+                        {"id":5, "nom":"Mitterie", "terrains":[]}
+                        ]
+                }
                 ]
             },
         {"id":13, "nom":"Île-de-France",
