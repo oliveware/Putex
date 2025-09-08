@@ -11,7 +11,7 @@ import Foundation
 public struct Nombre: Codable {
         
     var entiere:Int?
-    var decimales:String = ""
+    var decimales:String?
     //let base = 10
     
     public var isNaN: Bool {
@@ -20,8 +20,8 @@ public struct Nombre: Codable {
     
     init() { }
     
-    init(_ e:Int) {
-        entiere = e
+    init(_ entier:Int) {
+        entiere = entier
         decimales = ""
     }
     
@@ -108,11 +108,11 @@ public struct Nombre: Codable {
     
     public var value : Double {
         var decimal : Double = 0
-        if decimales != "" {
-            if let deci = Double(decimales) {
-                decimal = deci / Double(Nombre.div(decimales.count))
+        if let decim = decimales {
+            if let deci = Double(decim) {
+                decimal = deci / Double(Nombre.div(decim.count))
             } else {
-                print("décimales erronées : \(decimales)")
+                print("décimales erronées : \(decim)")
             }
         }
         if let entier = entiere {
@@ -126,8 +126,8 @@ public struct Nombre: Codable {
     // arrondi ne concerne que les décimales
     public var cents: Int {
         var deci : Int
-        if decimales == "" { deci = 0 } else {
-            if let decint = Int(decimales) {
+        if decimales == nil { deci = 0 } else {
+            if let decint = Int(decimales!) {
                 if decint < 100 {
                     deci = decint
                 } else {
@@ -140,7 +140,7 @@ public struct Nombre: Codable {
                 }
             } else {
                 deci = 0
-                print("erreur : decimales incorrectes : \(decimales)")
+                print("erreur : decimales incorrectes : \(decimales!)")
             }
         }
         if let entier = entiere {
@@ -180,16 +180,16 @@ public struct Nombre: Codable {
                 if main > 0 { chiffres = String(main) + chiffres}
                 if entier < 0 { chiffres = "-" + chiffres }
             }
-            if decimales != "" {
-                return chiffres + dot + decimales
+            if let decim = decimales {
+                return chiffres + dot + decim
             } else {
                 return chiffres
             }
         } else {
-            if decimales == "" {
+            if decimales == nil {
                 return ""
             } else {
-                return "0" + dot + decimales
+                return "0" + dot + decimales!
             }
         }
        
@@ -209,13 +209,13 @@ public struct Nombre: Codable {
     public func enlettres(_ devise:Devise) ->  String {
         if let entier = entiere {
             var lettres = entier.enlettres + " " + (devise.mot?.quantifié(entier) ?? "")
-            if decimales != "" {
-                if let deci = Int(decimales) {
+            if let decim = decimales {
+                if let deci = Int(decim) {
                     if deci > 0 {
                         lettres += " et " + deci.enlettres + " " + (devise.cent?.quantifié(deci) ?? "")
                     }
                 } else {
-                    print ("erreur nombre en lettres : \(entiere)")
+                    print ("décimales erronées (1) : \(decim)")
                 }
             }
             return lettres
@@ -226,13 +226,13 @@ public struct Nombre: Codable {
     public func enlettres(_ classifier:Mot) ->  String {
         if let entier = entiere {
             var lettres = "\(entier.enlettres) \(entier > 1 ? classifier.pluriel : classifier.singulier)"
-            if decimales != "" {
-                if let deci = Int(decimales) {
+            if let decim = decimales {
+                if let deci = Int(decim) {
                     if deci > 0 {
                         lettres += " et \(iemes) de \(deci == 1 ? classifier.singulier : classifier.pluriel)"
                     }
                 } else {
-                    print ("erreur nombre en lettres : \(entiere)")
+                    print ("décimales erronées (2) : \(decim)")
                 }
             }
             return lettres
@@ -243,9 +243,9 @@ public struct Nombre: Codable {
     
     var iemes : String {
         var result = ""
-        if decimales != "" {
-            let deci = Int(decimales)
-            switch decimales.count {
+        if let decim = decimales {
+            let deci = Int(decim)
+            switch decim.count {
             case 1:
                 result = deci == 1 ? " dizième" : " dizièmes"
             case 2:

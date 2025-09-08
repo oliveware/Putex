@@ -13,6 +13,7 @@ struct NumberEditor: View {
     var dot = ","
     
     @Binding var nombre: Nombre
+    @State private var decimales : Int?
     @State var nbdec : Int
     var classifier: String = ""
     var autovalide = false
@@ -24,13 +25,24 @@ struct NumberEditor: View {
             return String(nombre.entiere!)
         }
     }
-    func width(_ chiffres:String) -> CGFloat {
-        let width  = CGFloat((chiffres.count + 1) * 8)
-        return width > 20 ? width : 20
+    func width(_ chiffres:Int?) -> CGFloat {
+        if let string = chiffres {
+            let width  = CGFloat((String(string).count + 1) * 8)
+            return width > 25 ? width : 25
+        } else {
+            return 25
+        }
     }
     
     public init(_ nombre:Binding<Nombre>, _ set: NumberSet, _ classifier:String = "") {
         _nombre = nombre
+        if let decim = nombre.wrappedValue.decimales {
+            if let deci = Int(decim) {
+                decimales = deci
+            }
+        } else {
+            decimales = nil
+        }
         nbdec = set.nbdec
         self.classifier = classifier
       //  localedot = locale.decimalSeparator ?? ","
@@ -39,11 +51,17 @@ struct NumberEditor: View {
     var body: some View {
         HStack(spacing:0){
             TextField("", value:$nombre.entiere, format:.number)
-                .frame(width: width(entierestring), alignment: .trailing )
+                .frame(width: width($nombre.wrappedValue.entiere), alignment: .trailing )
             if nombre.decimales != ""  || nbdec > 0 {
                 Text(dot)
-                TextField("", text:$nombre.decimales)
-                    .frame(width: width(nombre.decimales) )
+                TextField("", value:$decimales, format:.number)
+                    .frame(width: width(decimales) )
+                    .onChange(of: decimales, {
+                        if let decim = decimales {
+                            nombre.decimales = String(decim)
+                        } else {
+                            nombre.decimales = nil
+                        }})
             }
             Text(" " + classifier)
         }//.frame(minWidth:showidth + 20)
