@@ -129,7 +129,7 @@ struct NumberPreview : View {
         }
         HStack {
             Text("nombre < 1000").frame(width:100)
-            NumberPreview(Nombre(1325,2), .decimal(3), "m", "estimation")
+            NumberPreview(Nombre(1325,2), .decimal(3), "€", "estimation")
                .frame(width:300)
         }
         HStack {

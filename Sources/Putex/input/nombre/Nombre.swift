@@ -15,14 +15,15 @@ public struct Nombre: Codable {
     //let base = 10
     
     public var isNaN: Bool {
-        entiere == nil && decimales == ""
+        entiere == nil || entiere == 0 && decimales == nil ||
+        entiere == nil || entiere == 0 && decimales == ""
     }
     
     init() { }
     
     init(_ entier:Int) {
         entiere = entier
-        decimales = ""
+        decimales = nil
     }
     
     public init(_ s:String){
@@ -52,7 +53,7 @@ public struct Nombre: Codable {
     }
     
     // d.count doit correspondre au NumberSet
-    init(_ e:String, _ d:String = "", _ negative:Bool = false) {
+    init(_ e:String, _ d:String? = nil, _ negative:Bool = false) {
         var entier = Int(e) ??  0
         if negative { entier = -entier }
         entiere = entier
@@ -63,14 +64,19 @@ public struct Nombre: Codable {
         let negative = n < 0
         if nbdec == 0 {
             entiere = n
+            decimales = nil
         } else {
             let div = Nombre.div(nbdec)
             let reste = n % div
             entiere = (n - reste) / div
-            var deci = negative ? String(-reste) : String(reste)
-            let nbzero = String(div).count - 1 - deci.count
-            for _ in 0..<nbzero { deci = "0" + deci }
-            decimales = deci
+            if reste == 0 {
+                decimales = nil
+            } else {
+                var deci = negative ? String(-reste) : String(reste)
+                let nbzero = String(div).count - 1 - deci.count
+                for _ in 0..<nbzero { deci = "0" + deci }
+                decimales = deci
+            }
         }
         if negative { entiere = -entiere! }
     }
