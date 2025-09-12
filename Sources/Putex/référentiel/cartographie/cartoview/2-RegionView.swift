@@ -36,7 +36,7 @@ struct RegionView: View {
                                     choix = true
                                 })
                                 {Image(systemName: "chevron.down") }
-                            }
+                            }.frame(alignment: .leading)
                         } else {
                             ForEach($region.communes){
                                 item in
@@ -55,8 +55,11 @@ struct RegionView: View {
                             }
                         }
                     }
-                    
-                    CommuneView(lid:$lid, continent:continent, territoire:territoire, region:region, commune:$commune, quartier:$quartier, terrain:$terrain)
+                    if $commune.wrappedValue.id == Commune().id {
+                        Text("Choisir une commune")
+                    } else {
+                        CommuneView(lid:$lid, continent:continent, territoire:territoire, region:region, commune:$commune, quartier:$quartier, terrain:$terrain)
+                    }
                 }.frame(alignment:.leading).padding(20)
                 
                 HStack (spacing: 20) {

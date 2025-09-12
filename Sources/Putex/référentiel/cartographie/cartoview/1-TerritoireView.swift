@@ -1,9 +1,9 @@
 //
-//  TerritoireView.swift
+//  TerritoireView2.swift
 //  Putex
 //
-//  Created by Herve Crespel on 08/11/2024.
-//
+//  Created by Herve Crespel on 12/09/2025.
+
 import SwiftUI
 
 struct TerritoireView : View {
@@ -17,35 +17,32 @@ struct TerritoireView : View {
     
 
     var body:some View {
-        NavigationSplitView {
-            List {
+        HStack {
+            VStack(alignment:.leading) {
                 ForEach($territoire.regions) { item in
                     if item.wrappedValue.avecterrains {
-                        NavigationLink {
-                            RegionView(lid:$lid,  continent:continent, territoire:territoire, region:item, commune:$commune, quartier:$quartier, terrain:$terrain )
-                                .onChange(of:item.id) {
-                                    region = item.wrappedValue
-                                    commune = Commune()
-                                    quartier = Quartier()
-                                    terrain = Terrain()
-                                    lid = LID([continent.id, territoire.id, item.id])
-                                }
-                        } label: {
-                            Text(item.wrappedValue.nom)
-                        }
+                        Button(action:{region = item.wrappedValue})
+                        {Text(item.wrappedValue.nom).frame(width:150, alignment: .center)}
+                            
                     }
-                    
                 }
-              //  .onDelete(perform: deleteItems)
+                //Spacer()
             }
-
-#if os(macOS)
-            .navigationSplitViewColumnWidth(min: 130, ideal: 150)
-#endif
-
-       } detail: {
-            Text("Select an item")
-        }
+            Spacer()
+            if region.id == Region().id {
+                Text("Choisir une région")
+            } else {
+                RegionView(lid:$lid,  continent:continent, territoire:territoire, region:$region, commune:$commune, quartier:$quartier, terrain:$terrain )
+                    .onChange(of:region.id) {
+                        commune = Commune()
+                        quartier = Quartier()
+                        terrain = Terrain()
+                        lid = LID([continent.id, territoire.id, region.id])
+                    }
+            }
+            Spacer()
+              //  .onDelete(perform: deleteItems)
+        }.frame(alignment: .leading)
 
     }
 }
@@ -62,5 +59,5 @@ struct TerritoirePreview : View {
 }
 
 #Preview {
-    TerritoirePreview()
+    TerritoirePreview().padding()
 }
