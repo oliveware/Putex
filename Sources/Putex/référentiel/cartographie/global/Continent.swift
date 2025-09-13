@@ -7,14 +7,16 @@
 
 import Foundation
 
-public struct Continent : Codable {
+public struct Continent : Codable, Identifiable {
     
-    var id:Int
+    public var id:Int
     var lid:LID {
         LID([id])
     }
     var nom = ""
     var territoires : [Territoire] = []
+    
+    init() { id = 0 }
     
     init(_ id:Int, _ nom:String, _ lands: [Territoire]) {
         self.id = id

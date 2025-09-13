@@ -15,31 +15,18 @@ struct RegionView: View {
     @Binding var quartier : Quartier
     @Binding var terrain : Terrain
     
-    @State private var choix = true
+   // @State private var choix = true
     @State private var ajout = false
     
     var body:some View {
-        
-        NavigationStack {
-            VStack(alignment:.leading) {
-        
-                HStack(alignment:.top)  {
+        VStack(alignment:.leading) {
+            if commune.id == Commune().id {
+                HStack(alignment:.center)  {
+                    
                     VStack(alignment:.leading) {
-                        Text("commune")
-                        if !choix && !(commune.nom == "") {
-                            HStack {
-                                Text(commune.nom).frame(width:120)
-                                Button(action:{
-                                    commune = Commune()
-                                    quartier = Quartier()
-                                    terrain = Terrain()
-                                    choix = true
-                                })
-                                {Image(systemName: "chevron.down") }
-                            }.frame(alignment: .leading)
-                        } else {
-                            ForEach($region.communes){
-                                item in
+                        ForEach($region.communes){
+                            item in
+                            if item.quartiers.count > 0 {
                                 Button(action:{
                                     commune = item.wrappedValue
                                     if item.quartiers.count == 1 {
@@ -49,37 +36,18 @@ struct RegionView: View {
                                     }
                                     terrain = Terrain()
                                     lid = LID([continent.id,territoire.id, region.id, item.id])
-                                    choix = false
+                                    //choix = false
                                 })
                                 { Text(item.wrappedValue.nom).frame(width:120) }
                             }
                         }
                     }
-                    if $commune.wrappedValue.id == Commune().id {
-                        Text("Choisir une commune")
-                    } else {
-                        CommuneView(lid:$lid, continent:continent, territoire:territoire, region:region, commune:$commune, quartier:$quartier, terrain:$terrain)
-                    }
-                }.frame(alignment:.leading).padding(20)
-                
-                HStack (spacing: 20) {
-                    GroupBox("LID") {
-                        Text(lid.id)
-                    }
-                    if !terrain.numvoie.isNaN {
-                        VStack{
-                            GroupBox("Adresse") {
-                                Text(terrain.adresse())
-                            }
-                            if terrain.autrenumvoie != nil {
-                                GroupBox("autre adresse") {
-                                    Text(terrain.adresse(nil,true))
-                                }
-                            }
-                        }
-                    }
-                }.padding(20)
-                
+                    Spacer()
+                    Text("Choisir une commune").padding(.bottom,10)
+                    Spacer()
+                }
+            } else {
+                CommuneView(lid:$lid, continent:continent, territoire:territoire, region:region, commune:$commune, quartier:$quartier, terrain:$terrain)
             }
        }
         

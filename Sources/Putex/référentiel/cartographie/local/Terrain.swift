@@ -11,7 +11,13 @@ public struct Terrain: Codable, Identifiable {
     public var id:Int
     var lid:LID?
     
-    var label:String {String(id)}
+    var label:String {
+        var string = numvoie.voirie
+        if let autre = autrenumvoie {
+            string = string + "\n" + autre.voirie
+        }
+        return string
+    }
     
     init(_ quartier:LID) {
         let terrainlid = LID(quartier)

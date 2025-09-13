@@ -24,6 +24,7 @@ public struct Region: Codable, Identifiable {
     }
    
     init() {id = 0}
+    
     init(_ territoire:LID) {
        let regionlid = LID(territoire)
         lid = regionlid

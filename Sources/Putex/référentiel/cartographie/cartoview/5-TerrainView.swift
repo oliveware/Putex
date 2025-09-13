@@ -11,18 +11,19 @@ public struct TerrainShow: View {
     @Binding var terrain:Terrain
     
     public var body: some View {
-        VStack ( spacing:20) {
-            if terrain.numvoie.voie != "" {
+        VStack ( alignment:.leading, spacing:10 ) {
+          /*  if terrain.numvoie.voie != "" {
                 GroupBox("Adresse") {
                     Text(terrain.address).padding(10)
                 }
-            }
+            }*/
             
             GroupBox("Parcelles") {
                 ParceList(parcelles: $terrain.parcelles).padding(10)
-                }.padding(10)
-            }.padding(10)
-        }
+            }.frame(height:CGFloat(terrain.parcelles.count * 5))
+           
+        }.padding(10)
+    }
 }
 
 public struct TerrainView: View {
@@ -66,20 +67,21 @@ public struct TerrainView: View {
                 LIDPicker($lid, creator)
             }
         } else {
-            VStack{
-                valeur
-               .padding(20)
-                
-                if edition {
-                    TerrainEditor($terrain)
-                } else {
-                    TerrainShow(terrain: $terrain)
+            VStack {
+                HStack{
+                    if edition {
+                        TerrainEditor($terrain)
+                    } else {
+                        TerrainShow(terrain: $terrain)
+                    }
+                    valeur
+                        .padding(20)
                 }
                 if modifiable {
                     Button(action:{ edition.toggle() })
                     { Text(edition ? "valider les corrections" : "corriger")}.padding(20)
                 }
-            }.frame(maxHeight:.infinity)
+            }
         }
     }
 }
@@ -163,7 +165,7 @@ struct TerrainPreview: View {
     
     var body: some View {
         TerrainView($terrain, modifiable:modifiable)
-            .frame(minWidth:700,minHeight:500)
+            .frame(width:600,height:300)
     }
 }
 

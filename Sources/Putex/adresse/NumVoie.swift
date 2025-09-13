@@ -22,6 +22,9 @@ public struct NumVoie: Codable, Equatable {
         voie.count > 7 && num != "" && codepostal.count > 4
     }
     
+    public var voirie:String {
+        num + " " + voie
+    }
     public var adresse:String {
         num + " " + voie + "\n" + codepostal
     }

@@ -30,36 +30,29 @@ struct CommuneView: View {
     
     var body:some View {
         if commune.quartiers.count > 0 {
-                HStack(alignment:.top)  {
+            if quartier.nom == "" {
+                HStack(alignment:.center)  {
                     VStack {
-                        // TextField("",text:$commune.nom)
-                        Text("quartier")
-                        if !choix {
-                            HStack {
-                                Text(quartier.nom).frame(width:150).padding(3)
-                                if commune.quartiers.count > 1 {
-                                    Button(action:{ choix = true })
-                                    {Image(systemName: "chevron.down") }
-                                }
-                            }
-                        } else {
-                            ForEach($commune.quartiers){
-                                item in
-                                Button(action:{
-                                    quartier = item.wrappedValue
-                                    terrain = Terrain()
-                                    lid = LID([continent.id, territoire.id, region.id, commune.id, item.id])
-                                    choix = false
-                                })
-                                {
-                                    Text(item.wrappedValue.nom).frame(width:100)
-                                }
+                        ForEach($commune.quartiers){
+                            item in
+                            Button(action:{
+                                quartier = item.wrappedValue
+                                terrain = Terrain()
+                                lid = LID([continent.id, territoire.id, region.id, commune.id, item.id])
+                                choix = false
+                            })
+                            {
+                                Text(item.wrappedValue.nom).frame(width:100)
                             }
                         }
                     }
-                    
+                    Spacer()
+                    Text("Choisir un quartier")
+                    Spacer()
+                }
+                } else {
                     QuartierView(lid:$lid, continent:continent, territoire:territoire, region:region, commune:commune, quartier:$quartier, terrain:$terrain)
-                }.frame(alignment:.leading)
+                }
             
         } else {
             if commune.nom != "" {

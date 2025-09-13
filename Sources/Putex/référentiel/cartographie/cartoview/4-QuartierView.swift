@@ -18,25 +18,31 @@ struct QuartierView : View {
     
     var body:some View {
         if quartier.terrains.count > 0 {
-            HStack {
-                VStack {
-                    Text("terrains")
-                    ForEach($quartier.terrains){
-                        item in
-                        Button(action:{
-                            terrain = item.wrappedValue
-                            lid = LID([continent.id, territoire.id, region.id, commune.id,
-                                       quartier.id, item.id])
-                            terrain.lid = lid
-                        })
-                        {
-                            Text(item.wrappedValue.label).frame(width:100)
+            if terrain.isNaN {
+                HStack {
+                    VStack {
+                        ForEach($quartier.terrains){
+                            item in
+                            Button(action:{
+                                terrain = item.wrappedValue
+                                lid = LID([continent.id, territoire.id, region.id, commune.id,
+                                           quartier.id, item.id])
+                                terrain.lid = lid
+                            })
+                            {
+                                Text(item.wrappedValue.label).frame(width:200)
+                            }
                         }
                     }
-                }
-                
-                //ParcelleView(parcelle:$selected)
-            }.frame(alignment:.leading)
+                    Spacer()
+                    Text("Choisir un terrain")
+                    Spacer()
+                    
+                    //ParcelleView(parcelle:$selected)
+                }.frame(alignment:.leading)
+            } else {
+                TerrainView($terrain )
+            }
         } else {
             if quartier.nom != "" {
                 Text("aucun terrain défini dans " + quartier.nom)

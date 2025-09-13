@@ -93,7 +93,7 @@ struct ParceList: View {
                 HStack {
                     Spacer()
                     Text("surface totale : " + surface.astring)
-                }.padding(20)
+                }.padding(10)
             }
             ForEach ($parcelles) {
                 parcelle in
@@ -141,7 +141,7 @@ struct ParceList: View {
                     }
                 }.padding(.top,20)
             }
-            }.frame(maxHeight:.infinity)
+        }
         
     }
     

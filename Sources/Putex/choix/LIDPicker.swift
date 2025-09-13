@@ -20,7 +20,7 @@ struct LIDPicker : View {
     var body: some View {
         if edit {
             VStack {
-                ContinentView(lid: $lid)
+                //ContinentView(lid: $lid)
                 Button("valider", action: {
                     edit = false
                     done()
