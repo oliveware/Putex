@@ -81,15 +81,17 @@ struct TerritoireView : View {
                 Spacer()
                 if region.id == Region().id {
                     HStack {
-                        VStack(alignment:.leading) {
-                            ForEach($territoire.regions) { item in
-                                if item.wrappedValue.avecterrains {
+                        ScrollView {
+                            VStack(alignment:.leading) {
+                                ForEach($territoire.regions) { item in
+                                    // if item.wrappedValue.avecterrains {
                                     Button(action:{region = item.wrappedValue})
                                     {Text(item.wrappedValue.nom).frame(width:150, alignment: .center)}
                                     
+                                    //}
                                 }
+                                //Spacer()
                             }
-                            //Spacer()
                         }
                         Spacer()
                         Text("Choisir une région")
