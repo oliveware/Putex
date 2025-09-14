@@ -22,7 +22,7 @@ struct LIDPicker : View {
     }
     
     var body: some View {
-        if edit {
+
             VStack {
                 TerritoireView(lid: $lid, continent:$continent, territoire:$territoire)
                 Button("valider", action: {
@@ -30,14 +30,7 @@ struct LIDPicker : View {
                     done()
                 }).padding(10)
             }
-        } else {
-            
-            HStack {
-                Text(Lieu(lid).adresse())
-                Button(action: {edit = true})
-                {Image(systemName: "pencil")}.padding(20)
-            }
-        }
+
     }
 }
 

@@ -15,6 +15,8 @@ struct TerritoireView : View {
     @State var quartier = Quartier()
     @State var terrain = Terrain()
     
+    @State var edition = false
+    
     var barre:some View {
         HStack {
             if territoire.nom != "" {
@@ -84,28 +86,23 @@ struct TerritoireView : View {
                         ScrollView {
                             VStack(alignment:.leading) {
                                 ForEach($territoire.regions) { item in
-                                    // if item.wrappedValue.avecterrains {
-                                    Button(action:{region = item.wrappedValue})
-                                    {Text(item.wrappedValue.nom).frame(width:150, alignment: .center)}
-                                    
-                                    //}
+                                     if edition || item.wrappedValue.avecterrains {
+                                        Button(action:{region = item.wrappedValue})
+                                        {Text(item.wrappedValue.nom).frame(width:150, alignment: .center)}
+                                    }
                                 }
-                                //Spacer()
                             }
                         }
+                        .frame(height:CGFloat(territoire.regions.count * (edition ? 20 : 10)))
                         Spacer()
                         Text("Choisir une région")
                         Spacer()
                     }
                 } else {
                     RegionView(lid:$lid,  continent:continent, territoire:territoire, region:$region, commune:$commune, quartier:$quartier, terrain:$terrain )
-                        .onChange(of:region.id) {
-                            commune = Commune()
-                            quartier = Quartier()
-                            terrain = Terrain()
-                            lid = LID([continent.id, territoire.id, region.id])
-                        }
                 }
+                        
+                
                 Spacer()
                 
                 HStack {
@@ -114,6 +111,12 @@ struct TerritoireView : View {
                 }
                 //  .onDelete(perform: deleteItems)
             }.frame(alignment: .leading)
+            .onChange(of:region.id) {
+                commune = Commune()
+                quartier = Quartier()
+                terrain = Terrain()
+                lid = LID([continent.id, territoire.id, region.id])
+            }
         }
     }
 }
@@ -123,12 +126,18 @@ struct TerritoirePreview : View {
     @State var territoire = Deutschland ?? Territoire(FR)
     @State var lid = LID([1,1])
     
+    var edition = false
+    
     var body:some View {
-        TerritoireView(lid:$lid, continent:$continent, territoire: $territoire)
+        TerritoireView(lid:$lid, continent:$continent, territoire: $territoire, edition:edition)
             .frame(width:600,height:300)
     }
 }
 
 #Preview {
     TerritoirePreview().padding()
+}
+
+#Preview ("edition") {
+    TerritoirePreview(edition:true).padding()
 }

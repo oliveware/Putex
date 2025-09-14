@@ -52,7 +52,10 @@ struct ContinentView : View {
                     VStack(alignment:.leading) {
                         ForEach($world){
                             item in
-                            Button(action:{continent = item.wrappedValue})
+                            Button(action:{
+                                continent = item.wrappedValue
+                                lid = LID([continent.id])
+                            })
                             {Text(item.wrappedValue.nom).frame(width:150, alignment: .center)}
                             
                         }
@@ -67,7 +70,10 @@ struct ContinentView : View {
                         VStack(alignment:.leading) {
                             ForEach($continent.territoires){
                                 item in
-                                Button(action:{territoire = item.wrappedValue})
+                                Button(action:{
+                                    territoire = item.wrappedValue
+                                    lid = LID([continent.id, item.id])
+                                })
                                 {Text(item.wrappedValue.nom).frame(width:150, alignment: .center)}
                                 
                             }
@@ -78,12 +84,16 @@ struct ContinentView : View {
                     }
                 } else {
                     TerritoireView(lid:$lid, continent:$continent, territoire:$territoire)
-                        .onChange(of:territoire.id, {lid=LID([continent.id, territoire.id])})
+                        
                 }
             }
             Spacer()
                 //  Button("ajouter un territoire",action:add)
-        }
+        }/*.onChange(of:territoire.id, {lid=LID([continent.id, territoire.id])})
+            .onChange(of:continent.id, {
+                lid=LID([continent.id])
+                territoire = Territoire()
+            })*/
     }
     
     func add() {
