@@ -141,12 +141,11 @@ let FR = """
                         "parcelles":[{"id":148, "cadastre":"59560 000 AM 148", "surface":{"nombre":{"entiere":662},"quantité":"surface"}}]},
                         {"id":251, "numvoie":{"voie":"rue du 14 juillet 1789", "num":"59","codepostal":"59113"},
                         "parcelles":[{"id":251, "cadastre":"59560 000 AM 251", "surface":{"nombre":{"entiere":118},"quantité":"surface"}}]},
-                        {"id":252, "numvoie":{"voie":"rue du 14 juillet 1789", "num":"61 bis","codepostal":"59113"},
-                        "parcelles":[{"id":252, "cadastre":"59560 000 AM 252", "surface":{"nombre":{"entiere":73},"quantité":"surface"}}]},
                         {"id":253, "numvoie":{"voie":"rue du 14 juillet 1789", "num":"61","codepostal":"59113"},
                         "parcelles":[{"id":253, "cadastre":"59560 000 AM 253", "surface":{"nombre":{"entiere":143},"quantité":"surface"}}]},
                         {"id":254, "numvoie":{"voie":"rue du 14 juillet 1789", "num":"61 bis","codepostal":"59113"},
-                        "parcelles":[{"id":254, "cadastre":"59560 000 AM 254", "surface":{"nombre":{"entiere":273},"quantité":"surface"}}]},
+                        "parcelles":[{"id":254, "cadastre":"59560 000 AM 254", "surface":{"nombre":{"entiere":273},"quantité":"surface"}},
+                        {"id":252, "cadastre":"59560 000 AM 252", "surface":{"nombre":{"entiere":73},"quantité":"surface"}}]},
                         {"id":103, "numvoie":{"voie":"rue des boulets", "num":"6", "codepostal":"59113"},
                         "parcelles":[{"id":103, "cadastre":"59560 000 AP 103", "surface":{"nombre":{"entiere":159},"quantité":"surface"}}]}
                         ]
