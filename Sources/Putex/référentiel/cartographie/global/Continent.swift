@@ -47,16 +47,26 @@ public struct Continent : Codable, Identifiable {
         }
         return found
     }
+    subscript(_ nom:String) -> Territoire {
+        var found : Territoire?
+        for territoire in territoires {
+            if territoire.nom == nom {
+                found = territoire
+                break
+            }
+        }
+        return found ?? Territoire()
+    }
 }
 
-struct Continents: Codable {
-    static var Europe = Continents(continents).sept[1]
+struct World: Codable {
+    static var Europe = World(continents).sept[1]
     
     var sept : [Continent]
     
     init(_ json:String) {
         let jsonData = json.data(using: .utf8)!
-        let terre = try! JSONDecoder().decode(Continents.self, from: jsonData)
+        let terre = try! JSONDecoder().decode(World.self, from: jsonData)
         self = terre
         LID.nextinit(terre.sept)
     }

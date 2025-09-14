@@ -20,7 +20,7 @@ import SwiftUI
 }*/
 
 struct ContinentView : View {
-    @State var world = Continents(continents).sept
+    @State var world = World(continents).sept
     @Binding var lid : LID
     @Binding var continent: Continent
     @Binding var territoire: Territoire
@@ -96,7 +96,7 @@ struct ContinentView : View {
 
 struct ContinentPreview : View {
     @State var lid = LID([])
-    @State var continent = Continents.Europe
+    @State var continent = World.Europe
     @State var territoire = Deutschland ?? Territoire(FR)
     
     var body:some View {

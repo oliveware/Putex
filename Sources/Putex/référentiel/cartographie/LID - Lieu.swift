@@ -159,7 +159,7 @@ public struct Lieu {
     
     public  init(_ lid:LID) {
         let continent_id = lid.continent
-        if let continent = Continents(continents)[continent_id] {
+        if let continent = World(continents)[continent_id] {
             self.continent = continent
             if lid.territoire != nil {
                 let territoire = continent[lid.territoire!]

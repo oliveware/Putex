@@ -8,19 +8,23 @@ import SwiftUI
 
 struct LIDPicker : View {
     @Binding var lid : LID
+    @State var continent: Continent
+    @State var territoire: Territoire
     @State var edit = false
     
     var done: () -> Void
     
     init(_ lid: Binding<LID>, _ done: @escaping () -> Void) {
         _lid = lid
+        continent = World.Europe
+        territoire = World.Europe["France"]
         self.done = done
     }
     
     var body: some View {
         if edit {
             VStack {
-                //ContinentView(lid: $lid)
+                TerritoireView(lid: $lid, continent:$continent, territoire:$territoire)
                 Button("valider", action: {
                     edit = false
                     done()
