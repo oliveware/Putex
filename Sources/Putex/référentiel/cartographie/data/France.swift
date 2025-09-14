@@ -147,7 +147,7 @@ let FR = """
                         "parcelles":[{"id":253, "cadastre":"59560 000 AM 253", "surface":{"nombre":{"entiere":143},"quantité":"surface"}}]},
                         {"id":254, "numvoie":{"voie":"rue du 14 juillet 1789", "num":"61 bis","codepostal":"59113"},
                         "parcelles":[{"id":254, "cadastre":"59560 000 AM 254", "surface":{"nombre":{"entiere":273},"quantité":"surface"}}]},
-                        {"id":254, "numvoie":{"voie":"rue des boulets", "num":"6", "codepostal":"59113"},
+                        {"id":103, "numvoie":{"voie":"rue des boulets", "num":"6", "codepostal":"59113"},
                         "parcelles":[{"id":103, "cadastre":"59560 000 AP 103", "surface":{"nombre":{"entiere":159},"quantité":"surface"}}]}
                         ]
                     },
