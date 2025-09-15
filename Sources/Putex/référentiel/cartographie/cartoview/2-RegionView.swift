@@ -14,36 +14,44 @@ struct RegionView: View {
     @Binding var commune : Commune
     @Binding var quartier : Quartier
     @Binding var terrain : Terrain
-    
-   // @State private var choix = true
-    @State private var ajout = false
+
+    @State var ajout = false
     
     var body:some View {
         VStack(alignment:.leading) {
-            if commune.id == Commune().id {
+            
+            if commune.nom == "" {
                 HStack(alignment:.center)  {
-                    
                     VStack(alignment:.leading) {
                         ForEach($region.communes){
                             item in
                             if item.quartiers.count > 0 {
                                 Button(action:{
-                                    commune = item.wrappedValue
                                     if item.quartiers.count == 1 {
-                                        quartier = commune.quartiers[0]
+                                        quartier = item.wrappedValue.quartiers[0]
+                                        lid = LID([continent.id,territoire.id, region.id, item.id, quartier.id])
                                     } else {
                                         quartier = Quartier()
+                                        lid = LID([continent.id,territoire.id, region.id, item.id])
                                     }
                                     terrain = Terrain()
-                                    lid = LID([continent.id,territoire.id, region.id, item.id])
-                                    //choix = false
+                                    commune = item.wrappedValue
                                 })
                                 { Text(item.wrappedValue.nom).frame(width:120) }
                             }
                         }
                     }
                     Spacer()
-                    Text("Choisir une commune").padding(.bottom,10)
+                    VStack{
+                        Text("Choisir une commune").padding(.bottom,10)
+                        if ajout {
+                            Button("ajouter une commune", action:{
+                                ajout = true
+                                region.communes = [Commune()] + $region.wrappedValue.communes
+                                commune = region.communes[0]
+                            })
+                        }
+                    }
                     Spacer()
                 }
             } else {

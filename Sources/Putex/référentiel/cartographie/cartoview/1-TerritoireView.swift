@@ -15,7 +15,7 @@ struct TerritoireView : View {
     @State var quartier = Quartier()
     @State var terrain = Terrain()
     
-    @State var edition = false
+    @State var edition = true
     
     var barre:some View {
         HStack {
@@ -87,7 +87,10 @@ struct TerritoireView : View {
                             VStack(alignment:.leading) {
                                 ForEach($territoire.regions) { item in
                                      if edition || item.wrappedValue.avecterrains {
-                                        Button(action:{region = item.wrappedValue})
+                                         Button(action:{
+                                             region = item.wrappedValue
+                                             lid = LID([continent.id,territoire.id, region.id])
+                                         })
                                         {Text(item.wrappedValue.nom).frame(width:150, alignment: .center)}
                                     }
                                 }
@@ -99,7 +102,7 @@ struct TerritoireView : View {
                         Spacer()
                     }
                 } else {
-                    RegionView(lid:$lid,  continent:continent, territoire:territoire, region:$region, commune:$commune, quartier:$quartier, terrain:$terrain )
+                    RegionView(lid:$lid,  continent:continent, territoire:territoire, region:$region, commune:$commune, quartier:$quartier, terrain:$terrain , ajout:edition)
                 }
                         
                 
@@ -126,7 +129,7 @@ struct TerritoirePreview : View {
     @State var territoire = Deutschland ?? Territoire(FR)
     @State var lid = LID([1,1])
     
-    var edition = false
+    var edition = true
     
     var body:some View {
         TerritoireView(lid:$lid, continent:$continent, territoire: $territoire, edition:edition)
@@ -134,10 +137,10 @@ struct TerritoirePreview : View {
     }
 }
 
-#Preview {
+#Preview("éditable") {
     TerritoirePreview().padding()
 }
 
-#Preview ("edition") {
-    TerritoirePreview(edition:true).padding()
+#Preview ("non éditable") {
+    TerritoirePreview(edition:false).padding()
 }

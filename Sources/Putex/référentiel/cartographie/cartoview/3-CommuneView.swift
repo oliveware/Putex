@@ -15,19 +15,6 @@ struct CommuneView: View {
     @Binding var quartier : Quartier
     @Binding var terrain : Terrain
     
-    @State private var choix = false
-    
-    func choisir() {
-        if commune.quartiers.count == 1 {
-            let quart = commune.quartiers[0]
-            quartier = quart
-            terrain = Terrain()
-            lid = LID([continent.id, territoire.id, region.id, commune.id, quart.id])
-        } else {
-            choix = true
-        }
-    }
-    
     var body:some View {
         if commune.quartiers.count > 0 {
             if quartier.nom == "" {
@@ -35,14 +22,18 @@ struct CommuneView: View {
                     VStack {
                         ForEach($commune.quartiers){
                             item in
-                            Button(action:{
-                                quartier = item.wrappedValue
-                                terrain = Terrain()
-                                lid = LID([continent.id, territoire.id, region.id, commune.id, item.id])
-                                choix = false
-                            })
-                            {
-                                Text(item.wrappedValue.nom).frame(width:100)
+                            if item.terrains.count > 0 {
+                                Button(action:{
+                                    quartier = item.wrappedValue
+                                    if item.terrains.count == 1 {
+                                        terrain = quartier.terrains[0]
+                                        lid = LID([continent.id, territoire.id, region.id, commune.id, item.id, terrain.id])
+                                    } else {
+                                        terrain = Terrain()
+                                        lid = LID([continent.id, territoire.id, region.id, commune.id, item.id])
+                                    }
+                                })
+                                { Text(item.wrappedValue.nom).frame(width:100) }
                             }
                         }
                     }

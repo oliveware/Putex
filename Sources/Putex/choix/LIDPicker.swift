@@ -10,7 +10,6 @@ struct LIDPicker : View {
     @Binding var lid : LID
     @State var continent: Continent
     @State var territoire: Territoire
-    @State var edit = false
     
     var done: () -> Void
     
@@ -24,9 +23,8 @@ struct LIDPicker : View {
     var body: some View {
 
             VStack {
-                TerritoireView(lid: $lid, continent:$continent, territoire:$territoire)
+                TerritoireView(lid: $lid, continent:$continent, territoire:$territoire, edition:false)
                 Button("valider", action: {
-                    edit = false
                     done()
                 }).padding(10)
             }
