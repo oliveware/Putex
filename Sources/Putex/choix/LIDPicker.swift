@@ -23,7 +23,7 @@ struct LIDPicker : View {
     var body: some View {
 
             VStack {
-                TerritoireView(lid: $lid, continent:$continent, territoire:$territoire, edition:false)
+                TerritoirePicker(lid: $lid, continent:$continent, territoire:$territoire, edition:false)
                 Button("valider", action: {
                     done()
                 }).padding(10)

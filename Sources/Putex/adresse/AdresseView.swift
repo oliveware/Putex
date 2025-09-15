@@ -9,7 +9,7 @@ import SwiftUI
 struct AdresseView : View {
     @Binding var numvoie: NumVoie
     @State private var edit = false
-    var commune:String = ""
+    var commune:String = "commune"
     
     var body: some View {
         HStack (spacing:20){
@@ -34,24 +34,26 @@ struct AdresseDouble : View {
     @State var autreedit = false
     
     var body: some View {
-        VStack(alignment:.trailing, spacing:20 ){
+        HStack(spacing:20 ){
             GroupBox("adresse") {
                 AdresseView(numvoie:$first, commune:commune)
             }
-            if autre == nil {
-                Button("autre adresse") {
-                    autre = NumVoie()
-                    autreedit = true
-                }.padding(20)
-            } else {
-                HStack (spacing:20){
-                    Button(action:{autre = nil})
-                    {Image(systemName: "minus")}
-                    GroupBox("autre adresse") {
-                        AdresseView(numvoie:Binding<NumVoie>(
-                            get: {autre ?? NumVoie()},
-                            set: { autre = $0 } ),
-                                commune:commune)
+            if !first.isNaN {
+                if autre == nil {
+                    Button("autre adresse") {
+                        autre = NumVoie()
+                        autreedit = true
+                    }.padding(20)
+                } else {
+                    HStack (spacing:20){
+                        Button(action:{autre = nil})
+                        {Image(systemName: "minus")}
+                        GroupBox("autre adresse") {
+                            AdresseView(numvoie:Binding<NumVoie>(
+                                get: {autre ?? NumVoie()},
+                                set: { autre = $0 } ),
+                                        commune:commune)
+                        }
                     }
                 }
             }

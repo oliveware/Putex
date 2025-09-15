@@ -7,7 +7,7 @@
 import SwiftUI
 
 // NavigationSplitView ne convient pas parce qu'elle crée un bandeau supérieur qui parasite la View englobante
-struct TerritoireViewOld : View {
+/*struct TerritoireViewOld : View {
     @Binding var lid:LID
     @Binding var continent: Continent
     @Binding var territoire: Territoire
@@ -65,3 +65,4 @@ struct TerritoirePreviewOld : View {
 #Preview {
     TerritoirePreviewOld()
 }
+*/

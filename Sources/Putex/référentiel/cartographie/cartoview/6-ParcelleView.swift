@@ -127,10 +127,12 @@ struct ParceList: View {
                         Spacer()
                     } else {
                         HStack {
-                            Button(action:{
-                                suppression.toggle()
-                            })
-                            {Image(systemName:"minus")}
+                            if parcelles.count > 0 {
+                                Button(action:{
+                                    suppression.toggle()
+                                })
+                                {Image(systemName:"minus")}
+                            }
                             Spacer()
                             Button(action:{
                                 ajoût = true

@@ -11,6 +11,7 @@ public struct Region: Codable, Identifiable {
     var lid:LID?
     
     public var nom = ""
+    var km2 : Int?
     var communes:[Commune] = []
     
     var avecterrains: Bool {

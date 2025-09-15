@@ -6,7 +6,54 @@
 //
 import SwiftUI
 
-struct CommuneView: View {
+struct CommuneView : View {
+    @Binding var commune : Commune
+    @State var edition : Bool
+    
+    init(_ commune:Binding<Commune>) {
+        _commune = commune
+        edition = commune.wrappedValue.nom == ""
+    }
+    
+    var body: some View {
+        HStack {
+                Text(commune.nom).frame(width:200, alignment:.leading)
+
+                Spacer()
+                Button(action: { edition = true})
+                {Image(systemName: "pencil")}
+                .sheet(isPresented: $edition) {
+                    CommuneEditor(commune: $commune)
+            }
+        }
+    }
+}
+
+struct CommuneEditor: View {
+    @Binding var commune: Commune
+    var body: some View {
+        HStack(spacing:20) {
+            VStack(alignment:.leading) {
+                TextField("nom", text:$commune.nom).frame(width:150)
+                
+                Button("ajouter un quartier", action:{commune.quartiers.append(Quartier())})
+                OptionalView("tutelle", $commune.tutelle)
+            }
+            if commune.quartiers.count > 0 {
+                GroupBox("quartiers") {
+                    ScrollView{
+                        ForEach($commune.quartiers) {
+                            item in
+                            QuartierView(item)
+                        }.frame(alignment:.leading)
+                    }
+                }
+            }
+        }
+    }
+}
+
+struct CommunePicker: View {
     @Binding var lid:LID
     var continent:Continent
     var territoire: Territoire
@@ -42,7 +89,7 @@ struct CommuneView: View {
                     Spacer()
                 }
                 } else {
-                    QuartierView(lid:$lid, continent:continent, territoire:territoire, region:region, commune:commune, quartier:$quartier, terrain:$terrain)
+                    QuartierPicker(lid:$lid, continent:continent, territoire:territoire, region:region, commune:commune, quartier:$quartier, terrain:$terrain)
                 }
             
         } else {
@@ -51,5 +98,18 @@ struct CommuneView: View {
             }
         }
     }
+}
+
+struct CommunePreview : View {
+    @State var commune = Commune()
+    
+    var body:some View {
+        CommuneEditor(commune: $commune)
+            .frame(width:900, height:200)
+    }
+}
+
+#Preview ("editor"){
+    CommunePreview().padding()
 }
 

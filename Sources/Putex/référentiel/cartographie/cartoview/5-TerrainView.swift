@@ -7,6 +7,37 @@
 
 import SwiftUI
 
+public struct TerrainView: View {
+    @Binding var terrain:Terrain
+    @State var edition : Bool
+    
+    init(_ terrain:Binding<Terrain>) {
+        _terrain = terrain
+        edition = terrain.wrappedValue.isNaN
+    }
+    
+    public var body: some View {
+        if edition {
+            GroupBox {
+                HStack {
+                    TerrainEditor($terrain)
+                    Spacer()
+                    Button(action: { edition = false})
+                    {Image(systemName: "checkmark")}
+                }
+            }
+        } else {
+            HStack {
+                TerrainShow(terrain: $terrain)
+ 
+                Spacer()
+                Button(action: { edition = true})
+                {Image(systemName: "pencil")}
+            }
+        }
+    }
+}
+
 public struct TerrainShow: View {
     @Binding var terrain:Terrain
     
@@ -26,7 +57,7 @@ public struct TerrainShow: View {
     }
 }
 
-public struct TerrainView: View {
+public struct TerrainPicker: View {
     @Binding var terrain:Terrain
     @State var edition : Bool
     @State private var lid = LID()
@@ -54,35 +85,23 @@ public struct TerrainView: View {
         }
     }
     
-    func creator() {
-        //print (terrain, lid)
-        terrain = Lieu(lid).terrain ?? Terrain(lid)
-        //print (terrain)
-        edition = true
-     }
-    
     public var body: some View {
-        if terrain.lid == nil {
-            VStack {
-                LIDPicker($lid, creator)
+        VStack {
+            HStack{
+                if edition {
+                    TerrainEditor($terrain)
+                } else {
+                    TerrainShow(terrain: $terrain)
+                }
+                valeur
+                    .padding(20)
             }
-        } else {
-            VStack {
-                HStack{
-                    if edition {
-                        TerrainEditor($terrain)
-                    } else {
-                        TerrainShow(terrain: $terrain)
-                    }
-                    valeur
-                        .padding(20)
-                }
-                if modifiable {
-                    Button(action:{ edition.toggle() })
-                    { Text(edition ? "valider les corrections" : "corriger")}.padding(20)
-                }
+            if modifiable {
+                Button(action:{ edition.toggle() })
+                { Text(edition ? "valider les corrections" : "corriger")}.padding(20)
             }
         }
+        
     }
 }
 
@@ -94,13 +113,13 @@ public struct TerrainEditor: View {
     }
     
     public var body: some View {
-        HStack(alignment:.top) {
+       
             VStack(alignment: .leading) {
                 AdresseDouble(first:$terrain.numvoie, autre:$terrain.autrenumvoie, commune:terrain.commune)
                
-            }
+           
             GroupBox("parcelles") {
-                ParceList(parcelles: $terrain.parcelles).padding(10)
+                ParceList(parcelles: $terrain.parcelles, edition:true).padding(10)
             }.padding(20)
                
         }.frame(alignment: .leading)
@@ -163,9 +182,31 @@ struct TerrainPreview: View {
     @State var terrain = Terrain(unterrain)
     var modifiable = false
     
+    @State private var voir = false
+    @State var lid = LID()
+    
     var body: some View {
-        TerrainView($terrain, modifiable:modifiable)
-            .frame(width:600,height:300)
+        VStack(spacing:20) {
+            if voir {
+                Text("lieu : \(Lieu(lid).terrain)")
+                Text("new : \(Terrain(lid))")
+                Text("terrain : \(terrain)")
+                Button("vu", action:{voir = false})
+            } else {
+                TerrainPicker($terrain, modifiable:modifiable)
+                    .frame(width:600,height:500)
+                    .onChange(of: terrain.id, {lid = terrain.lid!})
+                
+                Button("voir", action : {
+                    if let terrainlid = terrain.lid {
+                        lid = terrainlid
+                        voir = true
+                    }
+                })//.disabled(lid.terrain == nil)
+            }
+            
+        }
+        
     }
 }
 
