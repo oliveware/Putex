@@ -11,7 +11,7 @@ public struct TerrainView: View {
     @Binding var terrain:Terrain
     @State var edition : Bool
     
-    init(_ terrain:Binding<Terrain>) {
+    public init(_ terrain:Binding<Terrain>) {
         _terrain = terrain
         edition = terrain.wrappedValue.isNaN
     }
@@ -41,6 +41,19 @@ public struct TerrainView: View {
 public struct TerrainShow: View {
     @Binding var terrain:Terrain
     
+    public var valeur: some View {
+        Group {
+            if let valeur:Binding<Valeur> = Binding($terrain.valorisation) {
+                GroupBox("valeur"){
+                    ValeurView(valeur)
+                }
+            } else {
+                Button(action:{terrain.valorisation = Valeur()})
+                { Text("définir la valeur")}
+            }
+        }
+    }
+    
     public var body: some View {
         VStack ( alignment:.leading, spacing:10 ) {
           /*  if terrain.numvoie.voie != "" {
@@ -49,9 +62,13 @@ public struct TerrainShow: View {
                 }
             }*/
             
-            GroupBox("Parcelles") {
-                ParceList(parcelles: $terrain.parcelles).padding(10)
-            }.frame(height:CGFloat(terrain.parcelles.count * 5))
+            HStack {
+                GroupBox("Parcelles") {
+                    ParceList(parcelles: $terrain.parcelles).padding(10)
+                }.frame(height:CGFloat(terrain.parcelles.count * 5))
+                
+                valeur
+            }
            
         }.padding(10)
     }
@@ -72,6 +89,32 @@ public struct TerrainPicker: View {
     
   
     
+   
+    
+    public var body: some View {
+        VStack {
+            HStack{
+                if edition {
+                    TerrainEditor($terrain)
+                } else {
+                    TerrainShow(terrain: $terrain)
+                }
+            }
+            if modifiable {
+                Button(action:{ edition.toggle() })
+                { Text(edition ? "valider les corrections" : "corriger")}.padding(20)
+            }
+        }
+    }
+}
+
+public struct TerrainEditor: View {
+    @Binding var terrain:Terrain
+    
+    public init(_ terrain:Binding<Terrain>) {
+        _terrain = terrain
+    }
+    
     public var valeur: some View {
         Group {
             if let valeur:Binding<Valeur> = Binding($terrain.valorisation) {
@@ -86,41 +129,17 @@ public struct TerrainPicker: View {
     }
     
     public var body: some View {
-        VStack {
-            HStack{
-                if edition {
-                    TerrainEditor($terrain)
-                } else {
-                    TerrainShow(terrain: $terrain)
-                }
-                valeur
-                    .padding(20)
-            }
-            if modifiable {
-                Button(action:{ edition.toggle() })
-                { Text(edition ? "valider les corrections" : "corriger")}.padding(20)
-            }
-        }
-        
-    }
-}
-
-public struct TerrainEditor: View {
-    @Binding var terrain:Terrain
-    
-    public init(_ terrain:Binding<Terrain>) {
-        _terrain = terrain
-    }
-    
-    public var body: some View {
        
             VStack(alignment: .leading) {
                 AdresseDouble(first:$terrain.numvoie, autre:$terrain.autrenumvoie, commune:terrain.commune)
-               
            
-            GroupBox("parcelles") {
-                ParceList(parcelles: $terrain.parcelles, edition:true).padding(10)
-            }.padding(20)
+                HStack {
+                    GroupBox("parcelles") {
+                        ParceList(parcelles: $terrain.parcelles, edition:true).padding(10)
+                    }.padding(20)
+                    
+                    valeur
+                }
                
         }.frame(alignment: .leading)
         .padding(10)
