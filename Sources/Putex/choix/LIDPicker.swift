@@ -24,9 +24,7 @@ struct LIDPicker : View {
 
             VStack {
                 TerritoirePicker(lid: $lid, continent:$continent, territoire:$territoire, edition:false)
-                Button("valider", action: {
-                    done()
-                }).padding(10)
+                Button("valider", action: { done()  }).padding(10)
             }
 
     }

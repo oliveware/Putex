@@ -67,14 +67,12 @@ public struct TerrainPicker: View {
     }
     
     func done() {
-        terrain = Terrain(lid)
+        terrain = Lieu(lid).terrain ?? Terrain(lid)
     }
 
     public var body: some View {
         VStack {
             LIDPicker($lid, done)
-            Button("valider", action:{ terrain = Terrain(lid) })
-                .padding(20)
         }
     }
 }
@@ -164,13 +162,14 @@ struct TerrainPreview: View {
             } else {
                 TerrainPicker($terrain)
                     .frame(width:600,height:500)
-                    .onChange(of: terrain.id, {lid = terrain.lid!})
+                  //  .onChange(of: terrain.id, {lid = terrain.lid!})
                 
                 Button("voir", action : {
                     if let terrainlid = terrain.lid {
                         lid = terrainlid
-                        voir = true
+                        
                     }
+                    voir = true
                 })//.disabled(lid.terrain == nil)
             }
             
