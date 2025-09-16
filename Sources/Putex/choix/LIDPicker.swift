@@ -29,15 +29,7 @@ struct LIDPicker : View {
     }
     
     var body: some View {
-
-            VStack {
-                TerritoirePicker(lid: $lid, continent:$continent, territoire:$territoire, edition:false)
-
-                if level == .terrain && lid.terrain != nil {
-                    Button("choisir ce terrain", action: { done()  }).padding(10)
-                }
-            }
-
+        TerritoirePicker(lid: $lid, continent:$continent, territoire:$territoire, edition:false)
     }
 }
 

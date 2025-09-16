@@ -72,7 +72,10 @@ public struct TerrainPicker: View {
 
     public var body: some View {
         VStack {
-            LIDPicker($lid, done)
+            LIDPicker($lid, {})
+            if lid.terrain != nil {
+                  Button("choisir ce terrain", action: { done()  }).padding(10)
+              }
         }
     }
 }
