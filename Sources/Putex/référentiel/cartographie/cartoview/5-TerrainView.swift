@@ -59,15 +59,11 @@ public struct TerrainShow: View {
 
 public struct TerrainPicker: View {
     @Binding var terrain:Terrain
-    @State var edition : Bool
     @State private var lid = LID()
-    var modifiable = false
+
     
-    public init(_ terrain:Binding<Terrain>, modifiable:Bool = false) {
+    public init(_ terrain:Binding<Terrain>) {
         _terrain = terrain
-        let unchecked = !terrain.wrappedValue.checked
-        edition = unchecked
-        self.modifiable = unchecked ? true : modifiable
     }
     
     func done() {
@@ -77,10 +73,8 @@ public struct TerrainPicker: View {
     public var body: some View {
         VStack {
             LIDPicker($lid, done)
-          /*  if modifiable {
-                Button(action:{ edition.toggle() })
-                { Text(edition ? "valider les corrections" : "corriger")}.padding(20)
-            }*/
+            Button("valider", action:{ terrain = Terrain(lid) })
+                .padding(20)
         }
     }
 }
@@ -156,7 +150,6 @@ let unterrain = """
 struct TerrainPreview: View {
    // @State var terrain = Terrain(LID([1,1,6,1]))
     @State var terrain = Terrain(unterrain)
-    var modifiable = false
     
     @State private var voir = false
     @State var lid = LID()
@@ -169,7 +162,7 @@ struct TerrainPreview: View {
                 Text("terrain : \(terrain)")
                 Button("vu", action:{voir = false})
             } else {
-                TerrainPicker($terrain, modifiable:modifiable)
+                TerrainPicker($terrain)
                     .frame(width:600,height:500)
                     .onChange(of: terrain.id, {lid = terrain.lid!})
                 
@@ -193,6 +186,3 @@ struct TerrainPreview: View {
     TerrainPreview()
 }
 
-#Preview("modifiable") {
-    TerrainPreview(modifiable:true)
-}
