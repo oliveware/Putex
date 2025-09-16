@@ -8,10 +8,10 @@
 import Foundation
 
 public struct LID : Codable, Identifiable {
-    public static var NA = LID([0,0,0,0,0])
+    public static var NA = LID()
     static var next = (zero:0, one:0, two:0, three:0, four:0, five:0)
     static func nextinit(_ continents: [Continent]) {
-        var zero = continents.count
+        let zero = continents.count
         var one = 0
         var two = 0
         var three = 0

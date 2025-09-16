@@ -67,7 +67,7 @@ public struct TerrainPicker: View {
     }
     
     func done() {
-        terrain = Lieu(lid).terrain ?? Terrain(lid)
+        terrain = Lieu(lid).terrain ?? Terrain()
     }
 
     public var body: some View {

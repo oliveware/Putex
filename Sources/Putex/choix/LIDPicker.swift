@@ -11,20 +11,31 @@ struct LIDPicker : View {
     @State var continent: Continent
     @State var territoire: Territoire
     
+    enum Level {
+        case commune
+        case quartier
+        case terrain
+    }
+    let level : Level
+    
     var done: () -> Void
     
-    init(_ lid: Binding<LID>, _ done: @escaping () -> Void) {
+    init(_ lid: Binding<LID>, _ done: @escaping () -> Void, _ level:Level = .terrain) {
         _lid = lid
         continent = World.Europe
         territoire = World.Europe["France"]
         self.done = done
+        self.level = level
     }
     
     var body: some View {
 
             VStack {
                 TerritoirePicker(lid: $lid, continent:$continent, territoire:$territoire, edition:false)
-                Button("valider", action: { done()  }).padding(10)
+
+                if level == .terrain && lid.terrain != nil {
+                    Button("choisir ce terrain", action: { done()  }).padding(10)
+                }
             }
 
     }
