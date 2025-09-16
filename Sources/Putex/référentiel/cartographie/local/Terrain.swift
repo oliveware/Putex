@@ -93,28 +93,19 @@ public struct Terrain: Codable, Identifiable {
     }
     var usage : Usage?
     
-    
-    var valorisation : Valeur?
-    
     public var valeur: Valeur {
-        if valorisation == nil {
-            var value = Montant()
-            var NaN :String = ""
-            var date = JMA(Date.now)
-            for parcelle in parcelles {
-                if let vp = parcelle.valeur {
-                    value = value + vp
-                    let datestim = parcelle.prixm2!.date
-                    if datestim < date { date = datestim }
-                } else {
-                    NaN = "incomplète"
-                }
+        var value = Montant()
+        var NaN :String = ""
+        var date = JMA(Date.now)
+        for parcelle in parcelles {
+            if let vp = parcelle.valeur {
+                value = value + vp
+                let datestim = parcelle.prixm2!.date
+                if datestim < date { date = datestim }
+            } else {
+                NaN = "incomplète"
             }
-            return Valeur(Estimation(), Estimation(date, value, NaN ))
-        } else {
-            return valorisation!
         }
+        return Valeur(Estimation(), Estimation(date, value, NaN ))
     }
-    
-    
 }

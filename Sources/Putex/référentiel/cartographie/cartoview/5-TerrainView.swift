@@ -41,19 +41,6 @@ public struct TerrainView: View {
 public struct TerrainShow: View {
     @Binding var terrain:Terrain
     
-    public var valeur: some View {
-        Group {
-            if let valeur:Binding<Valeur> = Binding($terrain.valorisation) {
-                GroupBox("valeur"){
-                    ValeurView(valeur)
-                }
-            } else {
-                Button(action:{terrain.valorisation = Valeur()})
-                { Text("définir la valeur")}
-            }
-        }
-    }
-    
     public var body: some View {
         VStack ( alignment:.leading, spacing:10 ) {
           /*  if terrain.numvoie.voie != "" {
@@ -67,7 +54,7 @@ public struct TerrainShow: View {
                     ParceList(parcelles: $terrain.parcelles).padding(10)
                 }.frame(height:CGFloat(terrain.parcelles.count * 5))
                 
-                valeur
+                ValeurShow(terrain.valeur)
             }
            
         }.padding(10)
@@ -115,31 +102,16 @@ public struct TerrainEditor: View {
         _terrain = terrain
     }
     
-    public var valeur: some View {
-        Group {
-            if let valeur:Binding<Valeur> = Binding($terrain.valorisation) {
-                GroupBox("valeur"){
-                    ValeurView(valeur)
-                }
-            } else {
-                Button(action:{terrain.valorisation = Valeur()})
-                { Text("définir la valeur")}
-            }
-        }
-    }
-    
     public var body: some View {
        
-            VStack(alignment: .leading) {
+        VStack(alignment: .leading, spacing:30) {
                 AdresseDouble(first:$terrain.numvoie, autre:$terrain.autrenumvoie, commune:terrain.commune)
            
                 HStack {
-                    GroupBox("parcelles") {
-                        ParceList(parcelles: $terrain.parcelles, edition:true).padding(10)
-                    }.padding(20)
-                    
-                    valeur
+                    ParceList(parcelles: $terrain.parcelles, edition:true).padding(10)
+                    ValeurShow(terrain.valeur)
                 }
+                
                
         }.frame(alignment: .leading)
         .padding(10)

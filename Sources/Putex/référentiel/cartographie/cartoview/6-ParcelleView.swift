@@ -9,16 +9,22 @@ import SwiftUI
 
 struct ParcelleShow: View {
     @Binding var parcelle: Parcelle
-    @State var edition: Bool
+    let unique: Bool
+    @State private var edition: Bool
     
-    init(_ parcelle:Binding<Parcelle>) {
+    init(_ parcelle:Binding<Parcelle>, _ unique:Bool = false) {
         _parcelle = parcelle
         edition = parcelle.wrappedValue.surface.value == 0
+        self.unique = unique
     }
     
     var body: some View {
         HStack(spacing:50){
-            Text("n° " + String(parcelle.id))
+            if unique {
+                Text("parcelle unique n° " + String(parcelle.id))
+            } else {
+                Text("n° " + String(parcelle.id))
+            }
             Spacer()
             if edition {
                 NumberView($parcelle.surface)
@@ -45,13 +51,15 @@ struct ParcelleEditor: View {
 
 struct ParcelleView: View {
     @Binding var parcelle: Parcelle
+    let unique: Bool
     @Binding private var correction: Bool
     @State private var edition: Bool
     
-    init(_ parcelle: Binding<Parcelle>, _ correction:Binding<Bool>) {
+    init(_ parcelle: Binding<Parcelle>, _ correction:Binding<Bool>, _ unique:Bool = false) {
         _parcelle = parcelle
         _correction = correction
         edition = parcelle.wrappedValue.id == 0
+        self.unique = unique
     }
     
     var body: some View {
@@ -59,7 +67,7 @@ struct ParcelleView: View {
             if edition {
                 ParcelleEditor(parcelle: $parcelle)
             } else {
-                ParcelleShow($parcelle)
+                ParcelleShow($parcelle, unique)
             }
         }
     }
@@ -88,22 +96,43 @@ struct ParceList: View {
     
     var body: some View {
         
-        VStack {
-            if surface.value > 0  && parcelles.count > 1 {
-                HStack {
-                    Spacer()
-                    Text("surface totale : " + surface.astring)
-                }.padding(10)
-            }
-            ForEach ($parcelles) {
-                parcelle in
-                HStack(spacing:10) {
-                    if suppression {
-                        Button(action:{delete(parcelle.id)})
-                        {Image(systemName: "minus")}
-                        Spacer()
+        VStack(alignment:.leading) {
+            if parcelles.count == 0 {
+                Text("parcelle à définir").padding(.leading, 15)
+            } else {
+                if parcelles.count == 1 {
+                    HStack(spacing:10) {
+                        if suppression {
+                            Button(action:{
+                                parcelles = []
+                                suppression = false
+                                }
+                            )
+                            {Image(systemName: "minus")}
+                            Spacer()
+                        }
+                        ParcelleView($parcelles[0], $edition, true)
                     }
-                    ParcelleView(parcelle, $edition)
+                } else {
+                    GroupBox("\(parcelles.count) parcelles") {
+                        if surface.value > 0  && parcelles.count > 1 {
+                            HStack {
+                                Spacer()
+                                Text("surface totale : " + surface.astring)
+                            }.padding(10)
+                        }
+                        ForEach ($parcelles) {
+                            parcelle in
+                            HStack(spacing:10) {
+                                if suppression {
+                                    Button(action:{delete(parcelle.id)})
+                                    {Image(systemName: "minus")}
+                                    Spacer()
+                                }
+                                ParcelleView(parcelle, $edition)
+                            }
+                        }
+                    }
                 }
             }
             
@@ -133,7 +162,7 @@ struct ParceList: View {
                                 })
                                 {Image(systemName:"minus")}
                             }
-                            Spacer()
+                            if suppression { Spacer() }
                             Button(action:{
                                 ajoût = true
                             })
@@ -141,7 +170,7 @@ struct ParceList: View {
                             Spacer()
                         }
                     }
-                }.padding(.top,20)
+                }
             }
         }
         
