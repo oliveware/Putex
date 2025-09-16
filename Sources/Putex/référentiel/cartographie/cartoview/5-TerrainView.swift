@@ -48,15 +48,11 @@ public struct TerrainShow: View {
                     Text(terrain.address).padding(10)
                 }
             }*/
-            
-            HStack {
-                GroupBox("Parcelles") {
-                    ParceList(parcelles: $terrain.parcelles).padding(10)
-                }.frame(height:CGFloat(terrain.parcelles.count * 5))
-                
-                ValeurShow(terrain.valeur)
-            }
-           
+
+            GroupBox("Parcelles") {
+                ParceList(parcelles: $terrain.parcelles).padding(10)
+            }.frame(height:CGFloat(terrain.parcelles.count * 5))
+ 
         }.padding(10)
     }
 }
