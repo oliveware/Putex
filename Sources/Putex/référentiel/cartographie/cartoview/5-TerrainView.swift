@@ -70,23 +70,17 @@ public struct TerrainPicker: View {
         self.modifiable = unchecked ? true : modifiable
     }
     
-  
-    
-   
-    
+    func done() {
+        terrain = Terrain(lid)
+    }
+
     public var body: some View {
         VStack {
-            HStack{
-                if edition {
-                    TerrainEditor($terrain)
-                } else {
-                    TerrainShow(terrain: $terrain)
-                }
-            }
-            if modifiable {
+            LIDPicker($lid, done)
+          /*  if modifiable {
                 Button(action:{ edition.toggle() })
                 { Text(edition ? "valider les corrections" : "corriger")}.padding(20)
-            }
+            }*/
         }
     }
 }
