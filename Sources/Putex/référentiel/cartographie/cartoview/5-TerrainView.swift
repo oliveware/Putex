@@ -105,14 +105,9 @@ public struct TerrainEditor: View {
     public var body: some View {
        
         VStack(alignment: .leading, spacing:30) {
-                AdresseDouble(first:$terrain.numvoie, autre:$terrain.autrenumvoie, commune:terrain.commune)
-           
-                HStack {
-                    ParceList(parcelles: $terrain.parcelles, edition:true).padding(10)
-                    ValeurShow(terrain.valeur)
-                }
-                
-               
+            AdresseDouble(first:$terrain.numvoie, autre:$terrain.autrenumvoie, commune:terrain.commune)
+       
+            ParceList(parcelles: $terrain.parcelles, edition:true).padding(10)
         }.frame(alignment: .leading)
         .padding(10)
     }
