@@ -65,16 +65,20 @@ public struct TerrainPicker: View {
     public init(_ terrain:Binding<Terrain>) {
         _terrain = terrain
     }
-    
-    func done() {
-        terrain = Lieu(lid).terrain ?? Terrain()
-    }
 
     public var body: some View {
         VStack {
-            LIDPicker($lid, {})
-            if lid.terrain != nil {
-                  Button("choisir ce terrain", action: { done()  }).padding(10)
+            Text("Emplacement géographique")
+                .font(.title3).padding(20)
+            if terrain.isNaN {
+                LIDPicker($lid, {})
+            } else {
+                TerrainView($terrain)
+            }
+            if lid.terrain != nil && terrain.isNaN {
+                  Button("choisir ce terrain", action: {
+                      terrain = Lieu(lid).terrain ?? Terrain()
+                  }).padding(10)
               }
         }
     }
