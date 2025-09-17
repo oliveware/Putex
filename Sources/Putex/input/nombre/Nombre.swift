@@ -117,15 +117,13 @@ public struct Nombre: Codable {
         if let decim = decimales {
             if let deci = Double(decim) {
                 decimal = deci / Double(Nombre.div(decim.count))
-            } else {
-                print("décimales erronées : \(decim)")
             }
         }
         if let entier = entiere {
             if entier < 0 { decimal = -decimal }
             return Double(entier) + decimal
         } else {
-            return 0
+            return decimal
         }
     }
   
@@ -146,7 +144,9 @@ public struct Nombre: Codable {
                 }
             } else {
                 deci = 0
-                print("erreur : decimales incorrectes : \(decimales!)")
+                if decimales != "" {
+                    print("erreur : decimales incorrectes : \(decimales!)")
+                }
             }
         }
         if let entier = entiere {
