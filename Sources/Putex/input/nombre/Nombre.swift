@@ -25,27 +25,29 @@ public struct Nombre: Codable {
         decimales = nil
     }
     
-    public init(_ s:String){
-        var enchiffre = ""
-        for character in s {
-            if ["0","1","2","3","4","5","6","7","8","9",",",".","-"].contains(character) {
-                enchiffre += String(character)
+    public init(_ s:String = ""){
+        if s != "" {
+            var enchiffre = ""
+            for character in s {
+                if ["0","1","2","3","4","5","6","7","8","9",",",".","-"].contains(character) {
+                    enchiffre += String(character)
+                }
             }
-        }
-        let point = enchiffre.split(separator: ".")
-        let virgule = enchiffre.split(separator: ",")
-        if point.count == 1 && virgule.count == 1 {
-            entiere = Int(enchiffre) ?? 0
-        } else {
-            if point.count == 2 {
-                entiere = Int(point[0]) ?? 0
-                decimales = String(point[1])
+            let point = enchiffre.split(separator: ".")
+            let virgule = enchiffre.split(separator: ",")
+            if point.count == 1 && virgule.count == 1 {
+                entiere = Int(enchiffre) ?? 0
             } else {
-                if virgule.count == 2 {
-                    entiere = Int(virgule[0]) ?? 0
-                    decimales = String(virgule[1])
+                if point.count == 2 {
+                    entiere = Int(point[0]) ?? 0
+                    decimales = String(point[1])
                 } else {
-                    print("\(s) n'est pas un nombre")
+                    if virgule.count == 2 {
+                        entiere = Int(virgule[0]) ?? 0
+                        decimales = String(virgule[1])
+                    } else {
+                        print("\(s) n'est pas un nombre")
+                    }
                 }
             }
         }
