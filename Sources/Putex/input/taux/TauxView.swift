@@ -9,7 +9,6 @@ import SwiftUI
 
 public struct TauxView : View {
     @Binding var taux:Taux
-    @State var edition = true
     var prompt: String? = "pourcentage"
 
     var width : CGFloat {
