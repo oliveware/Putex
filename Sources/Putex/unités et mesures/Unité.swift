@@ -69,7 +69,7 @@ public enum Unité: String, Codable, Enumerable {
             case .mois :
                 return "mois"
             default:
-                return "pièce"
+                return "x" + String(Int(value)) // "pièce"
             }
         }
     }
