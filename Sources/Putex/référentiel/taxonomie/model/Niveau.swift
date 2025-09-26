@@ -35,6 +35,28 @@ struct Niveau {
         }
         return string
     }
+    func showlast(_ sep:String = "-") -> String {
+        var string = ""
+        if let zeroniv = zero {
+            string = zeroniv.nom
+            if let oneniv = one {
+                string = oneniv.nom
+                if let twoniv = two {
+                    string = twoniv.nom
+                    if let threeniv = three {
+                        string = threeniv.nom
+                        if let fourniv = four {
+                            string = fourniv.nom
+                            if let fiveniv = five {
+                                string = fiveniv.nom
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return string
+    }
     
     var nom: String {
         var string = ""
