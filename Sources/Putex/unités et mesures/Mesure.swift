@@ -83,6 +83,9 @@ extension Mesure {
             return nil
         }
     }
+    public static func + (a:Mesure, b:Nombre) -> Mesure {
+        return Mesure(a.nombre + b, a.quantité)
+    }
     
  /*
     public init (_ m:Double, _ unité:Unité) {
