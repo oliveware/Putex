@@ -138,6 +138,9 @@ public struct TID : Codable, Identifiable, Equatable{
     public func show(sep:String = "-")->String {
         Niveau(self).show(sep)
     }
+    public var show: String {
+        Niveau(self).showlast
+    }
     public var tab: [Int] {
         var t : [Int] = [zero]
         if let co =  one {
