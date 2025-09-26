@@ -29,7 +29,7 @@ public struct TIDPicker: View {
     
     public init(_ tid:Binding<TID>, _ taxonomy:Taxonomy? = nil) {
         _tid = tid
-        self.taxonomy = taxonomy ?? Taxonomy(taxonomie)
+        self.taxonomy = taxonomy ?? Taxonomy(besoins)
         let niveau = Niveau(tid.wrappedValue)
         nivzero = niveau.zero ?? Nivzero()
         nivone = niveau.one ?? Nivone()

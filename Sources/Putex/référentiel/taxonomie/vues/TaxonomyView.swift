@@ -13,7 +13,7 @@ public struct NiveauView : View {
     @State var edition:Bool
     
     public init (_ tid : Binding<TID>, _ taxonomy:Taxonomy? = nil) {
-        self.taxonomy = taxonomy ?? Taxonomy(taxonomie)
+        self.taxonomy = taxonomy ?? Taxonomy(besoins)
         _tid = tid
         edition = (tid.wrappedValue == TID())
     }
@@ -38,7 +38,7 @@ public struct NiveauView : View {
 
 
 struct NiveauPreview: View {
-    var taxonomy = Taxonomy(taxonomie)
+    var taxonomy = Taxonomy(besoins)
     @State var tid : TID
     
     var body:some View {
