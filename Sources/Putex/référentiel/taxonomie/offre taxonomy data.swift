@@ -7,222 +7,6 @@
 
 public let taxonomie = """
 {"items" : [
-    {"id":1, "nom":"produit", "one": [
-            {"id":1, "nom":"durable", "two":[
-                    {"id":1, "nom":"électro-ménager", "three":[
-                            {"id":1,"nom":"four", "four":[]}, 
-                            {"id":2,"nom":"frigo", "four":[]},
-                            {"id":3,"nom":"plaques", "four":[]},
-                            {"id":4,"nom":"lave-linge", "four":[]},
-                            {"id":5,"nom":"lave-vaisselle", "four":[]}
-                        ]
-                    },
-                    {"id":2, "nom":"mobilier", "three":[
-                            {"id":1,"nom":"siège", "four":[
-                                {"id":1,"nom":"chaise", "five":[]},
-                                {"id":2,"nom":"tabouret", "five":[]},
-                                {"id":3,"nom":"fauteuil", "five":[]},
-                                {"id":4,"nom":"canapé", "five":[]},
-                                {"id":5,"nom":"pouf", "five":[]}
-                                ]}, 
-                            {"id":2,"nom":"table", "four":[]},
-                            {"id":3,"nom":"armoire", "four":[]},
-                            {"id":4,"nom":"lit", "four":[]},
-                            {"id":5,"nom":"bureau", "four":[]},
-                            {"id":9,"nom":"tapis", "four":[]}
-                        ]
-                    },
-                    {"id":3, "nom":"chauffage", "three":[
-                            {"id":1,"nom":"radiateur", "four":[]},
-                            {"id":2,"nom":"chaudière", "four":[]},
-                            {"id":3,"nom":"pompe à chaleur", "four":[]}
-                        ]
-                    },
-                    {"id":4, "nom":"sanitaire", "three":[
-                            {"id":1,"nom":"lavabo", "four":[]},
-                            {"id":2,"nom":"douche", "four":[]},
-                            {"id":3,"nom":"baignoire", "four":[]},
-                            {"id":4,"nom":"robinet", "four":[]},
-                            {"id":5,"nom":"WC", "four":[]}
-                        ]
-                    },
-                    {"id":5, "nom":"véhicule", "three":[
-                            {"id":1,"nom":"aérien", "four":[
-                                {"id":1,"nom":"avion", "five":[]},
-                                {"id":2,"nom":"ULM", "five":[]},
-                                {"id":3,"nom":"parapente", "five":[]},
-                                {"id":4,"nom":"hélicoptère", "five":[]},
-                                {"id":5,"nom":"montgolfière", "five":[]}
-                                ]
-                            },
-                            {"id":2,"nom":"aquatique", "four":[
-                                {"id":1,"nom":"barque", "five":[]},
-                                {"id":2,"nom":"bateau", "five":[]},
-                                {"id":3,"nom":"voilier", "five":[]}
-                            ]},
-                            {"id":3,"nom":"terrestre", "four":[
-                                {"id":1,"nom":"automobile", "five":[]},
-                                {"id":2,"nom":"moto", "five":[]},
-                                {"id":3,"nom":"vélo", "five":[]},
-                                {"id":4,"nom":"trotinette", "five":[]}
-                            ]
-                            },
-                            {"id":5,"nom":"WC", "four":[]}
-                        ]
-                    }
-                ]
-            },
-            {"id":2, "nom":"consommable", "two":[
-                    {"id":1, "nom":"nourriture", "three":[
-                            {"id":1,"nom":"riz", "four":[]}, 
-                            {"id":2,"nom":"pain", "four":[]},
-                            {"id":3,"nom":"fruits", "four":[
-                                {"id":1,"nom":"abricot","five":[]},
-                                {"id":2,"nom":"ananas","five":[]},
-                                {"id":3,"nom":"avocat","five":[]},
-                                {"id":4,"nom":"citron","five":[]},
-                                {"id":5,"nom":"clémentine","five":[]},
-                                {"id":6,"nom":"datte","five":[]},
-                                {"id":7,"nom":"figue","five":[]},
-                                {"id":8,"nom":"fraise","five":[]},
-                                {"id":9,"nom":"kiwi","five":[]},
-                                {"id":10,"nom":"orange","five":[]},
-                                {"id":11,"nom":"pomme","five":[]},
-                                {"id":12,"nom":"poire","five":[]},
-                                {"id":13,"nom":"pomelos","five":[]},
-                                {"id":14,"nom":"prune","five":[]},
-                                {"id":15,"nom":"cerise","five":[]}
-                                ]
-                            },
-                            {"id":4,"nom":"légumes", "four":[
-                                {"id":1,"nom":"pomme de terre","five":[]},
-                                {"id":2,"nom":"poireau","five":[]},
-                                {"id":3,"nom":"haricot","five":[]}
-                            ]
-                            }
-                        ]
-                    },
-                    {"id":2, "nom":"entretien", "three":[
-                            {"id":1,"nom":"lessive", "four":[]}, 
-                            {"id":2,"nom":"savon", "four":[]},
-                            {"id":3,"nom":"douche", "four":[]}
-                        ]
-                    },
-                    {"id":3,"nom":"eau", "three":[
-                        {"id":1,"nom":"potable", "four":[
-                            {"id":1,"nom":"minérale", "five":[
-                                {"id":1,"nom":"plate"},
-                                {"id":2,"nom":"pétillante"}
-                            ]},
-                            {"id":2,"nom":"robinet", "five":[]}
-                            ]
-                        },
-                        {"id":2,"nom":"non potable", "four":[]}
-                        ]
-                    },  
-                    {"id":4,"nom":"électricité", "three":[]},
-                    {"id":5,"nom":"carburant", "three":[
-                        {"id":1,"nom":"gaz", "four":[]},
-                        {"id":2,"nom":"essence", "four":[]},
-                        {"id":3,"nom":"gasoil", "four":[]},
-                        {"id":4,"nom":"GPL", "four":[]},
-                        {"id":5,"nom":"fuel", "four":[]}
-                        ]
-                    },
-                    {"id":6,"nom":"telecom", "three":[
-                        {"id":1,"nom":"mobile", "four":[]}, 
-                        {"id":2,"nom":"internet", "four":[]},
-                        {"id":3,"nom":"cloud", "four":[]}
-                        ]
-                    },
-                    {"id":7,"nom":"papeterie", "three":[]},
-                    {"id":8,"nom":"électricité", "three":[]}
-                ] 
-            }
-        ] 
-    },
-    {"id":2, "nom":"service", "one": [
-        {"id":1, "nom":"location", "two":[
-            {"id":1, "nom":"logement", "three":[
-                {"id":1,"nom":"non meublé", "four":[
-                    {"id":1,"nom":"loyer", "five":[]},
-                    {"id":2,"nom":"caution", "five":[]}
-                    ]
-                },
-                {"id":2,"nom":"meublé", "four":[
-                    {"id":1,"nom":"loyer", "five":[]},
-                    {"id":2,"nom":"caution", "five":[]}
-                    ]
-                }
-                ]
-            },
-            {"id":2, "nom":"garage", "three":[
-                    {"id":1,"nom":"loyer", "four":[]},
-                    {"id":2,"nom":"caution", "four":[]}
-                    ]
-            },
-            {"id":3, "nom":"parking", "three":[
-                    {"id":1,"nom":"loyer", "four":[]},
-                    {"id":2,"nom":"caution", "four":[]}
-                    ]
-            },
-            {"id":4, "nom":"stockage", "three":[
-                    {"id":1,"nom":"loyer", "four":[]},
-                    {"id":2,"nom":"caution", "four":[]}
-                    ]
-            }
-            ]
-        },
-        {"id":2, "nom":"assurance", "two":[
-            {"id":1,"nom":"mutuelle", "three":[]},
-            {"id":2,"nom":"auto", "three":[]},
-            {"id":3,"nom":"habitation", "three":[
-                {"id":1,"nom":"propriétaire", "four":[]},
-                {"id":2,"nom":"locataire", "four":[]}
-                ]
-            },
-            {"id":4,"nom":"multiple", "three":[]},
-            {"id":5,"nom":"réparation", "three":[]}
-        ]},
-        {"id":3, "nom":"santé", "two":[
-            {"id":1, "nom":"médecin", "three":[
-                {"id":1, "nom":"généraliste", "four":[]},
-                {"id":2, "nom":"anesthésie", "four":[]},
-                {"id":3, "nom":"cardiologue", "four":[]},
-                {"id":4, "nom":"chirurgie", "four":[]},
-                {"id":5, "nom":"dentiste", "four":[]},
-                {"id":6, "nom":"dermatologue", "four":[]},
-                {"id":7, "nom":"ophtalmologue", "four":[]},
-                {"id":8, "nom":"radiologue", "four":[]}
-            ]},
-            {"id":2, "nom":"pharmacie", "three":[]},
-            {"id":3, "nom":"infirmier", "three":[]},
-            {"id":4, "nom":"analyses", "three":[]},
-            {"id":5, "nom":"ambulance", "three":[]},
-            {"id":6, "nom":"hôpital", "three":[]}
-            ]
-        } 
-    ]},
-    {"id":3, "nom":"cotisation", "one":[
-        {"id":1, "nom":"socicale", "two":[
-            {"id":1, "nom":"URSSAF", "three":[]},
-            {"id":2, "nom":"CSG", "three":[]}
-                ]
-        },
-        {"id":2, "nom":"association", "two":[]},
-        {"id":3, "nom":"syndicale", "two":[]}
-        ]
-    },
-    {"id":4, "nom":"impôt", "one":[
-        {"id":1,"nom":"revenu", "two":[]},
-        {"id":2,"nom":"taxe habitation", "two":[]},
-        {"id":3,"nom":"taxe foncière", "two":[]},
-        {"id":4,"nom":"TVA", "two":[]}
-    ]}
-]}
-"""
-let besoins = """
-{"items" : [
     {"id":1, "nom":"nourriture", "one": [
         {"id":1, "nom":"animale", "two":[
             {"id":1,"nom":"laitage", "three":[
@@ -501,94 +285,147 @@ let besoins = """
             ]
         },
         {"id":2, "nom":"équipement", "two":[
-            {"id":1, "nom":"électro-ménager", "three":[
-                {"id":1,"nom":"cuisson", "four":[
-                    {"id":1,"nom":"micro-onde", "five":[]},
-                    {"id":2,"nom":"four", "five":[]},
-                    {"id":3,"nom":"plaques", "five":[]},
-                    {"id":4,"nom":"hotte", "five":[]}
-                ]}, 
-                {"id":2,"nom":"froid", "four":[
-                    {"id":1,"nom":"réfrigérateur", "five":[]},
-                    {"id":2,"nom":"congélateur", "five":[]}
-                ]},
-                {"id":3,"nom":"nettoyage", "four":[
-                    {"id":4,"nom":"lave-linge", "five":[]},
-                    {"id":5,"nom":"lave-vaisselle", "five":[]},
-                    {"id":6,"nom":"aspirateur", "five":[]}
+            {"id":1,"nom":"cuisson", "three":[
+                {"id":1,"nom":"micro-onde", "four":[]},
+                {"id":2,"nom":"four", "four":[]},
+                {"id":3,"nom":"plaques", "four":[
+                        {"id":1,"nom":"halogène", "five":[]},
+                        {"id":2,"nom":"induction", "five":[]}
                     ]
-                }
-            ]
+                },
+                {"id":4,"nom":"gazinière", "four":[]},
+                {"id":5,"nom":"hotte", "four":[]}
+                ]
+            }, 
+            {"id":2,"nom":"froid", "three":[
+                {"id":1,"nom":"réfrigérateur", "four":[]},
+                {"id":2,"nom":"congélateur", "four":[]}
+                ]
+            },
+            {"id":3,"nom":"nettoyage", "three":[
+                {"id":4,"nom":"lave-linge", "four":[]},
+                {"id":5,"nom":"lave-vaisselle", "four":[]},
+                {"id":6,"nom":"aspirateur", "four":[]}
+                ]
             },
             {"id":2, "nom":"mobilier", "three":[
-                    {"id":1,"nom":"siège", "four":[
-                        {"id":1,"nom":"chaise", "five":[]},
-                        {"id":2,"nom":"tabouret", "five":[]},
-                        {"id":3,"nom":"fauteuil", "five":[]},
-                        {"id":4,"nom":"canapé", "five":[]},
-                        {"id":5,"nom":"pouf", "five":[]}
-                        ]
-                    }, 
-                    {"id":2,"nom":"table", "four":[]},
-                    {"id":3,"nom":"armoire", "four":[]},
-                    {"id":4,"nom":"lit", "four":[]},
-                    {"id":5,"nom":"bureau", "four":[]},
-                    {"id":9,"nom":"tapis", "four":[]}
+                {"id":1,"nom":"siège", "four":[
+                    {"id":1,"nom":"chaise", "five":[]},
+                    {"id":2,"nom":"tabouret", "five":[]},
+                    {"id":3,"nom":"fauteuil", "five":[]},
+                    {"id":4,"nom":"canapé", "five":[]},
+                    {"id":5,"nom":"pouf", "five":[]}
+                    ]
+                }, 
+                {"id":2,"nom":"table", "four":[]},
+                {"id":3,"nom":"armoire", "four":[]},
+                {"id":4,"nom":"lit", "four":[]},
+                {"id":5,"nom":"bureau", "four":[]},
+                {"id":9,"nom":"tapis", "four":[]},
+                {"id":10,"nom":"vitrine", "four":[]}
                 ]
             },
             {"id":3, "nom":"chauffage", "three":[
-                    {"id":1,"nom":"radiateur", "four":[]},
-                    {"id":2,"nom":"chaudière", "four":[]},
-                    {"id":3,"nom":"pompe à chaleur", "four":[]},
-                    {"id":4,"nom":"foyer bois", "four":[]}
+                {"id":1,"nom":"radiateur", "four":[]},
+                {"id":2,"nom":"chaudière", "four":[]},
+                {"id":3,"nom":"pompe à chaleur", "four":[]},
+                {"id":4,"nom":"foyer bois", "four":[]}
                 ]
             },
             {"id":4, "nom":"sanitaire", "three":[
-                    {"id":1,"nom":"lavabo", "four":[]},
-                    {"id":2,"nom":"douche", "four":[]},
-                    {"id":3,"nom":"baignoire", "four":[]},
-                    {"id":4,"nom":"robinet", "four":[]},
-                    {"id":5,"nom":"WC", "four":[]}
+                {"id":1,"nom":"lavabo", "four":[]},
+                {"id":2,"nom":"évier", "four":[]},
+                {"id":3,"nom":"douche", "four":[]},
+                {"id":4,"nom":"baignoire", "four":[]},
+                {"id":5,"nom":"robinet", "four":[]},
+                {"id":6,"nom":"WC", "four":[]}
+                ]
+            },
+            {"id":4, "nom":"luminaire", "three":[
+                {"id":1,"nom":"plafonier", "four":[]},
+                {"id":2,"nom":"lampe de table", "four":[]},
+                {"id":3,"nom":"applique", "four":[]},
+                {"id":4,"nom":"lampe de sol", "four":[]},
+                {"id":5,"nom":"éclairage externe", "four":[]}
+                ]
+            },
+            {"id":5, "nom":"décor", "three":[
+                {"id":1,"nom":"revêtement", "four":[
+                    {"id":1,"nom":"peinture", "five":[]},
+                    {"id":2,"nom":"papier-peint", "five":[]},
+                    {"id":3,"nom":"tissu mural", "five":[]},
+                    {"id":4,"nom":"carrelage", "five":[]},
+                    {"id":5,"nom":"parquet", "five":[]}
+                    ]
+                },
+                {"id":2,"nom":"objet décoratif", "four":[
+                    {"id":1,"nom":"tableau", "five":[]},
+                    {"id":2,"nom":"assiette", "five":[]},
+                    {"id":2,"nom":"miroir", "five":[]}
+                    ]
+                }
+                ]
+            },
+            {"id":5, "nom":"ouverture", "three":[
+                {"id":1,"nom":"porte", "four":[]
+                },
+                {"id":2,"nom":"fenêtre", "four":[]
+                }
+                ]
+            },
+            {"id":6, "nom":"électrique", "three":[
+                {"id":1,"nom":"prise", "four":[]
+                },
+                {"id":2,"nom":"interrupteur", "four":[]
+                },
+                {"id":3,"nom":"compteur", "four":[]
+                },
+                {"id":4,"nom":"disjoncteur", "four":[]
+                },
+                {"id":5,"nom":"tableau", "four":[]
+                },
+                {"id":6,"nom":"câble", "four":[]
+                }
                 ]
             }
             ]
         },
         {"id":3, "nom":"consommable", "two":[
-                    {"id":2, "nom":"entretien", "three":[
-                            {"id":1,"nom":"lessive", "four":[]}, 
-                            {"id":2,"nom":"savon", "four":[]},
-                            {"id":3,"nom":"douche", "four":[]}
-                        ]
-                    },
-                    {"id":3,"nom":"eau", "three":[
-                        {"id":1,"nom":"potable", "four":[
-                            {"id":1,"nom":"minérale", "five":[
-                                {"id":1,"nom":"plate"},
-                                {"id":2,"nom":"pétillante"}
-                            ]},
-                            {"id":2,"nom":"robinet", "five":[]}
-                            ]
-                        },
-                        {"id":2,"nom":"non potable", "four":[]}
-                        ]
-                    },  
-                    {"id":4,"nom":"électricité", "three":[]},
-                    {"id":5,"nom":"carburant", "three":[
-                        {"id":1,"nom":"gaz", "four":[]},
-                        {"id":2,"nom":"essence", "four":[]},
-                        {"id":3,"nom":"gasoil", "four":[]},
-                        {"id":4,"nom":"GPL", "four":[]},
-                        {"id":5,"nom":"fuel", "four":[]}
-                        ]
-                    },
-                    {"id":6,"nom":"telecom", "three":[
-                        {"id":1,"nom":"mobile", "four":[]}, 
-                        {"id":2,"nom":"internet", "four":[]},
-                        {"id":3,"nom":"cloud", "four":[]}
-                        ]
-                    },
-                    {"id":7,"nom":"papeterie", "three":[]}
-                ] 
+            {"id":2, "nom":"entretien", "three":[
+                    {"id":1,"nom":"lessive", "four":[]}, 
+                    {"id":2,"nom":"savon", "four":[]},
+                    {"id":3,"nom":"douche", "four":[]}
+                ]
+            },
+            {"id":3,"nom":"eau", "three":[
+                {"id":1,"nom":"potable", "four":[
+                    {"id":1,"nom":"minérale", "five":[
+                        {"id":1,"nom":"plate"},
+                        {"id":2,"nom":"pétillante"}
+                    ]},
+                    {"id":2,"nom":"robinet", "five":[]}
+                    ]
+                },
+                {"id":2,"nom":"non potable", "four":[]}
+                ]
+            },  
+            {"id":4,"nom":"électricité", "three":[]},
+            {"id":5,"nom":"carburant", "three":[
+                {"id":1,"nom":"gaz", "four":[]},
+                {"id":2,"nom":"essence", "four":[]},
+                {"id":3,"nom":"gasoil", "four":[]},
+                {"id":4,"nom":"GPL", "four":[]},
+                {"id":5,"nom":"fuel", "four":[]}
+                ]
+            },
+            {"id":6,"nom":"telecom", "three":[
+                {"id":1,"nom":"mobile", "four":[]}, 
+                {"id":2,"nom":"internet", "four":[]},
+                {"id":3,"nom":"cloud", "four":[]}
+                ]
+            },
+            {"id":7,"nom":"papeterie", "three":[]}
+            ] 
         }
         ]
     },
@@ -670,17 +507,33 @@ let besoins = """
                 {"id":3,"nom":"terrestre", "four":[
                     {"id":1,"nom":"automobile", "five":[]},
                     {"id":2,"nom":"moto", "five":[]},
-                    {"id":3,"nom":"vélo", "five":[]},
-                    {"id":4,"nom":"trotinette", "five":[]}
+                    {"id":3,"nom":"scooter", "five":[]},
+                    {"id":4,"nom":"vélo", "five":[]},
+                    {"id":5,"nom":"trotinette", "five":[]},
+                    {"id":6,"nom":"quad", "five":[]}
                 ]
                 }
                 ]
             },
-            {"id":1, "nom":"entretien", "three":[]}
+            {"id":2, "nom":"entretien", "three":[
+                {"id":1,"nom":"nettoyage", "four":[]},
+                {"id":2,"nom":"révision", "four":[]},
+                {"id":3,"nom":"réparation", "four":[]},
+                {"id":3,"nom":"pneus", "four":[]}
+            ]},
+            {"id":3, "nom":"location", "three":[
+                
+            ]},
+            {"id":4, "nom":"frais", "three":[
+                {"id":1,"nom":"péage", "four":[]},
+                {"id":2,"nom":"remorquage", "four":[]},
+                {"id":3,"nom":"amendes", "four":[]}
+            ]}
             ]
         },
         {"id":2, "nom":"en commun", "two":[
-
+            {"id":1, "nom":"abonnement", "three":[]},
+            {"id":2, "nom":"ticket", "three":[]}
             ]
         }
         ]
