@@ -65,11 +65,14 @@ public enum Unité: String, Codable, Enumerable {
             case .m3 :
                 return Measurement(value:value, unit:UnitVolume.cubicMeters).formatted()
             case .jour:
-                return "jour"
+                let nb = Int(value)
+                return String(nb) + " jour" + (nb == 1 ? "" : "s")
             case .mois :
-                return "mois"
-            default:
+                return String(Int(value)) + " mois"
+            case .unit:
                 return "x" + String(Int(value)) // "pièce"
+            default:
+                return String(value)
             }
         }
     }
