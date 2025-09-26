@@ -35,7 +35,7 @@ struct Niveau {
         }
         return string
     }
-    func showlast(_ sep:String = "-") -> String {
+    var showlast: String {
         var string = ""
         if let zeroniv = zero {
             string = zeroniv.nom
