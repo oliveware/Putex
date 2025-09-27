@@ -81,8 +81,7 @@ struct Niveau {
         return string
     }
     
-    init(_ tid:TID, _ taxonomy:Taxonomy? = nil) {
-        let taxons = taxonomy ?? Taxonomy(besoins)
+    init(_ tid:TID, _ taxons:Taxonomy) {
         let zero_id = tid.zero
         if let nivzero = taxons[zero_id] {
             zero = nivzero

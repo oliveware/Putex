@@ -14,6 +14,10 @@
 
 import SwiftUI
 
+
+// NE FONCTIONNE PAS
+// =================
+/*
 public struct TIDPicker: View {
     var taxonomy:Taxonomy
     @Binding var tid:TID
@@ -27,10 +31,10 @@ public struct TIDPicker: View {
     //@State var selected : (niv:Int, index:Int) = (niv: 0, index: 0)
     @State private var choix = 0
     
-    public init(_ tid:Binding<TID>, _ taxonomy:Taxonomy? = nil) {
+    public init(_ tid:Binding<TID>, _ taxonomy:Taxonomy) {
         _tid = tid
-        self.taxonomy = taxonomy ?? Taxonomy(besoins)
-        let niveau = Niveau(tid.wrappedValue)
+        self.taxonomy = taxonomy
+        let niveau = Niveau(tid.wrappedValue, taxonomy)
         nivzero = niveau.zero ?? Nivzero()
         nivone = niveau.one ?? Nivone()
         nivtwo = niveau.two ?? Nivtwo()
@@ -101,24 +105,16 @@ public struct TIDPicker: View {
 
 struct ClassePreview: View {
     @State var tid = TID()
+    var taxonomy:Taxonomy
     
     var body:some View {
-        TIDPicker($tid).frame(width:500, height:300).padding()
+        TIDPicker($tid, taxonomy).frame(width:500, height:300).padding()
     }
 }
-#Preview("vierge") {
-    ClassePreview(tid : TID([1]))
+#Preview("besoins") {
+    ClassePreview(tid : TID([1]), taxonomy:Taxonomy(besoins))
 }
-#Preview("produit") {
-    ClassePreview(tid : TID([1]))
+#Preview("produitservice") {
+    ClassePreview(tid : TID([1]), taxonomy:Taxonomy(produitservice))
 }
-#Preview("service") {
-    ClassePreview(tid : TID([2,1,1]))
-}
-#Preview("cotisation") {
-    ClassePreview(tid : TID([3,1]))
-}
-
-#Preview("impôt") {
-    ClassePreview(tid : TID([4]))
-}
+*/

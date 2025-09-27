@@ -25,7 +25,7 @@ public struct NiveauView : View {
             { TaxonomyPicker($tid, taxonomy) }
         } else {
             HStack {
-                Text(Niveau(tid).show(" | "))
+                Text(Niveau(tid, taxonomy).show(" | "))
                 Spacer()
                 Button(action:{edition = true})
                 {Image(systemName: "pencil")}
@@ -48,9 +48,9 @@ struct NiveauPreview: View {
 #Preview("vierge") {
     NiveauPreview(tid : TID())
 }
-#Preview("four") {
+#Preview("lait") {
     NiveauPreview(tid : TID([1,1,1,1]))
 }
-#Preview("meublé") {
+#Preview("caution meublé") {
     NiveauPreview(tid : TID([2,1,1,2]))
 }

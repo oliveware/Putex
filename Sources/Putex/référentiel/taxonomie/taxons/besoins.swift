@@ -5,222 +5,6 @@
 //  Created by Herve Crespel on 06/07/2025.
 //
 
-public let taxonomie = """
-{"items" : [
-    {"id":1, "nom":"produit", "one": [
-            {"id":1, "nom":"durable", "two":[
-                    {"id":1, "nom":"électro-ménager", "three":[
-                            {"id":1,"nom":"four", "four":[]}, 
-                            {"id":2,"nom":"frigo", "four":[]},
-                            {"id":3,"nom":"plaques", "four":[]},
-                            {"id":4,"nom":"lave-linge", "four":[]},
-                            {"id":5,"nom":"lave-vaisselle", "four":[]}
-                        ]
-                    },
-                    {"id":2, "nom":"mobilier", "three":[
-                            {"id":1,"nom":"siège", "four":[
-                                {"id":1,"nom":"chaise", "five":[]},
-                                {"id":2,"nom":"tabouret", "five":[]},
-                                {"id":3,"nom":"fauteuil", "five":[]},
-                                {"id":4,"nom":"canapé", "five":[]},
-                                {"id":5,"nom":"pouf", "five":[]}
-                                ]}, 
-                            {"id":2,"nom":"table", "four":[]},
-                            {"id":3,"nom":"armoire", "four":[]},
-                            {"id":4,"nom":"lit", "four":[]},
-                            {"id":5,"nom":"bureau", "four":[]},
-                            {"id":9,"nom":"tapis", "four":[]}
-                        ]
-                    },
-                    {"id":3, "nom":"chauffage", "three":[
-                            {"id":1,"nom":"radiateur", "four":[]},
-                            {"id":2,"nom":"chaudière", "four":[]},
-                            {"id":3,"nom":"pompe à chaleur", "four":[]}
-                        ]
-                    },
-                    {"id":4, "nom":"sanitaire", "three":[
-                            {"id":1,"nom":"lavabo", "four":[]},
-                            {"id":2,"nom":"douche", "four":[]},
-                            {"id":3,"nom":"baignoire", "four":[]},
-                            {"id":4,"nom":"robinet", "four":[]},
-                            {"id":5,"nom":"WC", "four":[]}
-                        ]
-                    },
-                    {"id":5, "nom":"véhicule", "three":[
-                            {"id":1,"nom":"aérien", "four":[
-                                {"id":1,"nom":"avion", "five":[]},
-                                {"id":2,"nom":"ULM", "five":[]},
-                                {"id":3,"nom":"parapente", "five":[]},
-                                {"id":4,"nom":"hélicoptère", "five":[]},
-                                {"id":5,"nom":"montgolfière", "five":[]}
-                                ]
-                            },
-                            {"id":2,"nom":"aquatique", "four":[
-                                {"id":1,"nom":"barque", "five":[]},
-                                {"id":2,"nom":"bateau", "five":[]},
-                                {"id":3,"nom":"voilier", "five":[]}
-                            ]},
-                            {"id":3,"nom":"terrestre", "four":[
-                                {"id":1,"nom":"automobile", "five":[]},
-                                {"id":2,"nom":"moto", "five":[]},
-                                {"id":3,"nom":"vélo", "five":[]},
-                                {"id":4,"nom":"trotinette", "five":[]}
-                            ]
-                            },
-                            {"id":5,"nom":"WC", "four":[]}
-                        ]
-                    }
-                ]
-            },
-            {"id":2, "nom":"consommable", "two":[
-                    {"id":1, "nom":"nourriture", "three":[
-                            {"id":1,"nom":"riz", "four":[]}, 
-                            {"id":2,"nom":"pain", "four":[]},
-                            {"id":3,"nom":"fruits", "four":[
-                                {"id":1,"nom":"abricot","five":[]},
-                                {"id":2,"nom":"ananas","five":[]},
-                                {"id":3,"nom":"avocat","five":[]},
-                                {"id":4,"nom":"citron","five":[]},
-                                {"id":5,"nom":"clémentine","five":[]},
-                                {"id":6,"nom":"datte","five":[]},
-                                {"id":7,"nom":"figue","five":[]},
-                                {"id":8,"nom":"fraise","five":[]},
-                                {"id":9,"nom":"kiwi","five":[]},
-                                {"id":10,"nom":"orange","five":[]},
-                                {"id":11,"nom":"pomme","five":[]},
-                                {"id":12,"nom":"poire","five":[]},
-                                {"id":13,"nom":"pomelos","five":[]},
-                                {"id":14,"nom":"prune","five":[]},
-                                {"id":15,"nom":"cerise","five":[]}
-                                ]
-                            },
-                            {"id":4,"nom":"légumes", "four":[
-                                {"id":1,"nom":"pomme de terre","five":[]},
-                                {"id":2,"nom":"poireau","five":[]},
-                                {"id":3,"nom":"haricot","five":[]}
-                            ]
-                            }
-                        ]
-                    },
-                    {"id":2, "nom":"entretien", "three":[
-                            {"id":1,"nom":"lessive", "four":[]}, 
-                            {"id":2,"nom":"savon", "four":[]},
-                            {"id":3,"nom":"douche", "four":[]}
-                        ]
-                    },
-                    {"id":3,"nom":"eau", "three":[
-                        {"id":1,"nom":"potable", "four":[
-                            {"id":1,"nom":"minérale", "five":[
-                                {"id":1,"nom":"plate"},
-                                {"id":2,"nom":"pétillante"}
-                            ]},
-                            {"id":2,"nom":"robinet", "five":[]}
-                            ]
-                        },
-                        {"id":2,"nom":"non potable", "four":[]}
-                        ]
-                    },  
-                    {"id":4,"nom":"électricité", "three":[]},
-                    {"id":5,"nom":"carburant", "three":[
-                        {"id":1,"nom":"gaz", "four":[]},
-                        {"id":2,"nom":"essence", "four":[]},
-                        {"id":3,"nom":"gasoil", "four":[]},
-                        {"id":4,"nom":"GPL", "four":[]},
-                        {"id":5,"nom":"fuel", "four":[]}
-                        ]
-                    },
-                    {"id":6,"nom":"telecom", "three":[
-                        {"id":1,"nom":"mobile", "four":[]}, 
-                        {"id":2,"nom":"internet", "four":[]},
-                        {"id":3,"nom":"cloud", "four":[]}
-                        ]
-                    },
-                    {"id":7,"nom":"papeterie", "three":[]},
-                    {"id":8,"nom":"électricité", "three":[]}
-                ] 
-            }
-        ] 
-    },
-    {"id":2, "nom":"service", "one": [
-        {"id":1, "nom":"location", "two":[
-            {"id":1, "nom":"logement", "three":[
-                {"id":1,"nom":"non meublé", "four":[
-                    {"id":1,"nom":"loyer", "five":[]},
-                    {"id":2,"nom":"caution", "five":[]}
-                    ]
-                },
-                {"id":2,"nom":"meublé", "four":[
-                    {"id":1,"nom":"loyer", "five":[]},
-                    {"id":2,"nom":"caution", "five":[]}
-                    ]
-                }
-                ]
-            },
-            {"id":2, "nom":"garage", "three":[
-                    {"id":1,"nom":"loyer", "four":[]},
-                    {"id":2,"nom":"caution", "four":[]}
-                    ]
-            },
-            {"id":3, "nom":"parking", "three":[
-                    {"id":1,"nom":"loyer", "four":[]},
-                    {"id":2,"nom":"caution", "four":[]}
-                    ]
-            },
-            {"id":4, "nom":"stockage", "three":[
-                    {"id":1,"nom":"loyer", "four":[]},
-                    {"id":2,"nom":"caution", "four":[]}
-                    ]
-            }
-            ]
-        },
-        {"id":2, "nom":"assurance", "two":[
-            {"id":1,"nom":"mutuelle", "three":[]},
-            {"id":2,"nom":"auto", "three":[]},
-            {"id":3,"nom":"habitation", "three":[
-                {"id":1,"nom":"propriétaire", "four":[]},
-                {"id":2,"nom":"locataire", "four":[]}
-                ]
-            },
-            {"id":4,"nom":"multiple", "three":[]},
-            {"id":5,"nom":"réparation", "three":[]}
-        ]},
-        {"id":3, "nom":"santé", "two":[
-            {"id":1, "nom":"médecin", "three":[
-                {"id":1, "nom":"généraliste", "four":[]},
-                {"id":2, "nom":"anesthésie", "four":[]},
-                {"id":3, "nom":"cardiologue", "four":[]},
-                {"id":4, "nom":"chirurgie", "four":[]},
-                {"id":5, "nom":"dentiste", "four":[]},
-                {"id":6, "nom":"dermatologue", "four":[]},
-                {"id":7, "nom":"ophtalmologue", "four":[]},
-                {"id":8, "nom":"radiologue", "four":[]}
-            ]},
-            {"id":2, "nom":"pharmacie", "three":[]},
-            {"id":3, "nom":"infirmier", "three":[]},
-            {"id":4, "nom":"analyses", "three":[]},
-            {"id":5, "nom":"ambulance", "three":[]},
-            {"id":6, "nom":"hôpital", "three":[]}
-            ]
-        } 
-    ]},
-    {"id":3, "nom":"cotisation", "one":[
-        {"id":1, "nom":"socicale", "two":[
-            {"id":1, "nom":"URSSAF", "three":[]},
-            {"id":2, "nom":"CSG", "three":[]}
-                ]
-        },
-        {"id":2, "nom":"association", "two":[]},
-        {"id":3, "nom":"syndicale", "two":[]}
-        ]
-    },
-    {"id":4, "nom":"impôt", "one":[
-        {"id":1,"nom":"revenu", "two":[]},
-        {"id":2,"nom":"taxe habitation", "two":[]},
-        {"id":3,"nom":"taxe foncière", "two":[]},
-        {"id":4,"nom":"TVA", "two":[]}
-    ]}
-]}
-"""
 
 let besoins = """
 {"items" : [
@@ -348,6 +132,12 @@ let besoins = """
                 ]
             },
             {"id":5,"nom":"poisson", "three":[
+                {"id":1,"nom":"cabillaud","four":[]},
+                {"id":5,"nom":"maquereau","four":[]},
+                {"id":10,"nom":"merlan","four":[]},
+                {"id":15,"nom":"sardine","four":[]},
+                {"id":20,"nom":"saumon","four":[]},
+                {"id":25,"nom":"thon","four":[]}
                 ]
             }
             ]
@@ -355,14 +145,21 @@ let besoins = """
         {"id":2, "nom":"végétale", "two":[
             {"id":3,"nom":"fruits", "three":[
                 {"id":1,"nom":"agrumes","four":[
-                    {"id":4,"nom":"citron","five":[]},
+                    {"id":4,"nom":"citron","five":[
+                        {"id":1,"nom":"jaune"},
+                        {"id":2,"nom":"vert"},
+                        {"id":3,"nom":"de Menton"},
+                        {"id":7,"nom":"yuzu"}
+                    ]},
                     {"id":5,"nom":"clémentine","five":[]},
-                    {"id":5,"nom":"mandarine","five":[]},
+                    {"id":6,"nom":"mandarine","five":[
+                        {"id":7,"nom":"satsuma"}
+                    ]},
                     {"id":10,"nom":"orange","five":[]},
                     {"id":13,"nom":"pomelos","five":[]}
                     ]
                 },
-                    {"id":2,"nom":"baies","four":[
+                {"id":2,"nom":"baies","four":[
                     {"id":1,"nom":"fraise","five":[]},
                     {"id":2,"nom":"framboise","five":[]},
                     {"id":3,"nom":"myrtille","five":[]},
@@ -373,14 +170,24 @@ let besoins = """
                     {"id":1,"nom":"abricot","five":[]},
                     {"id":2,"nom":"ananas","five":[]},
                     {"id":15,"nom":"banane","five":[]},
+                    {"id":25,"nom":"châtaigne","five":[]},
                     {"id":16,"nom":"cerise","five":[]},
                     {"id":6,"nom":"datte","five":[]},
                     {"id":7,"nom":"figue","five":[]},
                     {"id":9,"nom":"kiwi","five":[]},
+                    {"id":10,"nom":"mangue","five":[]},
                     {"id":17,"nom":"nectarine","five":[]},
                     {"id":18,"nom":"pêche","five":[]},
-                    {"id":11,"nom":"pomme","five":[]},
-                    {"id":12,"nom":"poire","five":[]},
+                    {"id":11,"nom":"pomme","five":[
+                        {"id":1,"nom":"jonagold"},
+                        {"id":2,"nom":"boskoop"}
+                    ]},
+                    {"id":12,"nom":"poire","five":[
+                        {"id":1,"nom":"conférense"},
+                        {"id":2,"nom":"passe-crassane"},
+                        {"id":8,"nom":"williams jaune"},
+                        {"id":9,"nom":"williams rouge"}
+                    ]},
                     {"id":14,"nom":"prune","five":[]}
                     
                     ]
@@ -436,7 +243,12 @@ let besoins = """
                 {"id":2,"nom":"aubergine","five":[]},
                 {"id":3,"nom":"cornichon","five":[]},
                 {"id":4,"nom":"courgette","five":[]},
-                {"id":5,"nom":"potiron","five":[]},
+                {"id":5,"nom":"pumpkin","five":[
+                    {"id":1,"nom":"butternot"},
+                    {"id":2,"nom":"citrouille"},
+                    {"id":3,"nom":"potiron"}
+                    ]
+                },
                 {"id":6,"nom":"tomate","five":[]}
                 ]
             },
@@ -451,15 +263,36 @@ let besoins = """
                 },
                 {"id":2,"nom":"petit pois","five":[
                     ]
+                },
+                {"id":3,"nom":"pois chiche","five":[]
                 }
             ]
             }
         ]
-        }
+        },
+        {"id":5,"nom":"champignons", "three":[
+            {"id":1,"nom":"de Paris","four":[]},
+            {"id":2,"nom":"cêpes","four":[]},
+            {"id":3,"nom":"girolles","four":[]},
+            {"id":4,"nom":"pleurottes","four":[]}
+        ]}
             ]
         },
         {"id":3, "nom":"transformée", "two":[
-
+            {"id":1,"nom":"cassoulet", "three":[
+            ]},
+            {"id":5,"nom":"choucroute", "three":[
+                {"id":1,"nom":"crue","four":[]},
+                {"id":10,"nom":"cuite","four":[]},
+                {"id":20,"nom":"garnie","four":[]}
+                ]
+            },
+            {"id":10,"nom":"pizza", "three":[
+                {"id":1,"nom":"margarita","four":[]},
+                {"id":10,"nom":"regina","four":[]},
+                {"id":20,"nom":"veggie","four":[]}
+                ]
+            }
             ]
         }
         ]
@@ -646,7 +479,34 @@ let besoins = """
         }
         ]
     },
-    {"id":3, "nom":"outil", "one": []
+   {"id":3, "nom":"outil", "one": [
+        {"id":1, "nom":"manuel", "two":[
+            {"id":1, "nom":"burin", "three":[]},
+            {"id":20, "nom":"ciseaux", "three":[]},
+            {"id":30, "nom":"lime", "three":[]},
+            {"id":40, "nom":"marteau", "three":[]},
+            {"id":50, "nom":"rabot", "three":[]},
+            {"id":60, "nom":"scie", "three":[
+                {"id":1,"nom":"bois", "four":[]},
+                {"id":3,"nom":"métaux", "four":[]}
+                ]
+            },
+            {"id":70, "nom":"tournevis", "three":[]},
+            {"id":80, "nom":"truelle", "three":[]}
+            ]
+        },
+        {"id":2, "nom":"electro", "two":[
+            {"id":1, "nom":"ponceuse", "three":[]},
+            {"id":10, "nom":"perceuse", "three":[]},
+            {"id":20, "nom":"scie", "three":[
+                {"id":1,"nom":"circulaire", "four":[]},
+                {"id":3,"nom":"sauteuse", "four":[]}
+                ]
+            },
+            {"id":30, "nom":"visseuse", "three":[]}
+            ]
+        }
+    ]
     },
     {"id":4, "nom":"soins", "one": [
          {"id":1, "nom":"santé", "two":[
@@ -781,7 +641,7 @@ let besoins = """
             {"id":3, "nom":"équipement", "three":[]}
             ]
         },
-        {"id":5, "nom":"attraction", "two":[
+        {"id":4, "nom":"attraction", "two":[
             {"id":1, "nom":"parc", "three":[]},
             {"id":2, "nom":"forain", "three":[]},
             {"id":3, "nom":"équipement", "three":[]}

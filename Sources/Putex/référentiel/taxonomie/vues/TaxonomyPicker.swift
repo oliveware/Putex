@@ -13,16 +13,16 @@ public struct TaxonomyPicker: View {
     @State var nivzero  : Nivzero
     @State var nivone   : Nivone
     @State var nivtwo   : Nivtwo
-    @State var nivthree = Nivthree()
-    @State var nivfour  = Nivfour()
-    @State var nivfive  = Nivfive()
+    @State var nivthree : Nivthree
+    @State var nivfour  : Nivfour
+    @State var nivfive  : Nivfive
     
     //@State var selected : (niv:Int, index:Int) = (niv: 0, index: 0)
     @State private var choix = 0
     
-    public init(_ tid:Binding<TID>, _ taxonomy:Taxonomy? = nil) {
+    public init(_ tid:Binding<TID>, _ taxonomy:Taxonomy) {
         _tid = tid
-        self.taxonomy = taxonomy ?? Taxonomy(besoins)
+        self.taxonomy = taxonomy
         let niveau = Niveau(tid.wrappedValue, taxonomy)
         nivzero = niveau.zero ?? Nivzero()
         nivone = niveau.one ?? Nivone()
@@ -68,19 +68,21 @@ public struct TaxonomyPicker: View {
     
     public var body:some View {
             HStack(alignment: .top) {
-                Text("choix : \(choix)")
+                if choix > 0 {
+                    Text("choix : \(choix)").padding(.trailing,20)
+                }
                 ZeroChoix(choix:$choix, nivzero: $nivzero, set: taxonomy)
                     .onChange(of:nivzero.id, {
                         suivant(0)
                         tid = TID([nivzero.id])
                     })
-                if choix > 0 {
+                if choix > 0 && nivzero.one.count > 0 {
                 OneChoix(choix:$choix, nivzero:$nivzero, nivone:$nivone)
                     .onChange(of:nivone.id, {
                         suivant(1)
                         tid = TID([nivzero.id, nivone.id])
                     })
-                if choix > 1 {
+                if choix > 1 && nivone.two.count > 0 {
                     TwoChoix(choix:$choix, nivone:$nivone, nivtwo: $nivtwo)
                         .onChange(of:nivtwo.id, {
                             suivant(2)
@@ -115,31 +117,23 @@ public struct TaxonomyPicker: View {
 
 struct ClassPreview: View {
     @State var tid = TID()
-    var taxons = besoins
+    var taxons : Taxonomy
     
     var body:some View {
         VStack {
-            TaxonomyPicker($tid, Taxonomy(taxons)).frame(width:500, height:300)
-            Text(String(tid.two ?? -1))
-            Text(Niveau(tid).nom)
+            TaxonomyPicker($tid, taxons).frame(width:600, height:300)
+            Text(tid.two == nil ? "-" : String(tid.two! ))
+            Text(Niveau(tid, taxons).nom)
             Text(tid.id)
-            Text(Niveau(tid).show())
+            Text(Niveau(tid, taxons).show())
         }.padding()
     }
 }
-#Preview("vierge") {
-    ClassPreview(tid : TID([]))
-}
-#Preview("produit") {
-    ClassPreview(tid : TID([1]))
-}
-#Preview("service") {
-    ClassPreview(tid : TID([2,1,1]))
-}
-#Preview("cotisation") {
-    ClassPreview(tid : TID([3,1]))
+#Preview("besoins") {
+    ClassPreview(taxons:Taxonomy(besoins))
 }
 
-#Preview("impôt") {
-    ClassPreview(tid : TID([4]))
+
+#Preview("produit-service") {
+    ClassPreview(taxons:Taxonomy(produitservice))
 }
