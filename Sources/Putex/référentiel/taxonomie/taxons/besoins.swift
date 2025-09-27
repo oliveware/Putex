@@ -6,7 +6,7 @@
 //
 
 
-let besoins = """
+public let besoins = """
 {"items" : [
     {"id":1, "nom":"nourriture", "one": [
         {"id":1, "nom":"animale", "two":[

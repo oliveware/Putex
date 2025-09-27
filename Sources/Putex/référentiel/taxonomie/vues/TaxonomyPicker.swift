@@ -20,7 +20,7 @@ public struct TaxonomyPicker: View {
     //@State var selected : (niv:Int, index:Int) = (niv: 0, index: 0)
     @State private var choix = 0
     
-    public init(_ tid:Binding<TID>, _ taxonomy:Taxonomy) {
+    public init(_ tid:Binding<TID>, _ taxonomy:Taxonomy = Taxonomy(besoins)) {
         _tid = tid
         self.taxonomy = taxonomy
         let niveau = Niveau(tid.wrappedValue, taxonomy)
