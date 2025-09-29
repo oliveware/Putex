@@ -30,6 +30,10 @@ public struct Nivone : Codable, Identifiable, Hashable {
         tid = nivonetid
         id = nivonetid.one!
     }
+    init(_ tab:[Int]) {
+        id = tab[1]
+        tid = TID(tab)
+    }
     
     init(_ json:String) {
         let jsonData = json.data(using: .utf8)!

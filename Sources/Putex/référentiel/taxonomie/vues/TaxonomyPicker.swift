@@ -84,7 +84,7 @@ public struct TaxonomyPicker: View {
                     })
                 if choix > 1 && nivone.two.count > 0 {
                     TwoChoix(choix:$choix, nivone:$nivone, nivtwo: $nivtwo)
-                        .onChange(of:nivtwo.id, {
+                        .onChange(of:nivtwo.nom, {
                             suivant(2)
                             tid = TID([nivzero.id, nivone.id, nivtwo.id])
                         })

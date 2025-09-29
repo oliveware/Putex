@@ -28,6 +28,10 @@ public struct Nivtwo : Codable, Identifiable, Hashable {
         tid = nivtwotid
         id = nivtwotid.two!
     }
+    init(_ tab:[Int]) {
+        id = tab[2]
+        tid = TID(tab)
+    }
     
     init(_ json:String) {
         let jsonData = json.data(using: .utf8)!

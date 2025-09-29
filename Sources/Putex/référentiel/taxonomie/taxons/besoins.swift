@@ -66,6 +66,12 @@ public let besoins = """
                     ]
                 },
                 {"id":3,"nom":"pâte persillée","four":[
+                        {"id":1,"nom":"Roquefort" ,"five":[]},
+                        {"id":2,"nom":"Bleu" ,"five":[]},
+                        {"id":3,"nom":"Fourme" ,"five":[]},
+                        {"id":4,"nom":"Gorgonzola" ,"five":[]},
+                        {"id":5,"nom":"Stilton" ,"five":[]},
+                        {"id":9,"nom":"Amish Blue" ,"five":[]}
                     ]
                 },
                 {"id":4,"nom":"pâte préssée","four":[
@@ -78,7 +84,7 @@ public let besoins = """
                         {"id":6,"nom":"Pecorino"},
                         {"id":7,"nom":"Parmesan"}
                     ]},
-                    {"id":1,"nom":"non cuite","five":[
+                    {"id":2,"nom":"non cuite","five":[
                         {"id":1,"nom":"Bethmale"},
                         {"id":2,"nom":"Cantal"},
                         {"id":3,"nom":"Cheddar"},
@@ -459,17 +465,29 @@ public let besoins = """
                 {"id":2,"nom":"non potable", "four":[]}
                 ]
             },  
-            {"id":4,"nom":"électricité", "three":[]},
-            {"id":5,"nom":"carburant", "three":[
-                {"id":1,"nom":"gaz", "four":[]},
-                {"id":2,"nom":"essence", "four":[]},
-                {"id":3,"nom":"gasoil", "four":[]},
-                {"id":4,"nom":"GPL", "four":[]},
-                {"id":5,"nom":"fuel", "four":[]}
+            {"id":5,"nom":"énergie", "three":[
+                {"id":1,"nom":"électricité", "four":[]},
+                {"id":2,"nom":"hydrogène", "four":[]},
+                {"id":3,"nom":"gaz", "four":[]},
+                {"id":4,"nom":"essence", "four":[]},
+                {"id":5,"nom":"gasoil", "four":[]},
+                {"id":6,"nom":"GPL", "four":[]},
+                {"id":7,"nom":"fuel", "four":[]},
+                {"id":8,"nom":"bois", "four":[
+                    {"id":1,"nom":"charbon de bois", "five":[] },
+                    {"id":2,"nom":"stère", "five":[] },
+                    {"id":3,"nom":"pelé", "five":[] }
+                    ]
+                },
+                {"id":9,"nom":"charbon", "four":[]}
                 ]
             },
             {"id":6,"nom":"telecom", "three":[
-                {"id":1,"nom":"mobile", "four":[]}, 
+                {"id":1,"nom":"mobile", "four":[
+                    {"id":1,"nom":"terrestre", "five":[] },
+                    {"id":2,"nom":"satellite", "five":[] }
+                    ]
+                }, 
                 {"id":2,"nom":"internet", "four":[]},
                 {"id":3,"nom":"cloud", "four":[]}
                 ]
@@ -610,7 +628,8 @@ public let besoins = """
         },
         {"id":2, "nom":"en commun", "two":[
             {"id":1, "nom":"abonnement", "three":[]},
-            {"id":2, "nom":"ticket", "three":[]}
+            {"id":2, "nom":"ticket", "three":[]},
+            {"id":9, "nom":"frais de port", "three":[]}
             ]
         }
         ]
@@ -653,7 +672,40 @@ public let besoins = """
             ]
         }
     ]
-    }
-]
+    },
+    {"id":9, "nom":"data", "one": [
+        
+    ]
+    },
+    {"id":10, "nom":"revenu", "one": [
+            {"id":1, "nom":"salaire", "two": [
+                ]
+            },
+            {"id":2, "nom":"pension", "two": [
+                ]
+            },
+            {"id":3, "nom":"remboursement", "two": [
+                ]
+            },
+            {"id":4, "nom":"intérêts", "two": [
+                ]
+            },
+            {"id":5, "nom":"dividende", "two": [
+                ]
+            },
+            {"id":6, "nom":"emprunt", "two": [
+                {"id":1, "nom":"capital", "three": [] },
+                {"id":2, "nom":"intérêts", "three": [] }
+                ]
+            },
+            {"id":7, "nom":"vente", "two": [
+                ]
+            },
+            {"id":9, "nom":"don", "two": [
+                ]
+            }
+        ]
+        }
+    ]
 }
 """
