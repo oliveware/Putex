@@ -138,12 +138,13 @@ public struct TID : Codable, Identifiable, Equatable{
         }
         return t
     }
-  /*  public func show(sep:String = "-")->String {
-        Niveau(self).show(sep)
+    public func taxon(_ sep:String = "-", _ taxonomy :Taxonomy = Taxonomy(besoins)) -> String {
+       taxonomy.show(self, false, sep)
     }
-    public var show: String {
-        Niveau(self).showlast
-    }*/
+    public var besoin: String {
+        let taxonomy = Taxonomy(besoins)
+        return taxonomy.show(self)
+    }
     
     public var tab: [Int] {
         var t : [Int] = [zero]
