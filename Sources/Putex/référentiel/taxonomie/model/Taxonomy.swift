@@ -15,7 +15,7 @@ public struct Taxonomy: Codable {
         let jsonData = json.data(using: .utf8)!
         let set = try! JSONDecoder().decode(Taxonomy.self, from: jsonData)
         self = set
-        TID.nextinit(set.items)
+        //TID.nextinit(set.items)
     }
     
     subscript(_ id:Int) -> Nivzero? {

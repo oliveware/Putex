@@ -46,7 +46,7 @@ public struct Nivfour : Codable, Identifiable, Hashable {
         return found
     }
     
-    mutating func add() {
+   /* mutating func add() {
         five.append(Nivfive(tid ?? TID()))
-    }
+    }*/
 }

@@ -8,7 +8,7 @@
 import Foundation
 
 public struct TID : Codable, Identifiable, Equatable{
-    public static var NA = TID([0,0,0,0,0,0])
+   /* public static var NA = TID([0,0,0,0,0,0])
     private static var next = (zero:0, one:0, two:0, three:0, four:0, five:0)
     static func nextinit(_ zeros: [Nivzero]) {
         let zero = zeros.count
@@ -18,15 +18,15 @@ public struct TID : Codable, Identifiable, Equatable{
         var four = 0
         var five = 0
         for zero in zeros {
-            one += zero.one.count
+            one = zero.one.count
             for one in zero.one {
-                two += one.two.count
+                two = one.two.count
                 for two in one.two {
-                    three += two.three.count
+                    three = two.three.count
                     for three in two.three {
-                        four += three.four.count
+                        four = three.four.count
                         for four in three.four {
-                            five += four.five.count
+                            five = four.five.count
                         }
                     }
                 }
@@ -51,7 +51,7 @@ public struct TID : Codable, Identifiable, Equatable{
     }
     static func five() -> Int {
         next.five += 1 ; return next.five
-    }
+    }*/
     
     var zero : Int
     var one : Int?
@@ -72,37 +72,41 @@ public struct TID : Codable, Identifiable, Equatable{
                         three = third
                         if let fourth = parent.four {
                             four = fourth
-                            five = TID.five()
+                            if let fith = parent.five {
+                                five = fith + 1
+                            } else {
+                                five = 1
+                            }
                         } else {
-                            four = TID.four()
+                            four = 1
                         }
                     } else {
-                        three = TID.three()
+                        three = 1
                     }
                 } else {
-                    two = TID.two()
+                    two = 1
                 }
             } else {
-                one = TID.one()
+                one = 1
             }
         } else {
-            zero = TID.zero()
+            zero = 1
         }
     }
     
     public init(_ tab:[Int]) {
         let div = tab.count
-        if div > 0 && tab[0] > 0 {
+        if div > 0  {
             zero = tab[0]
-            if div > 1 && tab[1] > 0 {
+            if div > 1 {
                 one = tab[1]
-                if div > 2   {
+                if div > 2 {
                     two = tab[2]
-                    if div > 3 && tab[3] > 0  {
+                    if div > 3  {
                         three = tab[3]
-                        if div > 4 && tab[4] > 0  {
+                        if div > 4  {
                             four = tab[4]
-                            if div == 6 && tab[5] > 0  {
+                            if div == 6 {
                                 five = tab[5]
                             }
                         }
@@ -111,13 +115,13 @@ public struct TID : Codable, Identifiable, Equatable{
             }
             print(self)
         } else {
-            zero = TID.zero()
+            zero = 1
         }
     }
     
     public var id: String {
         var t = String(zero)
-        if let co =  one {
+        if let co = one {
             t = t + "-" + String(co)
             if let r = two {
                 t = t + "-" + String(r)

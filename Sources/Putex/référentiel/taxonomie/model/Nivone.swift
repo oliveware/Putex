@@ -25,8 +25,8 @@ public struct Nivone : Codable, Identifiable, Hashable {
     var two:[Nivtwo] = []
     
     init() {id = -1}
-    init(_ nivzero:TID) {
-       let nivonetid = TID(nivzero)
+    init(_ nivzerotid:TID) {
+       let nivonetid = TID(nivzerotid)
         tid = nivonetid
         id = nivonetid.one!
     }
@@ -52,9 +52,9 @@ public struct Nivone : Codable, Identifiable, Hashable {
         return found
     }
     
-    mutating func add() {
+  /*  mutating func add() {
         two.append(Nivtwo(tid ?? TID()))
-    }
+    }*/
 }
 
 

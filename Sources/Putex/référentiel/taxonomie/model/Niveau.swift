@@ -72,9 +72,17 @@ struct Niveau {
                             string = fourniv.nom
                             if let fiveniv = five {
                                 string = fiveniv.nom
+                            } else {
+                                string = "five absent"
                             }
+                        } else {
+                            string = "four absent"
                         }
+                    } else {
+                        string = "three absent"
                     }
+                } else {
+                    string = "two absent"
                 }
             }
         }
@@ -85,17 +93,26 @@ struct Niveau {
         let zero_id = tid.zero
         if let nivzero = taxons[zero_id] {
             zero = nivzero
-            if let nivone = tid.one {
-                one = nivzero[nivone]
-                if let nivtwo = tid.two {
-                    two = one![nivtwo]
-                    if let nivthree = tid.three {
-                        three = two![nivthree]
-                        if let nivfour = tid.four {
-                            four = three![nivfour]
-                            if let nivfive = tid.five {
-                                five = four![nivfive]
-                                if five != nil {five!.tid = tid}
+            if let one_id = tid.one {
+                if let nivone = nivzero[one_id] {
+                    one = nivone
+                    if let two_id = tid.two {
+                        if let nivtwo = nivone[two_id] {
+                            two = nivtwo
+                            if let three_id = tid.three {
+                                if let nivthree = nivtwo[three_id] {
+                                    three = nivthree
+                                    if let four_id = tid.four {
+                                        if let nivfour = nivthree[four_id] {
+                                            four = nivfour
+                                            if let five_id = tid.five {
+                                                if let nivfive = nivfour[five_id] {
+                                                    five = nivfive
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
                             }
                         }
                     }
@@ -103,6 +120,4 @@ struct Niveau {
             }
         }
      }
-
-   
 }
