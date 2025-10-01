@@ -29,6 +29,9 @@ public struct Nivzero : Codable, Identifiable, Hashable {
         self.nom = nom
         one = nivone
     }
+    init(_ taxonomy:Taxonomy, _ tid:TID) {
+        self = taxonomy.items[tid.tab[0]]
+    }
     
    /* init(_ json:String) {
         let jsonData = json.data(using: .utf8)!
@@ -36,12 +39,9 @@ public struct Nivzero : Codable, Identifiable, Hashable {
         self = carto
     }*/
     
-    func insert(_ niveau: Niveau){
-        
-    }
-    mutating func add() {
+    /*mutating func add() {
         one.append(Nivone(tid))
-    }
+    }*/
     
     subscript(_ id:Int) -> Nivone? {
         var found : Nivone?

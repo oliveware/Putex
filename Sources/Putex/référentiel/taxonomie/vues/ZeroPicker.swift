@@ -54,7 +54,7 @@ struct ZeroPickerPreview : View {
     }
 }
 
-#Preview("éditable") {
+#Preview {
     ZeroPickerPreview().padding()
 }
 /*

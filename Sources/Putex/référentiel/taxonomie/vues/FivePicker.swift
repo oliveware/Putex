@@ -9,7 +9,10 @@ import SwiftUI
 
 struct FivePicker: View {
     @Binding var tid: TID
-
+    @Binding var zero : Nivzero
+    @Binding var one  : Nivone
+    @Binding var two : Nivtwo
+    @Binding var three : Nivthree
     @Binding var four : Nivfour
     @Binding var five : Nivfive
     

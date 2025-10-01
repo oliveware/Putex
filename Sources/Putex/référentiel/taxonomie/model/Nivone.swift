@@ -20,19 +20,14 @@ public struct Nivone : Codable, Identifiable, Hashable {
     var tid:TID?
     
     public var nom = ""
-   // public var pays:String { nom }
     
     var two:[Nivtwo] = []
     
     init() {id = -1}
-    init(_ nivzerotid:TID) {
-       let nivonetid = TID(nivzerotid)
-        tid = nivonetid
-        id = nivonetid.one!
-    }
-    init(_ tab:[Int]) {
-        id = tab[1]
-        tid = TID(tab)
+
+    init(_ taxonomy:Taxonomy, _ tid:TID) {
+        let tab = tid.tab
+        self = taxonomy.items[tab[0]].one[tab[1]]
     }
     
     init(_ json:String) {

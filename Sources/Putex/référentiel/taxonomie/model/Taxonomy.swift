@@ -28,4 +28,46 @@ public struct Taxonomy: Codable {
         }
         return found
     }
+    
+    var liste: [String] {
+        var lines:[String] = []
+        var line = ""
+        for zero in items {
+            line = zero.nom
+            lines.append(line)
+            if zero.one.count > 0 {
+                for one in zero.one {
+                    line = zero.nom + "." + one.nom
+                    lines.append(line)
+                    if one.two.count > 0 {
+                        for two in one.two {
+                            line = zero.nom + "." + one.nom + "." + two.nom
+                            lines.append(line)
+                            if two.three.count > 0 {
+                                for three in two.three {
+                                    line = zero.nom + "." + one.nom + "." + two.nom + "." + three.nom
+                                    lines.append(line)
+                                    if three.four.count > 0 {
+                                        for four in three.four {
+                                            line = zero.nom + "." + one.nom + "." + two.nom + "." + three.nom + "." + four.nom
+                                            lines.append(line)
+                                            if four.five.count > 0 {
+                                                for five in four.five {
+                                                    line = zero.nom + "." + one.nom + "." + two.nom + "." + three.nom + "." + four.nom + "." + five.nom
+                                                    lines.append(line)
+                                                }
+                                            } else { line = "" }
+                                        }
+                                    } else { line = "" }
+                                }
+                            } else { line = "" }
+                        }
+                    } else { line = "" }
+                }
+            }
+        }
+        return lines
+    }
+    
+
 }

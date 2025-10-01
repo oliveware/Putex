@@ -23,10 +23,10 @@ public struct Nivfour : Codable, Identifiable, Hashable {
     var five:[Nivfive] = []
     
     init() {id = -1}
-    init(_ nivthree:TID) {
-       let nivfourid = TID(nivthree)
-        tid = nivfourid
-        id = nivfourid.four!
+    
+    init(_ taxonomy:Taxonomy, _ tid:TID) {
+        let tab = tid.tab
+        self = taxonomy.items[tab[0]].one[tab[1]].two[tab[2]].three[tab[3]].four[tab[4]]
     }
     
     init(_ json:String) {

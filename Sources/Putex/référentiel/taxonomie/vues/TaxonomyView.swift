@@ -7,6 +7,21 @@
 
 import SwiftUI
 
+struct TaxonomyView : View {
+    var taxonomy:Taxonomy
+    var body: some View {
+        ScrollView {
+            ForEach (0..<taxonomy.liste.count,  id:\.self) {
+                index in
+                HStack {
+                    Text("\(index)\t\t\(taxonomy.liste[index])")
+                    Spacer()
+                }
+            }
+        }
+    }
+}
+
 public struct NiveauView : View {
     var taxonomy:Taxonomy
     @Binding var tid:TID
@@ -44,6 +59,10 @@ struct NiveauPreview: View {
     var body:some View {
         NiveauView($tid, taxonomy).frame(width:300, height:200).padding()
     }
+}
+
+#Preview("liste") {
+    TaxonomyView(taxonomy: Taxonomy(besoins)).frame(width:700)
 }
 #Preview("vierge") {
     NiveauPreview(tid : TID())

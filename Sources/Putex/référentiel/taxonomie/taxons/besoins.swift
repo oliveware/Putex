@@ -48,7 +48,7 @@ public let besoins = """
                         {"id":10,"nom":"Pierre Blanche"}
                         ]
                     },
-                    {"id":1,"nom":"croûte lavée","five":[
+                    {"id":2,"nom":"croûte lavée","five":[
                         {"id":1,"nom":"Bergues torchon"},
                         {"id":2,"nom":"Carré du Vinage"},
                         {"id":3,"nom":"Curé nantais"},
@@ -134,7 +134,37 @@ public let besoins = """
             {"id":3,"nom":"oeufs", "three":[
                 ]
             },
-            {"id":4,"nom":"viande", "three":[
+            {"id":41,"nom":"viande", "three":[
+                {"id":1,"nom":"boeuf","four":[]},
+                {"id":5,"nom":"mouton","four":[]},
+                {"id":10,"nom":"porc","four":[]},
+                {"id":15,"nom":"veau","four":[]},
+                {"id":20,"nom":"volaille","four":[
+                    {"id":2,"nom":"poulet","five":[]},
+                    {"id":3,"nom":"dinde","five":[]},
+                    {"id":4,"nom":"canard","five":[]},
+                    {"id":4,"nom":"pintade","five":[]}
+                ]}
+                ]
+            },
+            {"id":42,"nom":"charcuterie", "three":[
+                {"id":1,"nom":"saucisse","four":[
+                    {"id":1,"nom":"chipolata","five":[
+                        {"id":1,"nom":"nature"},
+                        {"id":2,"nom":"aux herbes"},
+                        {"id":3,"nom":"au piment"}
+                    ]},
+                    {"id":2,"nom":"merguez","five":[]},
+                    {"id":3,"nom":"chorizo","five":[]},
+                    {"id":4,"nom":"frankfort","five":[]},
+                    {"id":4,"nom":"toulouse","five":[]}
+                ]},
+                {"id":5,"nom":"jambon","four":[
+                    {"id":2,"nom":"cru","five":[]},
+                    {"id":3,"nom":"cuit","five":[]},
+                    {"id":4,"nom":"fumé","five":[]},
+                    {"id":4,"nom":"sans nitrite","five":[]}
+                ]}
                 ]
             },
             {"id":5,"nom":"poisson", "three":[

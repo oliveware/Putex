@@ -19,10 +19,10 @@ struct Nivfive: Codable, Identifiable,Hashable {
     var nom:String = ""
     
     init() {id = -1}
-    init(_ nivfour:TID) {
-        let nivfiveid = TID(nivfour)
-        tid = nivfiveid
-        id = nivfiveid.five!
+    
+    init(_ taxonomy:Taxonomy, _ tid:TID) {
+        let tab = tid.tab
+        self = taxonomy.items[tab[0]].one[tab[1]].two[tab[2]].three[tab[3]].four[tab[4]].five[tab[5]]
     }
     
 }
