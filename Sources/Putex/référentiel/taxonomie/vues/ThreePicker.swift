@@ -52,9 +52,10 @@ struct ThreePickerPreview : View {
         ThreePicker( tid:$tid, zero:$zero, one:$one, two:$two, three:$three, level:$level)
             .frame(width:600,height:300)
         HStack {
-            Text(Niveau(tid).nom)
+            Text(Niveau(tid).show("."))
+            Text(Niveau(tid).showlast)
             Text(three.nom)
-            Text(tid.show())
+            //Text(tid.show())
         }
     }
 }

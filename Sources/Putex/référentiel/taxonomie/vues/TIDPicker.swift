@@ -6,8 +6,8 @@
 //
 import SwiftUI
 
-struct TIDbarre: View {
-  //  var taxonomy:Taxonomy
+struct TIDPicker: View {
+    var taxonomy:Taxonomy
     @Binding var tid:TID
     @State var zero  = Nivzero()
     @State var one   = Nivone()
@@ -105,7 +105,7 @@ struct TIDbarre: View {
         
         VStack(alignment: .leading) {
             barre
-            if level == 0 { ZeroPicker( tid:$tid, zero:$zero, level:$level)
+            if level == 0 { ZeroPicker(taxonomy:taxonomy, tid:$tid, zero:$zero, level:$level)
                  //   .onChange(of:zero, {tid = TID([zero.id])})
             }
             if level == 1 { OnePicker( tid:$tid, zero:$zero, one:$one, level:$level)
@@ -134,20 +134,20 @@ struct TIDbarre: View {
 
 struct TIDbarrePreview : View {
     @State var tid = TID()
-    
+    var taxons = Taxonomy(besoins)
     var edition = true
     
     var body:some View {
         VStack {
-            TIDbarre(tid:$tid)
+            TIDPicker(taxonomy:taxons, tid:$tid)
                 .frame(width:600,height:300)
-            
-            Text(tid.id)
-            
-            Text(Niveau(tid).show())
-            Text(Niveau(tid).nom)
-            Text(String(tid.one ?? -1) ?? "-")
-            
+            HStack {
+                Text(tid.id)
+                
+             //   Text(Niveau(tid).show())
+             //   Text(Niveau(tid).nom)
+                Text(String(tid.one ?? -1) ?? "-")
+            }
         }
     }
 }

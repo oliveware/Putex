@@ -138,12 +138,12 @@ public struct TID : Codable, Identifiable, Equatable{
         }
         return t
     }
-    public func show(sep:String = "-")->String {
+  /*  public func show(sep:String = "-")->String {
         Niveau(self).show(sep)
     }
     public var show: String {
         Niveau(self).showlast
-    }
+    }*/
     
     public var tab: [Int] {
         var t : [Int] = [zero]

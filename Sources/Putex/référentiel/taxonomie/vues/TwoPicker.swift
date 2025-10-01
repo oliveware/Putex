@@ -53,10 +53,10 @@ struct TwoPickerPreview : View {
         TwoPicker( tid:$tid, zero:$zero, one:$one, two:$two, level:$level)
             .frame(width:600,height:300)
         HStack {
-            Text(Niveau(tid).nom)
-            
+           // Text(Niveau(tid).nom)
+            Text(one.nom)
             Text(two.nom)
-            Text(tid.show())
+           // Text(tid.show())
         }
     }
 }

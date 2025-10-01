@@ -55,9 +55,9 @@ struct FourPickerPreview : View {
         FourPicker( tid:$tid, zero:$zero, one:$one, two:$two, three:$three, four:$four, level:$level)
             .frame(width:600,height:300)
         HStack {
-            Text(Niveau(tid).nom)
+            //Text(Niveau(tid).nom)
             Text(four.nom)
-            Text(tid.show())
+            //Text(tid.show())
         }
     }
 }
