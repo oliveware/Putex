@@ -28,7 +28,7 @@ import SwiftUI
  }
  */
 
-struct TIDPicker: View {
+public struct TIDPicker: View {
     var taxonomy:Taxonomy
     @Binding var tid:TID
     @State var zero  = Nivzero()
@@ -128,7 +128,7 @@ struct TIDPicker: View {
         }
     }
     private var shift = 70
-    var body:some View {
+    public var body:some View {
         
         VStack(alignment: .leading) {
             barre
