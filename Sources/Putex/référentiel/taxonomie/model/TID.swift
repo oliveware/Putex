@@ -113,7 +113,7 @@ public struct TID : Codable, Identifiable, Equatable{
                     }
                 }
             }
-            print(self)
+            print("tid : \(self)")
         } else {
             zero = 1
         }

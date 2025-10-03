@@ -70,6 +70,7 @@ public struct Taxonomy: Codable {
     }
     
     func show(_ tid:TID, _ short:Bool = true, _ sep:String = " | ") -> String {
+        print("taxo : \(self)")
         var full = ""
         var last = ""
         let tab = tid.tab

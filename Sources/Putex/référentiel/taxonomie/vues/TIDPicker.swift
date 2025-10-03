@@ -169,7 +169,7 @@ struct TIDbarrePreview : View {
             TIDPicker($tid, taxons)
                 .frame(width:600,height:300)
             HStack {
-                Text(tid.id)
+                Text(taxons.show(tid, false))
                 
                 Text(Niveau(tid).show())
              //   Text(Niveau(tid).nom)
