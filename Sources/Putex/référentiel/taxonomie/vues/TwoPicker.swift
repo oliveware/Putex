@@ -26,7 +26,7 @@ struct TwoPicker: View {
                                      two = item.wrappedValue
                                      tid = TID([zero.id, one.id, item.id])
                                      level = 3
-                                     print(tid)
+                                     print("two : \(self)")
                                  })
                             {Text(item.wrappedValue.nom).frame(width:150, alignment: .center)}
                            // }
