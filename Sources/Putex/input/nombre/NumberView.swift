@@ -127,6 +127,10 @@ struct NumberPreview : View {
             NumberPreview(Nombre(1327,2), .decimal(2), "m2", "surface")
                .frame(width:300)
         }
+        
+        Text(Nombre(4578,2).enlettres)
+        
+        Text(Nombre(14578,3).enlettres(Mot("are","ares",.f)))
         HStack {
             Text("nombre < 1000").frame(width:100)
             NumberPreview(Nombre(1325,2), .decimal(3), "€", "estimation")

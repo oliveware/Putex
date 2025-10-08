@@ -14,8 +14,8 @@ public struct MontantView: View {
     @State var dot = ","
     
     @Binding var montant : Montant
-    @State var edition = false
-    var editable = true
+    @State var edition :Bool
+    var editable: Bool
     var label = "montant"
     
     var width : CGFloat {
@@ -26,7 +26,13 @@ public struct MontantView: View {
     public init(_ m:Binding<Montant>,_ p:String = "", _ editable:Bool = true) {
         _montant = m
         label = p
-        self.editable = editable
+        if m.wrappedValue.isnul {
+            self.editable = true
+            edition = true
+        } else {
+            self.editable = editable
+            edition = false
+        }
     }
     
     var editorwidth:CGFloat{
@@ -48,13 +54,7 @@ public struct MontantView: View {
                     {Image(systemName: "eraser")}
                 }
                 
-                if label != "" {
-                    Text(label + " : ")
-                }
-                
-                NumberEditor($montant.nombre, .decimal(2), "")
-                    .frame(width:editorwidth + 20)
-                DevisePicker($montant.symbol)
+               MontantEditor($montant, label)
                 
                 Button(action: {edition = false})
                 {Image(systemName: "checkmark")}
@@ -92,9 +92,9 @@ struct MontantDemo: View {
         VStack(spacing:15) {
                 MontantView($montant, "estimation", editable)
 
-          //  Text(montant.enlettres)
+            Text(montant.enlettres)
             
-          //  Text("\(montant.enchiffres)")
+            Text(montant.enchiffres)
         }
     }
 }
@@ -104,6 +104,9 @@ struct MontantDemo: View {
 }
 #Preview("editable") {
     MontantDemo(editable:true).frame(width:500)
+}
+#Preview("édition auto") {
+    MontantDemo(montant:Montant()).frame(width:500)
 }
 
 

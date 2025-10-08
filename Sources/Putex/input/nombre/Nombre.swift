@@ -205,8 +205,12 @@ public struct Nombre: Codable {
     
     public var enlettres: String {
         if let entier = entiere {
-            var lettres = "\(entier.enlettres)"
-            if decimales != "" { lettres += " et \(iemes)"}
+            var lettres = entier.enlettres
+            if let deci = decimales {
+                if let decim = Int(deci) {
+                    lettres += (" et "  + decim.enlettres + " " + iemes)
+                }
+            }
             return lettres
         } else {
             return ""
@@ -232,11 +236,11 @@ public struct Nombre: Codable {
     }
     public func enlettres(_ classifier:Mot) ->  String {
         if let entier = entiere {
-            var lettres = "\(entier.enlettres) \(entier > 1 ? classifier.pluriel : classifier.singulier)"
+            var lettres = entier.enlettres + " " + (entier > 1 ? classifier.pluriel : classifier.singulier)
             if let decim = decimales {
                 if let deci = Int(decim) {
                     if deci > 0 {
-                        lettres += " et \(iemes) de \(deci == 1 ? classifier.singulier : classifier.pluriel)"
+                        lettres += " et " + deci.enlettres + " " + iemes
                     }
                 } else {
                     print ("décimales erronées (2) : \(decim)")
