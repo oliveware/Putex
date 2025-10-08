@@ -8,7 +8,7 @@
 import Foundation
 
 public struct TID : Codable, Identifiable, Equatable{
-   /* public static var NA = TID([0,0,0,0,0,0])
+   public static var NA = TID([0,0,0,0,0,0])
     private static var next = (zero:0, one:0, two:0, three:0, four:0, five:0)
     static func nextinit(_ zeros: [Nivzero]) {
         let zero = zeros.count
@@ -51,7 +51,7 @@ public struct TID : Codable, Identifiable, Equatable{
     }
     static func five() -> Int {
         next.five += 1 ; return next.five
-    }*/
+    }
     
     var zero : Int
     var one : Int?
@@ -61,7 +61,7 @@ public struct TID : Codable, Identifiable, Equatable{
     var five : Int?
     
     // initialisation du niveau inférieur
-    public init(_ tid:TID? = nil) {
+    public init(_ tid:TID?) {
         if let parent = tid {
             zero = parent.zero
             if let first = parent.one {
@@ -72,26 +72,30 @@ public struct TID : Codable, Identifiable, Equatable{
                         three = third
                         if let fourth = parent.four {
                             four = fourth
-                            if let fith = parent.five {
-                                five = fith + 1
+                            if let _ = parent.five {
+                                print("dernier niveau")
                             } else {
-                                five = 1
+                                five = TID.five()
                             }
                         } else {
-                            four = 1
+                            four = TID.four()
                         }
                     } else {
-                        three = 1
+                        three = TID.three()
                     }
                 } else {
-                    two = 1
+                    two = TID.two()
                 }
             } else {
-                one = 1
+                one = TID.one()
             }
         } else {
-            zero = 1
+            zero = -1
         }
+    }
+    
+    public init() {
+        zero = -1
     }
     
     public init(_ tab:[Int]) {
@@ -113,10 +117,19 @@ public struct TID : Codable, Identifiable, Equatable{
                     }
                 }
             }
-            print("tid : \(self)")
+            print("tab : \(tab) tid : \(self)")
         } else {
-            zero = 1
+            zero = -1
         }
+    }
+    
+    init(_ niv0: Nivzero, _ niv1:Nivone, _ niv2:Nivtwo, _ niv3:Nivthree, _ niv4:Nivfour, _ niv5:Nivfive ) {
+        zero = niv0.id
+        one = niv1.id > 0 ? niv1.id : nil
+        two = niv2.id > 0 ? niv2.id : nil
+        three = niv3.id > 0 ? niv3.id : nil
+        four = niv4.id > 0 ? niv4.id : nil
+        five = niv5.id > 0 ? niv5.id : nil
     }
     
     public var id: String {
@@ -163,7 +176,7 @@ public struct TID : Codable, Identifiable, Equatable{
                 }
             }
         }
-      //  print(t)
+        print("tid tab", t)
         return t
     }
     

@@ -30,7 +30,11 @@ public struct Nivzero : Codable, Identifiable, Hashable {
         one = nivone
     }
     init(_ taxonomy:Taxonomy, _ tid:TID) {
-        self = taxonomy.items[tid.tab[0]]
+        if let zero = taxonomy[tid.zero] {
+            self = zero
+        } else {
+            id = -1
+        }
     }
     
    /* init(_ json:String) {

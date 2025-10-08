@@ -34,6 +34,7 @@ public enum Unité: String, Codable, Enumerable {
     case l      = "l"
     case jour   = "jour"
     case mois   = "mois"
+    case an     = "an"
     case unit   = "pièce"
 
     public var local: Mot {
@@ -45,6 +46,7 @@ public enum Unité: String, Codable, Enumerable {
         case .kwh: return Mot("kWh","kWh")
         case .jour: return Mot("jour","jours")
         case .mois: return Mot("mois","mois")
+        case .an: return Mot("année","années")
         case .unit: return Mot("pièce", "pièces")
         }
     }
@@ -57,7 +59,15 @@ public enum Unité: String, Codable, Enumerable {
             case .kwh:
                 return Measurement(value:value, unit:UnitEnergy.kilowattHours).formatted()
             case .l :
-                return Measurement(value:value, unit:UnitVolume.liters).formatted()
+               // return Measurement(value:value, unit:UnitVolume.liters).formatted()
+               let formatter = MeasurementFormatter()
+                formatter.unitOptions = .providedUnit
+                formatter.numberFormatter.maximumFractionDigits = 2
+                formatter.locale = Locale(identifier:"fr_FR")
+                return formatter.string (from: Measurement(value:value, unit:UnitVolume.liters))
+                    //Measurement(value:value, unit:UnitVolume.liters).formatted(.measurement(width: .wide, usage:.asProvided).locale(Locale(identifier:"fr_FR")))
+               // MeasurementFormatUnitUsage<UnitVolume>.liquid
+               
             case .m :
                 return Measurement(value:value, unit:UnitLength.meters).formatted()
             case .m2 :
@@ -70,7 +80,7 @@ public enum Unité: String, Codable, Enumerable {
             case .mois :
                 return String(Int(value)) + " mois"
             case .unit:
-                return "x" + String(Int(value)) // "pièce"
+                return "x " + String(Int(value)) // "pièce"
             default:
                 return String(value)
             }
@@ -79,13 +89,14 @@ public enum Unité: String, Codable, Enumerable {
     
     public var symbol:String {
         switch self {
-        case .l: return "l"
+        case .l: return UnitVolume.liters.symbol
         case .m: return UnitLength.meters.symbol
-        case .m2: return "m2"
-        case .m3: return "m3"
-        case .kwh: return "kWh"
+        case .m2: return UnitArea.squareMeters.symbol
+        case .m3: return UnitVolume.cubicMeters.symbol
+        case .kwh: return UnitEnergy.kilowattHours.symbol
         case .jour: return "jour"
         case .mois: return "mois"
+        case .an: return "an"
         case .unit : return ""
         }
     }
@@ -96,10 +107,7 @@ public enum Unité: String, Codable, Enumerable {
         case .m:    return .decimal(3)
         case .m2:   return .decimal(2)
         case .m3:   return .decimal(3)
-        case .kwh: return .naturel
-        case .jour: return .naturel
-        case .mois: return .naturel
-        case .unit : return .naturel
+        default :   return .naturel
         }
     }
    

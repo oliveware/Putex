@@ -105,13 +105,27 @@ extension Mesure {
 
 public struct MesureView :View {
     @Binding var mesure:Mesure
-    
+    @State private var edit = false
     public init(_ mesure:Binding<Mesure>) {
         _mesure = mesure
     }
     
     public var body: some View {
-        NumberView($mesure)
+        HStack {
+            if edit {
+                EnumPicker<Quantité>(Quantité.allCases, $mesure.quantité, true)
+                    .frame(width:220)
+                NumberEditor($mesure.nombre, mesure.quantité.set)
+                Text(mesure.unité.symbol)
+                Button(action:{edit = false})
+                {Image(systemName: "checkmark")}
+            } else {
+                Text(mesure.quantité.label + " : " + mesure.astring)
+                Button(action:{edit = true})
+                {Image(systemName: "pencil")}
+            }
+            
+        }
     }
 }
 
@@ -122,19 +136,23 @@ struct MesurePreview : View {
     @State var mensuel = Mesure(.mensuel)
     
     var body:some View {
-        VStack(alignment:.trailing) {
-            NumberView($volume)
+        VStack(alignment:.leading) {
             
-            MesureView($surface)
             
-            NumberView($hp)
             
-            NumberView($mensuel)
+            GroupBox("choix de la quantité") {
+                MesureView($surface)
+            }.padding(.bottom, 20)
+            GroupBox("quantité imposée") {
+                NumberView($volume)
+                NumberView($hp)
+                NumberView($mensuel)
+            }
         } .padding()
     }
 }
 
 #Preview {
-    MesurePreview()
+    MesurePreview().frame(width:500)
 }
 

@@ -29,7 +29,7 @@ struct LIDPicker : View {
     }
     
     var body: some View {
-        TerritoirePicker(lid: $lid, continent:$continent, territoire:$territoire, edition:false)
+        RegionPicker(lid: $lid, continent:$continent, territoire:$territoire, edition:false)
     }
 }
 

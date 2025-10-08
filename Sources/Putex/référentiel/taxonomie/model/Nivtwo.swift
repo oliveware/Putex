@@ -25,6 +25,7 @@ public struct Nivtwo : Codable, Identifiable, Hashable {
     init() {id = -1}
 
     init(_ taxonomy:Taxonomy, _ tid:TID) {
+        self.tid = tid
         let tab = tid.tab
         self = taxonomy.items[tab[0]].one[tab[1]].two[tab[2]]
     }

@@ -26,8 +26,13 @@ public struct Nivone : Codable, Identifiable, Hashable {
     init() {id = -1}
 
     init(_ taxonomy:Taxonomy, _ tid:TID) {
-        let tab = tid.tab
-        self = taxonomy.items[tab[0]].one[tab[1]]
+        var found : Nivone?
+        if let zero = taxonomy[tid.zero] {
+            if let one = tid.one {
+                found = zero[one] ?? Nivone()
+            }
+        }
+        self = found ?? Nivone()
     }
     
     init(_ json:String) {

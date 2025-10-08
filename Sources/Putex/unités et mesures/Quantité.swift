@@ -7,7 +7,11 @@
 import SwiftUI
 
 // nature de la chose mesurée
-public enum Quantité: String, Codable {
+public enum Quantité: String, Codable, Enumerable {
+    public static var selector = "quantité"
+    
+    public var id: String { self.rawValue}
+    
     
     static var utility :[Quantité] = [.eau, .elec, .hp, .hc, .gaz, .web, .mobile,.tv]
     static var loyer = "loyer"
@@ -15,8 +19,9 @@ public enum Quantité: String, Codable {
     static var nourriture = "nourriture"
     static var equipement = "équipement"
     
+    case jour = "jour"
     case mensuel = "mois"
-  //  case annuel = "année"
+    case annuel = "année"
     
     case piece  = "pièce"
     case eau    = "eau"
@@ -41,18 +46,19 @@ public enum Quantité: String, Codable {
         case .elec,.hp,.hc : return .kwh
         case .eau : return .l
         case .gaz: return .m3
+        case.jour: return .jour
         case .mensuel,.web,.mobile,.tv: return .mois
-      //  case .annuel: return .an
+        case .annuel: return .an
         }
     }
-    var label: String {
+    public var label: String {
         switch self {
-        case .elec,.hp,.hc,.eau  : return "consommation " + self.rawValue
+        case .elec,.hp,.hc,.eau,.gaz  : return "consommation " + self.rawValue
         case .aire   : return "surface"
-       // case .jour   : return "nb de jours"
-        case .mensuel   : return "abonnement"
+        case .volume: return "volume"
+        case .jour, .mensuel, .annuel : return "durée" 
         case .piece   : return "nb de pièces"
-        default: return "label"
+        default: return "abonnement " + self.rawValue
         }
     }
     
@@ -60,8 +66,7 @@ public enum Quantité: String, Codable {
         switch self {
         case .aire: return .decimal(2)
         case .volume,.gaz: return .decimal(3)
-        case .elec,.hp,.hc,.eau, .mensuel,.web,.mobile,.tv, .piece : return .naturel
-      //  case .annuel: return .an
+        default: return .naturel
         }
     }
     
