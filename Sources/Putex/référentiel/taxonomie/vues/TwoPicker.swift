@@ -17,12 +17,6 @@ struct TwoPicker: View {
     @State var five   = Nivfive()
     
     
-    init(_ tid:Binding<TID>, _ zero: Binding<Nivzero>, _ one: Binding<Nivone>) {
-        _tid = tid
-        _zero = zero
-        _one = one
-    }
-    
     var barre:some View {
         HStack {
             if one.nom != "" {
@@ -81,8 +75,6 @@ struct TwoPicker: View {
                     }
                 }
             }
-            Spacer()
-            Text(tid.id)
         }
     }
     
@@ -93,7 +85,11 @@ struct TwoPicker: View {
             ZeroPicker($tid, $zero, $one )
         } else {
             VStack {
-                barre
+                HStack {
+                    barre
+                    Spacer()
+                    Text(three.nom + "  " + four.nom + " " + tid.id)
+                }
                 Spacer()
                 if two.nom == "" {
                     HStack(alignment:.top) {
@@ -106,21 +102,21 @@ struct TwoPicker: View {
                                     //   if edition {
                                     Button(action:{
                                         two = item.wrappedValue
+                                        print ("before : ", tid.id)
                                         tid = TID([zero.id, one.id, two.id])
+                                        print ("after : ", tid.id)
                                     })
                                     {Text(item.wrappedValue.nom).frame(width:150, alignment: .center)}
                                     // }
                                 }
                             }
                         }
-                        
-                        
-                        
                         Spacer()
                     }
                 } else {
                     if two.three.count > 0 {
-                        ThreePicker( $tid, zero, one, $two, $three, $four, $five)
+                        ThreePicker(tid: $tid,zero: zero, one:one, two:$two, three:$three, four:$four, five:$five)
+                            
                     }
                 }
             }
@@ -131,14 +127,14 @@ struct TwoPicker: View {
 struct TwoPickerPreview : View {
 
     @State var zero = Taxonomy(besoins).items[0]
-    @State var two = Nivtwo()
     @State var one  = Taxonomy(besoins).items[0].one[0]
+    @State var two = Nivtwo()
     @State var tid = TID()
     
     var edition = true
     
     var body:some View {
-        TwoPicker( $tid, $zero, $one)
+        TwoPicker( tid:$tid, zero:$zero, one:$one, two:two)
             .frame(width:600,height:300)
         VStack {
             HStack {
@@ -153,4 +149,8 @@ struct TwoPickerPreview : View {
 
 #Preview {
     TwoPickerPreview().padding()
+}
+
+#Preview ("vierge") {
+    TwoPickerPreview(zero:Nivzero(), one:Nivone()).padding()
 }

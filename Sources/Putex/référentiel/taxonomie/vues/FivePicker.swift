@@ -40,6 +40,7 @@ struct FivePicker: View {
                                 Button(action:{
                                     five = item.wrappedValue
                                     tid = TID([zero.id, one.id, two.id, three.id, four.id, five.id])
+                                    print("five : " + tid.id)
                                 })
                                 {Text(item.wrappedValue.nom).frame(width:150, alignment: .center)}
                                 // }

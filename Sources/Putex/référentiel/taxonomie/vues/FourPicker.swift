@@ -15,16 +15,6 @@ struct FourPicker: View {
     @Binding var three  : Nivthree
     @Binding var four   : Nivfour
     @Binding var five   : Nivfive
-    
-    init(_ tid:Binding<TID>, _ zero: Nivzero, _ one: Nivone, _ two: Nivtwo, _ three:Binding<Nivthree>, _ four:Binding<Nivfour>, _ five:Binding<Nivfive>) {
-        _tid = tid
-        self.zero = zero
-        self.one = one
-        self.two = two
-        _three = three
-        _four = four
-        _five = five
-    }
 
     var body:some View {
         VStack(alignment:.leading) {
@@ -40,6 +30,7 @@ struct FourPicker: View {
                                 Button(action:{
                                     four = item.wrappedValue
                                     tid = TID([zero.id, one.id, two.id, three.id, four.id])
+                                    print("four : " + tid.id)
                                 })
                                 {Text(item.wrappedValue.nom).frame(width:150, alignment: .center)}
                                 // }
@@ -72,7 +63,7 @@ struct FourPickerPreview : View {
     var edition = true
     
     var body:some View {
-        FourPicker( $tid, zero, one, two, $three, $four, $five)
+        FourPicker(tid: $tid,zero: zero, one:one, two:two, three:$three, four:$four, five:$five)
             .frame(width:600,height:300)
         HStack {
             //Text(Niveau(tid).nom)

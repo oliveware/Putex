@@ -51,7 +51,7 @@ struct OnePicker: View {
                     Spacer()
                 }
             } else {
-                TwoPicker( $tid, $zero, $one)
+                //TwoPicker( tid:$tid, zero:$zero, one:$one)
             }
         }
         

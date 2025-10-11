@@ -6,31 +6,18 @@
 //
 import SwiftUI
 
-/*
-
- */
 
 public struct TIDPicker: View {
     @Binding var tid:TID
     var taxonomy:Taxonomy
     @State var zero  : Nivzero
     @State var one   : Nivone
-    @State var two   : Nivtwo
-    @State var three : Nivthree
-    @State var four  : Nivfour
-    @State var five  : Nivfive
     
     public init(_ tid:Binding<TID>, _ taxonomy:Taxonomy = Taxonomy(besoins)) {
         _tid = tid
         self.taxonomy = taxonomy
-        let wid = tid.wrappedValue
-        let dim = wid.tab.count
-        zero    = dim > 0 ? Nivzero(taxonomy, wid) : Nivzero()
-        one     = dim > 1 ? Nivone(taxonomy, wid) : Nivone()
-        two     = dim > 2 ? Nivtwo(taxonomy, wid) : Nivtwo()
-        three   = dim > 3 ? Nivthree(taxonomy, wid) : Nivthree()
-        four    = dim > 4 ? Nivfour(taxonomy, wid) : Nivfour()
-        five    = dim > 5 ? Nivfive(taxonomy, wid) : Nivfive()
+        zero    =  Nivzero()
+        one     =  Nivone()
     }
     
    
@@ -39,13 +26,9 @@ public struct TIDPicker: View {
     public var body:some View {
         
         VStack(alignment: .leading) {
-            
             Spacer()
-            
-           TwoPicker( $tid, $zero, $one)
-            
+            TwoPicker( tid:$tid, zero:$zero, one:$one)
             Spacer()
-            
             HStack {
                 Spacer()
                 Text(tid.id)
@@ -53,11 +36,7 @@ public struct TIDPicker: View {
         }.frame(alignment: .leading)
         .onChange(of:zero.id) {
             one = Nivone()
-            two = Nivtwo()
-            three = Nivthree()
-            four = Nivfour()
-            five = Nivfive()
-            tid = TID([zero.id])
+
         }
     }
 }

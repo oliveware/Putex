@@ -15,15 +15,6 @@ struct ThreePicker: View {
     @Binding var four   : Nivfour
     @Binding var five   : Nivfive
     
-    init(_ tid:Binding<TID>, _ zero: Nivzero, _ one: Nivone, _ two: Binding<Nivtwo>, _ three:Binding<Nivthree>, _ four:Binding<Nivfour>, _ five:Binding<Nivfive>) {
-        _tid = tid
-        self.zero = zero
-        self.one = one
-        _two = two
-        _three = three
-        _four = four
-        _five = five
-    }
 
     var body:some View {
         VStack(alignment:.leading) {
@@ -39,6 +30,7 @@ struct ThreePicker: View {
                                 Button(action:{
                                     three = item.wrappedValue
                                     tid = TID([zero.id, one.id, two.id, three.id])
+                                    print("three : " + tid.id)
                                     
                                 })
                                 {Text(item.wrappedValue.nom).frame(width:150, alignment: .center)}
@@ -52,7 +44,7 @@ struct ThreePicker: View {
                 
             } else {
                 if three.four.count > 0 {
-                    FourPicker( $tid, zero, one, two, $three, $four, $five)
+                    FourPicker(tid: $tid,zero: zero, one:one, two:two, three:$three, four:$four, five:$five)
                 }
             }
         }
@@ -69,7 +61,7 @@ struct ThreePickerPreview : View {
     @State var tid = TID()
     
     var body:some View {
-        ThreePicker( $tid, zero, one, $two, $three, $four, $five)
+        ThreePicker(tid: $tid,zero: zero, one:one, two:$two, three:$three, four:$four, five:$five)
             .frame(width:600,height:300)
         HStack {
             Text(zero.nom)

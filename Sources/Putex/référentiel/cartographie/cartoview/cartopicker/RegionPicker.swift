@@ -72,14 +72,16 @@ struct RegionPicker : View {
                 }
             }
             Spacer()
+            
         }
     }
 
     var body:some View {
-        if territoire.nom == "" {
-            ContinentPicker(lid: $lid, continent: $continent, territoire: $territoire)
-        } else {
-            VStack {
+        VStack {
+            if territoire.nom == "" {
+                ContinentPicker(lid: $lid, continent: $continent, territoire: $territoire)
+            } else {
+                
                 barre
                 Spacer()
                 if region.id == Region().id {
@@ -87,11 +89,11 @@ struct RegionPicker : View {
                         ScrollView {
                             VStack(alignment:.leading) {
                                 ForEach($territoire.regions) { item in
-                                     if edition || item.wrappedValue.avecterrains {
-                                         Button(action:{
-                                             region = item.wrappedValue
-                                             lid = LID([continent.id,territoire.id, region.id])
-                                         })
+                                    if edition || item.wrappedValue.avecterrains {
+                                        Button(action:{
+                                            region = item.wrappedValue
+                                            lid = LID([continent.id,territoire.id, region.id])
+                                        })
                                         {Text(item.wrappedValue.nom).frame(width:150, alignment: .center)}
                                     }
                                 }
@@ -105,23 +107,23 @@ struct RegionPicker : View {
                 } else {
                     CommunePicker(lid:$lid,  continent:continent, territoire:territoire, region:$region, commune:$commune, quartier:$quartier, terrain:$terrain , ajout:edition)
                 }
-                        
-                
+            }
+            Spacer()
+            
+            HStack {
                 Spacer()
-                
-                HStack {
-                    Spacer()
-                    Text(lid.id)
-                }
-                //  .onDelete(perform: deleteItems)
-            }.frame(alignment: .leading)
+                Text(lid.id)
+            }
+            
+            
+            //  .onDelete(perform: deleteItems)
+        }.frame(alignment: .leading)
             .onChange(of:region.id) {
                 commune = Commune()
                 quartier = Quartier()
                 terrain = Terrain()
                 lid = LID([continent.id, territoire.id, region.id])
             }
-        }
     }
 }
 
@@ -133,8 +135,11 @@ struct RegionPickerPreview : View {
     var edition = true
     
     var body:some View {
-        RegionPicker(lid:$lid, continent:$continent, territoire: $territoire, edition:edition)
-            .frame(width:600,height:300)
+        VStack {
+            RegionPicker(lid:$lid, continent:$continent, territoire: $territoire, edition:edition)
+                .frame(width:600,height:300)
+            Text(lid.id)
+        }
     }
 }
 
@@ -145,3 +150,4 @@ struct RegionPickerPreview : View {
 #Preview ("non éditable") {
     RegionPickerPreview(edition:false).padding()
 }
+              
