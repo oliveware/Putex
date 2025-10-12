@@ -132,7 +132,7 @@ public struct LID : Codable, Identifiable {
                 }
             }
         }
-        return t
+        return t == "8" ? "" : t
     }
 }
 

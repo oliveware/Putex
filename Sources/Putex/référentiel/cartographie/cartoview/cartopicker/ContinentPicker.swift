@@ -22,6 +22,7 @@ struct ContinentPicker : View {
                 Button(action:{
                     continent = Continent()
                     territoire = Territoire()
+                    lid = LID()
                 })
                 {Text(continent.nom)}
 

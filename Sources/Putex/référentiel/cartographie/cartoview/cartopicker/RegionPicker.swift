@@ -21,12 +21,14 @@ struct RegionPicker : View {
     var barre:some View {
         HStack {
             if territoire.nom != "" {
-                    Button(action:{
-                        territoire = Territoire()
-                        region = Region()
-                        commune = Commune()
-                        quartier = Quartier()
-                        terrain = Terrain() })
+                Button(action:{
+                    territoire = Territoire()
+                    region = Region()
+                    commune = Commune()
+                    quartier = Quartier()
+                    terrain = Terrain()
+                    lid = LID([continent.id])
+                })
                     {Text(territoire.nom)}
                 if region.nom != "" {
                     if territoire.regions.count > 1 {
@@ -34,7 +36,9 @@ struct RegionPicker : View {
                             region = Region()
                             commune = Commune()
                             quartier = Quartier()
-                            terrain = Terrain() })
+                            terrain = Terrain()
+                            lid = LID([continent.id, territoire.id])
+                        })
                         {Text(region.nom)}
                     } else {
                         Text(region.nom)
@@ -44,7 +48,9 @@ struct RegionPicker : View {
                             Button(action:{
                                 commune = Commune()
                                 quartier = Quartier()
-                                terrain = Terrain()})
+                                terrain = Terrain()
+                                lid = LID([continent.id, territoire.id, region.id])
+                            })
                             {Text(commune.nom)}
                         } else {
                             Text(commune.nom)
@@ -53,7 +59,9 @@ struct RegionPicker : View {
                             if commune.quartiers.count > 1 {
                                 Button(action:{
                                     quartier = Quartier()
-                                    terrain = Terrain()})
+                                    terrain = Terrain()
+                                    lid = LID([continent.id, territoire.id, region.id, commune.id])
+                                })
                                 {Text(quartier.nom)}
                             } else {
                                 Text(quartier.nom)
@@ -61,7 +69,9 @@ struct RegionPicker : View {
                             if !terrain.isNaN {
                                 if quartier.terrains.count > 1 {
                                     Button(action:{
-                                        terrain = Terrain()})
+                                        terrain = Terrain()
+                                        lid = LID([continent.id, territoire.id, region.id, commune.id,quartier.id])
+                                    })
                                     {Text(terrain.label)}
                                 } else {
                                     Text(terrain.label)
