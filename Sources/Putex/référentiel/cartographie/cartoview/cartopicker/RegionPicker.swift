@@ -103,6 +103,9 @@ struct RegionPicker : View {
                                         Button(action:{
                                             region = item.wrappedValue
                                             lid = LID([continent.id,territoire.id, region.id])
+                                            commune = Commune()
+                                            quartier = Quartier()
+                                            terrain = Terrain()
                                         })
                                         {Text(item.wrappedValue.nom).frame(width:150, alignment: .center)}
                                     }
@@ -128,12 +131,6 @@ struct RegionPicker : View {
             
             //  .onDelete(perform: deleteItems)
         }.frame(alignment: .leading)
-            .onChange(of:region.id) {
-                commune = Commune()
-                quartier = Quartier()
-                terrain = Terrain()
-                lid = LID([continent.id, territoire.id, region.id])
-            }
     }
 }
 

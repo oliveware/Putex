@@ -29,7 +29,7 @@ struct CommunePicker: View {
                                 Button(action:{
                                     if item.quartiers.count == 1 {
                                         quartier = item.wrappedValue.quartiers[0]
-                                        lid = LID([continent.id,territoire.id, region.id, item.id, quartier.id])
+                                        lid = LID([continent.id, territoire.id, region.id, item.id, quartier.id])
                                     } else {
                                         quartier = Quartier()
                                         lid = LID([continent.id,territoire.id, region.id, item.id])

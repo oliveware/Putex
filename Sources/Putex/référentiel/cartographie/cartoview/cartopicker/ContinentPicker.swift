@@ -60,7 +60,7 @@ struct ContinentPicker : View {
                                 item in
                                 Button(action:{
                                     territoire = item.wrappedValue
-                                    lid = LID([continent.id, item.id])
+                                    lid = LID([continent.id, territoire.id])
                                 })
                                 {Text(item.wrappedValue.nom).frame(width:150, alignment: .center)}
                                 

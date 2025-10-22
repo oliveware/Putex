@@ -116,23 +116,25 @@ public struct LID : Codable, Identifiable {
     }
     
     public var id: String {
-        var t = String(continent)
-        if let co =  territoire {
-            t = t + "-" + String(co)
-            if let r = region {
-                t = t + "-" + String(r)
-                if let c = commune {
-                    t = t + "-" + String(c)
-                    if let q = quartier {
-                        t = t + "-" + String(q)
-                        if let p = terrain {
-                            t = t + "-" + String(p)
+        if continent > 7 { return "" } else {
+            var t = String(continent)
+            if let co =  territoire {
+                t = t + "-" + String(co)
+                if let r = region {
+                    t = t + "-" + String(r)
+                    if let c = commune {
+                        t = t + "-" + String(c)
+                        if let q = quartier {
+                            t = t + "-" + String(q)
+                            if let p = terrain {
+                                t = t + "-" + String(p)
+                            }
                         }
                     }
                 }
             }
+            return t
         }
-        return t == "8" ? "" : t
     }
 }
 
