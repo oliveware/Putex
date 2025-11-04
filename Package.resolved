@@ -1,5 +1,5 @@
 {
-  "originHash" : "1425c968c8f321b1314aa510a94297034fdb6dd724f221bfcf03977f8da06638",
+  "originHash" : "d83e40d426414c92650873de76373c91d1ad17f65f7bd3dd99a1f8a9824e5506",
   "pins" : [
     {
       "identity" : "fichiers",
@@ -8,6 +8,15 @@
       "state" : {
         "branch" : "main",
         "revision" : "ecffa3bc4e8248d59118ccdec3c3a14a1d8a10db"
+      }
+    },
+    {
+      "identity" : "taxion",
+      "kind" : "remoteSourceControl",
+      "location" : "http://github.com/oliveware/Taxion",
+      "state" : {
+        "branch" : "main",
+        "revision" : "016c78541ad82a8c475e3fa9a3f8c9cafb6c810f"
       }
     }
   ],
