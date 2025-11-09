@@ -15,14 +15,14 @@ let package = Package(
     dependencies: [
         // Dependencies declare other packages that this package depends on.
         .package(url: "http://github.com/oliveware/Fichiers", branch: "main"),
-        .package(url: "http://github.com/oliveware/Taxion", branch: "main")
+        .package(url: "http://github.com/oliveware/Taxionomy", branch: "main")
     ],
     targets: [
         // Targets are the basic building blocks of a package, defining a module or a test suite.
         // Targets can depend on other targets in this package and products from dependencies.
         .target(
             name: "Putex",
-            dependencies:["Fichiers","Taxion"]
+            dependencies:["Fichiers","Taxionomy"]
         ),
         .testTarget(
             name: "PutexTests",

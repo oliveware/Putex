@@ -73,7 +73,8 @@ public struct Putex: View {
             }
         }
     }
-    }
+}
+
 #Preview {
     Putex()
 }

@@ -1,5 +1,5 @@
 {
-  "originHash" : "d83e40d426414c92650873de76373c91d1ad17f65f7bd3dd99a1f8a9824e5506",
+  "originHash" : "742a2f18d123be1d1b941104cc7ee1722ad9e97aef8629a3ad3bcd2c3b8b9dd4",
   "pins" : [
     {
       "identity" : "fichiers",
@@ -11,12 +11,12 @@
       }
     },
     {
-      "identity" : "taxion",
+      "identity" : "taxionomy",
       "kind" : "remoteSourceControl",
-      "location" : "http://github.com/oliveware/Taxion",
+      "location" : "http://github.com/oliveware/Taxionomy",
       "state" : {
         "branch" : "main",
-        "revision" : "016c78541ad82a8c475e3fa9a3f8c9cafb6c810f"
+        "revision" : "caab13accdb094784192f2dce4e1ae2bac97da4a"
       }
     }
   ],
