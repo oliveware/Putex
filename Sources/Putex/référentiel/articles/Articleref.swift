@@ -6,7 +6,7 @@
 //
 import Taxionomy
 
-struct Articleref {
+public struct Articleref {
     
     var types: [TypeArticle]
     var besoins:Taxionomy
