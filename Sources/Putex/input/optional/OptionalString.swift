@@ -34,34 +34,35 @@ public struct OptionalString: View {
         self.vertical = vertical
         self.large = large + 8*CGFloat(plarge > 8 ? plarge : 8)
     }
-    
+    @State var button = true
     public var body: some View {
         HStack(alignment:.bottom) {
-            if string == nil {
-                Button(buttontext) { string = "" }
+            if button {
+                Button(buttontext) { string = "" ; button = false }
             } else {
-                
                 if vertical {
                     VStack(alignment:.leading) {
+                        
                         Text(fieldname).font(.caption)
+                        
                         TextField("" , text:Binding<String>(
                             get: { string ?? "" },
-                            set: { string = $0 }
-                            ))
+                            set: { string = $0 == "" ? nil : $0}
+                        ))
                     }
                 } else {
                     Text(fieldname)
                     TextField("" , text:Binding<String>(
                         get: { string ?? "" },
-                        set: { string = $0 }
-                        ))
+                        set: { string = $0 == "" ? nil : $0}
+                    ))
                 }
                 Button(action:{
-                    string = nil
-                })
-                {Image(systemName: "delete.left")}
+                    string = nil ; button = true
+                 })
+                 {Image(systemName: "delete.left")}
             }
-        }.frame(minWidth:large)
+        }.frame(minWidth:large, alignment:.leading)
     }
 }
 
@@ -88,7 +89,7 @@ struct OptionalStringPreview: View {
 }
 
 #Preview {
-    VStack {
+    VStack(alignment:.leading) {
         OptionalStringPreview("commission").padding(10)
         OptionalStringPreview(Mot("commission","commissions",.f)).padding(10)
     }.padding(10)
