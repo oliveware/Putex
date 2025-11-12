@@ -8,7 +8,7 @@
 
 // un type d'article spécialise un taxion
 // par exemple, une cerise peut être fraîche, séchée, congelée, à l'eau de vie
-struct ModeleArticle: Codable {
+public struct ModeleArticle: Codable {
 
     var description: String = ""
     var marque: String = ""
@@ -19,7 +19,7 @@ struct ModeleArticle: Codable {
     // une cerise peut être fraîche ou conservée sous différente formes: séche, congelée, à l'eau de vie
     var conservation: String = ""
     
-    var show : String {
+    public var show : String {
         var string = conservation
         if contenant != "" {
             string = string + " en " + contenant
