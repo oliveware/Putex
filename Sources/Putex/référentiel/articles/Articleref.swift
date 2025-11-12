@@ -12,7 +12,7 @@ public struct Articleref {
     var besoins:Taxionomy
     var contenants:Taxionomy
     
-    func type(_ id:String) -> TypeArticle {
+    public func type(_ id:String) -> TypeArticle {
         var found = TypeArticle()
         for type in types {
             if type.id == id { found = type }
