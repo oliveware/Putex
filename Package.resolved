@@ -7,7 +7,7 @@
       "location" : "http://github.com/oliveware/Fichiers",
       "state" : {
         "branch" : "main",
-        "revision" : "ecffa3bc4e8248d59118ccdec3c3a14a1d8a10db"
+        "revision" : "80a017a3d5d41e2787474dc76c404cd797a3b1e1"
       }
     },
     {
@@ -16,7 +16,7 @@
       "location" : "http://github.com/oliveware/Taxionomy",
       "state" : {
         "branch" : "main",
-        "revision" : "d58e6538f93510104f39dc2f66160bb8ed2902d0"
+        "revision" : "7c0eeff60bf75eb7991e3691119710ad7fbb2d5c"
       }
     }
   ],

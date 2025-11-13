@@ -11,7 +11,7 @@ import Taxionomy
 public struct TypeArticleEditor : View {
     var taxionomy = Taxionomy(taxionomie2)
     @Binding var type: TypeArticle
-    @State var taxion = Taxion()
+    
     var done: () -> Void
     
     public init(_ type:Binding<TypeArticle>, _ done: @escaping () -> Void) {
@@ -21,10 +21,7 @@ public struct TypeArticleEditor : View {
     
     public var body : some View {
         VStack(alignment:.leading) {
-            Text("type d'article")
-                .font(.title)
-                .padding()
-            TaxionPicker($taxion, taxionomy, {type.id = taxion.id})
+            
 
             OptionalString("description", $type.description)
             
