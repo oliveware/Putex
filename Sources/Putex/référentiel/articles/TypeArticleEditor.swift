@@ -23,13 +23,17 @@ public struct TypeArticleEditor : View {
         VStack(alignment:.leading) {
             
 
-            OptionalString("description", $type.description)
+            HStack {
+                OptionalString("description", $type.description)
+                OptionalString("sous-catégorie", $type.sub)
+            }
+            .padding(.bottom,20)
             
-            OptionalString("site web", $type.url)
-            OptionalString("image", $type.imagurl)
+           
+            OptionUrl("image", $type.imagurl)
                 .padding(.bottom,20)
             
-            OptionalString("sous-catégorie", $type.sub)
+            OptionUrl("site web", $type.url)
             
             
             Button("valider", action:{

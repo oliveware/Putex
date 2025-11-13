@@ -57,7 +57,7 @@ struct WebPicture: View {
                     EmptyView()
                 }
             }
-            .frame(width: 600, height: 400)
+           // .frame(width: 600, height: 400)
             .clipShape(RoundedRectangle(cornerRadius: 10))
             .shadow(radius: 5)
     }
@@ -68,19 +68,19 @@ struct WebPrepicture: View {
     // let imageURL = URL(string: url)!
     
     var body: some View {
-        if let imageURL = URL(string:url) {
-            WebPicture(imageURL)
-        } else {
-            Text ("\(url) n'existe pas")
+        if url != "" {
+            if let imageURL = URL(string:url) {
+                WebPicture(imageURL)
+            } else {
+                Text ("\(url) n'existe pas")
+            }
         }
     }
 }
 
 #Preview {
-    //Vignette(picture: Picture("http://192.168.1.41/contents/poet/fr/intro/fete/voisin.png"))
-    
     VStack {
         WebPrepicture(url:"https://www.map24.com/wp-content/uploads/2023/04/Sharwil.jpg")
         WebPrepicture(url:"http://192.168.1.41/contents/poet/fr/intro/fete/voisin.png")
-    }
+    }.frame(width:400, height:600)
 }

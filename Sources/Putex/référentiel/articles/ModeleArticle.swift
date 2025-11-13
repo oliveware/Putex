@@ -17,18 +17,16 @@ public struct ModeleArticle: Codable {
     // cerise en boite ou en bocal
     var contenant: String?  // identifiant d'un contenant dans la taxonomie des contenants
     // une cerise peut être fraîche ou conservée sous différente formes: séche, congelée, à l'eau de vie
-    var conservation: String?
+    var conservation: Conservation?
     
     public var show : String {
         var string = ""
         if let cons = conservation {
-            if let cont = contenant {
-                string = cons + " en " + cont
-            } else {
-                string = cons
-            }
+            string = cons.show
             
         }
         return string
     }
+    
+    var isNaN: Bool { show == "" }
 }
