@@ -19,7 +19,7 @@ public struct ModeleArticle: Codable {
     // une cerise peut être fraîche ou conservée sous différente formes: séche, congelée, à l'eau de vie
     var conservation: Conservation?
     
-    init() {}
+    public init() {}
     
     public var show : String {
         var string = ""
@@ -30,5 +30,5 @@ public struct ModeleArticle: Codable {
         return string
     }
     
-    var isNaN: Bool { show == "" }
+    public var isNaN: Bool { show == "" }
 }
