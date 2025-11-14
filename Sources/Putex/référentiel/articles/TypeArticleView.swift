@@ -25,28 +25,33 @@ struct TypeArticleView: View {
     
     var body: some View {
         VStack {
-            Text("type d'article")
-                .font(.title)
-                .padding()
+            HStack {
+                Spacer()
+                Text("Type d'article")
+                    .font(.title)
+                Spacer()
+                if !type.isNaN {
+                    Button(action:{edition.toggle()})
+                    {Image(systemName: edition ? "checkmark" : "pencil")}
+                }
+            }.padding()
+
             TaxionPicker($taxion, taxionomy, {type.id = taxion.id})
-           
-            if !type.isNaN {
-                HStack {
-                    if edition {
-                        TypeArticleEditor($type, {})
-                    } else {
-                        TypeArticleShow(type, taxionomy.find(type.id).complet())
-                    }
-                    
-                    if let image = type.imagurl, let url = URL(string: image) {
-                        WebPicture(url)
-                            .frame(width:200, height:200)
-                    }
+            HStack {
+                if edition {
+                    TypeArticleEditor($type, {})
+                } else {
+                    TypeArticleShow(type, taxionomy.find(type.id).complet())
                 }
-                if let webpage = type.url, let url = URL(string: webpage) {
-                    WebView(url: url)
-                    //Text("site web : \(url)")
+                
+                if let image = type.imagurl, let url = URL(string: image) {
+                    WebPicture(url)
+                        .frame(width:200, height:200)
                 }
+            }
+            if let webpage = type.url, let url = URL(string: webpage) {
+                WebView(url: url)
+                //Text("site web : \(url)")
             }
         }
     }

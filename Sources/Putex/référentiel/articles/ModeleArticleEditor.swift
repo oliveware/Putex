@@ -22,9 +22,7 @@ struct ModeleArticleEditor : View {
     
     var body: some View {
         VStack(alignment:.leading) {
-            Text("Modèle d'article")
-                .font(.title)
-                .padding()
+            
             
             HStack {
                 TextField("description", text:$modele.description)

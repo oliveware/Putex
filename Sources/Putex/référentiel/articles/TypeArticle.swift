@@ -11,7 +11,8 @@ import Taxionomy
 public struct TypeArticle: Codable, Identifiable {
     public var id : String = ""    // TID.id
 
-    public init() {}
+    init() {}
+    
     var description: String?
     var sub: String? // dans une taxionomie spécialisée
     var imagurl: String?

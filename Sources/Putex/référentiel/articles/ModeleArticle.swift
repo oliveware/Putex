@@ -19,6 +19,8 @@ public struct ModeleArticle: Codable {
     // une cerise peut être fraîche ou conservée sous différente formes: séche, congelée, à l'eau de vie
     var conservation: Conservation?
     
+    init() {}
+    
     public var show : String {
         var string = ""
         if let cons = conservation {

@@ -8,7 +8,6 @@
 import SwiftUI
 import Taxionomy
 
-
 struct ModeleArticleView: View {
     var taxionomy:Taxionomy
     @Binding var modele: ModeleArticle
@@ -27,6 +26,15 @@ struct ModeleArticleView: View {
     
     var body: some View {
         VStack {
+            HStack {
+                Spacer()
+                Text("Modèle d'article")
+                    .font(.title)
+                    
+                Spacer()
+                Button(action:{edition.toggle()})
+                {Image(systemName: edition ? "checkmark" : "pencil")}
+            }.padding()
             HStack {
                 if edition {
                     ModeleArticleEditor($modele, {})
