@@ -8,7 +8,7 @@
 import SwiftUI
 import Taxionomy
 
-struct TypeArticleManager : View {
+public struct TypeArticleManager : View {
     @Binding var types : [TypeArticle]
     @State var type = TypeArticle()
     @State var modif = false
@@ -27,7 +27,7 @@ struct TypeArticleManager : View {
         {Text("ajouter un type d'article")}
     }
     
-    var body: some View {
+    public var body: some View {
         VStack(alignment: .center) {
             if types.count == 0 {
                 ajout
