@@ -35,7 +35,7 @@ public struct TypageArticle : View {
                         .font(.title)
                 TaxionPicker($taxion, besoins, {type.id = taxion.id})
             } else {
-                TypeArticleView($type, besoins)
+                TypeArticleShow(type, besoins.find(type.id).complet())
                 if avecmodele {
                     ModeleArticleView($modele, contenants)
                 } else {

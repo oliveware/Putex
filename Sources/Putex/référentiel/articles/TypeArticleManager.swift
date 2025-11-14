@@ -32,13 +32,13 @@ public struct TypeArticleManager : View {
             if types.count == 0 {
                 ajout
             } else {
-            GroupBox("Articles disponibles") {
+            GroupBox("Types d'articles disponibles") {
                 ScrollView {
                     ForEach($types){
                         item in
                         HStack(spacing:30) {
                             if modif {
-                                ConfirmedButton("minus", "cet article  (\(item.id))", {delete(item.id)
+                                ConfirmedButton("minus", "ce type d'article  (\(item.id))", {delete(item.id)
                                     modif = false})
                             }
                             TypeArticleView(item, besoins)
