@@ -32,17 +32,16 @@ public struct TypeArticleEditor : View {
                         OptionalString("sous-catégorie", $type.sub)
                             .padding(.bottom,20)
                         
-                        
-                        OptionUrl("image", $type.imagurl)
+                        OptionUrl("une image", $type.imagurl)
                             .padding(.bottom,20)
                     }
                     if let image = type.imagurl, let url = URL(string: image) {
                         WebPicture(url)
                             .frame(width:200, height:200)
                     }
-                }.frame(minWidth:600, minHeight: 400)
+                }
                 
-                OptionUrl("site web", $type.url)
+                OptionUrl("une page web", $type.url)
                 
                 if let webpage = type.url, let url = URL(string: webpage) {
                     WebView(url: url)

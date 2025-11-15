@@ -8,7 +8,7 @@ import SwiftUI
 
 struct OptionUrl : View {
     @Binding var url: String?
-    @State var string = "http"
+    @State var string = ""
     
     private var buttontext:String
     private var fieldname: String
@@ -80,7 +80,7 @@ struct OptionUrlPreview: View {
 
 #Preview {
     VStack {
-        OptionUrlPreview("image")
+        OptionUrlPreview("une image")
             .frame(width:400, height:400)
             .padding(10)
        
