@@ -30,12 +30,12 @@ public struct TypageArticle : View {
     public var body: some View {
         VStack(alignment:.leading) {
             
-                TypeArticleShow(type)
-                if avecmodele {
-                    ModeleArticleEditor($modele, contenants, fermetures, {})
-                } else {
-                    Button("ajouter un modèle", action:{avecmodele = true})
-                }
+            TypeArticleShow(type)
+            if avecmodele {
+                ModeleArticleEditor($modele, contenants, fermetures, {})
+            } else {
+                Button("ajouter un modèle", action:{avecmodele = true})
+            }
             
         }
     }
@@ -50,10 +50,10 @@ struct TypagePreview : View {
     
     var body : some View {
         TypageArticle(type, $modele, fermetures, contenants)
-            .frame(width:600, height:1000)
+          
     }
 }
 
 #Preview {
-    TypagePreview()
+    TypagePreview().padding()
 }
