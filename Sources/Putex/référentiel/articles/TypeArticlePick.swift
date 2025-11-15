@@ -27,7 +27,7 @@ struct TypeArticlePick: View {
             Button(action:{edition = true})
             {Image(systemName: "pencil")}
                 .sheet(isPresented: $edition)
-                {TypeArticleEditor($type, taxionomy, {})}
+                { TypeArticleEditor($type, taxionomy) }
         }.padding()
     }
 }

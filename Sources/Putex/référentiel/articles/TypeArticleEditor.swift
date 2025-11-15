@@ -13,23 +13,20 @@ public struct TypeArticleEditor : View {
     @State var taxion = Taxion()
     @Binding var type: TypeArticle
     
-    var done: () -> Void
-    
-    public init(_ type:Binding<TypeArticle>, _ taxionomie:Taxionomy, _ done: @escaping () -> Void) {
+    public init(_ type:Binding<TypeArticle>, _ taxionomie:Taxionomy) {
         _type = type
         taxionomy = taxionomie
         taxion = taxionomie.find(type.id)
-        self.done = done
     }
     
     public var body : some View {
-        VStack(alignment:.leading) {
+        VStack {
             TaxionPicker($taxion, taxionomy, {
                 type.change(taxion)
             })
             if !type.isNaN {
                 HStack {
-                    VStack {
+                    VStack (alignment:.leading) {
                         TextField("description", text:$type.show)
                         
                         OptionalString("sous-catégorie", $type.sub)
@@ -43,20 +40,16 @@ public struct TypeArticleEditor : View {
                         WebPicture(url)
                             .frame(width:200, height:200)
                     }
-                }
+                }.frame(minWidth:600, minHeight: 400)
                 
                 OptionUrl("site web", $type.url)
                 
                 if let webpage = type.url, let url = URL(string: webpage) {
                     WebView(url: url)
-                    //Text("site web : \(url)")
                 }
-                
-                Button("valider", action:{
-                    done()
-                }).padding()
             }
-        }.padding()
+        }.frame(minWidth:600, minHeight: 400)
+            .padding()
         
     }
 }
@@ -68,10 +61,9 @@ public struct TypeArticleEditor : View {
 struct TypePreditor : View {
     var taxionomy = Taxionomy(taxionomie2)
     @State var type = TypeArticle()
-    func done() {}
     
     var body : some View {
-        TypeArticleEditor($type, taxionomy, done)
+        TypeArticleEditor($type, taxionomy)
     }
 }
 
