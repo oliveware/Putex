@@ -10,7 +10,7 @@ import Taxionomy
 
 public struct TypeArticleEditor : View {
     var taxionomy : Taxionomy
-    @State var taxion = Taxion()
+    @State var taxion : Taxion
     @Binding var type: TypeArticle
     
     public init(_ type:Binding<TypeArticle>, _ taxionomie:Taxionomy) {
