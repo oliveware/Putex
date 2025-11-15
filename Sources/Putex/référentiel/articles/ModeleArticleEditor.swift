@@ -65,12 +65,6 @@ struct ModeleArticleEditor : View {
             OptionUrl("site web", $modele.url)
             
             
-            HStack {
-                Spacer()
-                Button("valider", action:{ done() }).padding()
-                Spacer()
-            }
-            
         }.padding()
     }
 }

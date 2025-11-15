@@ -33,7 +33,10 @@ public struct Typicker: View {
                         type in
                         HStack {
                             Text(type.show)
-                            Button(action: {tid = type.id})
+                            Button(action: {
+                                tid = type.id
+                                pick = false
+                            })
                             { Image(systemName: "pencil") }
                         }
                     }

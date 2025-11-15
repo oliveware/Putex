@@ -19,7 +19,7 @@ struct TypeArticleShow: View {
         VStack(alignment:.leading) {
             HStack {
                 VStack {
-                    Text("description : \(type.show)")
+                    Text("type : \(type.show)")
                     if let sub = type.sub {
                         Text("sous-catégorie : \(sub)")
                     }
