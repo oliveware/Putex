@@ -7,20 +7,20 @@
 import SwiftUI
 
 public struct Typicker: View {
-    @Binding var type : TypeArticle
+    @Binding var tid : String
     var types:[TypeArticle]
     
-    public init(_ type:Binding<TypeArticle>, _ types:[TypeArticle]) {
-        _type = type
+    public init(_ tid:Binding<String>, _ types:[TypeArticle]) {
+        _tid = tid
         self.types = types
     }
     
     public var body:some View {
         ForEach(types) {
-            item in
+            type in
             HStack {
-                Text(item.show)
-                Button(action: {type = item})
+                Text(type.show)
+                Button(action: {tid = type.id})
                 { Image(systemName: "pencil") }
             }
         }
