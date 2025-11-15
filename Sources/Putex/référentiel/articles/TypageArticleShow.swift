@@ -13,5 +13,6 @@ struct TypageArticleShow: View {
     var modele:ModeleArticle
     
     public var body : some View {
+        Text("typage")
     }
 }

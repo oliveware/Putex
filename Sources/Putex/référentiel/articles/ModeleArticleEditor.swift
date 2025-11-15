@@ -9,25 +9,35 @@ import SwiftUI
 import Taxionomy
 
 struct ModeleArticleEditor : View {
-    var taxionomy = Taxionomy(taxionomie2)
-    @State var taxion = Taxion()
+    var fermetures: Taxionomy
+    var contenants: Taxionomy
+    @State var contenant : Taxion
+    @State var fermeture : Taxion
     @Binding var modele:ModeleArticle
     
     var done: () -> Void
     
-    public init(_ modele:Binding<ModeleArticle>, _ done: @escaping () -> Void) {
+    public init(_ modele:Binding<ModeleArticle>, _ fermetures: Taxionomy, _ contenants:Taxionomy, _ done: @escaping () -> Void) {
+        self.fermetures = fermetures
+        self.contenants = contenants
         _modele = modele
+        if let contenant = modele.wrappedValue.contenant {
+            self.contenant = contenants.find(contenant)
+        } else {
+            self.contenant = Taxion()
+        }
+        if let fermeture = modele.wrappedValue.fermeture {
+            self.fermeture = fermetures.find(fermeture)
+        } else {
+            self.fermeture = Taxion()
+        }
         self.done = done
     }
     
     var body: some View {
         VStack(alignment:.leading) {
-            
-            
-            HStack {
-                TextField("description", text:$modele.description)
-                TextField("marque", text:$modele.marque)
-            }
+            TextField("description", text:$modele.description)
+            TextField("marque", text:$modele.marque)
             .padding(.bottom,20)
             
             // conservation
@@ -44,7 +54,9 @@ struct ModeleArticleEditor : View {
                 }
             }
             // contenant
-            TaxionPicker($taxion, taxionomy, { modele.contenant = taxion.id })
+            TaxionPicker($contenant, contenants, { modele.contenant = contenant.id })
+            // fermeture
+            TaxionPicker($fermeture, fermetures, { modele.fermeture = fermeture.id })
            
             // illustration/
             OptionUrl("image", $modele.imagurl)
@@ -64,11 +76,13 @@ struct ModeleArticleEditor : View {
 }
 
 struct ModelePreditor : View {
+    var fermetures = Taxionomy()
+    var contenants = Taxionomy()
     @State var modele = ModeleArticle()
     func done() {}
     
     var body : some View {
-        ModeleArticleEditor($modele, done)
+        ModeleArticleEditor($modele, fermetures, contenants, done)
     }
 }
 

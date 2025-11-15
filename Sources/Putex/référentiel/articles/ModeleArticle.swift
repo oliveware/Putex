@@ -15,7 +15,8 @@ public struct ModeleArticle: Codable {
     var imagurl: String?
     var url: String?
     // cerise en boite ou en bocal
-    var contenant: String?  // identifiant d'un contenant dans la taxonomie des contenants
+    var contenant: String?  // identifiant d'un contenant dans la taxionomie des contenants
+    var fermeture: String?  // identifiant d'une fermeture dans la taxionomie des fermeturts
     // une cerise peut être fraîche ou conservée sous différente formes: séche, congelée, à l'eau de vie
     var conservation: Conservation?
     
