@@ -16,13 +16,17 @@ public struct Typicker: View {
     }
     
     public var body:some View {
-        ForEach(types) {
-            type in
-            HStack {
-                Text(type.show)
-                Button(action: {tid = type.id})
-                { Image(systemName: "pencil") }
+        if types.count > 0 {
+            ForEach(types) {
+                type in
+                HStack {
+                    Text(type.show)
+                    Button(action: {tid = type.id})
+                    { Image(systemName: "pencil") }
+                }
             }
+        } else {
+            Text("aucun type défini")
         }
     }
 }
