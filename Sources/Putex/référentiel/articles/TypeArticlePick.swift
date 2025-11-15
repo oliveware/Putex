@@ -12,12 +12,13 @@ import WebKit
 struct TypeArticlePick: View {
     var taxionomy:Taxionomy
     @Binding var type: TypeArticle
-    @State var edition = false
+    @State var edition : Bool
 
     
     public init(_ type:Binding<TypeArticle>, _ taxionomie:Taxionomy) {
         _type = type
         taxionomy = taxionomie
+        edition = type.wrappedValue.id == ""
     }
     
     var body: some View {
