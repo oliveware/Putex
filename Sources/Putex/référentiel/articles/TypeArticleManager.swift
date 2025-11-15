@@ -27,6 +27,7 @@ public struct TypeArticleManager : View {
         {Text("ajouter un type d'article")}
     }
     
+    
     public var body: some View {
         VStack(alignment: .center) {
             if types.count == 0 {
@@ -41,7 +42,7 @@ public struct TypeArticleManager : View {
                                 ConfirmedButton("minus", "ce type d'article  (\(item.id))", {delete(item.id)
                                     modif = false})
                             }
-                            TypeArticleView(item, besoins)
+                            TypeArticlePick(item, besoins)
                         }
                     }
                 }.padding(10)

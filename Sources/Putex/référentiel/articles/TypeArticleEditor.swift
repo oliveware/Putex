@@ -9,48 +9,69 @@ import SwiftUI
 import Taxionomy
 
 public struct TypeArticleEditor : View {
-    var taxionomy = Taxionomy(taxionomie2)
+    var taxionomy : Taxionomy
+    @State var taxion = Taxion()
     @Binding var type: TypeArticle
     
     var done: () -> Void
     
-    public init(_ type:Binding<TypeArticle>, _ done: @escaping () -> Void) {
+    public init(_ type:Binding<TypeArticle>, _ taxionomie:Taxionomy, _ done: @escaping () -> Void) {
         _type = type
+        taxionomy = taxionomie
+        taxion = taxionomie.find(type.id)
         self.done = done
     }
     
     public var body : some View {
         VStack(alignment:.leading) {
-            
-
-            HStack {
-                OptionalString("description", $type.description)
-                OptionalString("sous-catégorie", $type.sub)
+            TaxionPicker($taxion, taxionomy, {
+                type.change(taxion)
+            })
+            if !type.isNaN {
+                HStack {
+                    VStack {
+                        TextField("description", text:$type.show)
+                        
+                        OptionalString("sous-catégorie", $type.sub)
+                            .padding(.bottom,20)
+                        
+                        
+                        OptionUrl("image", $type.imagurl)
+                            .padding(.bottom,20)
+                    }
+                    if let image = type.imagurl, let url = URL(string: image) {
+                        WebPicture(url)
+                            .frame(width:200, height:200)
+                    }
+                }
+                
+                OptionUrl("site web", $type.url)
+                
+                if let webpage = type.url, let url = URL(string: webpage) {
+                    WebView(url: url)
+                    //Text("site web : \(url)")
+                }
+                
+                Button("valider", action:{
+                    done()
+                }).padding()
             }
-            .padding(.bottom,20)
-            
-           
-            OptionUrl("image", $type.imagurl)
-                .padding(.bottom,20)
-            
-            OptionUrl("site web", $type.url)
-            
-            
-            Button("valider", action:{
-                done()
-            }).padding()
-            
         }.padding()
         
     }
 }
 
+// https://www.map24.com/wp-content/uploads/2023/04/Sharwil.jpg
+// http://192.168.1.41
+// https://apple.com
+
 struct TypePreditor : View {
+    var taxionomy = Taxionomy(taxionomie2)
     @State var type = TypeArticle()
     func done() {}
     
     var body : some View {
-        TypeArticleEditor($type, done)
+        TypeArticleEditor($type, taxionomy, done)
     }
 }
 

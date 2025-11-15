@@ -12,18 +12,19 @@ public struct TypeArticle: Codable, Identifiable {
     public var id : String = ""    // TID.id
 
     public init() {}
+    mutating func change(_ taxion:Taxion) {
+        id = taxion.id
+        show = taxion.complet()
+    }
     
-    var description: String?
+    var show: String = ""
     var sub: String? // dans une taxionomie spécialisée
     var imagurl: String?
     var url: String?
     
     
     var isNaN:Bool {
-        id == ""
+        id == "" || show == ""
     }
     
-    var show : String {
-       ""// Taxion(type).complet() + "\n" + cond.show
-    }
 }

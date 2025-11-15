@@ -13,7 +13,7 @@ public struct TypageArticle : View {
     var contenants:Taxionomy
     @Binding var type : TypeArticle
     @Binding var modele: ModeleArticle
-    @State var taxion = Taxion()
+
     @State var avecmodele = false
     
     public init(
@@ -23,25 +23,19 @@ public struct TypageArticle : View {
         _type = type
         _modele = modele
         self.besoins = besoins
-        taxion = besoins.find(type.id)
         self.contenants = contenants
         avecmodele = !modele.wrappedValue.isNaN
     }
     
     public var body: some View {
         VStack(alignment:.leading) {
-            if type.isNaN {
-                Text("Type d'article")
-                        .font(.title)
-                TaxionPicker($taxion, besoins, {type.id = taxion.id})
+            TypeArticleShow(type)
+            if avecmodele {
+                ModeleArticleView($modele, contenants)
             } else {
-                TypeArticleShow(type, besoins.find(type.id).complet())
-                if avecmodele {
-                    ModeleArticleView($modele, contenants)
-                } else {
-                    Button("ajouter un modèle", action:{avecmodele = true})
-                }
+                Button("ajouter un modèle", action:{avecmodele = true})
             }
+            
         }
     }
 }
