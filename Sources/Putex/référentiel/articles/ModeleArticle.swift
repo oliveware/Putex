@@ -22,7 +22,7 @@ public struct ModeleArticle: Codable {
     
     public init() {}
     
-    var show: String {
+    public var show: String {
         var string = description
         if marque != "" {
             string = string + "\nmarque : \(marque)"
