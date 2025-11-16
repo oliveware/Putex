@@ -37,24 +37,41 @@ struct ModeleArticleEditor : View {
     var conditionnement: some View {
         VStack {
             if conditionné {
-                GroupBox("conditionnement") {
-                    // conservation
-                    if modele.conservation == nil {
-                        Button("ajouter conservation", action:{modele.conservation = Conservation()})
-                    } else {
+                HStack (alignment: .top){
+                    Button(action:{
+                        modele.conservation = nil
+                        modele.contenant = nil
+                        modele.fermeture = nil
+                        conditionné = false
+                    })
+                    {Image(systemName: "delete.right")}
+                    GroupBox("conditionnement") {
+                        // conservation
+                        if modele.conservation == nil {
+                            Button("ajouter conservation", action:{modele.conservation = Conservation()})
+                        } else {
+                            HStack {
+                                Button(action:{modele.conservation = nil})
+                                {Image(systemName: "delete.right")}
+                                ConservationView(Binding<Conservation> (
+                                    get: { modele.conservation ?? Conservation()},
+                                    set: { modele.conservation = $0}
+                                ))
+                            }
+                        }
+                        // contenant
                         HStack {
-                            Button(action:{modele.conservation = nil})
+                            Button(action:{modele.contenant = nil})
                             {Image(systemName: "delete.right")}
-                            ConservationView(Binding<Conservation> (
-                                get: { modele.conservation ?? Conservation()},
-                                set: { modele.conservation = $0}
-                            ))
+                            TaxionPicker($contenant, contenants, { modele.contenant = contenant.id })
+                        }
+                        // fermeture
+                        HStack {
+                            Button(action:{modele.fermeture = nil})
+                            {Image(systemName: "delete.right")}
+                            TaxionPicker($fermeture, fermetures, { modele.fermeture = fermeture.id })
                         }
                     }
-                    // contenant
-                    TaxionPicker($contenant, contenants, { modele.contenant = contenant.id })
-                    // fermeture
-                    TaxionPicker($fermeture, fermetures, { modele.fermeture = fermeture.id })
                 }
             } else {
                 Button(" ajouter un conditionnement", action:{conditionné = true})
