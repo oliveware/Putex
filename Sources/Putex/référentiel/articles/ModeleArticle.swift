@@ -22,7 +22,7 @@ public struct ModeleArticle: Codable {
     
     public init() {}
     
-    public func show(_ contenants:Taxionomy, _ fermetures:Taxionomy) -> String {
+    var show: String {
         var string = description
         if marque != "" {
             string = string + "\nmarque : \(marque)"
@@ -34,10 +34,10 @@ public struct ModeleArticle: Codable {
             string = string + " " + cons.show
         }
         if let cont = contenant {
-            string = string + " en " + contenants.find(cont).complet()
+            string = string + " en " + cont
         }
         if let ferme = fermeture {
-            string = string + " à " + fermetures.find(ferme).complet()
+            string = string + " à " + ferme
         }
         return string
     }

@@ -65,7 +65,7 @@ struct ModeleArticleEditor : View {
                                 Button(action:{modele.contenant = nil})
                                 {Image(systemName: "delete.right")}
                             }
-                            TaxionPicker($contenant, contenants, { modele.contenant = contenant.id })
+                            TaxionPicker($contenant, contenants, { modele.contenant = contenant.short })
                         }
                         if modele.contenant != nil {
                             // fermeture
@@ -74,7 +74,7 @@ struct ModeleArticleEditor : View {
                                     Button(action:{modele.fermeture = nil})
                                     {Image(systemName: "delete.right")}
                                 }
-                                TaxionPicker($fermeture, fermetures, { modele.fermeture = fermeture.id })
+                                TaxionPicker($fermeture, fermetures, { modele.fermeture = fermeture.short })
                             }
                         }
                     }
