@@ -23,10 +23,12 @@ public struct ModeleArticle: Codable {
     public init() {}
     
     public var show : String {
-        var string = ""
+        var string = description
+        if marque != "" {
+            string = string + "\nmarque : \(marque)"
+        }
         if let cons = conservation {
-            string = cons.show
-            
+            string = string + cons.show
         }
         return string
     }
