@@ -15,8 +15,9 @@ public struct ModeleArticle: Codable {
     var imagurl: String?
     var url: String?
     // cerise en boite ou en bocal
-    var contenant: String?  // identifiant d'un contenant dans la taxionomie des contenants
-    var fermeture: String?  // identifiant d'une fermeture dans la taxionomie des fermeturts
+    var contenant: Idnom?  // identifiant d'un contenant dans la taxionomie des contenants
+    var fermeture: Idnom?  // identifiant d'une fermeture dans la taxionomie des fermeturts
+    
     // une cerise peut être fraîche ou conservée sous différente formes: séche, congelée, à l'eau de vie
     var conservation: Conservation?
     
@@ -34,10 +35,10 @@ public struct ModeleArticle: Codable {
             string = string + " " + cons.show
         }
         if let cont = contenant {
-            string = string + " en " + cont
+            string = string + " en " + cont.nom
         }
         if let ferme = fermeture {
-            string = string + " à " + ferme
+            string = string + " à " + ferme.nom
         }
         return string
     }
@@ -49,5 +50,14 @@ public struct ModeleArticle: Codable {
     }
     public var isNaN: Bool {
         description == "" && marque == "" && !illustré && !conditionné
+    }
+    
+    struct Idnom: Codable {
+        var id:String   // identifiant d'un taxion dans une taxionomie
+        var nom:String
+        init(_ taxion:Taxion) {
+            id = taxion.id
+            nom = taxion.short
+        }
     }
 }

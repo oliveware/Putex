@@ -22,12 +22,12 @@ struct ModeleArticleEditor : View {
         self.contenants = contenants
         _modele = modele
         if let contenant = modele.wrappedValue.contenant {
-            self.contenant = contenants.find(contenant)
+            self.contenant = contenants.find(contenant.id)
         } else {
             self.contenant = Taxion()
         }
         if let fermeture = modele.wrappedValue.fermeture {
-            self.fermeture = fermetures.find(fermeture)
+            self.fermeture = fermetures.find(fermeture.id)
         } else {
             self.fermeture = Taxion()
         }
@@ -60,24 +60,39 @@ struct ModeleArticleEditor : View {
                             }
                         }
                         // contenant
-                        HStack {
-                            if modele.contenant != nil {
-                                Button(action:{modele.contenant = nil})
-                                {Image(systemName: "delete.right")}
+                        if modele.contenant == nil {
+                            TaxionPicker($contenant, contenants, { modele.contenant = ModeleArticle.Idnom(contenant) })
+                        } else {
+                            if modele.contenant!.nom == "" {
+                                TaxionPicker($contenant, contenants, { modele.contenant = ModeleArticle.Idnom(contenant) })
+                            } else {
+                                HStack {
+                                    Button(action:{modele.contenant = nil})
+                                    {Image(systemName: "delete.right")}
+                                    Text(modele.contenant!.nom)
+                                    Button(action:{modele.contenant!.nom = ""})
+                                    {Image(systemName: "pencil")}
+                                }
                             }
-                            TaxionPicker($contenant, contenants, { modele.contenant = contenant.short })
                         }
-                        if modele.contenant != nil {
-                            // fermeture
-                            HStack {
-                                if modele.fermeture != nil {
+                        // fermeture
+                        
+                        if modele.fermeture == nil {
+                            TaxionPicker($fermeture, fermetures, { modele.fermeture = ModeleArticle.Idnom(fermeture) })
+                        } else {
+                            if modele.fermeture!.nom == "" {
+                                TaxionPicker($fermeture, fermetures, { modele.fermeture = ModeleArticle.Idnom(fermeture) })
+                            } else {
+                                HStack {
                                     Button(action:{modele.fermeture = nil})
                                     {Image(systemName: "delete.right")}
+                                    Text(fermeture.nom)
+                                    Button(action:{modele.fermeture!.nom = ""})
+                                    {Image(systemName: "pencil")}
                                 }
-                                TaxionPicker($fermeture, fermetures, { modele.fermeture = fermeture.short })
                             }
                         }
-                    }
+                    }.padding()
                 }
             } else {
                 Button(" ajouter un conditionnement", action:{conditionné = true})
@@ -95,6 +110,7 @@ struct ModeleArticleEditor : View {
                 .padding(.bottom,20)
             
             OptionUrl("site web", $modele.url)
+                .padding(.bottom,20)
             
             conditionnement
             
@@ -103,8 +119,8 @@ struct ModeleArticleEditor : View {
 }
 
 struct ModelePreditor : View {
-    var fermetures = Taxionomy()
-    var contenants = Taxionomy()
+    var fermetures = Taxionomy(["une fermeture"])
+    var contenants = Taxionomy(["un contenant"])
     @State var modele = ModeleArticle()
     func done() {}
     
