@@ -17,7 +17,7 @@ struct ModeleArticleEditor : View {
     
     var done: () -> Void
     
-    public init(_ modele:Binding<ModeleArticle>, _ fermetures: Taxionomy, _ contenants:Taxionomy, _ done: @escaping () -> Void) {
+    public init(_ modele:Binding<ModeleArticle>, _ contenants:Taxionomy, _ fermetures: Taxionomy, _ done: @escaping () -> Void) {
         self.fermetures = fermetures
         self.contenants = contenants
         _modele = modele
