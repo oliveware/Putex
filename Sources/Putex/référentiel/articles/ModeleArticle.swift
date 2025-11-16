@@ -28,7 +28,13 @@ public struct ModeleArticle: Codable {
             string = string + "\nmarque : \(marque)"
         }
         if let cons = conservation {
-            string = string + cons.show
+            string = string + " " + cons.show
+        }
+        if let cont = contenant {
+            string = string + " en " + cont
+        }
+        if let ferme = fermeture {
+            string = string + " à " + ferme
         }
         return string
     }
