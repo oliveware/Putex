@@ -61,15 +61,21 @@ struct ModeleArticleEditor : View {
                         }
                         // contenant
                         HStack {
-                            Button(action:{modele.contenant = nil})
-                            {Image(systemName: "delete.right")}
+                            if modele.contenant != nil {
+                                Button(action:{modele.contenant = nil})
+                                {Image(systemName: "delete.right")}
+                            }
                             TaxionPicker($contenant, contenants, { modele.contenant = contenant.id })
                         }
-                        // fermeture
-                        HStack {
-                            Button(action:{modele.fermeture = nil})
-                            {Image(systemName: "delete.right")}
-                            TaxionPicker($fermeture, fermetures, { modele.fermeture = fermeture.id })
+                        if modele.contenant != nil {
+                            // fermeture
+                            HStack {
+                                if modele.fermeture != nil {
+                                    Button(action:{modele.fermeture = nil})
+                                    {Image(systemName: "delete.right")}
+                                }
+                                TaxionPicker($fermeture, fermetures, { modele.fermeture = fermeture.id })
+                            }
                         }
                     }
                 }
