@@ -22,6 +22,8 @@ public struct TypeArticle: Codable, Identifiable {
     var imagurl: String?
     var url: String?
     
+    var config: Configurateur?
+    
     
     var isNaN:Bool {
         id == "" || show == ""

@@ -33,30 +33,39 @@ struct ModeleArticleEditor : View {
         }
         self.done = done
     }
-    
+    @State private var conditionné = false
+    var conditionnement: some View {
+        VStack {
+            if conditionné {
+                GroupBox("conditionnement") {
+                    // conservation
+                    if modele.conservation == nil {
+                        Button("ajouter conservation", action:{modele.conservation = Conservation()})
+                    } else {
+                        HStack {
+                            Button(action:{modele.conservation = nil})
+                            {Image(systemName: "delete.right")}
+                            ConservationView(Binding<Conservation> (
+                                get: { modele.conservation ?? Conservation()},
+                                set: { modele.conservation = $0}
+                            ))
+                        }
+                    }
+                    // contenant
+                    TaxionPicker($contenant, contenants, { modele.contenant = contenant.id })
+                    // fermeture
+                    TaxionPicker($fermeture, fermetures, { modele.fermeture = fermeture.id })
+                }
+            } else {
+                Button(" ajouter un conditionnement", action:{conditionné = true})
+            }
+        }
+    }
     var body: some View {
         VStack(alignment:.leading) {
             TextField("description", text:$modele.description)
             TextField("marque", text:$modele.marque)
             .padding(.bottom,20)
-            
-            // conservation
-            if modele.conservation == nil {
-                Button("ajouter conservation", action:{modele.conservation = Conservation()})
-            } else {
-                HStack {
-                    Button(action:{modele.conservation = nil})
-                    {Image(systemName: "delete.right")}
-                    ConservationView(Binding<Conservation> (
-                        get: { modele.conservation ?? Conservation()},
-                        set: { modele.conservation = $0}
-                    ))
-                }
-            }
-            // contenant
-            TaxionPicker($contenant, contenants, { modele.contenant = contenant.id })
-            // fermeture
-            TaxionPicker($fermeture, fermetures, { modele.fermeture = fermeture.id })
            
             // illustration/
             OptionUrl("image", $modele.imagurl)
@@ -64,6 +73,7 @@ struct ModeleArticleEditor : View {
             
             OptionUrl("site web", $modele.url)
             
+            conditionnement
             
         }.padding()
     }

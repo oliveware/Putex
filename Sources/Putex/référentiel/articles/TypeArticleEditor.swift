@@ -46,6 +46,15 @@ public struct TypeArticleEditor : View {
                 if let webpage = type.url, let url = URL(string: webpage) {
                     WebView(url: url)
                 }
+                
+                if let configurateur = type.config {
+                    Configurer(Binding<Configurateur>(
+                        get:{type.config ?? Configurateur()},
+                        set:{type.config = $0}
+                    ), true)
+                } else {
+                    Button("ajouter un configurateur", action:{type.config = Configurateur()})
+                }
             }
         }.frame(minWidth:600, minHeight: 400)
             .padding()
