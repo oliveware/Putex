@@ -4,7 +4,7 @@
 //
 //  Created by Herve Crespel on 09/11/2025.
 //
-
+import Taxionomy
 
 // un modèle d'article permet de distinguer des articles de même type
 // exemple de l'automobile
@@ -22,22 +22,32 @@ public struct ModeleArticle: Codable {
     
     public init() {}
     
-    public var show : String {
+    public func show(_ contenants:Taxionomy, _ fermetures:Taxionomy) -> String {
         var string = description
         if marque != "" {
             string = string + "\nmarque : \(marque)"
+        }
+        if conditionné {
+            string = string + "\nconditionnement : "
         }
         if let cons = conservation {
             string = string + " " + cons.show
         }
         if let cont = contenant {
-            string = string + " en " + cont
+            string = string + " en " + contenants.find(cont).complet()
         }
         if let ferme = fermeture {
-            string = string + " à " + ferme
+            string = string + " à " + fermetures.find(ferme).complet()
         }
         return string
     }
-    
-    public var isNaN: Bool { show == "" }
+    var conditionné : Bool {
+        !(contenant == nil && fermeture == nil && conservation == nil)
+    }
+    var illustré : Bool {
+        !(imagurl == nil && url == nil)
+    }
+    public var isNaN: Bool {
+        description == "" && marque == "" && !illustré && !conditionné
+    }
 }
