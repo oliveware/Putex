@@ -43,8 +43,6 @@ public struct Typicker: View {
                 }
                 }
             }
-        } else {
-            Text("aucun type défini")
-        }
+        } 
     }
 }
