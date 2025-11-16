@@ -29,8 +29,7 @@ struct TypeArticlePick: View {
             {Image(systemName: "pencil")}
                 .sheet(isPresented: $edition)
                 { TypeArticleEditor($type, taxionomy) }
-        }.padding()
-    }
+        }    }
 }
 // https://www.map24.com/wp-content/uploads/2023/04/Sharwil.jpg
 // http://192.168.1.41

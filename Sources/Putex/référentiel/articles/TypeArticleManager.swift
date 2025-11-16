@@ -45,7 +45,7 @@ public struct TypeArticleManager : View {
                             TypeArticlePick(item, besoins)
                         }
                     }
-                }.padding(2)
+                }
             }
         
             HStack {
