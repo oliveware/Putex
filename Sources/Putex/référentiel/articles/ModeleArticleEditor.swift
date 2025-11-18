@@ -45,7 +45,7 @@ struct ModeleArticleEditor : View {
                         modele.fermeture = nil
                         conditionné = false
                     })
-                    {Image(systemName: "delete.right")}
+                    {Image(systemName: "delete.right")}.padding(.top, 20)
                     GroupBox("conditionnement") {
                         // conservation
                         if modele.conservation == nil {
@@ -58,7 +58,7 @@ struct ModeleArticleEditor : View {
                                     get: { modele.conservation ?? Conservation()},
                                     set: { modele.conservation = $0}
                                 ))
-                            }
+                            }.frame(width:200, alignment:.leading)
                         }
                         // contenant
                         if modele.contenant == nil {
@@ -71,9 +71,10 @@ struct ModeleArticleEditor : View {
                                     Button(action:{modele.contenant = nil})
                                     {Image(systemName: "delete.right")}
                                     Text(modele.contenant!.nom)
+                                    Spacer()
                                     Button(action:{modele.contenant!.nom = ""})
                                     {Image(systemName: "pencil")}
-                                }
+                                }.frame(width:200, alignment:.leading)
                             }
                         }
                         // fermeture
@@ -87,13 +88,14 @@ struct ModeleArticleEditor : View {
                                 HStack {
                                     Button(action:{modele.fermeture = nil})
                                     {Image(systemName: "delete.right")}
-                                    Text(fermeture.nom)
+                                    Text(modele.fermeture!.nom)
+                                    Spacer()
                                     Button(action:{modele.fermeture!.nom = ""})
                                     {Image(systemName: "pencil")}
-                                }
+                                }.frame(width:200, alignment:.leading)
                             }
                         }
-                    }.padding()
+                    }
                 }
             } else {
                 Button(" ajouter un conditionnement", action:{conditionné = true})
