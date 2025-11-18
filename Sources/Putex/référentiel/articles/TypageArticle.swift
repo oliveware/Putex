@@ -14,7 +14,7 @@ public struct TypageArticle : View {
     var type:TypeArticle
     @Binding var modele: ModeleArticle
 
-    @State var avecmodele = false
+    @State var avecmodele : Bool
     
     public init(
         _ type:TypeArticle, _ modele:Binding<ModeleArticle>,
