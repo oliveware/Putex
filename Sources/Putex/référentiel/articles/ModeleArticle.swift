@@ -43,10 +43,10 @@ public struct ModeleArticle: Codable {
         return string
     }
     var conditionné : Bool {
-        !(contenant == nil && fermeture == nil && conservation == nil)
+        contenant != nil || fermeture != nil || conservation != nil
     }
     var illustré : Bool {
-        !(imagurl == nil && url == nil)
+        imagurl != nil || url != nil
     }
     public var isNaN: Bool {
         description == "" && marque == "" && !illustré && !conditionné
