@@ -32,8 +32,9 @@ struct ModeleArticleEditor : View {
             self.fermeture = Taxion()
         }
         self.done = done
+        conditionné = modele.wrappedValue.conditionné
     }
-    @State private var conditionné = false
+    @State private var conditionné : Bool
     var conditionnement: some View {
         VStack {
             if conditionné {
