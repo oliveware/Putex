@@ -9,29 +9,39 @@ import SwiftUI
 
 struct TypeArticleShow: View {
     var type: TypeArticle
+    var full : Bool
     
-    init(_ type:TypeArticle) {
+    init(_ type:TypeArticle, _ short: Bool = true) {
         self.type = type
+        full = !short
+    }
+    
+    public var short : some View {
+        VStack {
+            Text("type : \(type.show)")
+            if let sub = type.sub {
+                Text("sous-catégorie : \(sub)")
+            }
+        }
     }
     
     public var body : some View {
-        VStack(alignment:.leading) {
-            HStack {
-                VStack {
-                    Text("type : \(type.show)")
-                    if let sub = type.sub {
-                        Text("sous-catégorie : \(sub)")
+        if full {
+            VStack(alignment:.leading) {
+                HStack {
+                    short
+                    if let image = type.imagurl, let url = URL(string: image) {
+                        WebPicture(url)
+                            .frame(width:200, height:200)
                     }
                 }
-                if let image = type.imagurl, let url = URL(string: image) {
-                    WebPicture(url)
-                        .frame(width:200, height:200)
+                if let webpage = type.url, let url = URL(string: webpage) {
+                    WebView(url: url)
+                    //Text("site web : \(url)")
                 }
             }
-            if let webpage = type.url, let url = URL(string: webpage) {
-                WebView(url: url)
-                //Text("site web : \(url)")
-            }
+        } else {
+            short
         }
     }
 }

@@ -7,7 +7,7 @@
 
 import SwiftUI
 import Taxionomy
-
+/*
 struct ModeleArticleView: View {
     var contenants:Taxionomy
     var fermetures:Taxionomy
@@ -22,8 +22,10 @@ struct ModeleArticleView: View {
         self.contenants = contenants
         self.fermetures = fermetures
         if modele.contenant != nil {
-            contenant = contenants.find(modele.contenant!)
-            fermeture = fermetures.find(modele.fermeture!)
+            contenant = contenants.find(modele.contenant!.id)
+        }
+        if modele.fermeture != nil {
+            fermeture = fermetures.find(modele.fermeture!.id)
         }
     }
     
@@ -74,4 +76,4 @@ struct ModelePreview : View {
 #Preview {
     ModelePreview()
 }
-
+*/
