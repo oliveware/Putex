@@ -19,8 +19,8 @@ public struct TypeArticle: Codable, Identifiable {
     
     public var show: String = ""
     var sub: String? // dans une taxionomie spécialisée
-    var imagurl: String?
-    var url: String?
+    public var imagurl: String?
+    public var url: String?
     
     var config: Configurateur?
     
