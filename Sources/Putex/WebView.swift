@@ -10,6 +10,10 @@ import WebKit
 
 public struct WebView: NSViewRepresentable {
     public let url: URL
+    
+    public init(url: URL) {
+        self.url = url
+    }
 
     public func makeNSView(context: Context) -> WKWebView {
         let webView = WKWebView()
