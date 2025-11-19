@@ -17,7 +17,7 @@ public struct TypeArticle: Codable, Identifiable {
         show = taxion.complet()
     }
     
-    var show: String = ""
+    public var show: String = ""
     var sub: String? // dans une taxionomie spécialisée
     var imagurl: String?
     var url: String?

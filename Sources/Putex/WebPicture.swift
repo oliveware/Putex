@@ -34,12 +34,12 @@ public struct Vignette:View {
         Image(picture.url)
     }
 }
-struct WebPicture: View {
+public struct WebPicture: View {
    var url = URL(string: "https://picsum.photos/300")!
     
-    init(_ url:URL) { self.url = url }
+    public init(_ url:URL) { self.url = url }
     
-    var body: some View {
+    public var body: some View {
             AsyncImage(url: url) { phase in
                 switch phase {
                 case .empty:

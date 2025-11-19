@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import Taxionomy
 
 struct TypeArticleShow: View {
     var type: TypeArticle

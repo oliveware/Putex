@@ -4,28 +4,27 @@
 //
 //  Created by Herve Crespel on 13/11/2025.
 //
-/*
+
 import SwiftUI
 import Taxionomy
 
 struct ModeleArticleView: View {
     var contenants:Taxionomy
     var fermetures:Taxionomy
-    @Binding var modele: ModeleArticle
+    var modele: ModeleArticle
     @State var contenant : Taxion
     @State var fermeture : Taxion
     @State var edition: Bool
 
     
-    public init(_ modele:Binding<ModeleArticle>, _ contenants:Taxionomy, _ fermetures:Taxionomy) {
-        _modele = modele
+    public init(_ modele:ModeleArticle, _ contenants:Taxionomy, _ fermetures:Taxionomy) {
+        self.modele = modele
         self.contenants = contenants
         self.fermetures = fermetures
-        if modele.wrappedValue.contenant != nil {
-            contenant = contenants.find(modele.wrappedValue.contenant!)
-            fermeture = fermetures.find(modele.wrappedValue.fermeture!)
+        if modele.contenant != nil {
+            contenant = contenants.find(modele.contenant!)
+            fermeture = fermetures.find(modele.fermeture!)
         }
-        edition = modele.wrappedValue.isNaN
     }
     
     var body: some View {
@@ -67,7 +66,7 @@ struct ModelePreview : View {
     func done() {}
     
     var body : some View {
-        ModeleArticleView($modele, taxionomy)
+        ModeleArticleShow($modele, taxionomy)
             .frame(width:600, height:600)
     }
 }
@@ -75,4 +74,4 @@ struct ModelePreview : View {
 #Preview {
     ModelePreview()
 }
-*/
+

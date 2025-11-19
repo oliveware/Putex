@@ -31,6 +31,7 @@ public struct TypageArticle : View {
         VStack(alignment:.leading) {
             
             TypeArticleShow(type)
+            
             if avecmodele {
                 ModeleArticleEditor($modele, contenants, fermetures, {})
             } else {
