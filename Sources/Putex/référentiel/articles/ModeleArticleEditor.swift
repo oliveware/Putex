@@ -49,7 +49,7 @@ struct ModeleArticleEditor : View {
                     GroupBox("conditionnement") {
                         // conservation
                         if modele.conservation == nil {
-                            Button("ajouter conservation", action:{modele.conservation = Conservation()})
+                            Button("mode de conservation", action:{modele.conservation = Conservation()})
                         } else {
                             HStack {
                               //  if !modele.conservation!.isNaN {
@@ -100,7 +100,7 @@ struct ModeleArticleEditor : View {
                     }
                 }
             } else {
-                Button(" ajouter un conditionnement", action:{conditionné = true})
+                Button(" préciser le conditionnement", action:{conditionné = true})
             }
         }
     }
