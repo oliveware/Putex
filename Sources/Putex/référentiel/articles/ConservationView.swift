@@ -26,19 +26,19 @@ struct ConservationView: View {
                 {Image(systemName: "checkmark")}
             }
             TextField("conservateur", text : $conserve.conservateur)
-        }.frame(width:200, alignment:.leading)
+        }
     }
     
     var body: some View {
         if edition {
-            editor
+            editor.frame(width:300, alignment:.leading)
         } else {
             HStack {
                 Text("conservation : \(conserve.show)")
                 Spacer()
                 Button(action:{edition = true})
                 {Image(systemName: "pencil")}
-            }.frame(width:200, alignment:.leading)
+            }.frame(width:300, alignment:.leading)
         }
     }
 }
