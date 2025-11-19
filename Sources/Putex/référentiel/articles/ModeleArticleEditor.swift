@@ -52,13 +52,15 @@ struct ModeleArticleEditor : View {
                             Button("ajouter conservation", action:{modele.conservation = Conservation()})
                         } else {
                             HStack {
-                                Button(action:{modele.conservation = nil})
-                                {Image(systemName: "delete.right")}
+                              //  if !modele.conservation!.isNaN {
+                                    Button(action:{modele.conservation = nil})
+                                    {Image(systemName: "delete.right")}
+                               // }
                                 ConservationView(Binding<Conservation> (
                                     get: { modele.conservation ?? Conservation()},
-                                    set: { modele.conservation = $0}
+                                    set: { modele.conservation = $0.isNaN ? nil : $0}
                                 ))
-                            }.frame(width:200, alignment:.leading)
+                            }.frame(width:250, alignment:.leading)
                         }
                         // contenant
                         if modele.contenant == nil {
@@ -74,7 +76,7 @@ struct ModeleArticleEditor : View {
                                     Spacer()
                                     Button(action:{modele.contenant!.nom = ""})
                                     {Image(systemName: "pencil")}
-                                }.frame(width:200, alignment:.leading)
+                                }.frame(width:250, alignment:.leading)
                             }
                         }
                         // fermeture

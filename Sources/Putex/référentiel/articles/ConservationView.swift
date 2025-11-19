@@ -17,13 +17,16 @@ struct ConservationView: View {
     }
     
     var editor: some View {
-        HStack {
-            EnumPicker(Conservation.Mode.allCases, $conserve.mode, true)
-                .frame(width:120, height:150)
+        VStack {
+            HStack {
+                EnumPicker(Conservation.Mode.allCases, $conserve.mode, true)
+                    .frame(width:120, height:30)
+                Spacer()
+                Button(action:{edition = false})
+                {Image(systemName: "checkmark")}
+            }
             TextField("conservateur", text : $conserve.conservateur)
-            Button(action:{edition = false})
-            {Image(systemName: "checkmark")}
-        }
+        }.frame(width:200, alignment:.leading)
     }
     
     var body: some View {
@@ -32,9 +35,10 @@ struct ConservationView: View {
         } else {
             HStack {
                 Text("conservation : \(conserve.show)")
+                Spacer()
                 Button(action:{edition = true})
                 {Image(systemName: "pencil")}
-            }
+            }.frame(width:200, alignment:.leading)
         }
     }
 }
