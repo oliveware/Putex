@@ -7,16 +7,16 @@
 
 import SwiftUI
 
-struct TypeArticleShow: View {
+public struct TypeArticleShow: View {
     var type: TypeArticle
     var full : Bool
     
-    init(_ type:TypeArticle, _ short: Bool = true) {
+    public init(_ type:TypeArticle, _ short: Bool = true) {
         self.type = type
         full = !short
     }
     
-    public var short : some View {
+    var short : some View {
         VStack {
             Text("type : \(type.show)")
             if let sub = type.sub {
