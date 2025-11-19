@@ -12,8 +12,8 @@ public struct ModeleArticle: Codable {
 
     var description: String = ""
     var marque: String = ""
-    var imagurl: String?
-    var url: String?
+    public var imagurl: String?
+    public var url: String?
     // cerise en boite ou en bocal
     var contenant: Idnom?  // identifiant d'un contenant dans la taxionomie des contenants
     var fermeture: Idnom?  // identifiant d'une fermeture dans la taxionomie des fermeturts
