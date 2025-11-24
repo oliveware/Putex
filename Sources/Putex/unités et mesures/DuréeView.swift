@@ -56,30 +56,30 @@ struct DuréePreview : View {
     var start: Bool?
     
     var body: some View {
-        VStack {
-            DuréeView($jours, start)
-            Text ("\(jours.enlettres) jours")
-        }
+        VStack(alignment: .leading, spacing: 5) {
+            
+            HStack{
+                Text( "fin de mois").frame(width:100, alignment: .leading)
+                DuréeView($jours, true)
+               
+            }
+            HStack {
+                Text( "début de mois").frame(width:100, alignment: .leading)
+                DuréeView($jours, false)
+            }
+            HStack {
+                Text( "entre deux dates").frame(width:100, alignment: .leading)
+                DuréeView($jours, nil)
+            }
+            
+            Text("durée : " + jours.enlettres + " jours").font(.headline)
+                .padding(.leading,100)
+        }.padding()
     }
 }
 
 #Preview() {
-    VStack(alignment: .leading, spacing: 40) {
-        
-        HStack{
-            Text( "fin de mois").frame(width:100, alignment: .leading)
-            DuréePreview(start:true)
-           
-        }
-        HStack {
-            Text( "début de mois").frame(width:100, alignment: .leading)
-            DuréePreview(start:false)
-        }
-        HStack {
-            Text( "entre deux dates").frame(width:100, alignment: .leading)
-            DuréePreview()
-        }
-    }
+    DuréePreview()
 }
 
 

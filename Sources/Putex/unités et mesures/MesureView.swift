@@ -61,13 +61,9 @@ struct MesurePreview : View {
                     NumberView($hp)
                     NumberView($mensuel)
                     
-                    HStack {
-                        Text( "début de mois").frame(width:100, alignment: .leading)
-                        DuréePreview(start:false)
-                            .frame(width:300)
-                    }
+                    DuréePreview()
                     
-                }.frame(width:400).padding()
+                }.frame(width:500).padding()
             }
         } .padding()
     }
