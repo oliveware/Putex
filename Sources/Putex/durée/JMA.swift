@@ -226,6 +226,14 @@ public struct JMA: Codable, Equatable {
         return index
     }
     
+    public var monthfirst : JMA {
+        return JMA(1, mois, année)
+    }
+    
+    public var monthlast : JMA {
+        return JMA(nbjm, mois, année)
+    }
+    
     public func nbj(since ref:JMA) -> Int {
         var nbj : Int
        let calendarnbj = Calendar.current.dateComponents([.day], from: ref.asDate, to: self.asDate).day!

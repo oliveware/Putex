@@ -32,6 +32,7 @@ public enum Unité: String, Codable, Enumerable {
     case m2     = "m2"
     case m3     = "m3"
     case l      = "l"
+    case nuit   = "nuit"
     case jour   = "jour"
     case mois   = "mois"
     case an     = "an"
@@ -44,10 +45,11 @@ public enum Unité: String, Codable, Enumerable {
         case .m2 : return Mot("mètre carré","mètres carrés")
         case .m3:  return Mot("mètre cube", "mètres cubes")
         case .kwh: return Mot("kWh","kWh")
+        case .nuit: return Mot("nuitée", "nuitées", .f)
         case .jour: return Mot("jour","jours")
         case .mois: return Mot("mois","mois")
-        case .an: return Mot("année","années")
-        case .unit: return Mot("pièce", "pièces")
+        case .an: return Mot("année","années", .f)
+        case .unit: return Mot("pièce", "pièces", .f)
         }
     }
     
@@ -94,6 +96,7 @@ public enum Unité: String, Codable, Enumerable {
         case .m2: return UnitArea.squareMeters.symbol
         case .m3: return UnitVolume.cubicMeters.symbol
         case .kwh: return UnitEnergy.kilowattHours.symbol
+        case .nuit: return "nuit"
         case .jour: return "jour"
         case .mois: return "mois"
         case .an: return "an"

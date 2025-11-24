@@ -62,10 +62,10 @@ public struct JMAPicker : View {
         }
     }
     
-    func planifier() {
+ /*   func planifier() {
         edition = false
         jma = JMA(date)
-    }
+    }*/
 }
 
 struct JMAPreview : View {
