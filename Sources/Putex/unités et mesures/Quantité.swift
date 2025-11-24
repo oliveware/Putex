@@ -19,7 +19,9 @@ public enum Quantité: String, Codable, Enumerable {
     static var nourriture = "nourriture"
     static var equipement = "équipement"
     
-    case nuit   = "nuitée"
+    case débutmois   = "débutmois"
+    case finmois = "finmois"
+    case interdate = "interdate"
     case jour = "jour"
     case mensuel = "mois"
     case annuel = "année"
@@ -47,8 +49,7 @@ public enum Quantité: String, Codable, Enumerable {
         case .elec,.hp,.hc : return .kwh
         case .eau : return .l
         case .gaz: return .m3
-        case .jour: return .jour
-        case .nuit: return .nuit
+        case .jour, .débutmois, .finmois, .interdate : return .jour
         case .mensuel,.web,.mobile,.tv: return .mois
         case .annuel: return .an
         }
@@ -58,7 +59,7 @@ public enum Quantité: String, Codable, Enumerable {
         case .elec,.hp,.hc,.eau,.gaz  : return "consommation " + self.rawValue
         case .aire   : return "surface"
         case .volume: return "volume"
-        case .nuit : return "nuitée"
+        case .débutmois, .finmois, .interdate : return "journée"
         case .jour, .mensuel, .annuel : return "durée (" + self.rawValue + ")"
         case .piece   : return "nombre entier"
         default: return "abonnement " + self.rawValue

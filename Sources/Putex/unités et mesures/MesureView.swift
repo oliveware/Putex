@@ -18,9 +18,14 @@ public struct MesureView :View {
             if edit {
                 EnumPicker<Quantité>(Quantité.allCases, $mesure.quantité, true)
                     .frame(width:220)
-                if mesure.quantité == .nuit {
-                    
-                } else {
+                switch mesure.quantité {
+                case .débutmois:
+                    DuréeView($mesure.nombre, false)
+                case .finmois:
+                    DuréeView($mesure.nombre, true)
+                case .interdate:
+                    DuréeView($mesure.nombre, nil)
+                default:
                     NumberEditor($mesure.nombre, mesure.quantité.set)
                 }
                 Text(mesure.unité.symbol)
@@ -51,14 +56,23 @@ struct MesurePreview : View {
                 MesureView($surface)
             }.padding(.bottom, 20)
             GroupBox("quantité imposée") {
-                NumberView($volume)
-                NumberView($hp)
-                NumberView($mensuel)
+                VStack( alignment:.leading) {
+                    NumberView($volume)
+                    NumberView($hp)
+                    NumberView($mensuel)
+                    
+                    HStack {
+                        Text( "début de mois").frame(width:100, alignment: .leading)
+                        DuréePreview(start:false)
+                            .frame(width:300)
+                    }
+                    
+                }.frame(width:400).padding()
             }
         } .padding()
     }
 }
 
 #Preview {
-    MesurePreview().frame(width:500)
+    MesurePreview().frame(width:600)
 }
