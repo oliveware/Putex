@@ -18,9 +18,12 @@ public struct TypeArticle: Codable, Identifiable {
     }
     
     public var show: String = ""
-    var sub: String? // dans une taxionomie spécialisée
+    
     public var imagurl: String?
     public var url: String?
+    
+    var soustyperef: SousTypeRef?
+    var conditionné = false
     
     var config: Configurateur?
     
@@ -30,3 +33,5 @@ public struct TypeArticle: Codable, Identifiable {
     }
     
 }
+
+

@@ -12,11 +12,13 @@ public struct TypeArticleEditor : View {
     var taxionomy : Taxionomy
     @State var taxion : Taxion
     @Binding var type: TypeArticle
+    @State var soustype : Bool
     
     public init(_ type:Binding<TypeArticle>, _ taxionomie:Taxionomy) {
         _type = type
         taxionomy = taxionomie
         taxion = taxionomie.find(type.id)
+        soustype = type.wrappedValue.soustyperef != nil
     }
     
     public var body : some View {
@@ -28,9 +30,16 @@ public struct TypeArticleEditor : View {
                 HStack {
                     VStack (alignment:.leading) {
                         TextField("description", text:$type.show)
-                        
-                        OptionalString("sous-catégorie", $type.sub)
-                            .padding(.bottom,20)
+                        if soustype {
+                            Picker("", selection:$type.soustyperef) {
+                                ForEach(SousTypeRef.all) {
+                                    item in
+                                    Text(item.rawValue).tag(item)
+                                }
+                            }
+                        } else {
+                            Button("ajouter un sous-type", action:{soustype = true})
+                        }
                         
                         OptionUrl("une image", $type.imagurl)
                             .padding(.bottom,20)

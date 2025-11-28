@@ -8,7 +8,7 @@
 import SwiftUI
 import Taxionomy
 
-public struct TypageArticle : View {
+public struct ModelageArticle : View {
     var fermetures: Taxionomy
     var contenants:Taxionomy
     var type:TypeArticle
@@ -32,6 +32,14 @@ public struct TypageArticle : View {
             
             TypeArticleShow(type)
             
+            if type.conditionné {
+                ConditionnementView(Binding<Conditionnement>(
+                    get: {modele.conditionnement ?? Conditionnement()},
+                    set: {modele.conditionnement = $0.isNaN ? nil : $0}
+                    
+                ), contenants, fermetures, {})
+            }
+            
             if avecmodele {
                 ModeleArticleEditor($modele, contenants, fermetures, {})
             } else {
@@ -42,7 +50,7 @@ public struct TypageArticle : View {
     }
 }
 
-struct TypagePreview : View {
+struct ModelagePreview : View {
     var fermetures = Taxionomy()
     var contenants = Taxionomy()
     @State var type = TypeArticle()
@@ -50,11 +58,11 @@ struct TypagePreview : View {
     func done() {}
     
     var body : some View {
-        TypageArticle(type, $modele, fermetures, contenants)
+        ModelageArticle(type, $modele, fermetures, contenants)
           
     }
 }
 
 #Preview {
-    TypagePreview().padding()
+    ModelagePreview().padding()
 }
