@@ -58,7 +58,7 @@ struct ModelagePreview : View {
     func done() {}
     
     var body : some View {
-        ModelageArticle(type, $modele, fermetures, contenants)
+        ModelageArticle(type, $modele, fermetures, contenants).frame(width:400, height:300)
           
     }
 }

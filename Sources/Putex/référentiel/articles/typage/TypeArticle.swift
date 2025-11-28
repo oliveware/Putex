@@ -22,7 +22,7 @@ public struct TypeArticle: Codable, Identifiable {
     public var imagurl: String?
     public var url: String?
     
-    var soustyperef: SousTypeRef?
+    public var soustyperef: SousTypeRef?
     var conditionné = false
     
     var config: Configurateur?
