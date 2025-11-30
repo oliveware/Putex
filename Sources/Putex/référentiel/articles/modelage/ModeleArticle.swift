@@ -17,9 +17,6 @@ public struct ModeleArticle: Codable {
     
     var conditionnement: Conditionnement?
     
-    var soustype : Idnom?
-    
-    
     public init() {}
     
     public var show: String {

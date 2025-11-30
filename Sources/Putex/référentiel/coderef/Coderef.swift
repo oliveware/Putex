@@ -34,7 +34,6 @@ public struct Coderef: Codable, Identifiable {
         case piece      = "Q"
       case location   = "R"     // Rent
         case tarif      = "T"
-     //   case typarticle = "TA"
         case compte     = "W"
         case taxation   = "X"
         case appareil   = "Z"

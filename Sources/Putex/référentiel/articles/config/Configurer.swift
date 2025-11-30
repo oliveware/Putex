@@ -1,29 +1,9 @@
 //
-//  Untitled.swift
+//  Configurer.swift
 //  Putex
 //
-//  Created by Herve Crespel on 15/11/2025.
+//  Created by Herve Crespel on 30/11/2025.
 //
-struct Configurateur: Codable {
-    struct Caractere: Codable, Identifiable {
-        var id: String {nom}
-        var nom: String = ""
-        var valeur:String = ""
-        init(_ nom:String) { self.nom = nom }
-    }
-    var cars : [Caractere] = []
-    
-    mutating func add(_ nom:String) {
-        cars.append(Caractere(nom))
-    }
-    mutating func delete(_ sup:Caractere) {
-        var new: [Caractere] = []
-        for car in cars {
-            if car.id != sup.id { new.append(car) }
-        }
-        cars = new
-    }
-}
 
 import SwiftUI
 
@@ -100,7 +80,7 @@ struct ConfigPreview : View {
     @State var config = configsample
     
     func haut() -> CGFloat {
-        var nbl = config.cars.count
+        let nbl = config.cars.count
         return CGFloat( 200 + nbl * 20)
     }
 

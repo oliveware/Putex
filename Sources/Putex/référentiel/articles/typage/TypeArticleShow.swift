@@ -18,9 +18,9 @@ public struct TypeArticleShow: View {
     
     var short : some View {
         VStack {
-            Text("type : \(type.show)")
-            if let sub = type.soustyperef {
-                Text("sous-catégorie : \(sub.rawValue)")
+            Text("besoin : \(type.show)")
+            if let sub = type.soustype {
+                Text("sous-type : \(sub.nom)")
             }
         }
     }
