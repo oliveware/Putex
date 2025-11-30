@@ -7,7 +7,7 @@
 import Taxionomy
 
 public struct Nomenclatures : Codable {
-    var types: [TypeArticle] = []
+    public var types: [TypeArticle] = []
     var besoins = Taxionomy()
     var contenants = Taxionomy()
     var fermetures = Taxionomy()
