@@ -24,7 +24,7 @@ public struct Nomenclatures : Codable {
         return found
     }
     
-    mutating func insert(_ type:TypeArticle) {
+    public mutating func insert(_ type:TypeArticle) {
         var found = false
         var new:[TypeArticle] = []
         for item in types {
