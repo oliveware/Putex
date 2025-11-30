@@ -9,21 +9,20 @@ import SwiftUI
 import Taxionomy
 
 public struct ModelageArticle : View {
-    var fermetures: Taxionomy
-    var contenants:Taxionomy
     var type:TypeArticle
+    var nomenclatures:Nomenclatures
     @Binding var modele: ModeleArticle
 
     @State var avecmodele : Bool
     
     public init(
-        _ type:TypeArticle, _ modele:Binding<ModeleArticle>,
-        _ fermetures: Taxionomy, _ contenants:Taxionomy
+        _ type:TypeArticle,
+        _ modele:Binding<ModeleArticle>,
+        _ nomenclatures: Nomenclatures
     ) {
+        self.nomenclatures = nomenclatures
         self.type = type
         _modele = modele
-        self.fermetures = fermetures
-        self.contenants = contenants
         avecmodele = !modele.wrappedValue.isNaN
     }
     
@@ -32,16 +31,26 @@ public struct ModelageArticle : View {
             
             TypeArticleShow(type)
             
-            if type.conditionné {
-                ConditionnementView(Binding<Conditionnement>(
-                    get: {modele.conditionnement ?? Conditionnement()},
-                    set: {modele.conditionnement = $0.isNaN ? nil : $0}
-                    
-                ), contenants, fermetures, {})
-            }
-            
             if avecmodele {
-                ModeleArticleEditor($modele, contenants, fermetures, {})
+                if type.conditionné {
+                    if modele.conditionnement == nil {
+                        Button(" préciser le conditionnement", action:{ modele.conditionnement = Conditionnement()})
+                    } else {
+                        ConditionnementView(Binding<Conditionnement>(
+                            get: {modele.conditionnement ?? Conditionnement()},
+                            set: {modele.conditionnement = $0.isNaN ? nil : $0}
+                            
+                        ), nomenclatures, {})
+                    }
+                    if let cond = modele.conditionnement {
+                        Button(action:{
+                            modele.conditionnement = nil
+                        })
+                        {Image(systemName: "delete.right")}.padding(.top, 20)
+                    }
+                }
+           
+                ModeleArticleEditor($modele, {})
             } else {
                 Button("ajouter un modèle", action:{avecmodele = true})
             }
@@ -51,14 +60,13 @@ public struct ModelageArticle : View {
 }
 
 struct ModelagePreview : View {
-    var fermetures = Taxionomy()
-    var contenants = Taxionomy()
+    var nomenclatures = Nomenclatures()
     @State var type = TypeArticle()
     @State var modele = ModeleArticle()
     func done() {}
     
     var body : some View {
-        ModelageArticle(type, $modele, fermetures, contenants).frame(width:400, height:300)
+        ModelageArticle(type, $modele, nomenclatures).frame(width:400, height:300)
           
     }
 }

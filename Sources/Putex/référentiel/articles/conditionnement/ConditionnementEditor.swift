@@ -15,9 +15,9 @@ struct ConditionnementView: View {
     @State private var fermeturepick : Bool
     var done: () -> Void
     
-    public init(_ conditionnement:Binding<Conditionnement>, _ contenants:Taxionomy, _ fermetures: Taxionomy, _ done: @escaping () -> Void) {
-        self.fermetures = fermetures
-        self.contenants = contenants
+    public init(_ conditionnement:Binding<Conditionnement>, _ nomenclatures:Nomenclatures, _ done: @escaping () -> Void) {
+        self.fermetures = nomenclatures.fermetures
+        self.contenants = nomenclatures.contenants
         _conditionnement = conditionnement
         self.done = done
         contenantpick = conditionnement.wrappedValue.contenant.nom == ""
