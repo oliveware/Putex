@@ -14,6 +14,30 @@ public struct Nomenclatures : Codable {
     var soustypes: [String:Taxionomy] = [:]
     var cadrages: [String:Cadrage] = [:]
     
+    public init() {}
+    
+    public func type(_ id:String) -> TypeArticle {
+        var found = TypeArticle()
+        for type in types {
+            if type.id == id { found = type }
+        }
+        return found
+    }
+    
+    mutating func insert(_ type:TypeArticle) {
+        var found = false
+        var new:[TypeArticle] = []
+        for item in types {
+            if type.id == item.id {
+                new.append(type)
+                found = true
+            } else {
+                new.append(item)
+            }
+        }
+        if found { types = new } else { types = [type] + types }
+    }
+    
     public func besoin(_ id:String) -> Taxion {
         besoins.find(id)
     }
