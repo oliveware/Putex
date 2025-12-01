@@ -8,7 +8,7 @@
 import SwiftUI
 import Taxionomy
 
-public struct ArticleManager : View {
+public struct NomenclatureManager : View {
     @Binding var nomenclatures: Nomenclatures
     
     @State var selected = 0
