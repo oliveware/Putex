@@ -7,28 +7,25 @@
 
 import SwiftUI
 
-struct Configurer: View {
-    @Binding var config:Configurateur
-    var modele = false
+struct ConfiguratorMaker: View {
+    @Binding var config:Configurator
     @State private var nom:String = ""
     @State private var ajout = false
     @State private var delete = false
     @FocusState private var focused : Bool
     
-    init(_ config:Binding<Configurateur>, _ mode:Bool){
+    init(_ config:Binding<Configurator>){
         _config = config
-        modele = mode
     }
     
     var body: some View {
         VStack {
-            if config.cars.count > 0 {
-                GroupBox("configurateur") {
+            if !config.isNaN {
+                GroupBox("configurator") {
                     Form {
-                        ForEach($config.cars) {
+                        ForEach($config.config.cars) {
                             car in
                             HStack {
-                                
                                 TextField(car.wrappedValue.nom, text:car.valeur)
                                 Spacer()
                                 if delete {
@@ -44,43 +41,71 @@ struct Configurer: View {
                     }.padding(2)
                 }
             }
-            if modele {
-                if ajout {
-                    HStack {
-                        TextField("", text:$nom).focused($focused)
-                        Button(action:{
-                            config.add(nom)
-                            nom = ""
-                            ajout = false
-                        })
-                        {Image(systemName: "checkmark")}
-                            .disabled(nom.count < 5)
+
+            if ajout {
+                HStack {
+                    TextField("", text:$nom).focused($focused)
+                    Button(action:{
+                        config.add(nom)
+                        nom = ""
+                        ajout = false
+                    })
+                    {Image(systemName: "checkmark")}
+                        .disabled(nom.count < 5)
+                }
+            } else {
+                HStack {
+                    Button("ajouter une caractéristique", action:{
+                        ajout = true
+                        focused = true
+                    })
+                    Spacer()
+                    if !config.isNaN {
+                        Button(action:{ delete.toggle() })
+                        {Image(systemName: "minus")}
                     }
-                } else {
-                    HStack {
-                        Button("ajouter une caractéristique", action:{
-                            ajout = true
-                            focused = true
-                        })
-                        Spacer()
-                        if config.cars.count > 0 {
-                            Button(action:{ delete.toggle() })
-                            {Image(systemName: "minus")}
+                }
+            }
+            
+        }.padding()
+    }
+}
+
+struct ConfigurationFiller: View {
+    @Binding var config:Config
+    @State private var nom:String = ""
+    @State private var ajout = false
+    @State private var delete = false
+    @FocusState private var focused : Bool
+    
+    init(_ config:Binding<Config>){
+        _config = config
+    }
+    
+    var body: some View {
+        VStack {
+            if config.cars.count > 0 {
+                GroupBox("configuration") {
+                    Form {
+                        ForEach($config.cars) {
+                            car in
+                                TextField(car.wrappedValue.nom, text:car.valeur)
+                            .frame(minWidth: 200)
                         }
-                    }
+                    }.padding(2)
                 }
             }
         }.padding()
     }
 }
 
-var configsample = Configurateur()
+var configsample = Configurator()
 
 struct ConfigPreview : View {
     @State var config = configsample
     
     func haut() -> CGFloat {
-        let nbl = config.cars.count
+        let nbl = config.config.cars.count
         return CGFloat( 200 + nbl * 20)
     }
 
@@ -88,11 +113,11 @@ struct ConfigPreview : View {
         HStack(alignment:.top) {
             VStack {
                 Text("créer").padding()
-                Configurer($config, true).padding()
+                ConfiguratorMaker($config).padding()
             }
             VStack {
                 Text("utiliser").padding()
-                Configurer($config, false).padding()
+                ConfigurationFiller($config.config).padding()
             }
         }.frame(width:600, height:400)
         

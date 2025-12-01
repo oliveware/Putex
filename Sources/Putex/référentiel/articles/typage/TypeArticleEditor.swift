@@ -13,12 +13,14 @@ public struct TypeArticleEditor : View {
     @State var taxion : Taxion
     @Binding var type: TypeArticle
     @State var soustypage : Bool
+    @State var cadrage: Bool
     
     public init(_ type:Binding<TypeArticle>, _ taxionomie:Taxionomy) {
         _type = type
         taxionomy = taxionomie
         taxion = taxionomie.find(type.id)
         soustypage = type.wrappedValue.soustype != nil
+        cadrage = type.wrappedValue.cadrage != nil
     }
     
     public var body : some View {
@@ -31,24 +33,25 @@ public struct TypeArticleEditor : View {
                     VStack (alignment:.leading) {
                         TextField("description", text:$type.show)
                         if soustypage {
-                           /* Picker("", selection:$type.soustype) {
-                                ForEach(SousType.all) {
-                                    item in
-                                    Text(item.rawValue).tag(item)
-                                }
-                            }*/
+                            /* Picker("", selection:$type.soustype) {
+                             ForEach(SousType.all) {
+                             item in
+                             Text(item.rawValue).tag(item)
+                             }
+                             }*/
                         } else {
                             Button("ajouter un sous-type", action:{soustypage = true})
                         }
-                        
+                    }
+                    
                         OptionUrl("une image", $type.imagurl)
                             .padding(.bottom,20)
+                        
+                        if let image = type.imagurl, let url = URL(string: image) {
+                            WebPicture(url)
+                                .frame(width:200, height:200)
+                        }
                     }
-                    if let image = type.imagurl, let url = URL(string: image) {
-                        WebPicture(url)
-                            .frame(width:200, height:200)
-                    }
-                }
                 
                 OptionUrl("une page web", $type.url)
                 
@@ -56,13 +59,13 @@ public struct TypeArticleEditor : View {
                     WebView(url: url)
                 }
                 
-                if let configurateur = type.config {
-                    Configurer(Binding<Configurateur>(
-                        get:{type.config ?? Configurateur()},
+                if let configurator = type.config {
+                    ConfiguratorMaker(Binding<Configurator>(
+                        get:{type.config ?? Configurator()},
                         set:{type.config = $0}
-                    ), true)
+                    ))
                 } else {
-                    Button("ajouter un configurateur", action:{type.config = Configurateur()})
+                    Button("ajouter un configurator", action:{type.config = Configurator()})
                 }
             }
         }.frame(minWidth:600, minHeight: 400)

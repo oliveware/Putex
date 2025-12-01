@@ -7,11 +7,11 @@
 
 public struct Cadrage: Codable {
     var options: [Option] = []
-    var modele: Configurateur?
+    var modele: Configurator?
     
     struct Option:Codable {
         var nom = ""
-        var configurateur: Configurateur?
+        var config:Config?
     }
     
     func find(_ nom:String) -> Option {

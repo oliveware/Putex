@@ -26,7 +26,7 @@ public struct TypeArticle: Codable, Identifiable {
     var cadrage: Cadrage?
     var conditionné = false
     
-    var config: Configurateur?
+    var config: Configurator?
     
     
     var isNaN:Bool {

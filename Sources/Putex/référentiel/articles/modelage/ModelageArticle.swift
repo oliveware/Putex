@@ -36,18 +36,22 @@ public struct ModelageArticle : View {
                     if modele.conditionnement == nil {
                         Button(" préciser le conditionnement", action:{ modele.conditionnement = Conditionnement()})
                     } else {
-                        ConditionnementView(Binding<Conditionnement>(
-                            get: {modele.conditionnement ?? Conditionnement()},
-                            set: {modele.conditionnement = $0.isNaN ? nil : $0}
+                        HStack {
+                            ConditionnementView(Binding<Conditionnement>(
+                                get: {modele.conditionnement ?? Conditionnement()},
+                                set: {modele.conditionnement = $0.isNaN ? nil : $0}
+                                
+                            ), nomenclatures, {})
                             
-                        ), nomenclatures, {})
+                            Button(action:{
+                                modele.conditionnement = nil
+                            })
+                            {Image(systemName: "delete.right")}.padding(.top, 20)
+                        }
                     }
-                    if let cond = modele.conditionnement {
-                        Button(action:{
-                            modele.conditionnement = nil
-                        })
-                        {Image(systemName: "delete.right")}.padding(.top, 20)
-                    }
+                }
+                if let cadrage = type.cadrage {
+                  //  ConfigurationFiller(cadrage.configurer)
                 }
            
                 ModeleArticleEditor($modele, {})
