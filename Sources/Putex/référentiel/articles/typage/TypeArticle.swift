@@ -14,10 +14,10 @@ public struct TypeArticle: Codable, Identifiable {
     public init() {}
     mutating func change(_ taxion:Taxion) {
         id = taxion.id
-        show = taxion.complet()
+        label = taxion.complet()
     }
     
-    public var show: String = ""
+    public var label: String = ""
     
     public var imagurl: String?
     public var url: String?

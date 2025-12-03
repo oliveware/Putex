@@ -31,7 +31,7 @@ public struct TypeArticleEditor : View {
             if !type.isNaN {
                 HStack {
                     VStack (alignment:.leading) {
-                        TextField("description", text:$type.show)
+                        TextField("description", text:$type.label)
                         if soustypage {
                             /* Picker("", selection:$type.soustype) {
                              ForEach(SousType.all) {

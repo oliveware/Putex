@@ -32,7 +32,7 @@ public struct Typicker: View {
                     ForEach(types) {
                         type in
                         HStack {
-                            Text(type.show)
+                            Text(type.label)
                             Button(action: {
                                 tid = type.id
                                 pick = false

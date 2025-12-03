@@ -23,7 +23,7 @@ struct TypeArticlePick: View {
     
     var body: some View {
         HStack {
-            Text(type.show) // .font(.title)
+            Text(type.label) // .font(.title)
             Spacer()
             Button(action:{edition = true})
             {Image(systemName: "pencil")}
