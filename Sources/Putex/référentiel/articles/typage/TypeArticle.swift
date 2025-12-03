@@ -1,5 +1,5 @@
 //
-//  Produit.swift
+//  TypeArticle.swift
 //  Taxonomie
 //
 //  Created by Herve Crespel on 07/07/2025.
@@ -26,7 +26,7 @@ public struct TypeArticle: Codable, Identifiable {
     var cadrage: Cadrage?
     var conditionné = false
     
-    var config: Configurator?
+    var configurator: Configurator?
     
     
     var isNaN:Bool {

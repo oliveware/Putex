@@ -8,29 +8,29 @@
 import SwiftUI
 
 struct ConfiguratorMaker: View {
-    @Binding var config:Configurator
+    @Binding var configurator:Configurator
     @State private var nom:String = ""
     @State private var ajout = false
     @State private var delete = false
     @FocusState private var focused : Bool
     
     init(_ config:Binding<Configurator>){
-        _config = config
+        _configurator = config
     }
     
     var body: some View {
         VStack {
-            if !config.isNaN {
+            if !configurator.isNaN {
                 GroupBox("configurator") {
                     Form {
-                        ForEach($config.config.cars) {
+                        ForEach($configurator.cars) {
                             car in
                             HStack {
                                 TextField(car.wrappedValue.nom, text:car.valeur)
                                 Spacer()
                                 if delete {
                                     Button(action:{
-                                        config.delete (car.wrappedValue)
+                                        configurator.delete (car.wrappedValue)
                                         delete = false
                                     })
                                     {Image(systemName: "trash")}
@@ -46,7 +46,7 @@ struct ConfiguratorMaker: View {
                 HStack {
                     TextField("", text:$nom).focused($focused)
                     Button(action:{
-                        config.add(nom)
+                        configurator.add(nom)
                         nom = ""
                         ajout = false
                     })
@@ -60,7 +60,7 @@ struct ConfiguratorMaker: View {
                         focused = true
                     })
                     Spacer()
-                    if !config.isNaN {
+                    if !configurator.isNaN {
                         Button(action:{ delete.toggle() })
                         {Image(systemName: "minus")}
                     }
@@ -102,10 +102,16 @@ struct ConfigurationFiller: View {
 var configsample = Configurator()
 
 struct ConfigPreview : View {
-    @State var config = configsample
+    @State var configurator : Configurator
+    @State var config : Config
+    
+    init() {
+        configurator = Configurator()
+        config = Config()
+    }
     
     func haut() -> CGFloat {
-        let nbl = config.config.cars.count
+        let nbl = configurator.cars.count
         return CGFloat( 200 + nbl * 20)
     }
 
@@ -113,11 +119,13 @@ struct ConfigPreview : View {
         HStack(alignment:.top) {
             VStack {
                 Text("créer").padding()
-                ConfiguratorMaker($config).padding()
+                ConfiguratorMaker($configurator).padding()
+                    .onChange(of: configurator.cars, {config = Config(configurator)})
             }
             VStack {
                 Text("utiliser").padding()
-                ConfigurationFiller($config.config).padding()
+                ConfigurationFiller($config).padding()
+                    .onChange(of: config.cars, {configurator = Configurator(config)})
             }
         }.frame(width:600, height:400)
         

@@ -59,13 +59,22 @@ public struct TypeArticleEditor : View {
                     WebView(url: url)
                 }
                 
-                if let configurator = type.config {
+                if let configurator = type.configurator {
                     ConfiguratorMaker(Binding<Configurator>(
-                        get:{type.config ?? Configurator()},
-                        set:{type.config = $0}
+                        get:{type.configurator ?? Configurator()},
+                        set:{type.configurator = $0}
                     ))
                 } else {
-                    Button("ajouter un configurator", action:{type.config = Configurator()})
+                    Button("ajouter un configurator", action:{type.configurator = Configurator()})
+                }
+                
+                if let cadrage = type.cadrage {
+                    CadrageView(Binding<Cadrage>(
+                        get:{type.cadrage ?? Cadrage()},
+                        set:{type.cadrage = $0}
+                    ))
+                } else {
+                    Button("ajouter un cadrage", action:{type.cadrage = Cadrage()})
                 }
             }
         }.frame(minWidth:600, minHeight: 400)

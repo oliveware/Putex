@@ -16,6 +16,24 @@ public struct ModeleArticle: Codable {
     public var url: String?
     
     var conditionnement: Conditionnement?
+    var config: Config?
+    var option: Cadrage.Option?
+    
+    var configuration: Config? {
+        if let option = option {
+            return option.config
+        } else {
+            return config
+        }
+    }
+    
+    var configurator: Configurator {
+        if let config = configuration {
+            return Configurator(config)
+        } else {
+            return Configurator()
+        }
+    }
     
     public init() {}
     
