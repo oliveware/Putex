@@ -30,7 +30,7 @@ public struct TypeArticle: Codable, Identifiable {
     
     
     var isNaN:Bool {
-        id == "" || show == ""
+        id == "" || label == ""
     }
     
 }
