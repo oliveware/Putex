@@ -25,43 +25,48 @@ public struct TypeArticleEditor : View {
     
     public var body : some View {
         VStack {
-            TaxionPicker($taxion, taxionomy, {
-                type.change(taxion)
-            })
+            HStack {
+                TaxionPicker($taxion, taxionomy, {
+                    type.change(taxion)
+                })
+                
+                if soustypage {
+                    /* Picker("", selection:$type.soustype) {
+                     ForEach(SousType.all) {
+                     item in
+                     Text(item.rawValue).tag(item)
+                     }
+                     }*/
+                } else {
+                    Button("sous-type", action:{soustypage = true})
+                }
+                if type.configurator == nil {
+                    Button("configurateur", action:{type.configurator = Configurator()})
+                }
+                if type.cadrage == nil {
+                    Button("options", action:{type.cadrage = Cadrage()})
+                }
+            }
             if !type.isNaN {
                 HStack {
-                    VStack (alignment:.leading) {
+                    VStack {
                         TextField("description", text:$type.label)
-                        if soustypage {
-                            /* Picker("", selection:$type.soustype) {
-                             ForEach(SousType.all) {
-                             item in
-                             Text(item.rawValue).tag(item)
-                             }
-                             }*/
+                        
+                        OptionUrl("image", $type.imagurl)
+                            .padding(.bottom,20)
+                        OptionUrl("page web", $type.url)
+                        
+                        if let configurator = type.configurator {
+                            ConfiguratorMaker(Binding<Configurator>(
+                                get:{type.configurator ?? Configurator()},
+                                set:{type.configurator = $0}
+                            ))
                         }
                     }
-                    
-                    OptionUrl("une image", $type.imagurl)
-                        .padding(.bottom,20)
-                    
                     if let image = type.imagurl, let url = URL(string: image) {
                         WebPicture(url)
                             .frame(width:200, height:200)
                     }
-                }
-                
-                OptionUrl("une page web", $type.url)
-                
-                if let webpage = type.url, let url = URL(string: webpage) {
-                    WebView(url: url)
-                }
-                
-                if let configurator = type.configurator {
-                    ConfiguratorMaker(Binding<Configurator>(
-                        get:{type.configurator ?? Configurator()},
-                        set:{type.configurator = $0}
-                    ))
                 }
                 
                 if let cadrage = type.cadrage {
@@ -70,16 +75,9 @@ public struct TypeArticleEditor : View {
                         set:{type.cadrage = $0}
                     ))
                 }
-            }
-            HStack {
-                if !soustypage {
-                   Button("sous-type", action:{soustypage = true})
-               }
-                if type.configurator == nil {
-                   Button("configurateur", action:{type.configurator = Configurator()})
-               }
-                if type.cadrage == nil {
-                    Button("options", action:{type.cadrage = Cadrage()})
+                
+                if let webpage = type.url, let url = URL(string: webpage) {
+                    WebView(url: url)
                 }
             }
         }.frame(minWidth:600, minHeight: 400)
