@@ -39,19 +39,17 @@ public struct TypeArticleEditor : View {
                              Text(item.rawValue).tag(item)
                              }
                              }*/
-                        } else {
-                            Button("ajouter un sous-type", action:{soustypage = true})
                         }
                     }
                     
-                        OptionUrl("une image", $type.imagurl)
-                            .padding(.bottom,20)
-                        
-                        if let image = type.imagurl, let url = URL(string: image) {
-                            WebPicture(url)
-                                .frame(width:200, height:200)
-                        }
+                    OptionUrl("une image", $type.imagurl)
+                        .padding(.bottom,20)
+                    
+                    if let image = type.imagurl, let url = URL(string: image) {
+                        WebPicture(url)
+                            .frame(width:200, height:200)
                     }
+                }
                 
                 OptionUrl("une page web", $type.url)
                 
@@ -64,8 +62,6 @@ public struct TypeArticleEditor : View {
                         get:{type.configurator ?? Configurator()},
                         set:{type.configurator = $0}
                     ))
-                } else {
-                    Button("ajouter un configurator", action:{type.configurator = Configurator()})
                 }
                 
                 if let cadrage = type.cadrage {
@@ -73,8 +69,17 @@ public struct TypeArticleEditor : View {
                         get:{type.cadrage ?? Cadrage()},
                         set:{type.cadrage = $0}
                     ))
-                } else {
-                    Button("ajouter un cadrage", action:{type.cadrage = Cadrage()})
+                }
+            }
+            HStack {
+                if !soustypage {
+                   Button("sous-type", action:{soustypage = true})
+               }
+                if type.configurator == nil {
+                   Button("configurateur", action:{type.configurator = Configurator()})
+               }
+                if type.cadrage == nil {
+                    Button("options", action:{type.cadrage = Cadrage()})
                 }
             }
         }.frame(minWidth:600, minHeight: 400)

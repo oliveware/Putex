@@ -21,7 +21,7 @@ struct ConfiguratorMaker: View {
     var body: some View {
         VStack {
             if !configurator.isNaN {
-                GroupBox("configurator") {
+                GroupBox("Configurateur") {
                     Form {
                         ForEach($configurator.cars) {
                             car in

@@ -51,7 +51,7 @@ public struct ModelageArticle : View {
                     }
                 }
                 if let cadrage = type.cadrage {
-                  //  ConfigurationFiller(cadrage.configurer)
+                  //  OptionPicker(cadrage)
                 }
            
                 ModeleArticleEditor($modele, {})
