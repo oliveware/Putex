@@ -9,6 +9,8 @@ import SwiftUI
 
 struct CadrageView : View {
     @Binding var cadrage: Cadrage
+    @Binding var configurator:Configurator
+
     @State private var nom: String = ""
     @State var delete = false
     @State var ajout: Bool
@@ -16,23 +18,22 @@ struct CadrageView : View {
     
     @State var selected:Cadrage.Option?
     @State var configuration = Config()
+    @State var configurable : Bool
     
     func select(_ option:Cadrage.Option) {
         selected = option
         if let config  = option.config {
             configuration = config
         } else {
-            if let configurator = cadrage.modele {
-                configuration = Config(configurator)
-            } else {
-                configuration = Config()
-            }
+            configuration = Config(configurator)
         }
     }
     
-    init(_ cadrage:Binding<Cadrage>) {
+    init(_ cadrage:Binding<Cadrage>, _ configurator:Binding<Configurator>) {
         _cadrage = cadrage
+        _configurator = configurator
         ajout = cadrage.wrappedValue.isNaN
+        configurable = cadrage.wrappedValue.configurable || !configurator.wrappedValue.isNaN
     }
     
     var body: some View {
@@ -56,7 +57,7 @@ struct CadrageView : View {
                                 
                                 Text(option.wrappedValue.nom)
                                 Spacer()
-                                if cadrage.configurable {
+                                if configurable {
                                     Button(action:{select( option.wrappedValue)})
                                     {Image(systemName: "arrow.right")}
                                 }
@@ -96,32 +97,25 @@ struct CadrageView : View {
                 }
             }
    
-            if let configurator = cadrage.modele {
-                VStack {
-                    if let option = selected {
-                        Text("configuration de l'option \(selected?.nom ?? "")")
-                        ConfigurationFiller($configuration)
-                            .onChange(of : configuration, {cadrage.configure(option.id, configuration)})
-                    } else {
-                        Text("configurateur des options")
-                        ConfiguratorMaker(Binding<Configurator>(
-                            get : {configurator},
-                            set : {cadrage.modele = $0}
-                        ))
-                    }
-                }
+            if configurator.isNaN {
+                Button("configurer les options", action:{configurator = Configurator()})
             } else {
-                Button("configurer les options", action:{cadrage.modele = Configurator()})
-            }
+                if let option = selected {
+                    Text("configuration de l'option \(option.nom )")
+                    ConfigurationFiller($configuration)
+                        .onChange(of : configuration, {cadrage.configure(option.id, configuration)})
+                }
+          }
         }
     }
 }
 
 struct CadragePreview : View {
     @State var cadrage = Cadrage()
+    @State var configurator = Configurator()
     
     var body: some View {
-        CadrageView($cadrage).frame(height: 300)
+        CadrageView($cadrage, $configurator).frame(height: 300)
     }
 }
 #Preview {

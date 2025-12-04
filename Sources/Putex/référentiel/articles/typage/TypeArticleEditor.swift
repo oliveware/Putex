@@ -13,14 +13,12 @@ public struct TypeArticleEditor : View {
     @State var taxion : Taxion
     @Binding var type: TypeArticle
     @State var soustypage : Bool
-    @State var cadrage: Bool
     
     public init(_ type:Binding<TypeArticle>, _ taxionomie:Taxionomy) {
         _type = type
         taxionomy = taxionomie
         taxion = taxionomie.find(type.id)
         soustypage = type.wrappedValue.soustype != nil
-        cadrage = type.wrappedValue.cadrage != nil
     }
     
     public var body : some View {
@@ -41,10 +39,14 @@ public struct TypeArticleEditor : View {
                     Button("sous-type", action:{soustypage = true})
                 }
                 if type.configurator == nil {
-                    Button("configurateur", action:{type.configurator = Configurator()})
+                    Button("configurateur", action:{
+                        type.configurator = Configurator()
+                    })
                 }
                 if type.cadrage == nil {
-                    Button("options", action:{type.cadrage = Cadrage()})
+                    Button("options", action:{
+                        type.cadrage = Cadrage()
+                    })
                 }
             }
             if !type.isNaN {
@@ -58,7 +60,7 @@ public struct TypeArticleEditor : View {
                         
                         if let configurator = type.configurator {
                             ConfiguratorMaker(Binding<Configurator>(
-                                get:{type.configurator ?? Configurator()},
+                                get:{configurator},
                                 set:{type.configurator = $0}
                             ))
                         }
@@ -70,10 +72,16 @@ public struct TypeArticleEditor : View {
                 }
                 
                 if let cadrage = type.cadrage {
-                    CadrageView(Binding<Cadrage>(
-                        get:{type.cadrage ?? Cadrage()},
-                        set:{type.cadrage = $0}
-                    ))
+                    CadrageView(
+                        Binding<Cadrage>(
+                            get:{cadrage},
+                            set:{type.cadrage = $0}
+                        ),
+                        Binding<Configurator>(
+                            get:{type.configurator ?? Configurator()},
+                            set:{type.configurator = $0}
+                        )
+                    )
                 }
                 
                 if let webpage = type.url, let url = URL(string: webpage) {
@@ -87,6 +95,7 @@ public struct TypeArticleEditor : View {
 }
 
 // https://www.map24.com/wp-content/uploads/2023/04/Sharwil.jpg
+// https://www.jurassicfruit.com/products/avocado-pinkerton
 // http://192.168.1.41
 // https://apple.com
 

@@ -7,14 +7,11 @@
 
 public struct Cadrage: Codable {
     var options: [Option] = []
-    var modele: Configurator?
     
     var isNaN: Bool {options.count == 0}
     var configurable: Bool {
-        if let configurator = modele {
-            return !configurator.isNaN
-        } else {
-            return false
+        if options.count == 0 { return false } else {
+            return options[0].config != nil
         }
     }
     
