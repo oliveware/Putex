@@ -27,26 +27,27 @@ public struct TypeArticleEditor : View {
                 TaxionPicker($taxion, taxionomy, {
                     type.change(taxion)
                 })
-                
-                if soustypage {
-                    /* Picker("", selection:$type.soustype) {
-                     ForEach(SousType.all) {
-                     item in
-                     Text(item.rawValue).tag(item)
-                     }
-                     }*/
-                } else {
-                    Button("sous-type", action:{soustypage = true})
-                }
-                if type.configurator == nil {
-                    Button("configurateur", action:{
-                        type.configurator = Configurator()
-                    })
-                }
-                if type.cadrage == nil {
-                    Button("options", action:{
-                        type.cadrage = Cadrage()
-                    })
+                if !type.isNaN {
+                    if soustypage {
+                        /* Picker("", selection:$type.soustype) {
+                         ForEach(SousType.all) {
+                         item in
+                         Text(item.rawValue).tag(item)
+                         }
+                         }*/
+                    } else {
+                        Button("sous-type", action:{soustypage = true})
+                    }
+                    if type.configurator == nil {
+                        Button("configurateur", action:{
+                            type.configurator = Configurator()
+                        })
+                    }
+                    if type.cadrage == nil {
+                        Button("options", action:{
+                            type.cadrage = Cadrage()
+                        })
+                    }
                 }
             }
             if !type.isNaN {
