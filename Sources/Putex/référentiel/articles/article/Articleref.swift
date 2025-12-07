@@ -15,9 +15,9 @@ public struct Articleref: Codable {
     public var articles : [Article] = []
     var nomenclatures = Nomenclatures()
     
-    init() {}
+    public init() {}
     
-    func article(_ id: String) -> Article {
+    public func article(_ id: String) -> Article {
         var found = Article()
         for article in articles {
             if id == article.id {
