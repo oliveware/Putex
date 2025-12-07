@@ -55,7 +55,7 @@ public struct Article : Codable, Identifiable, Oxet {
         tid == ""
     }
     
-    init() {
+    public init() {
         id = Coderef.newcode(.article)
     }
     
@@ -64,7 +64,7 @@ public struct Article : Codable, Identifiable, Oxet {
       //  label = taxion.nom
     }
 
-    public init(_ tid:String, _ label:String) {
+    init(_ tid:String, _ label:String) {
         self.tid = tid
         self.label = label
         id = Coderef.newcode(.article)
