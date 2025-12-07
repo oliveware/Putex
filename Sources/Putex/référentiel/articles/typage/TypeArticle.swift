@@ -23,11 +23,14 @@ public struct TypeArticle: Codable, Identifiable {
     public var url: String?
     
     var soustype: SousType?
-    var cadrage: Cadrage?
+    public var cadrage: Cadrage?
     var conditionné = false
     
-    var configurator: Configurator?
+    public var configurator: Configurator?
     
+    var illustré : Bool {
+        imagurl != nil || url != nil
+    }
     
     var isNaN:Bool {
         id == "" || label == ""

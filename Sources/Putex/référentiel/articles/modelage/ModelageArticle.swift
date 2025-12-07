@@ -9,21 +9,14 @@ import SwiftUI
 import Taxionomy
 
 public struct ModelageArticle : View {
-    var type:TypeArticle
-    var nomenclatures:Nomenclatures
+    
     @Binding var modele: ModeleArticle
 
-    @State var avecmodele : Bool
+    @State var edition : Bool
     
-    public init(
-        _ type:TypeArticle,
-        _ modele:Binding<ModeleArticle>,
-        _ nomenclatures: Nomenclatures
-    ) {
-        self.nomenclatures = nomenclatures
-        self.type = type
+    public init(_ modele:Binding<ModeleArticle>) {
         _modele = modele
-        avecmodele = !modele.wrappedValue.isNaN
+        edition = !modele.wrappedValue.isNaN
     }
     
     public var body: some View {
@@ -31,33 +24,12 @@ public struct ModelageArticle : View {
             
             TypeArticleShow(type)
             
-            if avecmodele {
-                if type.conditionné {
-                    if modele.conditionnement == nil {
-                        Button(" préciser le conditionnement", action:{ modele.conditionnement = Conditionnement()})
-                    } else {
-                        HStack {
-                            ConditionnementView(Binding<Conditionnement>(
-                                get: {modele.conditionnement ?? Conditionnement()},
-                                set: {modele.conditionnement = $0.isNaN ? nil : $0}
-                                
-                            ), nomenclatures, {})
-                            
-                            Button(action:{
-                                modele.conditionnement = nil
-                            })
-                            {Image(systemName: "delete.right")}.padding(.top, 20)
-                        }
-                    }
-                }
-                if let cadrage = type.cadrage {
-                  //  OptionPicker(cadrage)
-                }
-           
+            if edition {
                 ModeleArticleEditor($modele, {})
             } else {
-                Button("ajouter un modèle", action:{avecmodele = true})
+               ModeleArticleShow(modele)
             }
+            
             
         }
     }

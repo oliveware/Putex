@@ -19,7 +19,7 @@ struct OptionArticleView: View {
     }
     var body:some View {
         HStack(alignment:.top) {
-            EnumPicker(OptionArticle.natures, $option.nature)
+          /*  EnumPicker(OptionArticle.natures, $option.nature)
                 .onChange( of:option.nature, {option.id = ""})
                 .frame(width:200)
             if let nature = option.nature {
@@ -37,13 +37,13 @@ struct OptionArticleView: View {
                         Text("aucun garage")
                     }
                 }
-            }
+            }*/
         }
     }
 }
 
 struct OptionArticlePreview: View {
-    @State var detail = OptionArticle(.garage)
+    @State var detail = OptionArticle("garage")
     
     var body:some View {
         VStack {

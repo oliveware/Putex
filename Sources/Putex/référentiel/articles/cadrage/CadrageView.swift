@@ -16,11 +16,11 @@ struct CadrageView : View {
     @State var ajout: Bool
     @FocusState private var focused : Bool
     
-    @State var selected:Cadrage.Option?
+    @State var selected:OptionArticle?
     @State var configuration = Config()
     @State var configurable : Bool
     
-    func select(_ option:Cadrage.Option) {
+    func select(_ option:OptionArticle) {
         selected = option
         if let config  = option.config {
             configuration = config

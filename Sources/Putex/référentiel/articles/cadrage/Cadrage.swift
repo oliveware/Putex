@@ -6,22 +6,12 @@
 //
 
 public struct Cadrage: Codable {
-    var options: [Option] = []
+    var options: [OptionArticle] = []
     
     var isNaN: Bool {options.count == 0}
     var configurable: Bool {
         if options.count == 0 { return false } else {
             return options[0].config != nil
-        }
-    }
-    
-    struct Option:Codable, Identifiable {
-        var id:String {nom}
-        var nom = ""
-        var config:Config?
-        
-        init(_ nom:String) {
-            self.nom = nom
         }
     }
     
@@ -33,8 +23,8 @@ public struct Cadrage: Codable {
         }
     }
     
-    func find(_ nom:String) -> Option {
-        var found = Option("")
+    func find(_ nom:String) -> OptionArticle {
+        var found = OptionArticle("")
         for option in options {
             if option.nom == nom {
                 found = option
@@ -44,11 +34,11 @@ public struct Cadrage: Codable {
     }
     
     mutating func add(_ nom:String) {
-        options.append(Option(nom))
+        options.append(OptionArticle(nom))
     }
     
-    mutating func delete(_ sup:Option) {
-        var new: [Option] = []
+    mutating func delete(_ sup:OptionArticle) {
+        var new: [OptionArticle] = []
         for option in options {
             if option.id != sup.id { new.append(option) }
         }
