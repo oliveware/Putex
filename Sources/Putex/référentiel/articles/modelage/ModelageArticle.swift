@@ -11,10 +11,11 @@ import Taxionomy
 public struct ModelageArticle : View {
     
     @Binding var modele: ModeleArticle
-
+    @State var type = TypeArticle()
     @State var edition : Bool
     
-    public init(_ modele:Binding<ModeleArticle>) {
+    public init(_ type:TypeArticle,_ modele:Binding<ModeleArticle>) {
+        self.type = type
         _modele = modele
         edition = !modele.wrappedValue.isNaN
     }
@@ -42,7 +43,7 @@ struct ModelagePreview : View {
     func done() {}
     
     var body : some View {
-        ModelageArticle(type, $modele, nomenclatures).frame(width:400, height:300)
+        ModelageArticle(type, $modele).frame(width:400, height:300)
           
     }
 }

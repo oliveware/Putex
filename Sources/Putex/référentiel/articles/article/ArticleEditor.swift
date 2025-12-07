@@ -46,7 +46,7 @@ struct ArticleEditor: View {
                 if article.modele == nil {
                     Button("ajouter un modèle", action:{article.modele = ModeleArticle()})
                 } else {
-                    ModelageArticle($modele)
+                    ModelageArticle(type, $modele)
                 }
                 
                 if type.conditionné {
