@@ -12,7 +12,7 @@ import Taxionomy
 
 public struct Articleref: Codable {
     
-    var articles : [Article] = []
+    public var articles : [Article] = []
     var nomenclatures = Nomenclatures()
     
     init() {}
