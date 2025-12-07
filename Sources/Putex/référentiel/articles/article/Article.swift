@@ -43,7 +43,7 @@ public struct Article : Codable, Identifiable, Oxet {
        // let typeillustré = type?.illustré ?? false
     }
     
-    var show:String {
+    public var show:String {
         if label == "" || tid == "" {
             return "article non défini"
         } else {
