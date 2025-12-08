@@ -54,7 +54,7 @@ public struct TypeArticleEditor : View {
             }
             
             if !type.isNaN {
-                TextField("description", text:$type.label)
+                TextField("description", text:$type.label).padding()
                 ScrollView {
                     HStack {
                         OptionUrl("image", $type.imagurl)
@@ -76,7 +76,7 @@ public struct TypeArticleEditor : View {
                     
                     if let cadrage = type.cadrage {
                         HStack {
-                            Button(action:{ type.configurator = nil })
+                            Button(action:{ type.cadrage = nil })
                             {Image(systemName: "delete.right")}
                             CadrageView(
                                 Binding<Cadrage>(
@@ -94,8 +94,7 @@ public struct TypeArticleEditor : View {
                     if let webpage = type.url, let url = URL(string: webpage) {
                         WebView(url: url)
                     }
-                }.frame(minWidth:600, minHeight: 400)
-                    .padding()
+                }.padding()
             }
         }
         
