@@ -13,6 +13,7 @@ public struct TypeArticleEditor : View {
     @State var taxion : Taxion
     @Binding var type: TypeArticle
     @State var soustypage : Bool
+    @State var pageon = false
     
     public init(_ type:Binding<TypeArticle>, _ taxionomie:Taxionomy) {
         _type = type
@@ -62,7 +63,7 @@ public struct TypeArticleEditor : View {
                             WebPicture(url)
                                 .frame(width:200, height:200)
                         }
-                    }
+                    }.padding()
                     if let configurator = type.configurator {
                         HStack {
                             Button(action:{ type.configurator = nil })
@@ -71,7 +72,7 @@ public struct TypeArticleEditor : View {
                                 get:{configurator},
                                 set:{type.configurator = $0}
                             ))
-                        }
+                        }.padding()
                     }
                     
                     if let cadrage = type.cadrage {
@@ -88,12 +89,14 @@ public struct TypeArticleEditor : View {
                                     set:{type.configurator = $0}
                                 )
                             )
-                        }
+                        }.padding()
                     }
-                }//.frame(width:800, height:800).padding()
+                }.frame(width:600).padding()
                     OptionUrl("page web", $type.url)
                     if let webpage = type.url, let url = URL(string: webpage) {
-                        WebView(url: url)
+                        Button(action:{ type.cadrage = nil })
+                        {Image(systemName: "arrow.down")}
+                            .sheet(isPresented: $pageon){WebView(url: url)}
                     }
                
             }
