@@ -62,7 +62,7 @@ public let articlerefjson = """
             }
         }
     ],
-    "nomenclatures": {
+    
 "soustypes" : {},
 "cadrages" : {},
     "fermetures": {
@@ -17594,6 +17594,6 @@ public let articlerefjson = """
             }
         ]
     }
-    }
+    
 }
 """
