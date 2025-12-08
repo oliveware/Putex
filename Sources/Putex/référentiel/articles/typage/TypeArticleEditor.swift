@@ -94,7 +94,7 @@ public struct TypeArticleEditor : View {
                     if let webpage = type.url, let url = URL(string: webpage) {
                         WebView(url: url)
                     }
-                }.padding()
+                }.frame(width:800, height:800).padding()
             }
         }
         
