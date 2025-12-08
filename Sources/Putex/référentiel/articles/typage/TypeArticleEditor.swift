@@ -64,29 +64,35 @@ public struct TypeArticleEditor : View {
                         }
                     }
                     if let configurator = type.configurator {
-                        ConfiguratorMaker(Binding<Configurator>(
-                            get:{configurator},
-                            set:{type.configurator = $0}
-                        ))
+                        HStack {
+                            Button(action:{ type.configurator = nil })
+                            {Image(systemName: "delete.right")}
+                            ConfiguratorMaker(Binding<Configurator>(
+                                get:{configurator},
+                                set:{type.configurator = $0}
+                            ))
+                        }
                     }
                     
                     if let cadrage = type.cadrage {
-                        CadrageView(
-                            Binding<Cadrage>(
-                                get:{cadrage},
-                                set:{type.cadrage = $0}
-                            ),
-                            Binding<Configurator>(
-                                get:{type.configurator ?? Configurator()},
-                                set:{type.configurator = $0}
+                        HStack {
+                            Button(action:{ type.configurator = nil })
+                            {Image(systemName: "delete.right")}
+                            CadrageView(
+                                Binding<Cadrage>(
+                                    get:{cadrage},
+                                    set:{type.cadrage = $0}
+                                ),
+                                Binding<Configurator>(
+                                    get:{type.configurator ?? Configurator()},
+                                    set:{type.configurator = $0}
+                                )
                             )
-                        )
-                    }
-                    HStack {
-                        OptionUrl("page web", $type.url)
-                        if let webpage = type.url, let url = URL(string: webpage) {
-                            WebView(url: url)
                         }
+                    }
+                    OptionUrl("page web", $type.url)
+                    if let webpage = type.url, let url = URL(string: webpage) {
+                        WebView(url: url)
                     }
                 }.frame(minWidth:600, minHeight: 400)
                     .padding()
