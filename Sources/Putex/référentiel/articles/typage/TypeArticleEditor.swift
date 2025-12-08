@@ -97,7 +97,9 @@ public struct TypeArticleEditor : View {
                     if let webpage = type.url, let url = URL(string: webpage) {
                         Button(action:{ pageon = true })
                         {Image(systemName: "arrow.down")}
-                            .sheet(isPresented: $pageon){WebView(url: url)}
+                            .sheet(isPresented: $pageon){
+                                WebView(url: url).frame(width:400,height:600)
+                            }
                     }
                 }
             }
