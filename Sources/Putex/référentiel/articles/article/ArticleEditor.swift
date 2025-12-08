@@ -69,7 +69,10 @@ struct ArticleEditor: View {
                 }
                 
                 if let cadrage = type.cadrage {
-                  //  OptionPicker(cadrage)
+                    OptionArticleView(cadrage, Binding<OptionArticle>(
+                        get: { $article.wrappedValue.option! },
+                        set: { article.option = $0}
+                    ), type.configurator! )
                     Spacer()
                   /*  if configurable {
                         Button(action:{select( option.wrappedValue)})

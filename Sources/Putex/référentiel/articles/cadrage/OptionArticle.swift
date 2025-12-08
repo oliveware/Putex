@@ -5,15 +5,17 @@
 //  Created by Herve Crespel on 19/06/2025.
 //
 
-struct OptionArticle: Codable, Identifiable {
+struct OptionArticle: Codable, Oxet {
+    static var selector: String = "option"
     
-    
-    var id:String {nom}
-    var nom = ""
+    static var warning: String = ""
+
+    var id:String {label}
+    var label = ""
     var config:Config?
     
     init(_ nom:String) {
-        self.nom = nom
+        label = nom
     }
     
     var configurator: Configurator {
@@ -28,7 +30,7 @@ struct OptionArticle: Codable, Identifiable {
         self.config = config
     }
    
-    var isNaN : Bool { nom == "" && config == nil}
+    var isNaN : Bool { label == "" && config == nil}
    
 }
 

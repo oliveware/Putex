@@ -26,7 +26,7 @@ public struct Cadrage: Codable {
     func find(_ nom:String) -> OptionArticle {
         var found = OptionArticle("")
         for option in options {
-            if option.nom == nom {
+            if option.label == nom {
                 found = option
             }
         }

@@ -8,36 +8,30 @@
 import SwiftUI
 
 struct OptionArticleView: View {
+    var cadrage:Cadrage
     @Binding var option:OptionArticle
-    var refname: String
-    @State private var edition : Bool
+    @State var config: Config
+ //   @State private var edition : Bool
     
-    init(_ ref:String, _ option:Binding<OptionArticle>) {
+    init(_ cadrage:Cadrage, _ option:Binding<OptionArticle>, _ configurator:Configurator) {
+        self.cadrage = cadrage
         _option = option
-        refname = ref
-        edition = option.wrappedValue.isNaN
+  //      edition = option.wrappedValue.isNaN
+        if let config = option.wrappedValue.config {
+            self.config = config
+        } else {
+            self.config = Config(configurator)
+        }
     }
     var body:some View {
-        HStack(alignment:.top) {
-          /*  EnumPicker(OptionArticle.natures, $option.nature)
-                .onChange( of:option.nature, {option.id = ""})
+        GroupBox("option") {
+            ItemPicker(cadrage.options, $option, {})
                 .frame(width:200)
-            if let nature = option.nature {
-                switch nature {
-                case .logement:
-                    if let logements = Coderef.all[refname] {
-                        CodePicker(logements, $option.id)
-                    } else {
-                        Text("aucun logement")
-                    }
-                case .garage:
-                    if let garages = Coderef.all["garages"] {
-                        CodePicker(garages, $option.id)
-                    }  else {
-                        Text("aucun garage")
-                    }
-                }
-            }*/
+            if cadrage.configurable {
+                Text("configuration")
+                ConfigurationFiller($config)
+                    .onChange(of : config, {option.config = config})
+            }
         }
     }
 }

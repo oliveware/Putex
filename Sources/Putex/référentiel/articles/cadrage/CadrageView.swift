@@ -9,30 +9,14 @@ import SwiftUI
 
 struct CadrageView : View {
     @Binding var cadrage: Cadrage
-    @Binding var configurator:Configurator
 
     @State private var nom: String = ""
     @State var delete = false
     @State var ajout = false
     @FocusState private var focused : Bool
     
-    @State var selected:OptionArticle?
-    @State var configuration = Config()
-    @State var configurable : Bool
-    
-    func select(_ option:OptionArticle) {
-        selected = option
-        if let config  = option.config {
-            configuration = config
-        } else {
-            configuration = Config(configurator)
-        }
-    }
-    
-    init(_ cadrage:Binding<Cadrage>, _ configurator:Binding<Configurator>) {
+    init(_ cadrage:Binding<Cadrage>) {
         _cadrage = cadrage
-        _configurator = configurator
-        configurable = cadrage.wrappedValue.configurable || !configurator.wrappedValue.isNaN
     }
     
     var body: some View {
@@ -53,7 +37,7 @@ struct CadrageView : View {
                                     Text("     ")
                                 }
                                 Spacer()
-                                Text(option.wrappedValue.nom)
+                                Text(option.wrappedValue.label)
                                 Spacer()
                             }.frame(minWidth: 100)
                         }
@@ -85,26 +69,15 @@ struct CadrageView : View {
                     }
                 }
             }
-            
-            /*  if configurator.isNaN {
-             Button("configurer les options", action:{configurator = Configurator()})
-             } else {
-             if let option = selected {
-             Text("configuration de l'option \(option.nom )")
-             ConfigurationFiller($configuration)
-             .onChange(of : configuration, {cadrage.configure(option.id, configuration)})
-             }
-             }*/
         }
     }
 }
 
 struct CadragePreview : View {
     @State var cadrage = Cadrage()
-    @State var configurator = Configurator()
     
     var body: some View {
-        CadrageView($cadrage, $configurator).frame(height: 300)
+        CadrageView($cadrage).frame(height: 300)
     }
 }
 #Preview {

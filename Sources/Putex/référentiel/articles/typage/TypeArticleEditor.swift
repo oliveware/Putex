@@ -42,20 +42,25 @@ public struct TypeArticleEditor : View {
                         })
                     }
                 }
-            }
+            }.padding(.trailing,5)
             if !type.isNaN {
-                if soustypage {
-                    HStack {
+                HStack {
+                    if soustypage {
+                        
                         Button(action:{
                             soustypage = false
                             type.soustype = nil
                         })
                         {Image(systemName: "delete.right")}
                         Text("sous-type non géré")
+                        
+                    } else {
+                        Button("sous-type", action:{soustypage = true})
                     }
-                } else {
-                    Button("sous-type", action:{soustypage = true})
-                }
+                    Spacer()
+                    Toggle("conditionné", isOn: $type.conditionné)
+                        .toggleStyle(.checkbox)
+                }.padding()
             }
             
             if !type.isNaN {
@@ -87,10 +92,6 @@ public struct TypeArticleEditor : View {
                                 Binding<Cadrage>(
                                     get:{cadrage},
                                     set:{type.cadrage = $0}
-                                ),
-                                Binding<Configurator>(
-                                    get:{type.configurator ?? Configurator()},
-                                    set:{type.configurator = $0}
                                 )
                             )
                         }.padding()
