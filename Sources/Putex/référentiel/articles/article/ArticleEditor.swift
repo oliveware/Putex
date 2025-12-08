@@ -58,7 +58,7 @@ struct ArticleEditor: View {
                                 get: {article.conditionnement ?? Conditionnement()},
                                 set: {article.conditionnement = $0.isNaN ? nil : $0}
                                 
-                            ), ref.nomenclatures, {})
+                            ), ref.fermetures, ref.contenants, {})
                             
                             Button(action:{
                                 article.conditionnement = nil

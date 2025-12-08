@@ -21,7 +21,15 @@ public struct ArticleManager : View {
         TabView(selection: $selected) {
             ArticleList($ref.articles, ref)
                 .tabItem { Text("articles") }.tag(1)
-            NomenclatureManager($ref.nomenclatures)
+            TypeArticleManager($ref.types, ref.besoins)
+                .tabItem { Text("types") }.tag(2)
+            TaxionomyManager($ref.besoins)
+                .tabItem { Text("besoins") }.tag(3)
+            TaxionomyManager($ref.contenants)
+                .tabItem { Text("contenants") }.tag(4)
+            TaxionomyManager($ref.fermetures)
+                .tabItem { Text("fermetures") }.tag(5)
+        
         }
     }
 }

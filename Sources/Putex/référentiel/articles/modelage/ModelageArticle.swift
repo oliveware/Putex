@@ -37,7 +37,7 @@ public struct ModelageArticle : View {
 }
 
 struct ModelagePreview : View {
-    var nomenclatures = Nomenclatures()
+
     @State var type = TypeArticle()
     @State var modele = ModeleArticle()
     func done() {}

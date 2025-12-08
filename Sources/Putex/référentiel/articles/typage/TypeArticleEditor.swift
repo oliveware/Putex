@@ -9,7 +9,7 @@ import SwiftUI
 import Taxionomy
 
 public struct TypeArticleEditor : View {
-    var taxionomy : Taxionomy
+    var besoins : Taxionomy
     @State var taxion : Taxion
     @Binding var type: TypeArticle
     @State var soustypage : Bool
@@ -17,7 +17,7 @@ public struct TypeArticleEditor : View {
     
     public init(_ type:Binding<TypeArticle>, _ taxionomie:Taxionomy) {
         _type = type
-        taxionomy = taxionomie
+        besoins = taxionomie
         taxion = taxionomie.find(type.id)
         soustypage = type.wrappedValue.soustype != nil
     }
@@ -25,22 +25,12 @@ public struct TypeArticleEditor : View {
     public var body : some View {
         VStack {
             HStack {
-                TaxionPicker($taxion, taxionomy, {
+                TaxionPicker($taxion, besoins, {
                     type.change(taxion)
                 })
                 
                 if !type.isNaN {
                     Spacer()
-                    if soustypage {
-                        /* Picker("", selection:$type.soustype) {
-                         ForEach(SousType.all) {
-                         item in
-                         Text(item.rawValue).tag(item)
-                         }
-                         }*/
-                    } else {
-                        Button("sous-type", action:{soustypage = true})
-                    }
                     if type.configurator == nil {
                         Button("configurateur", action:{
                             type.configurator = Configurator()
@@ -53,12 +43,23 @@ public struct TypeArticleEditor : View {
                     }
                 }
             }
+            if !type.isNaN {
+                if soustypage {
+                    HStack {
+                        Button(action:{ type.soustype = nil })
+                        {Image(systemName: "delete.right")}
+                        Text("sous-type non géré")
+                    }
+                } else {
+                    Button("sous-type", action:{soustypage = true})
+                }
+            }
             
             if !type.isNaN {
                 TextField("description", text:$type.label).padding()
                 ScrollView {
                     HStack {
-                        OptionUrl("image", $type.imagurl)
+                        OptionUrl("une illustration", $type.imagurl)
                         if let image = type.imagurl, let url = URL(string: image) {
                             WebPicture(url)
                                 .frame(width:200, height:200)
@@ -93,15 +94,17 @@ public struct TypeArticleEditor : View {
                     }
                 }.frame(width:600).padding()
                 HStack {
-                    OptionUrl("page web", $type.url)
+                    Button(action:{ type.url = nil })
+                    {Image(systemName: "delete.right")}
+                    OptionUrl("une page web", $type.url)
                     if let webpage = type.url, let url = URL(string: webpage) {
                         Button(action:{ pageon = true })
                         {Image(systemName: "arrow.down")}
                             .sheet(isPresented: $pageon){
-                                WebView(url: url).frame(width:400,height:600)
+                                WebView(url: url).frame(width:600,height:800)
                             }
                     }
-                }
+                }.padding()
             }
         }
         
@@ -114,11 +117,11 @@ public struct TypeArticleEditor : View {
 // https://apple.com
 
 struct TypePreditor : View {
-    var taxionomy = Taxionomy(taxionomie2)
+    var besoins = Taxionomy(taxionomie2)
     @State var type = TypeArticle()
     
     var body : some View {
-        TypeArticleEditor($type, taxionomy)
+        TypeArticleEditor($type, besoins)
     }
 }
 

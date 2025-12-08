@@ -13,7 +13,12 @@ import Taxionomy
 public struct Articleref: Codable {
     
     public var articles : [Article] = []
-    var nomenclatures = Nomenclatures()
+    public var types: [TypeArticle] = []
+    var besoins = Taxionomy()
+    var contenants = Taxionomy()
+    var fermetures = Taxionomy()
+    var soustypes: [String:Taxionomy] = [:]
+    var cadrages: [String:Cadrage] = [:]
     
     public init() {}
     
@@ -27,27 +32,57 @@ public struct Articleref: Codable {
         return found
     }
     
-   
-    var types: [TypeArticle] {nomenclatures.types}
-    
     public func type(_ id:String) -> TypeArticle {
-        nomenclatures.type(id)
+        var found = TypeArticle()
+        for type in types {
+            if type.id == id { found = type }
+        }
+        return found
+    }
+    
+    public mutating func insert(_ type:TypeArticle) {
+        var found = false
+        var new:[TypeArticle] = []
+        for item in types {
+            if type.id == item.id {
+                new.append(type)
+                found = true
+            } else {
+                new.append(item)
+            }
+        }
+        if found { types = new } else { types = [type] + types }
+    }
+    
+    public func besoin(_ id:String) -> Taxion {
+        besoins.find(id)
+    }
+    
+    public func contenant(_ id:String) -> Taxion {
+        contenants.find(id)
+    }
+    
+    public func fermeture(_ id:String) -> Taxion {
+        fermetures.find(id)
+    }
+    
+    public func soustype(_ nomref:String, _ id:String) -> Taxion {
+        if let ref = soustypes[nomref] {
+            return ref.find(id)
+        } else {
+            return Taxion()
+        }
+    }
+    public func cadrage(_ nom:String) -> Cadrage {
+        if let cadrage = cadrages[nom] {
+            return cadrage
+        } else {
+            return Cadrage()
+        }
     }
     
     func articlelist(_ tidid:String) -> [Article] {
         articles.filter({article in tidid == article.tid})
-    }
-    
-    public func besoin(_ id:String) -> Taxion {
-        nomenclatures.besoin(id)
-    }
-    
-    public func contenant(_ id:String) -> Taxion {
-        nomenclatures.contenant(id)
-    }
-    
-    mutating func insert(_ type:TypeArticle) {
-        nomenclatures.insert(type)
     }
     
     mutating func insert(_ article:Article) {
