@@ -90,11 +90,12 @@ public struct TypeArticleEditor : View {
                             )
                         }
                     }
+                }.frame(width:800, height:800).padding()
                     OptionUrl("page web", $type.url)
                     if let webpage = type.url, let url = URL(string: webpage) {
                         WebView(url: url)
                     }
-                }.frame(width:800, height:800).padding()
+               
             }
         }
         
