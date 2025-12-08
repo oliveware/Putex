@@ -92,13 +92,14 @@ public struct TypeArticleEditor : View {
                         }.padding()
                     }
                 }.frame(width:600).padding()
+                HStack {
                     OptionUrl("page web", $type.url)
                     if let webpage = type.url, let url = URL(string: webpage) {
-                        Button(action:{ type.cadrage = nil })
+                        Button(action:{ pageon = true })
                         {Image(systemName: "arrow.down")}
                             .sheet(isPresented: $pageon){WebView(url: url)}
                     }
-               
+                }
             }
         }
         
