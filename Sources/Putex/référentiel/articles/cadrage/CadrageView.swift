@@ -13,7 +13,7 @@ struct CadrageView : View {
 
     @State private var nom: String = ""
     @State var delete = false
-    @State var ajout: Bool
+    @State var ajout = false
     @FocusState private var focused : Bool
     
     @State var selected:OptionArticle?
@@ -32,15 +32,13 @@ struct CadrageView : View {
     init(_ cadrage:Binding<Cadrage>, _ configurator:Binding<Configurator>) {
         _cadrage = cadrage
         _configurator = configurator
-        ajout = cadrage.wrappedValue.isNaN
         configurable = cadrage.wrappedValue.configurable || !configurator.wrappedValue.isNaN
     }
     
     var body: some View {
-        HStack {
+        GroupBox("Options possibles") {
             VStack {
                 if !cadrage.isNaN {
-                    Text("options possibles").font(.title3)
                     Form {
                         ForEach($cadrage.options) {
                             option in
@@ -61,13 +59,9 @@ struct CadrageView : View {
                                     Button(action:{select( option.wrappedValue)})
                                     {Image(systemName: "arrow.right")}
                                 }
-                                
-                               
-                                
                             }.frame(minWidth: 100)
                         }
                     }.padding(2)
-                
                 }
                 if ajout {
                     HStack {
@@ -92,20 +86,19 @@ struct CadrageView : View {
                             focused = true
                         })
                         Spacer()
-                        
                     }
                 }
             }
-   
-            if configurator.isNaN {
-                Button("configurer les options", action:{configurator = Configurator()})
-            } else {
-                if let option = selected {
-                    Text("configuration de l'option \(option.nom )")
-                    ConfigurationFiller($configuration)
-                        .onChange(of : configuration, {cadrage.configure(option.id, configuration)})
-                }
-          }
+            
+            /*  if configurator.isNaN {
+             Button("configurer les options", action:{configurator = Configurator()})
+             } else {
+             if let option = selected {
+             Text("configuration de l'option \(option.nom )")
+             ConfigurationFiller($configuration)
+             .onChange(of : configuration, {cadrage.configure(option.id, configuration)})
+             }
+             }*/
         }
     }
 }

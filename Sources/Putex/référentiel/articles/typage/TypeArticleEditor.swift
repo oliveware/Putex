@@ -52,49 +52,46 @@ public struct TypeArticleEditor : View {
                     }
                 }
             }
+            
             if !type.isNaN {
-                HStack {
-                    VStack {
-                        TextField("description", text:$type.label)
-                        
-                        if let configurator = type.configurator {
-                            ConfiguratorMaker(Binding<Configurator>(
-                                get:{configurator},
-                                set:{type.configurator = $0}
-                            ))
+                TextField("description", text:$type.label)
+                ScrollView {
+                    HStack {
+                        OptionUrl("image", $type.imagurl)
+                        if let image = type.imagurl, let url = URL(string: image) {
+                            WebPicture(url)
+                                .frame(width:200, height:200)
                         }
                     }
-                    if let image = type.imagurl, let url = URL(string: image) {
-                        WebPicture(url)
-                            .frame(width:200, height:200)
-                    }
-                }
-                
-                if let cadrage = type.cadrage {
-                    CadrageView(
-                        Binding<Cadrage>(
-                            get:{cadrage},
-                            set:{type.cadrage = $0}
-                        ),
-                        Binding<Configurator>(
-                            get:{type.configurator ?? Configurator()},
+                    if let configurator = type.configurator {
+                        ConfiguratorMaker(Binding<Configurator>(
+                            get:{configurator},
                             set:{type.configurator = $0}
+                        ))
+                    }
+                    
+                    if let cadrage = type.cadrage {
+                        CadrageView(
+                            Binding<Cadrage>(
+                                get:{cadrage},
+                                set:{type.cadrage = $0}
+                            ),
+                            Binding<Configurator>(
+                                get:{type.configurator ?? Configurator()},
+                                set:{type.configurator = $0}
+                            )
                         )
-                    )
-                }
-                
-                if let webpage = type.url, let url = URL(string: webpage) {
-                    WebView(url: url)
-                }
-            
-                Spacer()
-                HStack {
-                    OptionUrl("image", $type.imagurl)
-                    OptionUrl("page web", $type.url)
-                }.padding(.bottom,20)
+                    }
+                    HStack {
+                        OptionUrl("page web", $type.url)
+                        if let webpage = type.url, let url = URL(string: webpage) {
+                            WebView(url: url)
+                        }
+                    }
+                }.frame(minWidth:600, minHeight: 400)
+                    .padding()
             }
-        }.frame(minWidth:600, minHeight: 400)
-            .padding()
+        }
         
     }
 }
