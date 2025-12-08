@@ -19,10 +19,8 @@ public struct NomenclatureManager : View {
     
     public var body: some View {
 
-            if nomenclatures.besoins.dim > 0 {
-                TypeArticleManager($nomenclatures.types, nomenclatures.besoins)
-                    .tabItem { Text("types") }.tag(2)
-            }
+            TypeArticleManager($nomenclatures.types, nomenclatures.besoins)
+                .tabItem { Text("types") }.tag(2)
             TaxionomyManager($nomenclatures.besoins)
                 .tabItem { Text("besoins") }.tag(3)
             TaxionomyManager($nomenclatures.contenants)

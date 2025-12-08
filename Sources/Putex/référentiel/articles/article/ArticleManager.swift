@@ -7,7 +7,6 @@
 
 import SwiftUI
 import Taxionomy
-import Putex
 
 public struct ArticleManager : View {
     @Binding var ref: Articleref
@@ -20,10 +19,8 @@ public struct ArticleManager : View {
     
     public var body: some View {
         TabView(selection: $selected) {
-            if ref.types.count > 0 {
-                ArticleList($ref.articles, ref)
+            ArticleList($ref.articles, ref)
                 .tabItem { Text("articles") }.tag(1)
-            }
             NomenclatureManager($ref.nomenclatures)
         }
     }

@@ -1,5 +1,5 @@
 import XCTest
-@testable import Putex
+@testable 
 
 final class PutexTests: XCTestCase {
     func testExample() throws {

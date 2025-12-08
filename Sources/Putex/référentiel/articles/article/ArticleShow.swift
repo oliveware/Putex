@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-import Putex
+
 
 struct ArticleShow: View {
     var ref:Articleref

@@ -5,7 +5,7 @@
 //  Created by Herve Crespel on 24/06/2025.
 //
 
-import Putex
+
 
 public enum Durable : String, Codable, Identifiable{
     public static var selector = "équipement"

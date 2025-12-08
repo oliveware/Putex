@@ -19,14 +19,14 @@ struct ConfiguratorMaker: View {
     }
     
     var body: some View {
-        VStack {
-            if !configurator.isNaN {
-                GroupBox("Configurateur") {
+        GroupBox("Configurateur") {
+            VStack {
+                if !configurator.isNaN {
                     Form {
                         ForEach($configurator.cars) {
                             car in
                             HStack {
-                                TextField(car.wrappedValue.nom, text:car.valeur)
+                                TextField(car.wrappedValue.nom, text:car.valeur, prompt: Text("valeur par défaut"))
                                 Spacer()
                                 if delete {
                                     Button(action:{
@@ -36,38 +36,36 @@ struct ConfiguratorMaker: View {
                                     {Image(systemName: "trash")}
                                 }
                                 
-                            }.frame(minWidth: 200)
+                            }//.frame(minWidth: 200)
                         }
                     }.padding(2)
                 }
-            }
-
-            if ajout {
-                HStack {
-                    TextField("", text:$nom).focused($focused)
-                    Button(action:{
-                        configurator.add(nom)
-                        nom = ""
-                        ajout = false
-                    })
-                    {Image(systemName: "checkmark")}
-                        .disabled(nom.count < 5)
-                }
-            } else {
-                HStack {
-                    Button("ajouter une caractéristique", action:{
-                        ajout = true
-                        focused = true
-                    })
-                    Spacer()
-                    if !configurator.isNaN {
-                        Button(action:{ delete.toggle() })
-                        {Image(systemName: "minus")}
+                if ajout {
+                    HStack {
+                        TextField("", text:$nom).focused($focused)
+                        Button(action:{
+                            configurator.add(nom)
+                            nom = ""
+                            ajout = false
+                        })
+                        {Image(systemName: "checkmark")}
+                            .disabled(nom.count < 5)
+                    }
+                } else {
+                    HStack {
+                        Button("ajouter une caractéristique", action:{
+                            ajout = true
+                            focused = true
+                        })
+                        Spacer()
+                        if !configurator.isNaN {
+                            Button(action:{ delete.toggle() })
+                            {Image(systemName: "minus")}
+                        }
                     }
                 }
-            }
-            
-        }.padding()
+            }.padding()
+        }
     }
 }
 
@@ -83,18 +81,19 @@ struct ConfigurationFiller: View {
     }
     
     var body: some View {
-        VStack {
+        GroupBox("Configuration") {
             if config.cars.count > 0 {
-                GroupBox("configuration") {
-                    Form {
-                        ForEach($config.cars) {
-                            car in
-                                TextField(car.wrappedValue.nom, text:car.valeur)
-                            .frame(minWidth: 200)
-                        }
-                    }.padding(2)
-                }
+                Form {
+                    ForEach($config.cars) {
+                        car in
+                            TextField(car.wrappedValue.nom, text:car.valeur)
+                        .frame(minWidth: 200)
+                    }
+                }.padding(2)
+            } else {
+                Text("configurateur non défini")
             }
+            
         }.padding()
     }
 }
