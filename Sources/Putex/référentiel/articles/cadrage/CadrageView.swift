@@ -52,13 +52,9 @@ struct CadrageView : View {
                                 } else {
                                     Text("     ")
                                 }
-                                
+                                Spacer()
                                 Text(option.wrappedValue.nom)
                                 Spacer()
-                                if configurable {
-                                    Button(action:{select( option.wrappedValue)})
-                                    {Image(systemName: "arrow.right")}
-                                }
                             }.frame(minWidth: 100)
                         }
                     }.padding(2)

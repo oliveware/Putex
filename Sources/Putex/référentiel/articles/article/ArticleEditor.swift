@@ -70,6 +70,11 @@ struct ArticleEditor: View {
                 
                 if let cadrage = type.cadrage {
                   //  OptionPicker(cadrage)
+                    Spacer()
+                  /*  if configurable {
+                        Button(action:{select( option.wrappedValue)})
+                        {Image(systemName: "arrow.right")}
+                    }*/
                 }
             }
 
