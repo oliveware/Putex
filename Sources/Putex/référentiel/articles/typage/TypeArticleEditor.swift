@@ -27,8 +27,9 @@ public struct TypeArticleEditor : View {
                 TaxionPicker($taxion, taxionomy, {
                     type.change(taxion)
                 })
-                Spacer()
+                
                 if !type.isNaN {
+                    Spacer()
                     if soustypage {
                         /* Picker("", selection:$type.soustype) {
                          ForEach(SousType.all) {
@@ -55,8 +56,6 @@ public struct TypeArticleEditor : View {
                 HStack {
                     VStack {
                         TextField("description", text:$type.label)
-                        
-                       
                         
                         if let configurator = type.configurator {
                             ConfiguratorMaker(Binding<Configurator>(
@@ -87,13 +86,12 @@ public struct TypeArticleEditor : View {
                 if let webpage = type.url, let url = URL(string: webpage) {
                     WebView(url: url)
                 }
-            }
-            Spacer()
-            HStack {
-                OptionUrl("image", $type.imagurl)
-                    .padding(.bottom,20)
-                
-                OptionUrl("page web", $type.url)
+            
+                Spacer()
+                HStack {
+                    OptionUrl("image", $type.imagurl)
+                    OptionUrl("page web", $type.url)
+                }.padding(.bottom,20)
             }
         }.frame(minWidth:600, minHeight: 400)
             .padding()
