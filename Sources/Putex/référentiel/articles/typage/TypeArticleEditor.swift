@@ -46,7 +46,10 @@ public struct TypeArticleEditor : View {
             if !type.isNaN {
                 if soustypage {
                     HStack {
-                        Button(action:{ type.soustype = nil })
+                        Button(action:{
+                            soustypage = false
+                            type.soustype = nil
+                        })
                         {Image(systemName: "delete.right")}
                         Text("sous-type non géré")
                     }
@@ -64,7 +67,7 @@ public struct TypeArticleEditor : View {
                             WebPicture(url)
                                 .frame(width:200, height:200)
                         }
-                    }.padding()
+                    }.frame(alignment:.leading).padding()
                     if let configurator = type.configurator {
                         HStack {
                             Button(action:{ type.configurator = nil })
@@ -92,10 +95,8 @@ public struct TypeArticleEditor : View {
                             )
                         }.padding()
                     }
-                }.frame(width:600).padding()
+                }.frame(width:800).padding()
                 HStack {
-                    Button(action:{ type.url = nil })
-                    {Image(systemName: "delete.right")}
                     OptionUrl("une page web", $type.url)
                     if let webpage = type.url, let url = URL(string: webpage) {
                         Button(action:{ pageon = true })
