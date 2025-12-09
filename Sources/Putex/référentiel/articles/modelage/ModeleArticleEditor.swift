@@ -9,12 +9,14 @@ import SwiftUI
 import Taxionomy
 
 struct ModeleArticleEditor : View {
-
+    var type : TypeArticle
     @Binding var modele:ModeleArticle
     
     var done: () -> Void
+    @State var pageon = false
     
-    public init(_ modele:Binding<ModeleArticle>, _ done: @escaping () -> Void) {
+    public init(_ type:TypeArticle,_ modele:Binding<ModeleArticle>, _ done: @escaping () -> Void) {
+        self.type = type
         _modele = modele
         self.done = done
     }
@@ -26,21 +28,49 @@ struct ModeleArticleEditor : View {
                 .padding(.bottom,20)
             
             // illustration/
-            OptionUrl("image", $modele.imagurl)
-                .padding(.bottom,20)
+            HStack{
+                OptionUrl("illustration", $modele.imagurl)
+                    .padding(.bottom,20)
+                if let image = modele.imagurl, let url = URL(string: image) {
+                    WebPicture(url)
+                        .frame(width:200, height:200)
+                } else {
+                    if let image = type.imagurl, let url = URL(string: image) {
+                        WebPicture(url)
+                            .frame(width:200, height:200)
+                    }
+                }
+            }.frame(alignment:.leading).padding()
             
-            OptionUrl("site web", $modele.url)
-                .padding(.bottom,20)
+            HStack {
+                OptionUrl("une page web", $modele.url)
+                if let webpage = modele.url, let url = URL(string: webpage) {
+                    Button(action:{ pageon = true })
+                    {Image(systemName: "arrow.down")}
+                        .sheet(isPresented: $pageon){
+                            WebView(url: url).frame(width:600,height:800)
+                        }
+                } else {
+                    if let webpage = type.url, let url = URL(string: webpage) {
+                        Button(action:{ pageon = true })
+                        {Image(systemName: "arrow.down")}
+                            .sheet(isPresented: $pageon){
+                                WebView(url: url).frame(width:600,height:800)
+                            }
+                    }
+                }
+            }.padding()
         }
     }
 }
 
 struct ModelePreditor : View {
+    var type = TypeArticle()
     @State var modele = ModeleArticle()
     func done() {}
     
     var body : some View {
-        ModeleArticleEditor($modele,  done)
+        ModeleArticleEditor(type, $modele, done)
     }
 }
 

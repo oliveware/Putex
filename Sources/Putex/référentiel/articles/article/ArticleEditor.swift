@@ -53,17 +53,16 @@ struct ArticleEditor: View {
                     if article.conditionnement == nil {
                         Button(" préciser le conditionnement", action:{ article.conditionnement = Conditionnement()})
                     } else {
+                        Button(action:{
+                            article.conditionnement = nil
+                        })
+                        {Image(systemName: "delete.right")}
                         HStack {
                             ConditionnementView(Binding<Conditionnement>(
                                 get: {article.conditionnement ?? Conditionnement()},
                                 set: {article.conditionnement = $0.isNaN ? nil : $0}
                                 
                             ), ref.fermetures, ref.contenants, {})
-                            
-                            Button(action:{
-                                article.conditionnement = nil
-                            })
-                            {Image(systemName: "delete.right")}.padding(.top, 20)
                         }
                     }
                 }

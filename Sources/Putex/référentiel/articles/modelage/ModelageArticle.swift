@@ -11,24 +11,24 @@ import Taxionomy
 public struct ModelageArticle : View {
     
     @Binding var modele: ModeleArticle
-    @State var type = TypeArticle()
+    var type = TypeArticle()
     @State var edition : Bool
     
     public init(_ type:TypeArticle,_ modele:Binding<ModeleArticle>) {
         self.type = type
         _modele = modele
-        edition = !modele.wrappedValue.isNaN
+        edition = modele.wrappedValue.isNaN
     }
     
     public var body: some View {
         VStack(alignment:.leading) {
             
-            TypeArticleShow(type)
+            Text(type.cartouche)
             
             if edition {
-                ModeleArticleEditor($modele, {})
+                ModeleArticleEditor(type, $modele, {})
             } else {
-               ModeleArticleShow(modele)
+               ModeleArticleShow(type, modele)
             }
             
             

@@ -9,26 +9,37 @@ import SwiftUI
 
 
 struct ModeleArticleShow: View {
-
+    var type : TypeArticle
     var modele: ModeleArticle
 
-    public init(_ modele:ModeleArticle) {
+    public init(_ type:TypeArticle,_ modele:ModeleArticle) {
+        self.type = type
         self.modele = modele
     }
     
     var body: some View {
         VStack {
             HStack {
-                Text(modele.show)
-                
+                VStack {
+                    Text(type.cartouche)
+                    Text(modele.show)
+                }
                 if let image = modele.imagurl, let url = URL(string: image) {
                     WebPicture(url)
                         .frame(width:200, height:200)
+                } else {
+                    if let image = type.imagurl, let url = URL(string: image) {
+                        WebPicture(url)
+                            .frame(width:200, height:200)
+                    }
                 }
             }
             if let webpage = modele.url, let url = URL(string: webpage) {
                 WebView(url: url)
-                //Text("site web : \(url)")
+            } else {
+                if let webpage = type.url, let url = URL(string: webpage) {
+                    WebView(url: url)
+                }
             }
         }
     }
@@ -38,11 +49,12 @@ struct ModeleArticleShow: View {
 // https://apple.com
 
 struct ModelePreview : View {
-    @State var modele = ModeleArticle()
+    var type = TypeArticle()
+    var modele = ModeleArticle()
     func done() {}
     
     var body : some View {
-        ModeleArticleShow(modele)
+        ModeleArticleShow(type, modele)
             .frame(width:600, height:600)
     }
 }

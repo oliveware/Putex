@@ -14,8 +14,11 @@ public struct TypeArticle: Codable, Identifiable {
     public init() {}
     mutating func change(_ taxion:Taxion) {
         id = taxion.id
-        label = taxion.complet()
+        full = taxion.full
+        if label == "" { label = taxion.short }
     }
+    
+    var full: [String] = []
     
     public var label: String = ""
     
@@ -34,6 +37,32 @@ public struct TypeArticle: Codable, Identifiable {
     
     var isNaN:Bool {
         id == "" || label == ""
+    }
+    
+    var line: String {
+        var string = label
+        var fin = ""
+        if full.count  > 0 {
+            if full[0] != label {
+                string = label + " ( " + full[0]
+                fin = " )"
+            }
+            if let soustype = soustype {
+                string = string + " - " + soustype.nom
+            }
+        }
+        return string + fin
+    }
+    
+    var cartouche: String {
+        var string = line
+        if full[1] != "" {
+             string = line + "\n" + full[1]
+        }
+        if full[2] != "" {
+             string = string + "\n" + full[2]
+        }
+        return string
     }
     
 }
