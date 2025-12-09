@@ -13,14 +13,18 @@ struct OptionArticleView: View {
     @State var config: Config
  //   @State private var edition : Bool
     
-    init(_ cadrage:Cadrage, _ option:Binding<OptionArticle>, _ configurator:Configurator) {
+    init(_ cadrage:Cadrage, _ option:Binding<OptionArticle>, _ typeconfigurator:Configurator?) {
         self.cadrage = cadrage
         _option = option
   //      edition = option.wrappedValue.isNaN
-        if let config = option.wrappedValue.config {
-            self.config = config
+        if let optionconfig = option.wrappedValue.config {
+            config = optionconfig
         } else {
-            self.config = Config(configurator)
+            if let configurator = typeconfigurator {
+                config = Config(configurator)
+            } else {
+                config = Config()
+            }
         }
     }
     @State var pick = false

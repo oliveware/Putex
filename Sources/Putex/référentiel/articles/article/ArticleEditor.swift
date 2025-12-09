@@ -53,15 +53,12 @@ struct ArticleEditor: View {
                     if article.conditionnement == nil {
                         Button(" préciser le conditionnement", action:{ article.conditionnement = Conditionnement()})
                     } else {
-                        Button(action:{
-                            article.conditionnement = nil
-                        })
-                        {Image(systemName: "delete.right")}
                         HStack {
+                            Button(action:{ article.conditionnement = nil })
+                            {Image(systemName: "delete.right")}
                             ConditionnementView(Binding<Conditionnement>(
                                 get: {article.conditionnement ?? Conditionnement()},
                                 set: {article.conditionnement = $0.isNaN ? nil : $0}
-                                
                             ), ref.fermetures, ref.contenants, {})
                         }
                     }
@@ -71,7 +68,7 @@ struct ArticleEditor: View {
                     OptionArticleView(cadrage, Binding<OptionArticle>(
                         get: { $article.wrappedValue.option ?? OptionArticle("") },
                         set: { article.option = $0}
-                    ), type.configurator! )
+                    ), type.configurator )
                     Spacer()
                   /*  if configurable {
                         Button(action:{select( option.wrappedValue)})
