@@ -28,7 +28,7 @@ public struct Typicker: View {
                 Button(action: {pick = true})
                 { Image(systemName: "pencil") }
                     .sheet(isPresented:$pick)
-                {ScrollView {
+                { ScrollView {
                     ForEach(types) {
                         type in
                         HStack {
@@ -37,10 +37,10 @@ public struct Typicker: View {
                                 tid = type.id
                                 pick = false
                             })
-                            { Image(systemName: "pencil") }
+                            { Image(systemName: "arrow.down") }
                         }
-                    }
-                }
+                    }.padding()
+                 }
                 }
             }
         } 

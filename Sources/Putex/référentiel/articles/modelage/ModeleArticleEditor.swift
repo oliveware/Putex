@@ -43,7 +43,7 @@ struct ModeleArticleEditor : View {
             }.frame(alignment:.leading).padding()
             
             HStack {
-                OptionUrl("une page web", $modele.url)
+                OptionUrl("page web", $modele.url)
                 if let webpage = modele.url, let url = URL(string: webpage) {
                     Button(action:{ pageon = true })
                     {Image(systemName: "arrow.down")}
@@ -53,7 +53,8 @@ struct ModeleArticleEditor : View {
                 } else {
                     if let webpage = type.url, let url = URL(string: webpage) {
                         Button(action:{ pageon = true })
-                        {Image(systemName: "arrow.down")}
+                        {Text("voir celle du type")}
+                      //  {Image(systemName: "arrow.down")}
                             .sheet(isPresented: $pageon){
                                 WebView(url: url).frame(width:600,height:800)
                             }

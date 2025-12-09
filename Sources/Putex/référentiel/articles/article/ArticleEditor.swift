@@ -32,10 +32,7 @@ struct ArticleEditor: View {
     var body: some View {
         VStack(alignment:.leading) {
             Text("description d'un article").font(.title3).padding()
-            HStack {
-                Text("label : ")
-                TextField("label", text:$article.label)
-            }.padding()
+           
             if article.tid == "" {
                 if ref.types.count > 0 {
                     Typicker($article.tid, ref.types)
@@ -43,6 +40,18 @@ struct ArticleEditor: View {
                     Text("aucun type n'est défini")
                 }
             } else {
+                HStack {
+                    Text("label : ")
+                    TextField("label", text:$article.label)
+                }.padding()
+                
+                if let cadrage = type.cadrage {
+                    OptionArticleView(cadrage, Binding<OptionArticle>(
+                        get: { $article.wrappedValue.option ?? OptionArticle("") },
+                        set: { article.option = $0}
+                    ), type.configurator )
+                }
+                
                 if article.modele == nil {
                     Button("ajouter un modèle", action:{article.modele = ModeleArticle()})
                 } else {
@@ -64,17 +73,7 @@ struct ArticleEditor: View {
                     }
                 }
                 
-                if let cadrage = type.cadrage {
-                    OptionArticleView(cadrage, Binding<OptionArticle>(
-                        get: { $article.wrappedValue.option ?? OptionArticle("") },
-                        set: { article.option = $0}
-                    ), type.configurator )
-                    Spacer()
-                  /*  if configurable {
-                        Button(action:{select( option.wrappedValue)})
-                        {Image(systemName: "arrow.right")}
-                    }*/
-                }
+                
             }
 
             Spacer()
