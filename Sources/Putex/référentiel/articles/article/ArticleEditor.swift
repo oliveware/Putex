@@ -30,70 +30,72 @@ struct ArticleEditor: View {
     }
     
     var body: some View {
-        VStack(alignment:.leading) {
-          //  Text("description d'un article").font(.title3).padding()
-            if ref.types.count > 0 {
-            if article.tid == "" {
-                Typicker($article.tid, ref.types)
-            } else {
-                HStack {
-                    Text("label : ")
-                    TextField("label", text:$article.label)
-                        .font(.title3).padding()
-                }.padding()
-                Typicker($article.tid, ref.types)
-                if let cadrage = type.cadrage {
-                    OptionArticleView(cadrage, Binding<OptionArticle>(
-                        get: { $article.wrappedValue.option ?? OptionArticle("") },
-                        set: { article.option = $0}
-                    ), type.configurator )
-                }
-                
-                if article.modele == nil {
-                    Button("ajouter un modèle", action:{article.modele = ModeleArticle()})
-                } else {
-                    ModelageArticle(type, $modele)
-                }
-                
-                if type.conditionné {
-                    if article.conditionnement == nil {
-                        Button(" préciser le conditionnement", action:{ article.conditionnement = Conditionnement()})
+        ScrollView {
+            VStack(alignment:.leading) {
+                //  Text("description d'un article").font(.title3).padding()
+                if ref.types.count > 0 {
+                    if article.tid == "" {
+                        Typicker($article.tid, type, ref.types)
                     } else {
                         HStack {
-                            Button(action:{ article.conditionnement = nil })
-                            {Image(systemName: "delete.right")}
-                            ConditionnementView(Binding<Conditionnement>(
-                                get: {article.conditionnement ?? Conditionnement()},
-                                set: {article.conditionnement = $0.isNaN ? nil : $0}
-                            ), ref.fermetures, ref.contenants, {})
+                            Text("label : ")
+                            TextField("label", text:$article.label)
+                                .font(.title3).padding(.bottom,5)
+                        }.padding()
+                        Typicker($article.tid, type, ref.types)
+                        if let cadrage = type.cadrage {
+                            OptionArticleView(cadrage, Binding<OptionArticle>(
+                                get: { $article.wrappedValue.option ?? OptionArticle("") },
+                                set: { article.option = $0}
+                            ), type.configurator )
                         }
-                    }
-                }
-                
-                
-            }
-
-            Spacer()
-            HStack {
-                Spacer()
-                Button("annuler", action:{edition = false})
-                if !article.isNaN {
-                    Button(action:{
-                        //article.modele = modele.isNaN ? nil : modele
-                        if modele.isNaN {
-                            article.modele = nil
+                        
+                        if article.modele == nil {
+                            Button("ajouter un modèle", action:{article.modele = ModeleArticle()})
                         } else {
-                            article.modele = modele
+                            ModelageArticle(type, $modele)
                         }
-                        edition = false})
-                    {Text("valider")}
+                        
+                        if type.conditionné {
+                            if article.conditionnement == nil {
+                                Button(" préciser le conditionnement", action:{ article.conditionnement = Conditionnement()})
+                            } else {
+                                HStack {
+                                    Button(action:{ article.conditionnement = nil })
+                                    {Image(systemName: "delete.right")}
+                                    ConditionnementView(Binding<Conditionnement>(
+                                        get: {article.conditionnement ?? Conditionnement()},
+                                        set: {article.conditionnement = $0.isNaN ? nil : $0}
+                                    ), ref.fermetures, ref.contenants, {})
+                                }
+                            }
+                        }
+                        
+                        
+                    }
+                    
+                    Spacer()
+                    HStack {
+                        Spacer()
+                        Button("annuler", action:{edition = false})
+                        if !article.isNaN {
+                            Button(action:{
+                                //article.modele = modele.isNaN ? nil : modele
+                                if modele.isNaN {
+                                    article.modele = nil
+                                } else {
+                                    article.modele = modele
+                                }
+                                edition = false})
+                            {Text("valider")}
+                        }
+                        Spacer()
+                    }
+                } else {
+                    Text("aucun type n'est défini")
                 }
-                Spacer()
-            }
-            } else {
-                Text("aucun type n'est défini")
-            }
-        }.padding()
+            }.padding()
+        }
     }
 }
 

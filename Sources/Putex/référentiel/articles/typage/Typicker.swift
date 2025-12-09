@@ -10,9 +10,11 @@ public struct Typicker: View {
     @Binding var tid : String
     var types:[TypeArticle]
     @State var pick : Bool
+    @State var selected : TypeArticle
     
-    public init(_ tid:Binding<String>, _ types:[TypeArticle]) {
+    public init(_ tid:Binding<String>,_ type:TypeArticle, _ types:[TypeArticle]) {
         _tid = tid
+        selected = type
         self.types = types
         pick = tid.wrappedValue == ""
     }
@@ -23,7 +25,7 @@ public struct Typicker: View {
                 if tid == "" {
                     Text("choisir un type")
                 } else {
-                    Text(tid)
+                    Text(selected.line)
                 }
                 Button(action: {pick = true})
                 { Image(systemName: "pencil") }
@@ -32,8 +34,9 @@ public struct Typicker: View {
                         ForEach(types) {
                             type in
                             HStack {
-                                Text(type.label)
+                                Text(type.line)
                                 Button(action: {
+                                    selected = type
                                     tid = type.id
                                     pick = false
                                 })
