@@ -23,11 +23,18 @@ struct OptionArticleView: View {
             self.config = Config(configurator)
         }
     }
+    @State var pick = false
     var body:some View {
         GroupBox("option") {
-            ItemPicker(cadrage.options, $option, {})
-                .frame(width:200)
-            if cadrage.configurable {
+            HStack {
+                Text(option.label)
+                Button(action: {pick = true})
+                {Image(systemName: "pencil")}
+                    .sheet(isPresented: $pick)
+                {ItemPicker(cadrage.options, $option, {pick = false})
+                    .frame(width:200)}
+            }
+            if option.label != "" && cadrage.configurable {
                 Text("configuration")
                 ConfigurationFiller($config)
                     .onChange(of : config, {option.config = config})

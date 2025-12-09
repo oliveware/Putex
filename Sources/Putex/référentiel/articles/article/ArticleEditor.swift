@@ -69,7 +69,7 @@ struct ArticleEditor: View {
                 
                 if let cadrage = type.cadrage {
                     OptionArticleView(cadrage, Binding<OptionArticle>(
-                        get: { $article.wrappedValue.option! },
+                        get: { $article.wrappedValue.option ?? OptionArticle("") },
                         set: { article.option = $0}
                     ), type.configurator! )
                     Spacer()
