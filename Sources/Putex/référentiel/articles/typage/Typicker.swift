@@ -25,7 +25,7 @@ public struct Typicker: View {
                 if tid == "" {
                     Text("choisir un type")
                 } else {
-                    Text(selected.line)
+                    Text(selected.cartouche)
                 }
                 Button(action: {pick = true})
                 { Image(systemName: "pencil") }
