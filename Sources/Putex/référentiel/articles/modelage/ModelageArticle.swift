@@ -25,12 +25,17 @@ public struct ModelageArticle : View {
             
             Text(type.cartouche)
             
-            if edition {
-                ModeleArticleEditor(type, $modele, {})
-            } else {
-               ModeleArticleShow(type, modele)
+            HStack {
+                if edition {
+                    ModeleArticleEditor(type, $modele, {})
+                    Button(action: {edition = false})
+                    {Image(systemName: "checkmark")}
+                } else {
+                    ModeleArticleShow(type, modele)
+                    Button(action: {edition = true})
+                    {Image(systemName: "pencil")}
+                }
             }
-            
             
         }
     }
