@@ -31,20 +31,17 @@ struct ArticleEditor: View {
     
     var body: some View {
         VStack(alignment:.leading) {
-            Text("description d'un article").font(.title3).padding()
-           
+          //  Text("description d'un article").font(.title3).padding()
+            if ref.types.count > 0 {
             if article.tid == "" {
-                if ref.types.count > 0 {
-                    Typicker($article.tid, ref.types)
-                } else {
-                    Text("aucun type n'est défini")
-                }
+                Typicker($article.tid, ref.types)
             } else {
                 HStack {
                     Text("label : ")
                     TextField("label", text:$article.label)
+                        .font(.title3).padding()
                 }.padding()
-                
+                Typicker($article.tid, ref.types)
                 if let cadrage = type.cadrage {
                     OptionArticleView(cadrage, Binding<OptionArticle>(
                         get: { $article.wrappedValue.option ?? OptionArticle("") },
@@ -92,6 +89,9 @@ struct ArticleEditor: View {
                     {Text("valider")}
                 }
                 Spacer()
+            }
+            } else {
+                Text("aucun type n'est défini")
             }
         }.padding()
     }

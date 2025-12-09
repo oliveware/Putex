@@ -28,19 +28,19 @@ public struct Typicker: View {
                 Button(action: {pick = true})
                 { Image(systemName: "pencil") }
                     .sheet(isPresented:$pick)
-                { ScrollView {
-                    ForEach(types) {
-                        type in
-                        HStack {
-                            Text(type.label)
-                            Button(action: {
-                                tid = type.id
-                                pick = false
-                            })
-                            { Image(systemName: "arrow.down") }
+                    { ScrollView {
+                        ForEach(types) {
+                            type in
+                            HStack {
+                                Text(type.label)
+                                Button(action: {
+                                    tid = type.id
+                                    pick = false
+                                })
+                                { Image(systemName: "arrow.down") }
+                            }
                         }
-                    }.padding()
-                 }
+                     }.padding()
                 }
             }
         } 
