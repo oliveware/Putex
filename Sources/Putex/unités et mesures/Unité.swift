@@ -7,6 +7,7 @@
 
 import Foundation
 import SwiftUI
+import Taxionomy
 
 public enum Unité: String, Codable, Enumerable {
     

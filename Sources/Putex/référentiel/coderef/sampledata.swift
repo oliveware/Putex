@@ -4,6 +4,7 @@
 //
 //  Created by Herve Crespel on 11/10/2024.
 //
+import Taxionomy
 
 public let tables = [
     "banques": Coderef(

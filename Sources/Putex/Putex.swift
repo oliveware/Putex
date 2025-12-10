@@ -2,6 +2,7 @@
 // https://docs.swift.org/swift-book
 
 import SwiftUI
+import Taxionomy
 
 public struct Putex: View {
     

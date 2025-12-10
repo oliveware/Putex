@@ -5,6 +5,7 @@
 //  Created by Herve Crespel on 27/09/2024.
 //
 import SwiftUI
+import Taxionomy
 
 public struct OptionalView: View {
     @Binding var string:String?

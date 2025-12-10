@@ -5,7 +5,7 @@
 //  Created by Herve Crespel on 21/05/2024.
 //
 
-import Foundation
+import Taxionomy
 
 
 struct Putexdata {

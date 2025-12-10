@@ -7,6 +7,8 @@
 
 // le nom Coderef évite la confusion avec Foundation.Table
 //
+import Taxionomy
+
 public struct Coderef: Codable, Identifiable {
     public var label: String {name.pluriel}
     

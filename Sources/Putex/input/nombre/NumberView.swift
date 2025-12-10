@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Taxionomy
 
 public struct NumberView: View {
     //@Environment(\.locale) var locale: Locale

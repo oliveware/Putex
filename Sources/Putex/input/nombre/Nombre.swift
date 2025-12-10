@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Taxionomy
 
 // représentation d'un nombre décimal en base 10
 public struct Nombre: Codable {

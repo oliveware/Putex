@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Taxionomy
 
 public struct PutexCatalog: View {
     @State var mot = Mot("","")

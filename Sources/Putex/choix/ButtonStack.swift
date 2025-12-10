@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Taxionomy
 
 struct ButtonRow: View {
     @Binding var selected:(row:Int, col:Int)

@@ -7,6 +7,7 @@
 
 
 import Foundation
+import Taxionomy
 
 
 // https://freeDeviseapi.com/docs/currencies
