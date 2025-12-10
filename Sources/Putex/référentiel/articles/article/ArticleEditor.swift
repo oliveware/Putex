@@ -54,13 +54,17 @@ struct ArticleEditor: View {
                         }
                         
                         if article.modele == nil {
-                            Button("ajouter un modèle", action:{
+                            Button("détails et illustrations", action:{
                                 article.modele = ModeleArticle(type)
                             }).padding()
                         } else {
-                            ModeleArticleEditor(type, $modele, {
-                                article.modele = modele.isNaN ? nil : modele
-                            })
+                            HStack {
+                                Button(action:{ article.modele = nil })
+                                {Image(systemName: "delete.right")}
+                                ModeleArticleEditor(type, $modele, {
+                                    article.modele = modele.isNaN ? nil : modele
+                                })
+                            }
                         }
                         
                         if type.conditionné {

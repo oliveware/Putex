@@ -30,8 +30,9 @@ struct OptionArticleView: View {
     }
     @State var pick = false
     var body:some View {
-        GroupBox("option") {
+       
             HStack {
+                Text("option : ")
                 Text(option.label)
                 Button(action: {pick = true})
                 {Image(systemName: "pencil")}
@@ -39,15 +40,12 @@ struct OptionArticleView: View {
                 {ItemPicker(cadrage.options, $option, {
                     pick = false
                     done()
-                })
-                    .frame(width:200)}
+                }).frame(width:200)}
             }
             if option.label != "" && cadrage.configurable {
-                Text("configuration")
                 ConfigurationFiller($config)
                     .onChange(of : config, {option.config = config})
             }
-        }
     }
 }
 
