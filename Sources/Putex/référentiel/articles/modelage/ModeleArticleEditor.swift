@@ -25,12 +25,10 @@ struct ModeleArticleEditor : View {
         VStack(alignment:.leading) {
             TextField("description", text:$modele.description)
             TextField("marque", text:$modele.marque)
-                .padding(.bottom,20)
             
             // illustration/
             HStack{
                 OptionUrl("illustration", $modele.imagurl)
-                    .padding(.bottom,20)
                 if let image = modele.imagurl, let url = URL(string: image) {
                     WebPicture(url)
                         .frame(width:200, height:200)
@@ -40,7 +38,7 @@ struct ModeleArticleEditor : View {
                             .frame(width:200, height:200)
                     }
                 }
-            }.frame(alignment:.leading).padding()
+            }.frame(alignment:.leading)
             
             HStack {
                 OptionUrl("page web", $modele.url)
@@ -60,8 +58,8 @@ struct ModeleArticleEditor : View {
                             }
                     }
                 }
-            }.padding()
-        }
+            }
+        }.padding()
     }
 }
 
@@ -75,4 +73,4 @@ struct ModelePreditor : View {
     }
 }
 
-#Preview { ModelePreditor().frame(width: 800, height:500) }
+#Preview { ModelePreditor().frame(width: 500, height:500) }
