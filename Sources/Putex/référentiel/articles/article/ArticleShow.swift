@@ -32,7 +32,7 @@ struct ArticleShow: View {
                         Text("type non défini")
                     } else {
                         Text(type.line)
-                        Text(type.taxiondetails)
+                        Text(type.details)
                     }
                     
                     if let modele = article.modele {

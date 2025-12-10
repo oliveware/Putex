@@ -14,11 +14,11 @@ public struct TypeArticle: Codable, Identifiable {
     public init() {}
     mutating func change(_ taxion:Taxion) {
         id = taxion.id
-        taxiondata = taxion.full
+        data = taxion.full
         if label == "" { label = taxion.short }
     }
     
-    var taxiondata: [String] = []
+    var data: [String] = []
     
     public var label: String = ""
     
@@ -42,9 +42,9 @@ public struct TypeArticle: Codable, Identifiable {
     var line: String {
         var string = label
         var fin = ""
-        if taxiondata.count  > 0 {
-            if taxiondata[0] != label {
-                string = label + " ( " + taxiondata[0]
+        if data.count  > 0 {
+            if data[0] != label {
+                string = label + " ( " + data[0]
                 fin = " )"
             }
             if let soustype = soustype {
@@ -54,10 +54,10 @@ public struct TypeArticle: Codable, Identifiable {
         return string + fin
     }
     
-    var taxiondetails: String {
-        switch taxiondata.count {
-        case 2: return taxiondata[1]
-        case 3: return taxiondata[1] + "\n" + taxiondata[2]
+    var details: String {
+        switch data.count {
+        case 2: return data[1]
+        case 3: return data[1] + "\n" + data[2]
         default: return ""
         }
     }

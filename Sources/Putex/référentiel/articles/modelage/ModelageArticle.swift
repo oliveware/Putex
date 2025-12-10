@@ -23,7 +23,7 @@ public struct ModelageArticle : View {
     public var body: some View {
         VStack(alignment:.leading) {
             
-            Text(type.taxiondetails)
+            Text(type.details)
             
             HStack {
                 if edition {

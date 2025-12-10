@@ -22,7 +22,7 @@ struct ModeleArticleShow: View {
             HStack {
                 VStack {
                     Text(type.line)
-                    Text(type.taxiondetails)
+                    Text(type.details)
                     Text(modele.show)
                 }
                 if let image = modele.imagurl, let url = URL(string: image) {
