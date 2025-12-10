@@ -11,9 +11,9 @@ struct OptionArticleView: View {
     var cadrage:Cadrage
     @Binding var option:OptionArticle
     @State var config: Config
- //   @State private var edition : Bool
+    var done: () -> Void
     
-    init(_ cadrage:Cadrage, _ option:Binding<OptionArticle>, _ typeconfigurator:Configurator?) {
+    init(_ cadrage:Cadrage, _ option:Binding<OptionArticle>, _ typeconfigurator:Configurator?, _ done: @escaping () -> Void) {
         self.cadrage = cadrage
         _option = option
   //      edition = option.wrappedValue.isNaN
@@ -26,6 +26,7 @@ struct OptionArticleView: View {
                 config = Config()
             }
         }
+        self.done = done
     }
     @State var pick = false
     var body:some View {
@@ -35,7 +36,10 @@ struct OptionArticleView: View {
                 Button(action: {pick = true})
                 {Image(systemName: "pencil")}
                     .sheet(isPresented: $pick)
-                {ItemPicker(cadrage.options, $option, {pick = false})
+                {ItemPicker(cadrage.options, $option, {
+                    pick = false
+                    done()
+                })
                     .frame(width:200)}
             }
             if option.label != "" && cadrage.configurable {
