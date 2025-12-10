@@ -53,7 +53,9 @@ struct ArticleEditor: View {
                         if article.modele == nil {
                             Button("ajouter un modèle", action:{article.modele = ModeleArticle()})
                         } else {
-                            ModeleArticleEditor(type, $modele, {})
+                            ModeleArticleEditor(type, $modele, {
+                                article.modele = modele.isNaN ? nil : modele
+                            })
                         }
                         
                         if type.conditionné {
@@ -74,23 +76,16 @@ struct ArticleEditor: View {
                         
                     }
                     
-                    Spacer()
+                  /*  Spacer()
                     HStack {
                         Spacer()
                         Button("annuler", action:{edition = false})
                         if !article.isNaN {
-                            Button(action:{
-                                //article.modele = modele.isNaN ? nil : modele
-                                if modele.isNaN {
-                                    article.modele = nil
-                                } else {
-                                    article.modele = modele
-                                }
-                                edition = false})
+                            Button(action:{ edition = false })
                             {Text("valider")}
                         }
                         Spacer()
-                    }
+                    }*/
                 } else {
                     Text("aucun type n'est défini")
                 }
