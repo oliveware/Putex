@@ -45,7 +45,7 @@ struct ArticleEditor: View {
                         TextField("label", text:$article.label)
                                 .font(.title3).padding(.bottom,5)
                         typicker
-                        Text(type.details)
+                        
                         if let cadrage = type.cadrage {
                             OptionArticleView(cadrage, Binding<OptionArticle>(
                                 get: { $article.wrappedValue.option ?? OptionArticle("") },
