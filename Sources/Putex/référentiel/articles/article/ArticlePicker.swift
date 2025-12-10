@@ -7,39 +7,44 @@
 import SwiftUI
 
 
-struct ArticlePicker : View {
-    var ref : Articleref
-    @Binding var article: Article
-    var done: () -> Void
+public struct ArticlePicker : View {
+    var items: [Article]
+    @Binding var selected : Article
     @State var pick : Bool
     
-    public init(_ article:Binding<Article>, _ ref:Articleref, _ done:@escaping () -> Void) {
-        _article = article
-        self.ref = ref
-     //  taxion = ref.besoin(article.wrappedValue.tid)
-        self.done = done
+    public init(_ items:[Article], _ article:Binding<Article>) {
+        self.items = items
+        _selected = article
         pick = article.wrappedValue.isNaN
     }
 
-    
-   var body : some View {
-        VStack (){
+    public var body: some View {
+        if items.count == 0 {
+            Text("aucun article")
+        } else {
             HStack {
+                Text(selected.show)
                 Spacer()
-                Text("article").font(.title3)
-                Spacer()
-                Button(action:{pick = true})
-                {Image(systemName: "list.triangle")}
+                Button(action: {pick = true})
+                {Image(systemName: "pencil")}
+                .sheet(isPresented: $pick) {
+                    ScrollView {
+                        ForEach(items){
+                            item in
+                            HStack(spacing:30) {
+                                Text(item.show)
+                                Spacer()
+                                Button(action:{
+                                    selected = item
+                                    pick = false
+                                })
+                                {Image(systemName: "list.triangle")}
+                            }
+                        }.padding(10)
+                    }
+                }
             }
-            if pick {
-                ArticlePicker($article, ref, {
-                    pick = false
-                    done()
-                })
-            } else {
-                ArticleShow(article, ref)
-            }
-        }.padding().border(.gray).cornerRadius(3)
+        }
     }
 }
 

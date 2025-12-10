@@ -86,6 +86,9 @@ extension Article {
     static func == (_ a:Article,_ b:Article) -> Bool {
         a.tid == b.tid && a.label == b.label
     }
+    static func > (_ a:Article,_ b:Article) -> Bool {
+        a.tid > b.tid
+    }
     
     public static var warning = "aucun article défini"
     
