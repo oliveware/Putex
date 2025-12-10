@@ -31,14 +31,14 @@ struct ConservationView: View {
     
     var body: some View {
         if edition {
-            editor.frame(width:300, alignment:.leading)
+            editor.frame(alignment:.leading)
         } else {
             HStack {
                 Text("conservation : \(conserve.show)")
                 Spacer()
                 Button(action:{edition = true})
                 {Image(systemName: "pencil")}
-            }.frame(width:300, alignment:.leading)
+            }.frame(alignment:.leading)
         }
     }
 }

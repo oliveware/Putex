@@ -44,7 +44,6 @@ struct ArticleEditor: View {
                     } else {
                         TextField("label", text:$article.label)
                                 .font(.title3).padding(.bottom,5)
-                                .padding()
                         typicker
                         Text(type.details)
                         if let cadrage = type.cadrage {
@@ -55,7 +54,7 @@ struct ArticleEditor: View {
                         }
                         
                         if article.modele == nil {
-                            Button("ajouter un modèle", action:{article.modele = ModeleArticle()})
+                            Button("ajouter un modèle", action:{article.modele = ModeleArticle()}).padding()
                         } else {
                             ModeleArticleEditor(type, $modele, {
                                 article.modele = modele.isNaN ? nil : modele
