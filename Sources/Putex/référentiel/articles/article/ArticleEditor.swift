@@ -50,7 +50,7 @@ struct ArticleEditor: View {
                             OptionArticleView(cadrage, Binding<OptionArticle>(
                                 get: { $article.wrappedValue.option ?? OptionArticle("") },
                                 set: { article.option = $0}
-                            ), type.configurator, {article.label += " " + (article.option?.label ?? "")} )
+                            ), type.configurator, { article.setlabel(ref) } )
                         }
                         
                         if article.modele == nil {

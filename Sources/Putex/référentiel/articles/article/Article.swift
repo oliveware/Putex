@@ -31,6 +31,10 @@ public struct Article : Codable, Identifiable, Oxet {
     var option: OptionArticle?
     var conditionnement: Conditionnement?
     
+    mutating func setlabel(_ ref:Articleref) {
+        label = type(ref).label + " " + (option?.label ?? "")
+    }
+    
     var cadré : Bool {
         option != nil
     }
