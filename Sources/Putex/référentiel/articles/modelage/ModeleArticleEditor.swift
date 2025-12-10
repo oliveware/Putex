@@ -32,11 +32,6 @@ struct ModeleArticleEditor : View {
                 if let image = modele.imagurl, let url = URL(string: image) {
                     WebPicture(url)
                         .frame(width:200, height:200)
-                } else {
-                    if let image = type.imagurl, let url = URL(string: image) {
-                        WebPicture(url)
-                            .frame(width:200, height:200)
-                    }
                 }
             }.frame(alignment:.leading)
             
@@ -48,15 +43,6 @@ struct ModeleArticleEditor : View {
                         .sheet(isPresented: $pageon){
                             WebView(url: url).frame(width:600,height:800)
                         }
-                } else {
-                    if let webpage = type.url, let url = URL(string: webpage) {
-                        Button(action:{ pageon = true })
-                        {Text("voir celle du type")}
-                      //  {Image(systemName: "arrow.down")}
-                            .sheet(isPresented: $pageon){
-                                WebView(url: url).frame(width:600,height:800)
-                            }
-                    }
                 }
             }
         }.padding()
@@ -65,7 +51,7 @@ struct ModeleArticleEditor : View {
 
 struct ModelePreditor : View {
     var type = TypeArticle()
-    @State var modele = ModeleArticle()
+    @State var modele = ModeleArticle(TypeArticle())
     func done() {}
     
     var body : some View {

@@ -44,7 +44,7 @@ public struct ModelageArticle : View {
 struct ModelagePreview : View {
 
     @State var type = TypeArticle()
-    @State var modele = ModeleArticle()
+    @State var modele = ModeleArticle(TypeArticle())
     func done() {}
     
     var body : some View {

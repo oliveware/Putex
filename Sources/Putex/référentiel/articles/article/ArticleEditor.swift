@@ -17,12 +17,12 @@ struct ArticleEditor: View {
     init(_ article:Binding<Article>, _ ref:Articleref, _ edition:Binding<Bool>) {
         _article = article
         self.ref = ref
-        type = article.wrappedValue.type(ref)
-
+        let type = article.wrappedValue.type(ref)
+        self.type = type
         if let model = article.wrappedValue.modele {
             modele =  model
         } else {
-            modele = ModeleArticle()
+            modele = ModeleArticle(type)
         }
         _edition = edition
     }
@@ -54,7 +54,9 @@ struct ArticleEditor: View {
                         }
                         
                         if article.modele == nil {
-                            Button("ajouter un modèle", action:{article.modele = ModeleArticle()}).padding()
+                            Button("ajouter un modèle", action:{
+                                article.modele = ModeleArticle(type)
+                            }).padding()
                         } else {
                             ModeleArticleEditor(type, $modele, {
                                 article.modele = modele.isNaN ? nil : modele

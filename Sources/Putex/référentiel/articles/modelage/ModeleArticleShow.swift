@@ -51,7 +51,7 @@ struct ModeleArticleShow: View {
 
 struct ModelePreview : View {
     var type = TypeArticle()
-    var modele = ModeleArticle()
+    var modele = ModeleArticle(TypeArticle())
     func done() {}
     
     var body : some View {

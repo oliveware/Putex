@@ -16,7 +16,11 @@ public struct ModeleArticle: Codable {
     public var imagurl: String?
     public var url: String?
     
-    public init() {}
+    public init(_ type:TypeArticle) {
+        description = type.details
+        imagurl = type.imagurl
+        url = type.url
+    }
     
     public var show: String {
         var string = description
