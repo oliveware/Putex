@@ -30,7 +30,7 @@ struct ArticleEditor: View {
     var typicker: some View {
         Typicker($type, ref.types, {
             article.tid = type.id
-            article.label = type.label
+            article.setlabel(ref)
         })
     }
     
@@ -56,7 +56,7 @@ struct ArticleEditor: View {
                         if article.modele == nil {
                             Button("détails et illustrations", action:{
                                 article.modele = ModeleArticle(type)
-                            }).padding()
+                            })
                         } else {
                             HStack {
                                 Button(action:{ article.modele = nil })
