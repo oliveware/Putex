@@ -46,7 +46,7 @@ struct ArticleEditor: View {
                                 .font(.title3).padding(.bottom,5)
                                 .padding()
                         typicker
-                        
+                        Text(type.taxiondetails)
                         if let cadrage = type.cadrage {
                             OptionArticleView(cadrage, Binding<OptionArticle>(
                                 get: { $article.wrappedValue.option ?? OptionArticle("") },

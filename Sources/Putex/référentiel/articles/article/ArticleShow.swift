@@ -31,7 +31,8 @@ struct ArticleShow: View {
                     if article.tid == "" {
                         Text("type non défini")
                     } else {
-                        Text(type.cartouche)
+                        Text(type.line)
+                        Text(type.taxiondetails)
                     }
                     
                     if let modele = article.modele {
