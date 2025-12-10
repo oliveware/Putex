@@ -7,25 +7,25 @@
 import SwiftUI
 
 public struct Typicker: View {
-    @Binding var tid : String
+    @Binding var type : TypeArticle
     var types:[TypeArticle]
+    var done: () -> Void
     @State var pick : Bool
-    @State var selected : TypeArticle
     
-    public init(_ tid:Binding<String>,_ type:TypeArticle, _ types:[TypeArticle]) {
-        _tid = tid
-        selected = type
+    public init(_ type:Binding<TypeArticle>, _ types:[TypeArticle],  _ done:@escaping () -> Void) {
+        _type = type
         self.types = types
-        pick = tid.wrappedValue == ""
+        self.done = done
+        pick = type.wrappedValue.id == ""
     }
     
     public var body:some View {
         if types.count > 0 {
             HStack {
-                if tid == "" {
+                if type.id == "" {
                     Text("choisir un type")
                 } else {
-                    Text(selected.cartouche)
+                    Text(type.cartouche)
                 }
                 Button(action: {pick = true})
                 { Image(systemName: "pencil") }
@@ -36,9 +36,9 @@ public struct Typicker: View {
                             HStack {
                                 Text(type.line)
                                 Button(action: {
-                                    selected = type
-                                    tid = type.id
+                                    self.type = type
                                     pick = false
+                                    done()
                                 })
                                 { Image(systemName: "arrow.down") }
                             }

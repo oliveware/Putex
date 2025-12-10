@@ -96,7 +96,7 @@ public struct TypeArticleEditor : View {
                             )
                         }.padding()
                     }
-                }.frame(width:800).padding()
+                }.frame(minWidth:800, minHeight:600).padding()
                 HStack {
                     OptionUrl("une page web", $type.url)
                     if let webpage = type.url, let url = URL(string: webpage) {

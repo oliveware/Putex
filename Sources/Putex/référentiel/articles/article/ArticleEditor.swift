@@ -9,18 +9,16 @@ import Taxionomy
 
 struct ArticleEditor: View {
     var ref:Articleref
-    var type:TypeArticle
+    @State var type:TypeArticle
     @Binding var article:Article
     @State var modele: ModeleArticle
     @Binding var edition : Bool
- //   @State var besoin: Taxion
     
     init(_ article:Binding<Article>, _ ref:Articleref, _ edition:Binding<Bool>) {
         _article = article
         self.ref = ref
         type = article.wrappedValue.type(ref)
-    //    type = ref.type(article.wrappedValue.tid)
- //       besoin = ref.besoin(type.id)
+
         if let model = article.wrappedValue.modele {
             modele =  model
         } else {
@@ -29,20 +27,26 @@ struct ArticleEditor: View {
         _edition = edition
     }
     
+    var typicker: some View {
+        Typicker($type, ref.types, {
+            article.tid = type.id
+            article.label = type.label
+        })
+    }
+    
     var body: some View {
         ScrollView {
             VStack(alignment:.leading) {
                 //  Text("description d'un article").font(.title3).padding()
                 if ref.types.count > 0 {
                     if article.tid == "" {
-                        Typicker($article.tid, type, ref.types)
+                        typicker
                     } else {
-                        HStack {
-                            Text("label : ")
-                            TextField("label", text:$article.label)
+                        TextField("label", text:$article.label)
                                 .font(.title3).padding(.bottom,5)
-                        }.padding()
-                        Typicker($article.tid, type, ref.types)
+                                .padding()
+                        typicker
+                        
                         if let cadrage = type.cadrage {
                             OptionArticleView(cadrage, Binding<OptionArticle>(
                                 get: { $article.wrappedValue.option ?? OptionArticle("") },
