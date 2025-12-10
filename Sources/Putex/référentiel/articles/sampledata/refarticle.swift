@@ -9,62 +9,9 @@ public let refarticle = ArticlerefDocument(articlerefjson).ref
 
 public let articlerefjson = """
 {
-    "articles": [
-        {
-            "id": "A#6",
-            "label": "jus de pomme",
-            "tid": "1-2-15-51-93",
-            "modele": {
-                "fermeture": {
-                    "id": "2-8",
-                    "nom": "bouchon métal"
-                },
-                "marque": "",
-                "description": "",
-                "contenant": {
-                    "id": "1-1",
-                    "nom": "bouteille verre"
-                },
-                "conservation": {
-                    "mode": "frais",
-                    "conservateur": ""
-                }
-            }
-        },
-        {
-            "id": "A#10",
-            "label": "avocat",
-            "tid": "1-2-16-63-205",
-            "modele": {
-                "description": "Hass",
-                "marque": ""
-            }
-        },
-        {
-            "id": "A#45",
-            "label": "fraises Charlotte",
-            "tid": "1-2-15-48-70-135",
-            "modele": {
-                "description": "",
-                "marque": "",
-                "fermeture": {
-                    "nom": "couvercle parfait",
-                    "id": "3-7"
-                },
-                "conservation": {
-                    "mode": "confiture",
-                    "conservateur": ""
-                },
-                "contenant": {
-                    "nom": "bocal verre",
-                    "id": "2-8"
-                }
-            }
-        }
-    ],
-    
-"soustypes" : {},
-"cadrages" : {},
+    "articles": [],
+    "soustypes" : {},
+    "cadrages" : {},
     "fermetures": {
         "nom": "une fermeture",
         "levels": [
