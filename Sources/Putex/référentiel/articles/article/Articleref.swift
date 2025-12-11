@@ -84,6 +84,9 @@ public struct Articleref: Codable {
     func sametid(_ tidid:String) -> [Article] {
         articles.filter({article in tidid == article.tid})
     }
+    func sameparent(_ parentid:String) -> [Article] {
+        articles.filter({article in TID(article.tid).belongsto(parentid)})
+    }
     
     mutating func insert(_ article:Article) {
         var found = false
