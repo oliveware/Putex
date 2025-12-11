@@ -17,32 +17,7 @@ public struct Putex: View {
             VStack {
                 Text("Putex")
                     .font(.title3)
-                
-                HStack {
-                    Text("Mot").font(.title)
-                        .frame(width:150)
-                    MotView($data.mot).frame(width:400)
-                        .padding(10).border(.gray).cornerRadius(3)
-                }.frame(width:600, alignment:.leading)
-                    .padding(10)
-                HStack {
-                    Text("NomPropre").font(.title)
-                        .frame(width:150)
-                    NomPropre($data.nompropre, "compositeur", "aide" )
-                        .frame(width:400)
-                        .padding(10).border(.gray).cornerRadius(3)
-                }.frame(width:600, alignment:.leading)
-                    .padding(10)
-                HStack {
-                    Text("Line").font(.title)
-                        .frame(width:150)
-                Line(input:$data.ligne)
-                        .frame(width:400)
-                        .padding(10).border(.gray).cornerRadius(3)
-            }.frame(width:600, alignment:.leading)
-                .padding(10)
-                
-                
+
                 /*HStack(spacing:30){
                  NumberView($data.naturel , data.naturel.isnul, .naturel, "m3")
                  NumberView($data.relatif , data.relatif.isnul, .relatif)

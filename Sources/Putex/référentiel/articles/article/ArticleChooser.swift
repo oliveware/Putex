@@ -29,7 +29,7 @@ public struct ArticleChooser : View {
             } else {
                 GroupBox("Articles disponibles") {
                     ScrollView {
-                        ForEach(ref.articlelist(tidid)){
+                        ForEach(ref.sametid(tidid)){
                             item in
                             HStack(spacing:30) {
                                 Text(article.show)

@@ -81,7 +81,7 @@ public struct Articleref: Codable {
         }
     }
     
-    func articlelist(_ tidid:String) -> [Article] {
+    func sametid(_ tidid:String) -> [Article] {
         articles.filter({article in tidid == article.tid})
     }
     

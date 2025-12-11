@@ -6,14 +6,11 @@
 //
 
 import SwiftUI
-import Taxionomy
+
 
 public struct PutexCatalog: View {
-    @State var mot = Mot("","")
-    @State var nompropre = "Boris"
     
     @State var index = 0
-    @State var simple = 0
     @State var choix = 0
     
     public init() {}
@@ -29,15 +26,6 @@ public struct PutexCatalog: View {
                .offset(y:16)
 
             TabView(selection: $index) {
-                TabView(selection: $simple) {
-                    MotView($mot)
-                        .tabItem { Text("mot") }.tag(0)
-                    NomPropre($nompropre, "nom propre", "nom propre" )
-                        .tabItem { Text("nom propre") }.tag(1)
-                    Line(input:$nompropre)
-                        .tabItem { Text("ligne") }.tag(2)
-                }.tabItem { Text("simple") }.tag(0)
-                
                 Nombrex(Nombre())
                     .frame(alignment: .center)
                     .padding(5)
@@ -46,7 +34,7 @@ public struct PutexCatalog: View {
                     .tabItem { Text("nombres") }.tag(1)
                 MontantDemo()
                    .tabItem {Text("montant")}.tag(5)
-                TabView(selection: $choix) {
+            TabView(selection: $choix) {
                     Choice(["un","deux","trois","quatre"],"choix")
                     .tabItem { Text("Choice") }.tag(1)
                   

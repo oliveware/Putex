@@ -10,12 +10,9 @@ import Taxionomy
 
 struct Putexdata {
     var choix = ""
-    var mot = Mot("chose", "choses", .f)
-    var nompropre = "Boris Goudounov"
     var date = JMA(15, 5, 2024)
     var devise = Devise["EUR"]
     var erreur = Erreur("problème dans", "Type", "Propriété")
-    var ligne = "une ligne courte"
     var naturel = Nombre()
     var relatif = Nombre()
     var euro = Nombre()
