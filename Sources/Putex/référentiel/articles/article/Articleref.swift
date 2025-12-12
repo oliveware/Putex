@@ -21,6 +21,7 @@ public struct Articleref: Codable {
     var cadrages: [String:Cadrage] = [:]
     
     public init() {}
+    public init(_ ref:Articleref) {self = ref}
     
     public func article(_ id: String) -> Article {
         var found = Article()
