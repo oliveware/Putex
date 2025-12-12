@@ -8,11 +8,11 @@
 import SwiftUI
 
 
-struct ArticleShow: View {
+public struct ArticleShow: View {
     var ref:Articleref
     var article:Article
     
-    init(_ article:Article, _ ref:Articleref) {
+    public init(_ article:Article, _ ref:Articleref) {
         self.article = article
         self.ref = ref
     }
@@ -21,7 +21,7 @@ struct ArticleShow: View {
         ref.type(article.tid)
     }
 
-    var body:some View {
+    public var body:some View {
         VStack {
             HStack {
                 VStack(alignment:.leading) {
