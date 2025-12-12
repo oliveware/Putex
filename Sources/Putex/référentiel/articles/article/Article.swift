@@ -47,6 +47,8 @@ public struct Article : Codable, Identifiable, Oxet {
        // let typeillustré = type?.illustré ?? false
     }
     
+    public var quantité: Mesure? {conditionnement?.quantité}
+    
     public var show:String {
         if label == "" || tid == "" {
             return "article non défini"
