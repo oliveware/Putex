@@ -31,7 +31,7 @@ public struct Article : Codable, Identifiable, Oxet {
     var option: OptionArticle?
     var conditionnement: Conditionnement?
     // quantité unitaire
-    var quantité : Mesure?
+    public var quantité : Mesure?
     
     mutating func setlabel(_ ref:Articleref) {
         label = type(ref).label + " " + (option?.label ?? "")
