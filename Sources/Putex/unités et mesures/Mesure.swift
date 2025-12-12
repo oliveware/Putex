@@ -34,6 +34,11 @@ public struct Mesure: Codable {
         quantité.unité.mesure(nombre.value)
     }
     
+    public init() {
+        nombre = Nombre()
+        quantité = .piece
+    }
+    
     public init(_ q:Quantité) {
         nombre = Nombre()
         quantité = q
