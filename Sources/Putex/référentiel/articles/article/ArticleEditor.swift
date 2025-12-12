@@ -13,6 +13,7 @@ struct ArticleEditor: View {
     @Binding var article:Article
     @State var modele: ModeleArticle
     @Binding var edition : Bool
+    @State var quantité :Quantité?
     
     init(_ article:Binding<Article>, _ ref:Articleref, _ edition:Binding<Bool>) {
         _article = article
@@ -25,6 +26,9 @@ struct ArticleEditor: View {
             modele = ModeleArticle(type)
         }
         _edition = edition
+        if let quantité = article.wrappedValue.quantité {
+            self.quantité = quantité.quantité
+        }
     }
     
     var typicker: some View {
@@ -81,8 +85,18 @@ struct ArticleEditor: View {
                                 }
                             }
                         }
-                        
-                        
+                        //unitaire: some View {
+                        if quantité == nil {
+                            Button("préciser la quantité", action:{quantité = .piece})
+                        } else {
+                            VStack{
+                                Text("quantité unitaire").font(.title3)
+                                MesureView(Binding<Mesure>(
+                                    get: {article.quantité ?? Mesure(quantité)},
+                                    set: {article.quantité = $0})
+                                ).padding()
+                            }.border(.gray).cornerRadius(3)
+                        }
                     }
                     
                   /*  Spacer()

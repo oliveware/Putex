@@ -54,15 +54,6 @@ struct ConditionnementView: View {
                         {Image(systemName: "pencil")}
                     }.frame(width:350, alignment:.leading)
                 }
-                
-               //unitaire: some View {
-                VStack{
-                    Text("quantité unitaire").font(.title3)
-                    MesureView(Binding<Mesure>(
-                        get: {conditionnement.quantité ?? Mesure()},
-                        set: {conditionnement.quantité = $0})
-                    ).padding()
-                }.border(.gray).cornerRadius(3) 
             }
         }
     }

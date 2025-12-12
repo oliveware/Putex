@@ -13,8 +13,7 @@ struct Conditionnement: Codable {
     
     // une cerise peut être fraîche ou conservée sous différente formes: séche, congelée, à l'eau de vie
     var conservation = Conservation()
-    // quantité unitaire
-    var quantité : Mesure?
+    
     
     init() {}
     

@@ -30,6 +30,8 @@ public struct Article : Codable, Identifiable, Oxet {
     var modele:ModeleArticle?
     var option: OptionArticle?
     var conditionnement: Conditionnement?
+    // quantité unitaire
+    var quantité : Mesure?
     
     mutating func setlabel(_ ref:Articleref) {
         label = type(ref).label + " " + (option?.label ?? "")
@@ -46,8 +48,6 @@ public struct Article : Codable, Identifiable, Oxet {
         return modeleillustré
        // let typeillustré = type?.illustré ?? false
     }
-    
-    public var quantité: Mesure? {conditionnement?.quantité}
     
     public var show:String {
         if label == "" || tid == "" {
