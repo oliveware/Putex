@@ -38,7 +38,7 @@ public enum Quantité: String, Codable, Enumerable {
     case gaz    = "gaz"
     case web    = "accès internet"
     case mobile = "réseau mobile"
-  //  case cloud = "cloud"
+    case gb     = "byte storage"
     case tv = "télévision"
         
     case aire = "surface"
@@ -61,6 +61,7 @@ public enum Quantité: String, Codable, Enumerable {
         case .jour, .débutmois, .finmois, .interdate : return .jour
         case .mensuel,.web,.mobile,.tv: return .mois
         case .annuel: return .an
+        case .gb: return .gb
         }
     }
     public var label: String {

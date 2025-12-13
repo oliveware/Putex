@@ -36,11 +36,13 @@ public enum Unité: String, Codable, Enumerable {
     case g      = "g"
     case l      = "l"
     case cl     = "cl"
+    case gb     = "Gb"
     case nuit   = "nuit"
     case jour   = "jour"
     case mois   = "mois"
     case an     = "an"
-    case unit   = "pièce"
+    case piece  = "pièce"
+    case unit   = "unité"
 
     public var local: Mot {
         switch self {
@@ -48,6 +50,7 @@ public enum Unité: String, Codable, Enumerable {
         case .g: return Mot("gramme", "grammes")
         case .l: return Mot("litre","litres")
         case .cl: return Mot("centilitre","centilitres")
+        case .gb : return Mot("gigabyte","gigabytes")
         case .m : return Mot("mètre","mètres")
         case .m2 : return Mot("mètre carré","mètres carrés")
         case .m3:  return Mot("mètre cube", "mètres cubes")
@@ -56,7 +59,8 @@ public enum Unité: String, Codable, Enumerable {
         case .jour: return Mot("jour","jours")
         case .mois: return Mot("mois","mois")
         case .an: return Mot("année","années", .f)
-        case .unit: return Mot("pièce", "pièces", .f)
+        case .piece: return Mot("pièce", "pièces", .f)
+        case .unit: return Mot("unité", "unités", .f)
         }
     }
     
@@ -88,8 +92,10 @@ public enum Unité: String, Codable, Enumerable {
                 return String(nb) + " jour" + (nb == 1 ? "" : "s")
             case .mois :
                 return String(Int(value)) + " mois"
-            case .unit:
+            case .unit, .piece:
                 return "x " + String(Int(value)) // "pièce"
+            case .gb:
+                return Measurement(value:value, unit:UnitInformationStorage.gigabytes).formatted()
             default:
                 return String(value)
             }
@@ -110,7 +116,8 @@ public enum Unité: String, Codable, Enumerable {
         case .jour: return "jour"
         case .mois: return "mois"
         case .an: return "an"
-        case .unit : return ""
+        case .unit,.piece : return ""
+        case .gb : return "Gb"
         }
     }
     
