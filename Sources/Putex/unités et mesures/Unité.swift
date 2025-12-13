@@ -32,7 +32,10 @@ public enum Unité: String, Codable, Enumerable {
     case m      = "m"
     case m2     = "m2"
     case m3     = "m3"
+    case kg     = "kg"
+    case g      = "g"
     case l      = "l"
+    case cl     = "cl"
     case nuit   = "nuit"
     case jour   = "jour"
     case mois   = "mois"
@@ -41,7 +44,10 @@ public enum Unité: String, Codable, Enumerable {
 
     public var local: Mot {
         switch self {
+        case .kg: return Mot("kilogramme", "kilogrammes")
+        case .g: return Mot("gramme", "grammes")
         case .l: return Mot("litre","litres")
+        case .cl: return Mot("centilitre","centilitres")
         case .m : return Mot("mètre","mètres")
         case .m2 : return Mot("mètre carré","mètres carrés")
         case .m3:  return Mot("mètre cube", "mètres cubes")
@@ -70,7 +76,7 @@ public enum Unité: String, Codable, Enumerable {
                 return formatter.string (from: Measurement(value:value, unit:UnitVolume.liters))
                     //Measurement(value:value, unit:UnitVolume.liters).formatted(.measurement(width: .wide, usage:.asProvided).locale(Locale(identifier:"fr_FR")))
                // MeasurementFormatUnitUsage<UnitVolume>.liquid
-               
+            case .cl : return Measurement(value:value, unit:UnitVolume.centiliters).formatted()
             case .m :
                 return Measurement(value:value, unit:UnitLength.meters).formatted()
             case .m2 :
@@ -92,7 +98,10 @@ public enum Unité: String, Codable, Enumerable {
     
     public var symbol:String {
         switch self {
+        case .kg: return UnitMass.kilograms.symbol
+        case .g: return UnitMass.grams.symbol
         case .l: return UnitVolume.liters.symbol
+        case .cl: return UnitVolume.centiliters.symbol
         case .m: return UnitLength.meters.symbol
         case .m2: return UnitArea.squareMeters.symbol
         case .m3: return UnitVolume.cubicMeters.symbol

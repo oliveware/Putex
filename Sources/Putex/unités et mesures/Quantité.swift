@@ -14,20 +14,24 @@ public enum Quantité: String, Codable, Enumerable {
     
     
     static var utility :[Quantité] = [.eau, .elec, .hp, .hc, .gaz, .web, .mobile,.tv]
-    static var loyer = "loyer"
-    static var honoraire = "honoraires"
-    static var nourriture = "nourriture"
-    static var equipement = "équipement"
+  //  static var loyer = "loyer"
+  //  static var honoraire = "honoraires"
+  //  static var nourriture = "nourriture"
+  // static var equipement = "équipement"
     
-    case débutmois   = "débutmois"
-    case finmois = "finmois"
-    case interdate = "interdate"
-    case jour = "jour"
-    case mensuel = "mois"
-    case annuel = "année"
+    case débutmois  = "début de mois"
+    case finmois    = "fin de mois"
+    case interdate  = "inter date"
+    case jour       = "jour"
+    case mensuel    = "mois"
+    case annuel     = "année"
     
-    case piece  = "pièce"
+    case piece  = "à l'unité"
+    case gramme  = "en gramme"
+    case kg     = "en kg"
     case eau    = "eau"
+    case litre  = "au litre"
+    case cl     = "en centilitre"
     case elec   = "électricité"
     case hc     = "heures creuses"
     case hp     = "heures pleines"
@@ -43,11 +47,16 @@ public enum Quantité: String, Codable, Enumerable {
     
     public var unité: Unité {
         switch self {
+            
         case .piece: return .unit
         case .aire: return .m2
         case .volume: return .m3
         case .elec,.hp,.hc : return .kwh
         case .eau : return .l
+        case .litre : return .l
+        case .cl : return .cl
+        case .gramme : return .g
+        case .kg : return .kg
         case .gaz: return .m3
         case .jour, .débutmois, .finmois, .interdate : return .jour
         case .mensuel,.web,.mobile,.tv: return .mois
@@ -57,11 +66,11 @@ public enum Quantité: String, Codable, Enumerable {
     public var label: String {
         switch self {
         case .elec,.hp,.hc,.eau,.gaz  : return "consommation " + self.rawValue
-        case .aire   : return "surface"
+        case .aire   : return "surface (m2)"
+        case .litre, .piece, .cl: return self.rawValue
         case .volume: return "volume"
-        case .débutmois, .finmois, .interdate : return "journée"
+        case .débutmois, .finmois, .interdate : return "journée (" + self.rawValue + ")"
         case .jour, .mensuel, .annuel : return "durée (" + self.rawValue + ")"
-        case .piece   : return "nombre entier"
         default: return "abonnement " + self.rawValue
         }
     }
@@ -76,9 +85,9 @@ public enum Quantité: String, Codable, Enumerable {
     
     public var color: Color {
         switch self {
-        case .eau:          return Color.blue
-        case .elec,.hp,.hc: return Color.red
-        case .mensuel:      return Color.yellow
+        case .eau :          return Color.blue
+        case .elec,.hp,.hc : return Color.red
+        case .mensuel :      return Color.yellow
        default:    return Color.white
         }
     }
