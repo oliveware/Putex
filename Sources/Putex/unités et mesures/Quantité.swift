@@ -68,6 +68,7 @@ public enum Quantité: String, Codable, Enumerable {
         switch self {
         case .elec,.hp,.hc,.eau,.gaz  : return "consommation " + self.rawValue
         case .aire   : return "surface (m2)"
+        case .gramme,.kg: return "poids " + self.rawValue
         case .litre, .piece, .cl: return self.rawValue
         case .volume: return "volume"
         case .débutmois, .finmois, .interdate : return "journée (" + self.rawValue + ")"
