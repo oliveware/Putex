@@ -65,12 +65,12 @@ public struct Article : Codable, Identifiable, Oxet {
         id = Coderef.newcode(.article)
     }
     
-    public init(_ label:String, _ description:String, _ emplacement:String, _ lid:LID) {
+   /* public init(_ label:String, _ description:String, _ emplacement:String, _ lid:LID) {
         id = Coderef.newcode(.article)
         self.label = label
         let type = TypeArticle(lid)
         modele = ModeleArticle(type)
-    }
+    }*/
     
     init(_ taxion:Taxion) {
         tid = taxion.id
