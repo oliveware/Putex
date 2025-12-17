@@ -22,11 +22,13 @@ public struct Articleref: Codable {
     var cadrages: [String:Cadrage] = [:]
     
     public init() {
-        let endpoint = "http://192.168.1.41/dodata/"
-        let urlbesoins = URL(string: endpoint + "besoins.taxionomie")!
+      //  let endpoint = "http://192.168.1.41/dodata/"
+      //  let urlbesoins = URL(string: endpoint + "besoins.taxionomie")!
         besoins = Taxionomy(URL(string:"http://192.168.1.41/dodata/besoins1.taxionomie")!)
-        contenants = Fichier(endpoint, "contenants", .taxion).get() ?? Taxionomy()
-        fermetures = Fichier(endpoint, "fermetures", .taxion).get() ?? Taxionomy()
+        contenants = Taxionomy(URL(string:"http://192.168.1.41/dodata/contenants.taxionomie")!)
+        fermetures = Taxionomy(URL(string:"http://192.168.1.41/dodata/fermetures.taxionomie")!)
+     //   contenants = Fichier(endpoint, "contenants", .taxion).get() ?? Taxionomy()
+     //   fermetures = Fichier(endpoint, "fermetures", .taxion).get() ?? Taxionomy()
     }
     public init(_ ref:Articleref) {self = ref}
     
