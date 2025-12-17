@@ -62,6 +62,11 @@ public struct TypeArticle: Codable, Identifiable {
         }
     }
     
+    enum Special {
+        case loyer
+        case caution
+    }
+    
 }
 
 

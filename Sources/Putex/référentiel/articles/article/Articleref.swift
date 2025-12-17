@@ -9,6 +9,7 @@
 import Foundation
 
 import Taxionomy
+import Fichiers
 
 public struct Articleref: Codable {
     
@@ -20,7 +21,12 @@ public struct Articleref: Codable {
     var soustypes: [String:Taxionomy] = [:]
     var cadrages: [String:Cadrage] = [:]
     
-    public init() {}
+    public init() {
+        let endpoint = "192.168.1.41/dodata/"
+        besoins = Fichier(endpoint, "besoins", .taxion).get() ?? Taxionomy()
+        contenants = Fichier(endpoint, "contenants", .taxion).get() ?? Taxionomy()
+        fermetures = Fichier(endpoint, "fermetures", .taxion).get() ?? Taxionomy()
+    }
     public init(_ ref:Articleref) {self = ref}
     
     public func article(_ id: String) -> Article {
