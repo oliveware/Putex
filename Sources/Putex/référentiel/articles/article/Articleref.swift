@@ -15,7 +15,7 @@ public struct Articleref: Codable {
     
     public var articles : [Article] = []
     public var types: [TypeArticle] = []
-    var besoins = Taxionomy()
+    var besoins : Taxionomy
     var contenants = Taxionomy()
     var fermetures = Taxionomy()
     var soustypes: [String:Taxionomy] = [:]
