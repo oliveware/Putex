@@ -21,20 +21,25 @@ public struct Articleref: Codable {
     var soustypes: [String:Taxionomy] = [:]
     var cadrages: [String:Cadrage] = [:]
     
-    public init() {
-      //  let endpoint = "http://192.168.1.41/dodata/"
-      //  let urlbesoins = URL(string: endpoint + "besoins.taxionomie")!
-       if let besoins : Taxionomy = Fichier("dodata/", "besoins", .taxion).get("http://192.168.1.41/") {
-            self.besoins = besoins
-        } else {
-            print ("erreur url ")
-            self.besoins = Taxionomy()
+    var cache = Cache()
+    struct Cache:Codable {
+        var endpoint = "http://192.168.1.41"
+        var dir = "/dodata/"
+        //var filextension = Filextension.taxion
+        func get(_ nom:String) -> Taxionomy {
+            if let taxions : Taxionomy = Fichier(dir, nom, .taxion).get(endpoint) {
+                 return taxions
+             } else {
+                 print ("erreur url ")
+                 return Taxionomy()
+             }
         }
-        //besoins = Taxionomy(URL(string:"http://192.168.1.41/dodata/besoins.taxionomie")!)
-        contenants = Taxionomy(URL(string:"http://192.168.1.41/dodata/emballages.taxionomie")!)
-        fermetures = Taxionomy(URL(string:"http://192.168.1.41/dodata/fermetures.taxionomie")!)
-     //   contenants = Fichier(endpoint, "contenants", .taxion).get() ?? Taxionomy()
-     //   fermetures = Fichier(endpoint, "fermetures", .taxion).get() ?? Taxionomy()
+    }
+    
+    public init() {
+        besoins = cache.get("besoins")
+        contenants = cache.get("emballages")
+        fermetures = cache.get("fermetures")
     }
     public init(_ ref:Articleref) {self = ref}
     
