@@ -24,7 +24,7 @@ public struct Articleref: Codable {
     public init() {
         let endpoint = "http://192.168.1.41/dodata/"
         let urlbesoins = URL(string: endpoint + "besoins.taxionomie")!
-        besoins = Taxionomy(urlbesoins)
+        besoins = Taxionomy(URL(string:"http://192.168.1.41/dodata/besoins1.taxionomie")!)
         contenants = Fichier(endpoint, "contenants", .taxion).get() ?? Taxionomy()
         fermetures = Fichier(endpoint, "fermetures", .taxion).get() ?? Taxionomy()
     }
