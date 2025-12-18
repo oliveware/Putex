@@ -22,25 +22,16 @@ public struct Articleref: Codable {
     var cadrages: [String:Cadrage] = [:]
     
     var cache = Cache()
-    struct Cache:Codable {
-        var endpoint = "http://192.168.1.41"
-        var dir = "/dodata/"
-        //var filextension = Filextension.taxion
-        func get(_ nom:String) -> Taxionomy {
-            if let taxions : Taxionomy = Fichier(dir, nom, .taxion).get(endpoint) {
-                 return taxions
-             } else {
-                 print ("erreur url ")
-                 return Taxionomy()
-             }
-        }
-    }
     
     public init() {
         besoins = cache.get("besoins")
         contenants = cache.get("emballages")
         fermetures = cache.get("fermetures")
     }
+    public init(_ nom:String) {
+        self = cache.get(nom)
+    }
+    
     public init(_ ref:Articleref) {self = ref}
     
     public func article(_ id: String) -> Article {
