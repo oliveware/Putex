@@ -8,10 +8,11 @@
 import SwiftUI
 import Taxionomy
 
-public struct ArticleFullManager : View {
+public struct ArticleManager : View {
     @Binding var ref: Articleref
     
     @State var selected = 0
+    @State var full = false
     
     public init(_ ref:Binding<Articleref>) {
         _ref = ref
@@ -23,12 +24,17 @@ public struct ArticleFullManager : View {
                 .tabItem { Text("articles") }.tag(1)
             TypeArticleManager($ref.types, ref.besoins)
                 .tabItem { Text("types") }.tag(2)
-            TaxionomyManager($ref.besoins)
-                .tabItem { Text("besoins") }.tag(3)
-            TaxionomyManager($ref.contenants)
-                .tabItem { Text("contenants") }.tag(4)
-            TaxionomyManager($ref.fermetures)
-                .tabItem { Text("fermetures") }.tag(5)
+            if full {
+                TaxionomyManager($ref.besoins)
+                    .tabItem { Text("besoins") }.tag(3)
+                TaxionomyManager($ref.contenants)
+                    .tabItem { Text("contenants") }.tag(4)
+                TaxionomyManager($ref.fermetures)
+                    .tabItem { Text("fermetures") }.tag(5)
+            }
+            Spacer()
+            Button(action:{full.toggle()})
+            {Image(systemName: full ? "chevron.left" : "chevron.right")}
         
         }
     }
