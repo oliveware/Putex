@@ -16,9 +16,11 @@ extension UTType {
 }
 
 public nonisolated struct ArticlerefDocument: FileDocument {
-    public var ref = Articleref()
+    public var ref : Articleref
 
-    public init () {}
+    public init (_ endpoint:String) {
+        ref = Articleref(endpoint)
+    }
     
     public init(_ json:String) {
         let jsonData = json.data(using: .utf8)!
