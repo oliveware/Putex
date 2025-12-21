@@ -23,13 +23,13 @@ public struct Articleref: Codable {
     
     var cache = Cache()
     
-    public init() {
-        besoins = cache.get("besoins")
-        contenants = cache.get("emballages")
-        fermetures = cache.get("fermetures")
+    public init(_ endpoint:String) {
+        besoins = cache.get("besoins", endpoint)
+        contenants = cache.get("emballages", endpoint)
+        fermetures = cache.get("fermetures", endpoint)
     }
-    public init(_ nom:String) {
-        self = cache.get(nom)
+    public init(_ nom:String, _ endpoint:String) {
+        self = cache.get(nom, endpoint)
     }
     
     public init(_ ref:Articleref) {self = ref}
