@@ -12,7 +12,7 @@ import Fichiers
 
 public struct Cache: Codable {
     //var endpoint = "http://192.168.1.41"
-    var dir = "/dodata/"
+    var dir = ""    //"/dodata/"
     //var filextension = Filextension.taxion
     
     func get(_ nom:String, _ endpoint:String) -> Taxionomy {
