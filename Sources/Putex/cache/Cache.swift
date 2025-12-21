@@ -11,11 +11,11 @@ import Taxionomy
 import Fichiers
 
 public struct Cache: Codable {
-    var endpoint = "http://192.168.1.41"
+    //var endpoint = "http://192.168.1.41"
     var dir = "/dodata/"
     //var filextension = Filextension.taxion
     
-    func get(_ nom:String) -> Taxionomy {
+    func get(_ nom:String, _ endpoint:String) -> Taxionomy {
         if let taxions : Taxionomy = Fichier(dir, nom, .taxion).get(endpoint) {
              return taxions
          } else {
@@ -24,7 +24,7 @@ public struct Cache: Codable {
          }
     }
     
-    public func get(_ nom:String) -> Articleref {
+    public func get(_ nom:String, _ endpoint:String) -> Articleref {
         if let ref : Articleref = Fichier(dir, nom, .articleref).get(endpoint) {
              return ref
          } else {
