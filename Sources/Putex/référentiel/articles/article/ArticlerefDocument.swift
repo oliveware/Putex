@@ -18,7 +18,7 @@ extension UTType {
 public nonisolated struct ArticlerefDocument: FileDocument {
     public var ref : Articleref
 
-    public init (_ endpoint:String) {
+    public init (_ endpoint:String, _ nul:Bool = false) {
         ref = Articleref(endpoint)
     }
     
@@ -51,7 +51,7 @@ public nonisolated struct ArticlerefDocument: FileDocument {
         guard let url = URL(string: url) else { return }
         ref = try await URLSession.shared.decode(Articleref.self, from: url)
     }*/
-    public init(url:String)  {
+   /* public init(url:String)  {
         guard let url = URL(string: url) else { return }
         var refa = Articleref()
         URLSession.shared.dataTask(with: url) { data, response, error in
@@ -64,7 +64,7 @@ public nonisolated struct ArticlerefDocument: FileDocument {
            }
         }.resume()
         ref = refa
-   }
+   }*/
 }
 
 extension URLSession {

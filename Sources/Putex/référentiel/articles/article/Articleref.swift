@@ -15,13 +15,15 @@ public struct Articleref: Codable {
     
     public var articles : [Article] = []
     public var types: [TypeArticle] = []
-    var besoins : Taxionomy
+    var besoins = Taxionomy()
     var contenants = Taxionomy()
     var fermetures = Taxionomy()
     var soustypes: [String:Taxionomy] = [:]
     var cadrages: [String:Cadrage] = [:]
     
     var cache = Cache()
+    
+    public init() {}
     
     public init(_ endpoint:String) {
         besoins = cache.get("besoins", endpoint)

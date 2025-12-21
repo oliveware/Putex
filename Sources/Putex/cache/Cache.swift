@@ -29,7 +29,7 @@ public struct Cache: Codable {
              return ref
          } else {
              print ("erreur url ")
-             return Articleref()
+             return Articleref(endpoint)
          }
     }
 }

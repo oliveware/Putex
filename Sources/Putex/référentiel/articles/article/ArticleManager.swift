@@ -56,5 +56,5 @@ public struct ArticleManager : View {
 }
 
 #Preview {
-    ArticleManager(.constant(ArticlerefDocument().ref), true).frame(width:800, height:600)
+    ArticleManager(.constant(ArticlerefDocument("http://pi.inawani.org").ref), true).frame(width:800, height:600)
 }
