@@ -9,6 +9,7 @@ public let refarticle = ArticlerefDocument(articlerefjson).ref
 
 public let articlerefjson = """
 {
+    "cache" : {"dir":""},
     "articles": [],
     "soustypes" : {},
     "cadrages" : {},
