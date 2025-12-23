@@ -36,8 +36,8 @@ public struct Articleref: Codable {
     
     public init(_ ref:Articleref) {
         self = ref
-        //Article.nextid = ref.articles.map(\.id).max() ?? 0
-        Article.nextid = ref.articles.count
+        Article.nextid = ref.articles.map{Int($0.id.split(separator: "#")[1])!}.max() ?? 0
+        //Article.nextid = ref.articles.count
     }
     
     public func article(_ id: String) -> Article {
