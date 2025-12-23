@@ -43,11 +43,13 @@ public struct Coderef: Codable, Identifiable {
     
     static var nextcode = 0
     public static func newcode(_ domain:Domain) -> String {
-        nextcode += 1
+        
         switch domain {
         case .article:
+            Article.nextid += 1
             return "A#" + String(Article.nextid)
         default:
+            nextcode += 1
             return domain.rawValue + "#" + String(nextcode)
         }
     }
