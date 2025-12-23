@@ -18,6 +18,7 @@ var tel = Article("1-2-4", "mobile")
 // un article décrit un modèle et non un exemplaire
 // un article est référencé dans le vault
 public struct Article : Codable, Identifiable, Oxet {
+    static var nextid:Int = 0
     // identifiant de l'article
     public var id: String = ""
     // étiquette résumant l'article

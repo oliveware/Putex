@@ -34,7 +34,11 @@ public struct Articleref: Codable {
         self = cache.get(nom, endpoint)
     }
     
-    public init(_ ref:Articleref) {self = ref}
+    public init(_ ref:Articleref) {
+        self = ref
+        //Article.nextid = ref.articles.map(\.id).max() ?? 0
+        Article.nextid = ref.articles.count
+    }
     
     public func article(_ id: String) -> Article {
         var found = Article()

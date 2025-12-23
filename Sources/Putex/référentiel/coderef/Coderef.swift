@@ -44,7 +44,12 @@ public struct Coderef: Codable, Identifiable {
     static var nextcode = 0
     public static func newcode(_ domain:Domain) -> String {
         nextcode += 1
-        return domain.rawValue + "#" + String(nextcode)
+        switch domain {
+        case .article:
+            return "A#" + String(Article.nextid)
+        default:
+            return domain.rawValue + "#" + String(nextcode)
+        }
     }
     public var id : String { name.pluriel }
     var name : Mot
