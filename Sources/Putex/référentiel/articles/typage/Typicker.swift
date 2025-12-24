@@ -45,7 +45,7 @@ public struct Typicker: View {
                             }
                         }
                      }.padding()
-                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+                    .frame(width: 400, height: 300)
                 }
             }
         } 
