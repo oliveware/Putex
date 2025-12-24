@@ -35,6 +35,7 @@ public struct Typicker: View {
                             type in
                             HStack {
                                 Text(type.line)
+                                Spacer()
                                 Button(action: {
                                     self.type = type
                                     pick = false
@@ -44,6 +45,7 @@ public struct Typicker: View {
                             }
                         }
                      }.padding()
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
                 }
             }
         } 
