@@ -34,18 +34,18 @@ public struct Typicker: View {
                         ForEach(types) {
                             type in
                             HStack {
-                                Text(type.line)
-                                Spacer()
                                 Button(action: {
                                     self.type = type
                                     pick = false
                                     done()
                                 })
-                                { Image(systemName: "arrow.down") }
+                                { Text(type.label) }
+                                Spacer()
+                                Text(type.line)
                             }
                         }
                      }.padding()
-                    .frame(width: 400, height: 300)
+                    .frame(width: 600, height: 400)
                 }
             }
         } 

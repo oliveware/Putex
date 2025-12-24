@@ -40,11 +40,11 @@ public struct TypeArticle: Codable, Identifiable {
     }
     
     var line: String {
-        var string = label
+        var string = ""
         var fin = ""
         if data.count  > 0 {
             if data[0] != label {
-                string = label + " ( " + data[0]
+                string = " ( " + data[0]
                 fin = " )"
             }
             if let soustype = soustype {
