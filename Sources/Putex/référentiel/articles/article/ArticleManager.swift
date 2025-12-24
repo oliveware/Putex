@@ -24,9 +24,9 @@ public struct ArticleManager : View {
             GroupBox {
                 HStack {
                     Button("articles", action:{selected = 1})
-                        .foregroundColor(Color.green)
+                        .background(selected == 1 ? Color.gray : Color.black)
                     Button("types", action:{selected = 2})
-                        .background(Color.pink)
+                        .background(selected == 2 ? Color.gray : Color.black)
                     if full {
                         Button("besoins", action:{selected = 3})
                         Button("contenants", action:{selected = 4})
