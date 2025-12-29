@@ -6,7 +6,7 @@
 //
 
 
-let England = countries.read("England")
+let England :Territoire = cache.get("England")
 
 let GBE = """
 {

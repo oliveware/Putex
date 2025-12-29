@@ -5,7 +5,7 @@
 //  Created by Herve Crespel on 13/09/2025.
 //
 
-let Nederland = countries.read("Nederland")
+let Nederland :Territoire = cache.get("Nederland")
 
 let NL = """
 {

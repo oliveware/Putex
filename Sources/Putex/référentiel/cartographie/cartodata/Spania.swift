@@ -5,7 +5,7 @@
 //  Created by Herve Crespel on 30/09/2025.
 //
 
-let Spania = countries.read("Spania")
+let Spania :Territoire = cache.get("Spania")
 
 let ES = """
 {

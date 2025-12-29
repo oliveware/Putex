@@ -5,7 +5,7 @@
 //  Created by Herve Crespel on 30/09/2025.
 //
 
-let Wales = countries.read("Wales")
+let Wales :Territoire = cache.get("Wales")
 
 let Cymru = """
 {
