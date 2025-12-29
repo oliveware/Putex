@@ -15,14 +15,14 @@ public struct NumberView: View {
     
     
     @Binding var nombre: Nombre
-    @State var edition = false
+    @State var edition : Bool
     @State var set : NumberSet
     var symbol: String = ""
     var label :String?
     
     public init(_ nombre:Binding<Nombre>, _ set: NumberSet, _ symbol:String = "", _ label:String? = nil) {
         _nombre = nombre
-
+        edition = nombre.wrappedValue.isNaN
         self.set = set
         self.symbol = symbol
         self.label = label
@@ -31,6 +31,7 @@ public struct NumberView: View {
     public init(_ mesure:Binding<Mesure>) {
         _nombre = mesure.nombre
         let q = mesure.wrappedValue.quantité
+        edition = mesure.wrappedValue.nombre.isNaN
         set = q.set
         symbol = q.unité.symbol
         label = q.label
