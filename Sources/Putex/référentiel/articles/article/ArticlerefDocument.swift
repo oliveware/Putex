@@ -18,8 +18,8 @@ extension UTType {
 public nonisolated struct ArticlerefDocument: FileDocument {
     public var ref : Articleref
 
-    public init (_ endpoint:String, _ nul:Bool = false) {
-        ref = Articleref(endpoint)
+    public init (_ nom:String, _ nul:Bool = false) {
+        ref = Articleref(nom)
     }
     
     public init(_ json:String) {

@@ -5,7 +5,8 @@
 //  Created by Herve Crespel on 13/09/2025.
 //
 
-let Deutschland = countries.read("Deutschland")
+//let Deutschland = countries.read("Deutschland")
+let Deutschland:Territoire = cache.get("Deutschland")
 
 let DE = """
 {

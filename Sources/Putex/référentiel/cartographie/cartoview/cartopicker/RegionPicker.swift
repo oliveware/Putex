@@ -136,7 +136,7 @@ struct RegionPicker : View {
 
 struct RegionPickerPreview : View {
     @State var continent = World.Europe
-    @State var territoire = Deutschland ?? Territoire(FR)
+    @State var territoire = Deutschland
     @State var lid = LID([1,1])
     
     var edition = true
