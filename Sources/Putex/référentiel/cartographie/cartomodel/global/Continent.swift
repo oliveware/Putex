@@ -60,7 +60,8 @@ public struct Continent : Codable, Identifiable {
 }
 
 struct World: Codable {
-    static var Europe = World(continents).sept[1]
+    //static var Europe = World(continents).sept[1]
+    static var Europe = Continent(1, "Europe", [France,Deutschland,England,Nederland,Spania,Wales])
     
     var sept : [Continent]
     

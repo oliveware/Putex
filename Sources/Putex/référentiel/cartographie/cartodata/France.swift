@@ -5,7 +5,8 @@
 //  Created by Herve Crespel on 13/09/2025.
 //
 
-let France = countries.read("France-cadastre")
+//let France = countries.read("France-cadastre")
+let France :Territoire = cache.get("France")
 
 
 let FR = """

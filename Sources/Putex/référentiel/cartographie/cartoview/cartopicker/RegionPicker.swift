@@ -136,7 +136,7 @@ struct RegionPicker : View {
 
 struct RegionPickerPreview : View {
     @State var continent = World.Europe
-    @State var territoire = Deutschland
+    @State var territoire = France
     @State var lid = LID([1,1])
     
     var edition = true
@@ -144,7 +144,7 @@ struct RegionPickerPreview : View {
     var body:some View {
         VStack {
             RegionPicker(lid:$lid, continent:$continent, territoire: $territoire, edition:edition)
-                .frame(width:600,height:300)
+                .frame(width:600,height:400)
             Text(lid.id)
         }
     }
