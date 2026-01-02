@@ -5,9 +5,9 @@
 //  Created by Herve Crespel on 30/09/2025.
 //
 
-let Wales :Territoire = cache.get("Wales")
+let Cymru :Territoire = cache.get("Cymru")
 
-let Cymru = """
+let Wales = """
 {
     "id": 5,
     "nom": "Cymru",

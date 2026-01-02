@@ -68,7 +68,7 @@ struct ContinentShow: View {
 }
 
 struct ContinentEditor: View {
-    @State var world = World(continents).sept
+    @State var world = World.sept
     @Binding var continent: Continent
 
     var body:some View {
@@ -104,5 +104,8 @@ struct ContinentPreview : View {
     ContinentPreview().padding()
 }
 #Preview("Europe") {
-    ContinentPreview(continent : World.Europe).padding()
+    ContinentPreview(continent : Europe).padding()
+}
+#Preview("Amérique") {
+    ContinentPreview(continent : NorthAmerica).padding()
 }

@@ -12,11 +12,12 @@ public struct ArticleManager : View {
     @Binding var ref: Articleref
     
     @State var selected = 0
-    @State var full : Bool
+    @State var full = false
+    var extend : Bool
     
     public init(_ ref:Binding<Articleref>, _ full:Bool) {
         _ref = ref
-        self.full = full
+        extend = full
     }
     
     public var body: some View {
@@ -33,9 +34,10 @@ public struct ArticleManager : View {
                         Button("fermetures", action:{selected = 5})
                     }
                     Spacer()
-                    Button(action:{full.toggle()})
-                    {Image(systemName: full ? "chevron.left" : "chevron.right")}
-                    
+                    if extend {
+                        Button(action:{full.toggle()})
+                        {Image(systemName: full ? "chevron.left" : "chevron.right")}
+                    }
                 }.padding(3)
             }
             Spacer()

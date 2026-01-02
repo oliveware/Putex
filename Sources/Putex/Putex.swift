@@ -24,6 +24,9 @@ public struct Putex: View {
                  NumberView($data.euro , data.euro.isnul, .decimal(2), "€")
                  NumberView($data.cours , data.cours.isnul, .decimal(4), "€")
                  }*/
+                
+                ContinentPreview().padding()
+                
                 HStack {
                     Text("Nombre").font(.title)
                         .frame(width:150)

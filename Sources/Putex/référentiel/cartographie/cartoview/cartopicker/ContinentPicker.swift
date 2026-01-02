@@ -7,7 +7,7 @@
 import SwiftUI
 
 struct ContinentPicker : View {
-    @State var world = World(continents).sept
+    @State var world = World.sept
     @Binding var lid : LID
     @Binding var continent: Continent
     @Binding var territoire: Territoire
@@ -38,7 +38,7 @@ struct ContinentPicker : View {
             if continent.nom == "" {
                 HStack {
                     VStack(alignment:.leading) {
-                        ForEach($world){
+                        ForEach($world.continents){
                             item in
                             Button(action:{
                                 continent = item.wrappedValue

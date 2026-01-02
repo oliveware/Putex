@@ -16,7 +16,10 @@ public struct Territoire : Codable, Identifiable {
     
     var regions:[Region] = []
     
-    init() {id = 0}
+    init() {
+        id = 0
+        nom = "inconnu"
+    }
     
     init(_ continent:LID) {
        let territoirelid = LID(continent)

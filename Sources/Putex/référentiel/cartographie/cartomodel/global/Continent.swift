@@ -7,6 +7,8 @@
 
 import Foundation
 
+// continents définis par le modèle à 7 continents
+// les modèles à 6,5,4,et 3 continents s'en déduisent en regroupants certains de ces continents
 public struct Continent : Codable, Identifiable {
     
     public var id:Int
@@ -18,10 +20,17 @@ public struct Continent : Codable, Identifiable {
     
     init() { id = 0 }
     
-    init(_ id:Int, _ nom:String, _ lands: [Territoire]) {
+    init(_ id:Int, _ nom:String, lands: [Territoire]) {
         self.id = id
         self.nom = nom
         territoires = lands
+    }
+    init(_ id:Int, _ nom:String, _ lands: [String]) {
+        self.id = id
+        self.nom = nom
+        for land in lands {
+            territoires.append(cache.get(land))
+        }
     }
     
    /* init(_ json:String) {
@@ -57,32 +66,19 @@ public struct Continent : Codable, Identifiable {
         }
         return found ?? Territoire()
     }
+    // fusion
+    init(_ id:Int, _ nom:String, parts:[Continent]) {
+        self.id = id
+        self.nom = nom
+        var lands : [Territoire] = []
+        for part in parts {
+            lands = lands + part.territoires
+        }
+        territoires = lands
+    }
 }
 
-struct World: Codable {
-    //static var Europe = World(continents).sept[1]
-    static var Europe = Continent(1, "Europe", [France,Deutschland,England,Nederland,Spania,Wales])
-    
-    var sept : [Continent]
-    
-    init(_ json:String) {
-        let jsonData = json.data(using: .utf8)!
-        let terre = try! JSONDecoder().decode(World.self, from: jsonData)
-        self = terre
-        LID.nextinit(terre.sept)
-    }
-    
-    subscript(_ id:Int) -> Continent? {
-        var found : Continent?
-        for continent in sept {
-            if continent.id == id {
-                found = continent
-                break
-            }
-        }
-        return found
-    }
-}
+
 
 
 
