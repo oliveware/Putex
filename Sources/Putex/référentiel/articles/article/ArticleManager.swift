@@ -11,7 +11,7 @@ import Taxionomy
 public struct ArticleManager : View {
     @Binding var ref: Articleref
     
-    @State var selected = 0
+    @State var selected = 1
     @State var full = false
     var extend : Bool
     
