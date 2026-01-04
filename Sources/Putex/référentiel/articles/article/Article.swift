@@ -9,10 +9,10 @@ import Foundation
 
 import Taxionomy
 
-var hp = Article("1-2-4", "heures pleines")
+/*var hp = Article("1-2-4", "heures pleines")
 var hc = Article("1-2-4", "heures creuses")
 var eau = Article("1-2-4", "eau")
-var tel = Article("1-2-4", "mobile")
+var tel = Article("1-2-4", "mobile")*/
 
 
 // un article décrit un modèle et non un exemplaire
@@ -62,8 +62,8 @@ public struct Article : Codable, Identifiable, Oxet {
         tid == ""
     }
     
-    public init() {
-        id = Coderef.newcode(.article)
+    public init(_ num:Int = 0) {
+        id = "A#" + String(num) //Coderef.newcode(.article)
     }
     
    /* public init(_ label:String, _ description:String, _ emplacement:String, _ lid:LID) {

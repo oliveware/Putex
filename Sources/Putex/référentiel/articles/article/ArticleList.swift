@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-
+/*
 public struct ArticleList : View {
     var ref:Articleref
     @Binding var items: [Article]
@@ -20,7 +20,7 @@ public struct ArticleList : View {
     
     public var ajout: some View {
         Button(action:{
-            article = Article()
+            article = Article(ref.nextid)
             items.append(article)
         })
         {Text("ajouter un article")}
@@ -59,6 +59,7 @@ public struct ArticleList : View {
             }
         }.padding(10)
     }
+
     func delete(_ id: String) {
         var new : [Article] = []
         for item in items {
@@ -88,3 +89,4 @@ struct ArticleListPreview: View {
 #Preview {
     ArticleListPreview(articlerefjson).frame(width:600, height:400)
 }
+*/

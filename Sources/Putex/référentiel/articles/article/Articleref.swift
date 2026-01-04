@@ -13,6 +13,10 @@ import Fichiers
 
 public struct Articleref: Codable {
     
+    var maxid:Int {
+        articles.map{Int($0.id.split(separator: "#")[1])!}.max() ?? 0
+    }
+    
     public var articles : [Article] = []
     public var types: [TypeArticle] = []
     var besoins = Taxionomy()
@@ -32,8 +36,6 @@ public struct Articleref: Codable {
     
     public init(_ ref:Articleref) {
         self = ref
-        Article.nextid = ref.articles.map{Int($0.id.split(separator: "#")[1])!}.max() ?? 0
-        //Article.nextid = ref.articles.count
     }
     
     public func article(_ id: String) -> Article {
@@ -102,6 +104,9 @@ public struct Articleref: Codable {
         articles.filter({article in TID(article.tid).belongsto(parentid)})
     }
     
+    mutating func add() {
+        articles = [Article(maxid+1)] + articles
+    }
     mutating func insert(_ article:Article) {
         var found = false
         var new:[Article] = []

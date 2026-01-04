@@ -8,7 +8,7 @@
 import SwiftUI
 import Taxionomy
 
-public struct ArticleManager : View {
+public struct ArticlerefManager : View {
     @Binding var ref: Articleref
     
     @State var selected = 1
@@ -43,7 +43,7 @@ public struct ArticleManager : View {
             Spacer()
             switch selected {
             case 1 :
-                ArticleList($ref.articles, ref)
+                liste
             case 2 :
                 TypeArticleManager($ref.types, ref.besoins)
             case 3 :
@@ -56,8 +56,50 @@ public struct ArticleManager : View {
             }
         }
     }
+        
+    var ajout: some View {
+        Button(action:{
+            ref.add()
+        })
+        {Text("ajouter un article")}
+    }
+        
+    @State var modif = false
+    var liste: some View {
+            VStack(alignment: .center) {
+                if ref.articles.count == 0 {
+                    ajout
+                } else {
+                GroupBox("Articles disponibles") {
+                    ScrollView {
+                        ForEach($ref.articles){
+                            item in
+                            HStack(spacing:30) {
+                                if modif {
+                                    ConfirmedButton("minus", "cet article  (\(item.id))", {ref.delete(item.wrappedValue)
+                                        modif = false})
+                                }
+                                ArticleView(item, ref)
+                            }
+                        }
+                    }
+                }
+            
+                HStack {
+                    if ref.articles.count > 0 {
+                        Button(action:{modif.toggle()})
+                        {Image(systemName: "minus")}
+                    }
+                    Spacer()
+                    ajout
+                    Spacer()
+                }
+            }
+        }.padding(10)
+    }
+    
 }
 
 #Preview {
-    ArticleManager(.constant(ArticlerefDocument("http://pi.inawani.org").ref), true).frame(width:800, height:600)
+    ArticlerefManager(.constant(ArticlerefDocument("http://pi.inawani.org").ref), true).frame(width:800, height:600)
 }
