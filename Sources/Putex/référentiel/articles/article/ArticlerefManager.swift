@@ -28,7 +28,7 @@ public struct ArticlerefManager : View {
                         .background(selected == 1 ? Color.gray : Color.black)
                     Button("types", action:{selected = 2})
                         .background(selected == 2 ? Color.gray : Color.black)
-                    if full {
+                  /*  if full {
                         Button("besoins", action:{selected = 3})
                         Button("contenants", action:{selected = 4})
                         Button("fermetures", action:{selected = 5})
@@ -37,7 +37,7 @@ public struct ArticlerefManager : View {
                     if extend {
                         Button(action:{full.toggle()})
                         {Image(systemName: full ? "chevron.left" : "chevron.right")}
-                    }
+                    }*/
                 }.padding(3)
             }
             Spacer()
@@ -45,13 +45,13 @@ public struct ArticlerefManager : View {
             case 1 :
                 liste
             case 2 :
-                TypeArticleManager($ref.types, ref.besoins)
-            case 3 :
+                TypeArticleManager($ref.types)
+           /* case 3 :
                 TaxionomyManager($ref.besoins)
             case 4 :
                 TaxionomyManager($ref.contenants)
             case 5 :
-                TaxionomyManager($ref.fermetures)
+                TaxionomyManager($ref.fermetures)*/
             default : Text("")
             }
         }

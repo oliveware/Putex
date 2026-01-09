@@ -12,11 +12,11 @@ public struct TypeArticleManager : View {
     @Binding var types : [TypeArticle]
     @State var type = TypeArticle()
     @State var modif = false
-    var besoins : Taxionomy
+    var besoins : Taxionomy = cache.get("besoins")
     
-    public init(_ items:Binding<[TypeArticle]>, _ besoins:Taxionomy) {
+    public init(_ items:Binding<[TypeArticle]>) {
         _types = items
-        self.besoins = besoins
+        //self.besoins = besoins
     }
     
     public var ajout: some View {
@@ -75,10 +75,10 @@ func delete(_ id: String) {
 
 
 struct TypeArticleListPreview: View {
-    var besoins = Taxionomy(taxionomie2)
+    ///var besoins = Taxionomy(taxionomie2)
     @State var items: [TypeArticle] = []
     var body: some View {
-        TypeArticleManager($items, besoins)
+        TypeArticleManager($items)
     }
 }
 #Preview {

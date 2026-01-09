@@ -9,15 +9,13 @@ import Taxionomy
 
 struct ConditionnementView: View {
     @Binding var conditionnement: Conditionnement
-    var fermetures: Taxionomy
-    var contenants: Taxionomy
+    var fermetures: Taxionomy = cache.get("contenants")
+    var contenants: Taxionomy = cache.get("fermetures")
     @State private var contenantpick : Bool
     @State private var fermeturepick : Bool
     var done: () -> Void
     
-    public init(_ conditionnement:Binding<Conditionnement>,  _ fermetures:Taxionomy,_ contenants:Taxionomy, _ done: @escaping () -> Void) {
-        self.fermetures = fermetures
-        self.contenants = contenants
+    public init(_ conditionnement:Binding<Conditionnement>, _ done: @escaping () -> Void) {
         _conditionnement = conditionnement
         self.done = done
         contenantpick = conditionnement.wrappedValue.contenant.nom == ""

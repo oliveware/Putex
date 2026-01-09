@@ -19,16 +19,16 @@ public struct Articleref: Codable {
     
     public var articles : [Article] = []
     public var types: [TypeArticle] = []
-    var besoins = Taxionomy()
-    var contenants = Taxionomy()
-    var fermetures = Taxionomy()
+    //var besoins = Taxionomy()
+    //var contenants = Taxionomy()
+    //var fermetures = Taxionomy()
     var soustypes: [String:Taxionomy] = [:]
     var cadrages: [String:Cadrage] = [:]
     
     public init() {
-        besoins = cache.get("besoins")
-        contenants = cache.get("emballages")
-        fermetures = cache.get("fermetures")
+        //besoins = cache.get("besoins")
+        //contenants = cache.get("emballages")
+        //fermetures = cache.get("fermetures")
     }
     public init(_ nom:String) {
         self = cache.get(nom)
@@ -70,7 +70,7 @@ public struct Articleref: Codable {
         if found { types = new } else { types = [type] + types }
     }
     
-    public func besoin(_ id:String) -> Taxion {
+   /* public func besoin(_ id:String) -> Taxion {
         besoins.find(id)
     }
     
@@ -80,7 +80,7 @@ public struct Articleref: Codable {
     
     public func fermeture(_ id:String) -> Taxion {
         fermetures.find(id)
-    }
+    }*/
     
     public func soustype(_ nomref:String, _ id:String) -> Taxion {
         if let ref = soustypes[nomref] {

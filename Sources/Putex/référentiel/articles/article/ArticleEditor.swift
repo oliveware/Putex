@@ -81,7 +81,7 @@ struct ArticleEditor: View {
                                     ConditionnementView(Binding<Conditionnement>(
                                         get: {article.conditionnement ?? Conditionnement()},
                                         set: {article.conditionnement = $0.isNaN ? nil : $0}
-                                    ), ref.fermetures, ref.contenants, {})
+                                    ), {})
                                 }
                             }
                         }
