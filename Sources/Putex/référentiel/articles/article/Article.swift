@@ -45,8 +45,8 @@ public struct Article : Codable, Identifiable, Oxet {
         conditionnement != nil
     }
     var illustré : Bool {
-        let modeleillustré = modele?.illustré ?? false
-        return modeleillustré
+        let modillustré = modele?.illustré ?? false
+        return modillustré
        // let typeillustré = type?.illustré ?? false
     }
     

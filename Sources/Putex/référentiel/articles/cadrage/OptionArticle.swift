@@ -1,9 +1,14 @@
 //
-//  DetailArticle.swift
+//  OptionArticle.swift
 //  Semantex
 //
 //  Created by Herve Crespel on 19/06/2025.
 //
+
+public protocol Vendable {
+    var label: String {get}
+    var config:Config {get}
+}
 
 struct OptionArticle: Codable, Oxet {
     static var selector: String = "option"
@@ -16,6 +21,11 @@ struct OptionArticle: Codable, Oxet {
     
     init(_ nom:String) {
         label = nom
+    }
+    
+    init<T:Vendable>(_ ext:T) {
+        label = ext.label
+        config = ext.config
     }
     
     var configurator: Configurator {

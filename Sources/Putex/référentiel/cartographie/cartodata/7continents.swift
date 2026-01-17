@@ -6,7 +6,7 @@
 //
 import Fichiers
 
-let continents = """
+/*let continents = """
 {"sept" : [
     {   "id":1, "nom":"Europe", "territoires": [\(FR), \(NL), \(DE), \(ES), \(GBE), \(Cymru)] },
     {   "id":2, "nom":"Amérique du nord", "territoires": [] },
@@ -16,7 +16,7 @@ let continents = """
     {   "id":6, "nom":"Afrique", "territoires": [] },
     {   "id":7, "nom":"Antartique", "territoires": [] }
 ]}
-"""
+"""*/
 
 //let countries = ClassCache<Territoire>()
 

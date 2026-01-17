@@ -18,7 +18,7 @@ public struct Territoire : Codable, Identifiable {
     
     init() {
         id = 0
-        nom = "inconnu"
+        nom = "territoire inconnu"
     }
     
     init(_ continent:LID) {

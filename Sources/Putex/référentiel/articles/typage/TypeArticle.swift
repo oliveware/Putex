@@ -19,6 +19,7 @@ public struct TypeArticle: Codable, Identifiable {
     }
     
     var data: [String] = []
+    var ext : String? { data.count > 3 ? data[3] : nil }
     
     public var label: String = ""
     
