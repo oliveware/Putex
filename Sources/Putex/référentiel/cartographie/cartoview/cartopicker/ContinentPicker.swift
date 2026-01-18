@@ -90,3 +90,14 @@ struct ContinentPicker : View {
       //  continent.territoires.append(Territoire($continent.lid))
     }
 }
+
+struct ContinentPickerPreview : View {
+    var world = World.sept
+    @State var lid : LID
+    @State var continent: Continent = World.Europe
+    @State var territoire: Territoire = World.France
+    
+    var body: some View {
+        
+    }
+}

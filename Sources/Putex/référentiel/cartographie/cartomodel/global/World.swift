@@ -11,7 +11,8 @@ struct World: Codable {
     //static var Europe = Continent(1, "Europe", lands: [France,Deutschland,England,Nederland,Spania,Cymru])
     //static var sept = World([Europe, NorthAmerica, SouthAmerica, Africa, Asia, Oceanie, Antartica])
     static var sept = World("sept")
-    static var Europe = sept[1] ?? Continent()
+    static var Europe = sept["Europe"]
+    static var France = Europe["France"]
     
     var continents : [Continent]
     
@@ -41,6 +42,17 @@ struct World: Codable {
             }
         }
         return found
+    }
+    
+    subscript(_ nom:String) -> Continent {
+        var found : Continent?
+        for continent in continents {
+            if continent.nom == nom {
+                found = continent
+                break
+            }
+        }
+        return found ?? Continent()
     }
 }
 
