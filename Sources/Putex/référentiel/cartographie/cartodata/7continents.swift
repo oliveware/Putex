@@ -22,7 +22,7 @@ import Fichiers
 
 let Europe = Continent( 1, "Europe", [ "France","Nederland","Deutschland","Espana","England","Cymru" ]
 )
-let NorthAmerica = Continent( 2, "Amérique du nord", ["Canada","Groenland"])
+let NorthAmerica = Continent( 2, "Amérique du nord", ["Canada1","Groenland"])
     // ["Canada","USA","Groenland","Mexico"])
 let SouthAmerica = Continent( 3, "Amérique du sud", [])
     // ["Panama","Costa Rica","Brésil", "Argentine", "Chili", "Pérou", "Bolivie", "Colombie", "Venezuela"]
