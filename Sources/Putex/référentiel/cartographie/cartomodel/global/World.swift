@@ -8,21 +8,29 @@ import Foundation
 
 struct World: Codable {
     //static var Europe = World(continents).sept[1]
-    static var Europe = Continent(1, "Europe", lands: [France,Deutschland,England,Nederland,Spania,Cymru])
-    static var sept = World([Europe, NorthAmerica, SouthAmerica, Africa, Asia, Oceanie, Antartica])
+    //static var Europe = Continent(1, "Europe", lands: [France,Deutschland,England,Nederland,Spania,Cymru])
+    //static var sept = World([Europe, NorthAmerica, SouthAmerica, Africa, Asia, Oceanie, Antartica])
+    static var sept = World("seven")
+    static var Europe = sept[1] ?? Continent()
     
     var continents : [Continent]
     
-    init(_ parts: [Continent]) {
+    init(_ parts: [Continent] = []) {
         continents = parts
     }
     
-    init(_ json:String) {
-        let jsonData = json.data(using: .utf8)!
-        let terre = try! JSONDecoder().decode(World.self, from: jsonData)
-        self = terre
-        LID.nextinit(terre.continents)
+    init(_ filename: String) {
+        self = cache.get(filename)
     }
+    /*init(_ json:String) {
+        let jsonData = json.data(using: .utf8)!
+        let terre = try! JSONDecoder().decode([Continentjson].self, from: jsonData)
+        continents = []
+        for continentjson in terre {
+            continents.append(Continent(continentjson))
+        }
+        LID.nextinit(continents)
+    }*/
     
     subscript(_ id:Int) -> Continent? {
         var found : Continent?
@@ -35,3 +43,6 @@ struct World: Codable {
         return found
     }
 }
+
+
+

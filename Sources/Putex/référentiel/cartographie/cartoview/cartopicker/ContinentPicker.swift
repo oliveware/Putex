@@ -35,7 +35,7 @@ struct ContinentPicker : View {
         VStack {
             barre
             Spacer()
-            if continent.nom == "" {
+            if continent.id == 0 {
                 HStack {
                     VStack(alignment:.leading) {
                         ForEach($world.continents){

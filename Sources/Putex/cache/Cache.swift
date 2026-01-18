@@ -44,5 +44,14 @@ public struct Cache: Codable {
          }
     }
     
+    func get(_ nom:String) -> World {
+        if let world : World = Fichier(dir, nom, .world).get(endpoint) {
+             return world
+         } else {
+             print ("erreur fichier world \(nom) ")
+             return World()
+         }
+    }
+    
 
 }

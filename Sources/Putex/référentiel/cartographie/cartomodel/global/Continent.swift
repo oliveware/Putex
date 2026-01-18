@@ -32,6 +32,13 @@ public struct Continent : Codable, Identifiable {
             territoires.append(cache.get(land))
         }
     }
+    init(_ json: Continentjson) {
+        id = json.id
+        nom = json.nom
+        for land in json.lands {
+            territoires.append(cache.get(land))
+        }
+    }
     
    /* init(_ json:String) {
         let jsonData = json.data(using: .utf8)!
@@ -79,7 +86,17 @@ public struct Continent : Codable, Identifiable {
 }
 
 
-
+struct Continentjson:Codable {
+    var id:Int
+    var nom:String
+    var lands:[String]
+    
+    init(_ json:String) {
+        let jsonData = json.data(using: .utf8)!
+        let continent = try! JSONDecoder().decode(Continentjson.self, from: jsonData)
+        self = continent
+    }
+}
 
 
 

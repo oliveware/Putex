@@ -88,7 +88,7 @@ struct RegionPicker : View {
 
     var body:some View {
         VStack {
-            if territoire.nom == "" {
+            if territoire.id == 0 {
                 ContinentPicker(lid: $lid, continent: $continent, territoire: $territoire)
             } else {
                 
