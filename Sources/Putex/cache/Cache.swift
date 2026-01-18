@@ -21,7 +21,7 @@ public struct Cache: Codable {
         if let taxions : Taxionomy = Fichier(dir, nom, .taxion).get(endpoint) {
              return taxions
          } else {
-             print ("erreur url ")
+             print ("erreur fichier taxionomie \(nom) ")
              return Taxionomy()
          }
     }
@@ -30,7 +30,7 @@ public struct Cache: Codable {
         if let ref : Articleref = Fichier(dir, nom, .articleref).get(endpoint) {
              return ref
          } else {
-             print ("erreur url ")
+             print ("erreur fichier articleref \(nom) ")
              return Articleref()
          }
     }
@@ -39,7 +39,7 @@ public struct Cache: Codable {
         if let country : Territoire = Fichier(dir, nom, .country).get(endpoint) {
              return country
          } else {
-             print ("erreur url ")
+             print ("erreur fichier territoire \(nom) ")
              return Territoire()
          }
     }
