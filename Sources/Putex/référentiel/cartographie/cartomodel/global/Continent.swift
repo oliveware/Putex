@@ -12,13 +12,16 @@ import Foundation
 public struct Continent : Codable, Identifiable {
     
     public var id:Int
-    var lid:LID {
-        LID([id])
-    }
+    var lid:LID { LID([id]) }
+    
     var nom = ""
     var territoires : [Territoire] = []
     
-    init() { id = 0 }
+    init() {
+        id = 0
+        nom = ""
+    }
+    var isNaN : Bool { id == 0 }
     
     init(_ id:Int, _ nom:String, lands: [Territoire]) {
         self.id = id
@@ -66,7 +69,7 @@ public struct Continent : Codable, Identifiable {
     subscript(_ nom:String) -> Territoire {
         var found : Territoire?
         for territoire in territoires {
-            if territoire.nom == nom {
+            if territoire.isNaN {
                 found = territoire
                 break
             }

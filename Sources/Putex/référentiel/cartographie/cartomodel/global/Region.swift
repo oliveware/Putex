@@ -24,7 +24,11 @@ public struct Region: Codable, Identifiable {
         return found
     }
    
-    init() {id = 0}
+    init() {
+        id = 0
+        nom = ""
+    }
+    var isNaN : Bool { id == 0 }
     
     init(_ territoire:LID) {
        let regionlid = LID(territoire)

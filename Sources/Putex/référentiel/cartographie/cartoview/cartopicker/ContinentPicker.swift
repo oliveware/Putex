@@ -18,7 +18,7 @@ struct ContinentPicker : View {
     
     var barre:some View {
         HStack {
-            if continent.nom != "" {
+            if !continent.isNaN {
                 Button(action:{
                     continent = Continent()
                     territoire = Territoire()
@@ -53,7 +53,7 @@ struct ContinentPicker : View {
                     Spacer()
                 }
             } else {
-                if territoire.nom == "" {
+                if territoire.isNaN {
                     HStack {
                         VStack(alignment:.leading) {
                             ForEach($continent.territoires){
@@ -94,8 +94,8 @@ struct ContinentPicker : View {
 struct ContinentPickerPreview : View {
     var world = World.sept
     @State var lid : LID
-    @State var continent: Continent = World.Europe
-    @State var territoire: Territoire = World.France
+    @State var continent: Continent = Europe
+    @State var territoire: Territoire = France
     
     var body: some View {
         

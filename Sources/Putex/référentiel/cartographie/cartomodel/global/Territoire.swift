@@ -18,8 +18,10 @@ public struct Territoire : Codable, Identifiable {
     
     init() {
         id = 0
-        nom = "territoire inconnu"
+        nom = ""
     }
+    
+    var isNaN : Bool { id == 0 }
     
     init(_ continent:LID) {
        let territoirelid = LID(continent)

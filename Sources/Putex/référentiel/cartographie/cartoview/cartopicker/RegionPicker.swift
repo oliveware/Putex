@@ -20,7 +20,7 @@ struct RegionPicker : View {
     
     var barre:some View {
         HStack {
-            if territoire.nom != "" {
+            if !territoire.isNaN {
                 Button(action:{
                     territoire = Territoire()
                     region = Region()
@@ -30,7 +30,7 @@ struct RegionPicker : View {
                     lid = LID([continent.id])
                 })
                     {Text(territoire.nom)}
-                if region.nom != "" {
+                if !region.isNaN {
                     if territoire.regions.count > 1 {
                         Button(action:{
                             region = Region()
@@ -135,8 +135,8 @@ struct RegionPicker : View {
 }
 
 struct RegionPickerPreview : View {
-    @State var continent = World.Europe
-    @State var territoire = World.France
+    @State var continent = Europe
+    @State var territoire = France
     @State var lid = LID([1,1])
     
     var edition = true

@@ -14,12 +14,17 @@ public struct Quartier: Codable, Identifiable {
     
     var terrains:[Terrain] = []
     
+    init() {
+        id = 0
+        nom = ""
+    }
+    var isNaN : Bool { id == 0 }
+    
     init(_ commune:LID) {
         let quartierlid = LID(commune)
         lid = quartierlid
         id = quartierlid.quartier!
     }
-    init() { id = 0}
     
     subscript(_ id:Int) -> Terrain? {
         var found : Terrain?

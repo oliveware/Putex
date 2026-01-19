@@ -8,11 +8,11 @@ import Foundation
 
 struct World: Codable {
     //static var Europe = World(continents).sept[1]
-    //static var Europe = Continent(1, "Europe", lands: [France,Deutschland,England,Nederland,Spania,Cymru])
-    //static var sept = World([Europe, NorthAmerica, SouthAmerica, Africa, Asia, Oceanie, Antartica])
-    static var sept = World("sept")
-    static var Europe = sept["Europe"]
-    static var France = Europe["France"]
+    static var Europe = Continent(1, "Europe", lands: [France,Deutschland,England,Nederland,Spania,Cymru])
+    static var sept = World([Europe, NorthAmerica, SouthAmerica, Africa, Asia, Oceanie, Antartica])
+    //static var sept = World("sept")
+    //static var Europe = sept["Europe"]
+    //static var France = Europe["France"]
     
     var continents : [Continent]
     

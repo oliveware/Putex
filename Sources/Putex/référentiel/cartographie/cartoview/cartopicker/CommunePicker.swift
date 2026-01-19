@@ -20,7 +20,7 @@ struct CommunePicker: View {
     var body:some View {
         VStack(alignment:.leading) {
             
-            if commune.nom == "" {
+            if commune.isNaN {
                 HStack(alignment:.center)  {
                     VStack(alignment:.leading) {
                         ForEach($region.communes){

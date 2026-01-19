@@ -29,14 +29,19 @@ public struct Commune: Codable, Identifiable {
         }
         return found
     }
+    
+    init() {
+        id = 0
+        nom = ""
+    }
+    var isNaN : Bool { id == 0 }
    
     init(_ region:LID) {
         let communelid = LID(region)
         lid = communelid
         id = communelid.commune!
     }
-    init() { id = 0 }
-
+   
     subscript(_ id:Int) -> Quartier? {
         var found : Quartier?
         for quartier in quartiers {

@@ -27,7 +27,7 @@ struct ContinentView: View {
     @State private var territoire = Territoire()
     
     var body:some View {
-        if continent.nom == "" {
+        if continent.isNaN {
             ContinentPicker(lid:$lid, continent: $continent, territoire: $territoire)
         } else {
             if edition {
