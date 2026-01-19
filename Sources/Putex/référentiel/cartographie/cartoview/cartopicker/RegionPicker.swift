@@ -151,6 +151,7 @@ struct RegionPickerPreview : View {
 }
 
 #Preview("éditable") {
+    // édition incomplète - ne fonctionne pas
     RegionPickerPreview().padding()
 }
 
