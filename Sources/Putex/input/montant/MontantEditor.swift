@@ -52,3 +52,15 @@ public struct MontantEditor: View {
         }
     }
 }
+
+struct MontantPreditor: View {
+    
+    @State var montant = Montant()
+    var body: some View {
+        MontantView($montant).frame(width:300)
+    }
+}
+
+#Preview {
+    MontantPreditor()
+}

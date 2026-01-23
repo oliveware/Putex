@@ -16,7 +16,7 @@ public struct Nombre: Codable {
     //let base = 10
     
     public var isNaN: Bool {
-        entiere == nil && decimales == ""
+        entiere == nil && decimales == nil
     }
     
     init() { }

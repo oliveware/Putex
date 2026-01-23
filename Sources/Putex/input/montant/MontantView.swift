@@ -27,12 +27,11 @@ public struct MontantView: View {
         _montant = m
         label = p
         if m.wrappedValue.isnul {
-            self.editable = true
             edition = true
         } else {
-            self.editable = editable
-            edition = false
+            edition = editable
         }
+        self.editable = editable
     }
     
     var editorwidth:CGFloat{
@@ -46,7 +45,7 @@ public struct MontantView: View {
         return Text(prompt + montant.enchiffres)
     }
     
-    var edit: some View {
+   public var body: some View {
         HStack {
             if edition {
                 if !montant.nombre.isNaN {
@@ -55,24 +54,22 @@ public struct MontantView: View {
                 }
                 
                MontantEditor($montant, label)
-                
-                Button(action: {edition = false})
-                {Image(systemName: "checkmark")}
+                if !montant.nombre.isNaN {
+                    Button(action: {edition = false})
+                    {Image(systemName: "checkmark")}
+                }
             } else {
                 show
-                Button(action: {edition = true}) {
-                    Image(systemName: "pencil")
+                if editable {
+                    Button(action: {edition = true}) {
+                        Image(systemName: "pencil")
+                    }
                 }
             }
         }//.frame(width:150+width)
     }
     
-    public var body: some View {
-        HStack {
-         //   if label != "" {Text("\(label) : ")}
-            if editable { edit } else { show }
-        }
-    }
+
     
     func clear() {
         montant.nombre = Nombre()
@@ -90,7 +87,7 @@ struct MontantDemo: View {
     
     var body: some View {
         VStack(spacing:15) {
-                MontantView($montant, "estimation", editable)
+            MontantView($montant, "estimation", editable)
 
             Text(montant.enlettres)
             
