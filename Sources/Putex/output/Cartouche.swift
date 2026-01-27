@@ -137,6 +137,6 @@ struct CartouchePreview: View {
     HStack {
         CartouchePreview(cartouche : Cartouche("", ["ligne 1", "ligne 2", "ligne 3"], false))
         
-        CartouchePreview(cartouche : Cartouche("", ["ligne 1", "ligne 2", "ligne 3"]))
+        CartouchePreview(cartouche : Cartouche("", ["ligne 4", "ligne 5", "ligne 6"]))
     }
 }
