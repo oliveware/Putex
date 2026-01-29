@@ -10,9 +10,9 @@ public struct NumVoie: Codable, Equatable {
         a.voie == b.voie && a.num == b.num && a.codepostal == b.codepostal
     }
     
-    var voie:   String = ""
-    var num:    String = ""
-    var codepostal:String = ""
+    var voie:       String = ""
+    var num:        String = ""
+    var codepostal: String = ""
     
     public var isNaN: Bool {
         voie == "" || num == "" || codepostal == ""

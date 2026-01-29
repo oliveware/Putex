@@ -34,6 +34,13 @@ public struct Adresse: Codable, Equatable {
         commune = v
     }
     
+    init(_ numvoie:NumVoie, _ com:String) {
+        numero = numvoie.num
+        voie = numvoie.voie
+        codepostal = numvoie.codepostal
+        commune = com
+    }
+    
     public init () {
     }
     

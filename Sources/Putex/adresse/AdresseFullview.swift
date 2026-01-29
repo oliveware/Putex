@@ -8,7 +8,7 @@
 import SwiftUI
 //import CoreLocation
 
-public struct AdresseView0: View {
+public struct AdresseFullview: View {
     @Binding var adresse: Adresse
     var prompt = "adresse postale"
     @Binding var edition: Bool
@@ -26,10 +26,7 @@ public struct AdresseView0: View {
                 if edition == true {
                     Form {
                         TextField(text: $adresse.numero, prompt: Text("")){Text("numéro")} .frame(maxWidth: 100)
-                        
                         TextField(text: $adresse.voie, prompt: Text("")) {Text("voie")}
-                        
-                        
                         TextField(text: $adresse.codepostal, prompt: Text("")) {
                             Text("code postal")
                         }
@@ -55,8 +52,17 @@ public struct AdresseView0: View {
     }
 }
 
-struct AdresseView_Previews: PreviewProvider {
-    static var previews: some View {
-        AdresseView0(.constant(uneadresse), .constant(true))
+struct AdresseFullPreview : View {
+    @State var adresse = uneadresse
+    @State var edition = false
+    var body: some View {
+        AdresseFullview($adresse, $edition)
     }
+}
+
+#Preview {
+    AdresseFullPreview()
+}
+#Preview("edit") {
+    AdresseFullPreview(edition:true)
 }

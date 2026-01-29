@@ -68,7 +68,7 @@ public struct TerrainEditor: View {
     public var body: some View {
        
         VStack(alignment: .leading, spacing:30) {
-            AdresseDouble(first:$terrain.numvoie, autre:$terrain.autrenumvoie, commune:terrain.commune)
+            NumVoieDouble(first:$terrain.numvoie, autre:$terrain.autrenumvoie, commune:terrain.commune)
        
             ParceList(parcelles: $terrain.parcelles, edition:true).padding(10)
         }.frame(alignment: .leading)

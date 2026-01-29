@@ -1,12 +1,12 @@
 //
-//  AdresseView.swift
+//  NumVoieView.swift
 //  Putex
 //
 //  Created by Herve Crespel on 21/11/2024.
 //
 import SwiftUI
 
-struct AdresseView : View {
+struct NumVoieView : View {
     @Binding var numvoie: NumVoie
     @State private var edit = false
     var commune:String = "commune"
@@ -26,7 +26,7 @@ struct AdresseView : View {
     }
 }
 
-struct AdresseDouble : View {
+struct NumVoieDouble : View {
     @Binding var first: NumVoie
     @Binding var autre: NumVoie?
     var commune:String = ""
@@ -36,7 +36,7 @@ struct AdresseDouble : View {
     var body: some View {
         HStack(spacing:20 ){
             GroupBox("adresse") {
-                AdresseView(numvoie:$first, commune:commune)
+                NumVoieView(numvoie:$first, commune:commune)
             }
             if !first.isNaN {
                 if autre == nil {
@@ -49,7 +49,7 @@ struct AdresseDouble : View {
                         Button(action:{autre = nil})
                         {Image(systemName: "minus")}
                         GroupBox("autre adresse") {
-                            AdresseView(numvoie:Binding<NumVoie>(
+                            NumVoieView(numvoie:Binding<NumVoie>(
                                 get: {autre ?? NumVoie()},
                                 set: { autre = $0 } ),
                                         commune:commune)
@@ -61,11 +61,11 @@ struct AdresseDouble : View {
     }
 }
     public struct AdressePreview: View {
-        @State var first = NumVoie()
+        @State var first = NumVoie("67", "rue du 14 juillet","59113")
         @State var autre : NumVoie?
         
         public var body :some View {
-            AdresseDouble(first:$first, autre:$autre)
+            NumVoieDouble(first:$first, autre:$autre)
         }
     }
 
