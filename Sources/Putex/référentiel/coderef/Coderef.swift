@@ -18,31 +18,15 @@ public struct Coderef: Codable, Identifiable {
     public static func find(_ name:String) -> Coderef {
         all[name] ?? empty
     }
+    public static func find(_ domain:Codomain) -> Coderef {
+        all[domain.name.pluriel] ?? empty
+    }
     static var empty: Coderef {
         Coderef(Mot("vide",nil))
     }
     
-    public enum Domain :String, Codable {
-        case article    = "A"
-        case batiment   = "B"
-        case company    = "C"
-        case equipement = "E"
-        case foncier    = "F"
-        case human      = "H"
-        case local      = "L"
-        case offre      = "O"
-        case cataloffre = "OC"
-        case payment    = "P"
-        case piece      = "Q"
-      case location   = "R"     // Rent
-        case tarif      = "T"
-        case compte     = "W"
-        case taxation   = "X"
-        case appareil   = "Z"
-    }
-    
     static var nextcode = 0
-    public static func newcode(_ domain:Domain) -> String {
+    public static func newcode(_ domain:Codomain) -> String {
         
         switch domain {
         case .article:
@@ -53,11 +37,19 @@ public struct Coderef: Codable, Identifiable {
             return domain.rawValue + "#" + String(nextcode)
         }
     }
+    
+    
     public var id : String { name.pluriel }
     var name : Mot
     var items : [Head] = []
     var selector: String = ""
     
+    public init(_ domain:Codomain) {
+        let tablename = domain.name
+        name = tablename
+        selector = tablename.singulier
+        Coderef.all[name.pluriel] = self
+    }
     public init(_ tablename:Mot) {
         name = tablename
         selector = tablename.singulier
@@ -97,6 +89,7 @@ public struct Coderef: Codable, Identifiable {
         }
         if !found { updated.append(head)}
         items = updated
+        if !found { Coderef.all[name.pluriel] = self }
     }
     
     mutating func insert<T:Oxet>(_ item:T) {
