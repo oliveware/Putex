@@ -35,7 +35,10 @@ public struct JMAPicker : View {
         
         DatePicker("", selection: $date, displayedComponents: .date)
            // .frame(width: 200)
-            .onChange(of:date) {jma = JMA(date)}
+            .onChange(of:date) {
+                jma = JMA(date)
+                todo()
+            }
     }
     
     public var body : some View {
