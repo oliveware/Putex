@@ -9,7 +9,8 @@ import SwiftUI
 import Taxionomy
 
 struct ButtonRow: View {
-    @Binding var selected:(row:Int, col:Int)
+    @Binding var bc:(row:Int, col:Int)
+    @Binding var label:String
     var cols: [String] = []
     var row:Int
     var width: Int = 200
@@ -23,8 +24,12 @@ struct ButtonRow: View {
         HStack (spacing:CGFloat(spacing)) {
             ForEach (0..<cols.count, id:\.self) {
                 col in
-                Button(action:{selected = (row:row,                                                          col:col)})
-                {Text(cols[col]).frame(width:colwidth)}
+                Button(action:{
+                    bc = (row:row, col:col)
+                    label = cols[col]
+                })
+                {Text(cols[col]).frame(width:colwidth)
+                    .foregroundColor(.yellow)}
             }
         }
         
@@ -33,11 +38,13 @@ struct ButtonRow: View {
 
 public struct ButtonStack: View {
     @Binding var bc : (row:Int, col:Int)
+    @Binding var label:String
     var rows: [[String]]
     var width = 200
     
-    public init(_ bc:Binding<(row:Int, col:Int)>,_ rows: [[String]], _ large:Int? = nil) {
+    public init(_ bc:Binding<(row:Int, col:Int)>,_ label:Binding<String>,_ rows: [[String]], _ large:Int? = nil) {
         _bc = bc
+        _label = label
         self.rows = rows
         if large == nil {
             var max = 0
@@ -58,7 +65,7 @@ public struct ButtonStack: View {
         VStack {
             ForEach (0..<rows.count, id:\.self) {
                 row in
-                ButtonRow(selected: $bc, cols: rows[row], row:row, width: width)
+                ButtonRow(bc: $bc, label:$label, cols: rows[row], row:row, width: width)
             }
         }
     }
@@ -93,7 +100,7 @@ public struct ButtonStackEditor : View {
                 TextField("", text:$label).frame(width:CGFloat(width))
                     .focused($focus)
                     .onSubmit {
-                        rows = [[label]] + rows
+                        rows =  [[label]] + rows
                         label = ""
                         newrow = false
                         focus = false
@@ -103,12 +110,13 @@ public struct ButtonStackEditor : View {
                     newrow = true
                     focus = true
                 })
-                { Image(systemName: "plus") }.padding(20).disabled(focus)
+                { Text("ajouter " + mots[0].indéterminé) }
+                    .padding(20).disabled(focus)
             }
             ForEach (0..<$rows.count, id:\.self) {
                 row in
                 HStack(spacing:20) {
-                    ButtonRow(selected: $bc, cols: rows[row], row:row, width: width)
+                    ButtonRow(bc: $bc, label: $label, cols: rows[row], row:row, width: width)
                     
                     if newcol == row {
                         TextField("", text:$label).frame(width:100)
@@ -124,13 +132,13 @@ public struct ButtonStackEditor : View {
                             newcol = row
                             focus = true
                         })
-                        { Image(systemName: "plus") }.disabled(focus)
+                        { Text("ajouter " + mots[1].indéterminé) }
+                            .disabled(focus)
+                            .padding(.leading,20)
                     }
                 }
             }
-            if rows.count == 0 {
-                Text("ajouter " + mots[0].indéterminé)
-            } else {
+            if rows.count > 0 {
                 Button("valider", action:{ valider() }).padding(20)
                     .disabled(focus)
             }
@@ -140,6 +148,7 @@ public struct ButtonStackEditor : View {
 
 struct ButtonStackPreview : View {
     @State var bc = (row:0, col:0)
+    @State var label = ""
     @State var rows = [["second"],["premier"],["gauche","droit"]]
     
     @State var edition = false
@@ -154,10 +163,12 @@ struct ButtonStackPreview : View {
                 ButtonStackEditor($rows, valider )
             } else {
                 HStack(spacing:50) {
-                    ButtonStack($bc, rows)
-                    Text("\(bc.row) - \(bc.col)")
+                    ButtonStack($bc, $label, rows)
+                    if rows.count > 0 {
+                        Text("\(rows.count - 1 - bc.row) - \(bc.col)  \(label)")
+                    }
                 }.padding(20)
-                Button("edit", action:{edition = true})
+                Button(rows.count > 0 ? "modifier": "créer", action:{edition = true})
             }
         }.frame(width:500, height:400)
     }
@@ -170,5 +181,9 @@ struct ButtonStackPreview : View {
     ButtonStackPreview()
 }
 #Preview("more") {
-    ButtonStackPreview(rows : [["troisième"],["2g","2d"],["1a","1b", "1c"],["rdc1", "rdc2"]])
+    ButtonStackPreview(rows : [
+        ["troisième"],
+        ["2g","2d"],
+        ["1a","1b", "1c"],
+        ["rdc1", "rdc2"]])
 }
