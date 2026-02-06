@@ -14,6 +14,11 @@ public struct ButtonStackPicker : View {
     @State private var bc = (row:0, col:0)
     @State private var pick = false
     
+    public init(_ label:Binding<String>, _ labels:[[String]]) {
+        _label = label
+        self.labels = labels
+    }
+    
     public var body: some View {
         HStack {
             Text(label)
