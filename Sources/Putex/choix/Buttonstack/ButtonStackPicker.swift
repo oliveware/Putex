@@ -25,7 +25,7 @@ public struct ButtonStackPicker : View {
             Button(action:{pick = true})
             {Image(systemName: "pencil")}
                 .sheet(isPresented: $pick)
-            {ButtonStack($bc, $label, labels)}
+            {ButtonStack($bc, $label, labels, done:{pick = false}).padding()}
         }
     }
 }

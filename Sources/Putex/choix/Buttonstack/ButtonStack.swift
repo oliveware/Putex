@@ -19,6 +19,7 @@ struct ButtonRow: View {
     var colwidth: CGFloat {
         CGFloat(Double(width - (spacing+15)*(cols.count-1)) / Double(cols.count))
     }
+    var done: () -> Void
     
     var body: some View {
         HStack (spacing:CGFloat(spacing)) {
@@ -27,6 +28,7 @@ struct ButtonRow: View {
                 Button(action:{
                     bc = (row:row, col:col)
                     label = cols[col]
+                    done()
                 })
                 {Text(cols[col]).frame(width:colwidth)
                     .foregroundColor(.yellow)}
@@ -41,8 +43,10 @@ public struct ButtonStack: View {
     @Binding var label:String
     var rows: [[String]]
     var width = 200
+    var done: () -> Void
     
-    public init(_ bc:Binding<(row:Int, col:Int)>,_ label:Binding<String>,_ rows: [[String]], _ large:Int? = nil) {
+    public init(_ bc:Binding<(row:Int, col:Int)>,_ label:Binding<String>,
+                _ rows: [[String]], _ large:Int? = nil, done: @escaping () -> Void ) {
         _bc = bc
         _label = label
         self.rows = rows
@@ -59,13 +63,14 @@ public struct ButtonStack: View {
         } else {
             width = large!
         }
+        self.done = done
     }
 
     public var body: some View {
         VStack {
             ForEach (0..<rows.count, id:\.self) {
                 row in
-                ButtonRow(bc: $bc, label:$label, cols: rows[row], row:row, width: width)
+                ButtonRow(bc: $bc, label:$label, cols: rows[row], row:row, width: width, done: done)
             }
         }
     }
@@ -81,14 +86,13 @@ public struct ButtonStackEditor : View {
     @State private var newcol = -1
     @State private var label = ""
     
-    
-    var valider: () -> Void
+    var done: () -> Void
     @FocusState private var focus
     
     public init(_ rows:Binding<[[String]]>, _ done:@escaping () -> Void,
          _ mots:[Mot]? = nil) {
         _rows = rows
-        valider = done
+        self.done = done
         if mots != nil {
             self.mots = mots!
         }
@@ -116,7 +120,7 @@ public struct ButtonStackEditor : View {
             ForEach (0..<$rows.count, id:\.self) {
                 row in
                 HStack(spacing:20) {
-                    ButtonRow(bc: $bc, label: $label, cols: rows[row], row:row, width: width)
+                    ButtonRow(bc: $bc, label: $label, cols: rows[row], row:row, width: width, done:{})
                     
                     if newcol == row {
                         TextField("", text:$label).frame(width:100)
@@ -139,7 +143,7 @@ public struct ButtonStackEditor : View {
                 }
             }
             if rows.count > 0 {
-                Button("valider", action:{ valider() }).padding(20)
+                Button("valider", action:{ done() }).padding(20)
                     .disabled(focus)
             }
         }
@@ -163,7 +167,7 @@ struct ButtonStackPreview : View {
                 ButtonStackEditor($rows, valider )
             } else {
                 HStack(spacing:50) {
-                    ButtonStack($bc, $label, rows)
+                    ButtonStack($bc, $label, rows, done:valider)
                     if rows.count > 0 {
                         Text("\(rows.count - 1 - bc.row) - \(bc.col)  \(label)")
                     }
