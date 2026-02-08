@@ -6,22 +6,29 @@
 //
 
 import SwiftUI
+import Taxionomy
 
 public struct ButtonStackPicker : View {
     @Binding var label:String
     var labels:[[String]]
+    var mot:Mot
     
     @State private var bc = (row:0, col:0)
     @State private var pick = false
     
-    public init(_ label:Binding<String>, _ labels:[[String]]) {
+    public init(_ label:Binding<String>, _ labels:[[String]], _ mot:Mot) {
         _label = label
         self.labels = labels
+        self.mot = mot
     }
     
     public var body: some View {
         HStack {
-            Text(label)
+            if label == "" {
+                Text("choisir \(mot.indéterminé)")
+            } else {
+                Text(label)
+            }
             Button(action:{pick = true})
             {Image(systemName: "pencil")}
                 .sheet(isPresented: $pick)
