@@ -21,6 +21,10 @@ struct ButtonRow: View {
     }
     var done: () -> Void
     
+    func selected(_ col:Int) -> Bool {
+        row == bc.row && col == bc.col
+    }
+    
     var body: some View {
         HStack (spacing:CGFloat(spacing)) {
             ForEach (0..<cols.count, id:\.self) {
@@ -31,10 +35,9 @@ struct ButtonRow: View {
                     done()
                 })
                 {Text(cols[col]).frame(width:colwidth)
-                    .foregroundColor(.yellow)}
+                    .foregroundColor(selected(col) ? .yellow : .gray)}
             }
         }
-        
     }
 }
 
