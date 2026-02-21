@@ -9,7 +9,7 @@ import SwiftUI
 public struct Terrain: Codable, Identifiable {
     
     public var id:Int
-    var lid:LID?
+    public var lid:LID?
     
     var label:String {
         var string = numvoie.voirie
