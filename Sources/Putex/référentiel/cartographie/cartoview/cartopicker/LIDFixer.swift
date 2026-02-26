@@ -17,9 +17,10 @@ public struct LIDFixer: View {
 
     public var body: some View {
         VStack {
-            Text("Emplacement géographique")
-                .font(.title3).padding(20)
+            
             if terrain.isNaN {
+                Text("Emplacement géographique")
+                    .font(.title3).padding(20)
                 LIDPicker($lid, {})
             } else {
                 TerrainView($terrain)

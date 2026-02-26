@@ -43,17 +43,9 @@ public struct TerrainShow: View {
     
     public var body: some View {
         VStack ( alignment:.leading, spacing:10 ) {
-          /*  if terrain.numvoie.voie != "" {
-                GroupBox("Adresse") {
-                    Text(terrain.address).padding(10)
-                }
-            }*/
-
-            GroupBox("Parcelles") {
-                ParceList(parcelles: $terrain.parcelles).padding(10)
-            }.frame(height:CGFloat(terrain.parcelles.count * 5))
- 
-        }.padding(10)
+            ParceList(parcelles: $terrain.parcelles)
+                .frame(height:CGFloat(terrain.parcelles.count * 5))
+        }
     }
 }
 
@@ -148,7 +140,6 @@ struct TerrainPreview: View {
                 Button("voir", action : {
                     if let terrainlid = terrain.lid {
                         lid = terrainlid
-                        
                     }
                     voir = true
                 })//.disabled(lid.terrain == nil)
