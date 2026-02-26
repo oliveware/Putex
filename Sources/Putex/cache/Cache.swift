@@ -17,6 +17,12 @@ public struct Cache: Codable {
     var dir = "/dodata/"
     //var filextension = Filextension.taxion
     
+    init() {}
+    init(_ endpoint:String, _ folder:String) {
+        self.endpoint = endpoint
+        dir = folder
+    }
+    
     public func get(_ nom:String) -> Taxionomy {
         if let taxions : Taxionomy = Fichier(dir, nom, .taxion).get(endpoint) {
              return taxions
