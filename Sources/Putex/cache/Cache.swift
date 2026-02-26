@@ -18,7 +18,7 @@ public struct Cache: Codable {
     //var filextension = Filextension.taxion
     
     init() {}
-    init(_ endpoint:String, _ folder:String) {
+    public init(_ endpoint:String, _ folder:String = "/dodata/") {
         self.endpoint = endpoint
         dir = folder
     }
