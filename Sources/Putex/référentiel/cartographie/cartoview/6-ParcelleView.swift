@@ -14,7 +14,7 @@ struct ParcelleShow: View {
     
     init(_ parcelle:Binding<Parcelle>, _ unique:Bool = false) {
         _parcelle = parcelle
-        edition = parcelle.wrappedValue.surface.value == 0
+        edition = parcelle.wrappedValue.id == 0
         self.unique = unique
     }
     
