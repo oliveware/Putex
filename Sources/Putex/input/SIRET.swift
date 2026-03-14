@@ -6,15 +6,24 @@
 //
 import SwiftUI
 
-struct SIRET {
+public struct SIRET {
     var siren:String = ""
     var etab:String = ""
+    
+    public var astring:String {
+        siren + etab
+    }
+    
 }
 
-struct SIRETView : View {
+public struct SIRETView : View {
     @Binding var siret:SIRET
     
-    var body: some View {
+    public init(_ siret:Binding<SIRET>) {
+        _siret = siret
+    }
+    
+    public var body: some View {
         HStack {
             TextField("code SIREN", text: $siret.siren)
                 .frame(width:120)
@@ -28,7 +37,7 @@ struct SIRETPreview : View {
     @State var siret = SIRET()
     
     var body: some View {
-        SIRETView(siret:$siret).padding()
+        SIRETView($siret).padding()
     }
 }
 
