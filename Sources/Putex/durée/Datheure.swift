@@ -11,6 +11,10 @@ public struct Datheure : Codable, Equatable {
         lhs.date == rhs.date && lhs.heure == rhs.heure
     }
     
+    public static var now: Datheure {
+        Datheure(JMA.now, HMS.NaN)
+    }
+    
     var j : Int = 0
     var m : Int
     var a: Int
