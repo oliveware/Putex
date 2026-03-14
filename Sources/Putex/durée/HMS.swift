@@ -27,6 +27,20 @@ public struct HMS : Codable, Equatable {
     }
     
     public var astring: String {
-        return String(h) + ":" + String(mn) + ":" + String(s)
+        return bourre("h") + ":" + bourre("mn") + ":" + bourre("s")
+    }
+    
+    func bourre(_ d:String ) -> String {
+        var string = ""
+        if d == "h" {
+            string = h < 10 ? "0" + String(h) : String(h)
+        }
+        if d == "mn" {
+            string = mn < 10 ? "0" + String(mn) : String(mn)
+        }
+        if d == "s" {
+            string = s < 10 ? "0" + String(s) : String(s)
+        }
+        return string
     }
 }

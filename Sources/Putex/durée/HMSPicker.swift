@@ -18,9 +18,7 @@ struct HMSPicker : View {
         _hms = hms
         self.todo = todo
     }
-    func bourre(_ val:Int) -> String {
-        val < 10 ? "0" + String(val) : String(val)
-    }
+
     func dec24() {
         hms.h -= 1
         if hms.h < 0 { hms.h = 23 }
@@ -54,11 +52,11 @@ struct HMSPicker : View {
     
     var body: some View {
         HStack{
-            Stepper {Text(bourre(hms.h))}
+            Stepper {Text(hms.bourre("h"))}
             onIncrement: {inc24()} onDecrement: {dec24()}
-            Stepper {Text(bourre(hms.mn))}
+            Stepper {Text(hms.bourre("mn"))}
             onIncrement: {inc60(true)} onDecrement: {dec60(true)}
-            Stepper {Text(bourre(hms.s))}
+            Stepper {Text(hms.bourre("s"))}
             onIncrement: {inc60(false)} onDecrement: {dec60(false)}
         }
     }
