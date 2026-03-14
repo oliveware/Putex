@@ -41,6 +41,20 @@ public struct FixedField : View {
     }
 }
 
+/* private var siren: Binding<String> {
+     Binding(
+         get: {siret.siren},
+         set: {new in
+             if new.count <= 9 {
+                 siret.siren = new
+               //  showWarning = false // Hide warning if under limit
+             } else {
+                 siret.siren = String(new.prefix(9))
+               //  showWarning = true // Show warning if truncated
+             }
+         })
+ }*/
+
 struct FixedFieldPreview : View {
     @State var string = ""
     

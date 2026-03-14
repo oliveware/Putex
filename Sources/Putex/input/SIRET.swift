@@ -21,26 +21,13 @@ public struct SIRET: Codable {
 public struct SIRETView : View {
     @Binding var siret:SIRET
     
-   /* private var siren: Binding<String> {
-        Binding(
-            get: {siret.siren},
-            set: {new in
-                if new.count <= 9 {
-                    siret.siren = new
-                  //  showWarning = false // Hide warning if under limit
-                } else {
-                    siret.siren = String(new.prefix(9))
-                  //  showWarning = true // Show warning if truncated
-                }
-            })
-    }*/
-    
     public init(_ siret:Binding<SIRET>) {
         _siret = siret
     }
     
     public var body: some View {
         HStack {
+            Text("SIRET")
             FixedField("SIREN", $siret.siren, 9, true, true)
                 .frame(width:100)
             FixedField("établissement", $siret.etab, 5, true, true)
