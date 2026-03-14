@@ -39,10 +39,10 @@ public struct Datheure : Codable, Equatable {
         mn = heure.mn
         s = heure.s
     }
-    var date: JMA {
+    public var date: JMA {
         JMA(j,m,a)
     }
-    var heure:HMS {
+    public var heure:HMS {
         HMS(h,mn,s)
     }
     
