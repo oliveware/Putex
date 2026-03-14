@@ -6,7 +6,7 @@
 //
 import SwiftUI
 
-public struct SIRET {
+public struct SIRET: Codable {
     var siren:String = ""
     var etab:String = ""
     
