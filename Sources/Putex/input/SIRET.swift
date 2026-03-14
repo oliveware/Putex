@@ -10,6 +10,8 @@ public struct SIRET: Codable {
     var siren:String = ""
     var etab:String = ""
     
+    public init() {}
+    
     public var astring:String {
         siren + etab
     }
