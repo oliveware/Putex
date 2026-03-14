@@ -7,6 +7,7 @@
 
 public struct Récurrence: Codable {
     static var périodes :[Période] = [.m,.t,.a]
+    
     enum Période : String, Codable, Enumerable {
         public var id: Self { self }
         static var selector = "récurrence"
@@ -54,12 +55,6 @@ public struct Récurrence: Codable {
         self.occurences = occurences
         self.jour = jour
     }
-}
-
-public struct Echéance: Codable {
-    var date: JMA
-    var montant: Montant
-    var payée = false
 }
 
 import SwiftUI

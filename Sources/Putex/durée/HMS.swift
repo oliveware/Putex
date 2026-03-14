@@ -10,16 +10,20 @@ import Foundation
 
 public struct HMS : Codable, Equatable {
     public static func == (_ lhs: HMS,_ rhs: HMS) -> Bool {
-        lhs.heure == rhs.heure && lhs.minute == rhs.minute && lhs.seconde == rhs.seconde
+        lhs.h == rhs.h && lhs.mn == rhs.mn && lhs.s == rhs.s
     }
     
-    var heure: Int
-    var minute: Int
-    var seconde: Int
+    var h: Int
+    var mn: Int
+    var s: Int
     
-    public init(heure: Int, minute: Int, seconde: Int) {
-        self.heure = heure
-        self.minute = minute
-        self.seconde = seconde
+    public init(_ heure: Int, _ minute: Int, _ seconde: Int) {
+        h = heure
+        mn = minute
+        s = seconde
+    }
+    
+    public var astring: String {
+        return String(h) + ":" + String(mn) + ":" + String(s)
     }
 }
