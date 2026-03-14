@@ -42,10 +42,10 @@ public struct Datheure : Codable, Equatable {
         HMS(h,mn,s)
     }
     
-    var astring: String {
+    public var astring: String {
         "le " + date.astring + " à " + heure.astring
     }
-    var capstring: String {
+    public var capstring: String {
         "LE " + date.astring + " A " + heure.astring
     }
 }
