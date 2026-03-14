@@ -7,20 +7,20 @@
 
 import SwiftUI
 
-struct DatheurePicker : View {
+public struct DatheurePicker : View {
     @Binding var datheure : Datheure
     @State var date:JMA
     @State var heure:HMS
     var prompt = ""
     
-    init(_ datheure:Binding<Datheure>, _ prompt:String = "") {
+    public init(_ datheure:Binding<Datheure>, _ prompt:String = "") {
         _datheure = datheure
         date = datheure.wrappedValue.date
         heure = datheure.wrappedValue.heure
         self.prompt = prompt
     }
     
-    var body: some View {
+    public var body: some View {
         HStack {
             JMAPicker($date, prompt, update)
             HMSPicker($heure, update)
