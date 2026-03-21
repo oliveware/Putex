@@ -31,13 +31,13 @@ public struct Datheure : Codable, Equatable {
         mn = minute
         s = seconde
     }
-    public init(_ date:JMA, _ heure:HMS) {
+    public init(_ date:JMA, _ heure:HMS? = nil) {
         j = date.jour
         m = date.mois
         a = date.année
-        h = heure.h
-        mn = heure.mn
-        s = heure.s
+        h = heure?.h ?? 0
+        mn = heure?.mn ?? 0
+        s = heure?.s ?? 0
     }
     public var date: JMA {
         JMA(j,m,a)

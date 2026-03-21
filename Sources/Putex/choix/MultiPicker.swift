@@ -73,3 +73,7 @@ struct MultiPreview : View {
 #Preview {
     MultiPreview().frame(width:200,height:150)
 }
+#Preview("comptes") {
+    MultiPreview(tables:[courant, epargne, bourse])
+        .frame(width:200,height:150)
+}

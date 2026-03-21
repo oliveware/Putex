@@ -52,7 +52,7 @@ struct NumberEditor: View {
         HStack(spacing:0){
             TextField("", value:$nombre.entiere, format:.number)
                 .frame(width: width($nombre.wrappedValue.entiere), alignment: .trailing )
-            if nombre.decimales != ""  || nbdec > 0 {
+            if nombre.decimales != nil  || nbdec > 0 {
                 Text(dot)
                 TextField("", value:$decimales, format:.number)
                     .frame(width: width(decimales) )

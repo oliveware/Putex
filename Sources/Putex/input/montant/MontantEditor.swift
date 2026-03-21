@@ -42,10 +42,10 @@ public struct MontantEditor: View {
              }*/
             
             if label != "" {
-                Text(label + " : ")
+                Text(label)
             }
             
-            NumberEditor($montant.nombre, .decimal(2), "")
+            NumberEditor($montant.nombre, .naturel, "cents")
                 .frame(width:editorwidth + 20)
             
             DevisePicker($montant.symbol)
