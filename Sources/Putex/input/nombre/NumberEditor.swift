@@ -33,7 +33,17 @@ struct NumberEditor: View {
             return 25
         }
     }
+    var mono: Bool
+    @State var cents:String = ""
     
+    init(_ nombre:Binding<Nombre>, _ classifier:String = "") {
+        _nombre = nombre
+        cents = nombre.wrappedValue.enchiffres()
+        self.classifier = classifier
+        mono = true
+        nbdec = 0
+      //  localedot = locale.decimalSeparator ?? ","
+    }
     public init(_ nombre:Binding<Nombre>, _ set: NumberSet, _ classifier:String = "") {
         _nombre = nombre
         if let decim = nombre.wrappedValue.decimales {
@@ -45,25 +55,32 @@ struct NumberEditor: View {
         }
         nbdec = set.nbdec
         self.classifier = classifier
+        mono = false
       //  localedot = locale.decimalSeparator ?? ","
     }
     
     var body: some View {
         HStack(spacing:0){
-            TextField("", value:$nombre.entiere, format:.number)
-                .frame(width: width($nombre.wrappedValue.entiere), alignment: .trailing )
-            if nombre.decimales != nil  || nbdec > 0 {
-                Text(dot)
-                TextField("", value:$decimales, format:.number)
-                    .frame(width: width(decimales) )
-                    .onChange(of: decimales, {
-                        if let decim = decimales {
-                            nombre.decimales = String(decim)
-                        } else {
-                            nombre.decimales = nil
-                        }})
+            if mono {
+                TextField("", text:$cents)
+                    .frame(width:CGFloat((cents.count + 1) * 8), alignment: .trailing )
+                    .onChange(of: cents, {nombre = Nombre(cents)})
+            } else {
+                TextField("", value:$nombre.entiere, format:.number)
+                    .frame(width: width($nombre.wrappedValue.entiere), alignment: .trailing )
+                if nombre.decimales != nil  || nbdec > 0 {
+                    Text(dot)
+                    TextField("", value:$decimales, format:.number)
+                        .frame(width: width(decimales) )
+                        .onChange(of: decimales, {
+                            if let decim = decimales {
+                                nombre.decimales = String(decim)
+                            } else {
+                                nombre.decimales = nil
+                            }})
+                }
+                Text(" " + classifier)
             }
-            Text(" " + classifier)
         }//.frame(minWidth:showidth + 20)
     }
     
