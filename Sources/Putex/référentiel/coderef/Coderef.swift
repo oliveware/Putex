@@ -89,10 +89,10 @@ public struct Coderef: Codable, Identifiable {
         }
         if !found { updated.append(head)}
         items = updated
-        if !found { Coderef.all[name.pluriel] = self }
+        Coderef.all[name.pluriel] = self
     }
     
-    mutating func insert<T:Oxet>(_ item:T) {
+    public mutating func insert<T:Oxet>(_ item:T) {
         insert(Head(item))
     }
     
