@@ -50,6 +50,9 @@ public struct Coderef: Codable, Identifiable {
         selector = tablename.singulier
         Coderef.all[name.pluriel] = self
     }
+    public init<T:Oxet>(_ domain:Codomain, _ items:[T]) {
+        self.init(domain.name, items)
+    }
     public init(_ tablename:Mot) {
         name = tablename
         selector = tablename.singulier
