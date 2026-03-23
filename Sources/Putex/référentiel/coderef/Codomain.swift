@@ -26,6 +26,7 @@ public enum Codomain :String, Codable {
     case compte     = "W"
     case taxation   = "X"
     case appareil   = "Z"
+    case NA = "NA"
     
     var name: Mot {
         switch self {
@@ -46,14 +47,20 @@ public enum Codomain :String, Codable {
         case .compte:return Mot("compte","comptes",.m)
         case .taxation:return Mot("taxation","taxations",.f)
         case .appareil:return Mot("appareil","appareils",.m)
+        case .NA: return Mot("rien","riens", .m)
         }
     }
+    
     static func cas(_ id:String) -> Codomain {
         let split = id.split(separator:"#")
-        switch split[0] {
-        case "H" : return .human
-        case "C" : return .company
-        default: return .appareil
+        if split.count > 0 {
+            switch split[0] {
+            case "H" : return .human
+            case "C" : return .company
+            default: return .NA
+            }
+        } else {
+            return .NA
         }
     }
 }
