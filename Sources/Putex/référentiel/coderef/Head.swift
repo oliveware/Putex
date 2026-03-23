@@ -15,7 +15,9 @@ public struct Head: Codable, Identifiable, Oxet {
     public var domain : Codomain {
         Codomain.cas(id)
     }
-    
+    public init(_ label:String) {
+        self.init("", label)
+    }
     init(_ code:String, _ desc:String) {
         self.code = code
         label = desc
