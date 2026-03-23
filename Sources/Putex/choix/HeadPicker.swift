@@ -14,13 +14,22 @@ public struct HeadPicker: View {
     var table : Coderef
     @Binding var head : Head?
     @State var ajout = false
-    @Binding var open:Bool
+    @State var open = false
     
-    public init(_ open: Binding<Bool>, _ table:Coderef, _ selected:Binding<Head?>,_ prompt:String?) {
+    /*public init(_ open: Binding<Bool>, _ table:Coderef, _ selected:Binding<Head?>,_ prompt:String?) {
         self.prompt = prompt ?? "Choisir " + table.name.indéterminé
         self.table = table
         _head = selected
         _open = open
+    }*/
+    
+    public init(_ head:Binding<Head?>, _ domain:Codomain) {
+        table = Coderef.find(domain)
+        _head = head
+    }
+    public init(_ head:Binding<Head?>, _ ref:Coderef) {
+        table = ref
+        _head = head
     }
     
     public var body: some View {
@@ -88,7 +97,7 @@ struct HeadPickerPreview : View {
                 .font(.title2)
                 .padding(20)
            
-                HeadPicker($open, table, $head, nil)
+            HeadPicker($head, table)
                     .frame(width:200)
           
         }.padding(10)
