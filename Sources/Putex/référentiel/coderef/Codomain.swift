@@ -5,6 +5,7 @@
 //  Created by Herve Crespel on 29/01/2026.
 //
 import Taxionomy
+import Foundation
 
 
 public enum Codomain :String, Codable {
@@ -45,6 +46,14 @@ public enum Codomain :String, Codable {
         case .compte:return Mot("compte","comptes",.m)
         case .taxation:return Mot("taxation","taxations",.f)
         case .appareil:return Mot("appareil","appareils",.m)
+        }
+    }
+    static func cas(_ id:String) -> Codomain {
+        let split = id.split(separator:"#")
+        switch split[0] {
+        case "H" : return .human
+        case "C" : return .company
+        default: return .appareil
         }
     }
 }

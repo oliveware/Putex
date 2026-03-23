@@ -10,4 +10,5 @@ public protocol Oxet: Codable, Identifiable {
     var label:String {get}
     static var selector:String {get}
     static var warning:String {get}
+   // static var all:[Self] {get set}
 }
