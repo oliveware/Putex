@@ -31,7 +31,7 @@ public enum Codomain :String, Codable {
             
         case .article: return Mot("article","articles",.f)
         case .batiment: return Mot("bâtiment","bâtiments",.m)
-        case .company: return Mot("bâtiment","bâtiments",.m)
+        case .company: return Mot("entreprise","entreprises",.m)
         case .equipement:return Mot("équipement","équipements",.m)
         case .foncier:return Mot("foncier","fonciers",.m)
         case .human:return Mot("humain","humains",.m)
