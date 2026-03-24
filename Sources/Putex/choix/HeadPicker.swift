@@ -13,7 +13,7 @@ public struct HeadPicker: View {
     
     var table : Coderef
     @Binding var head : Head?
-    @State var input = true
+    @State var input : Bool
     @State var choice = false
     
     /*public init(_ choice: Binding<Bool>, _ table:Coderef, _ selected:Binding<Head?>,_ prompt:String?) {
@@ -28,12 +28,22 @@ public struct HeadPicker: View {
         self.prompt = prompt ?? table.name.singulier
         self.table = table
         _head = head
+        if let h = head.wrappedValue {
+            input = h.label == ""
+        } else {
+            input = true
+        }
     }
     public init(_ head:Binding<Head?>, _ ref:Coderef, _ prompt:String?) {
         let table = ref
         self.prompt = prompt ?? table.name.singulier
         self.table = table
         _head = head
+        if let h = head.wrappedValue {
+            input = h.label == ""
+        } else {
+            input = true
+        }
     }
     
     public var body: some View {
@@ -79,9 +89,7 @@ public struct HeadPicker: View {
                         .disabled(table.items.isEmpty)
                 }
             }
-
         }
-        
     }
     
     func choose(_ item:Head) {
