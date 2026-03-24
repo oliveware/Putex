@@ -29,7 +29,7 @@ public struct HeadPicker: View {
         self.table = table
         _head = head
         if let h = head.wrappedValue {
-            input = h.label == ""
+            input = h.label == "" || h.domain == .NA
         } else {
             input = true
         }
@@ -76,7 +76,7 @@ public struct HeadPicker: View {
                         ))
                         Button(action:{input = false})
                         {Image(systemName: "checkmark")}
-                        Button(action:{choice = true})
+                        Button(action:{choice = head.domain != .NA})
                         {Image(systemName: "magnifyingglass")}
                     } else {
                         Text(head.label)
