@@ -9,12 +9,29 @@ import SwiftUI
 public struct HeadPicker: View {
     var prompt = ""
     var width: CGFloat = 130
-    var height: CGFloat = 125
+    var height: CGFloat {
+        var steps = table.items.count
+        if steps < 3 { steps = 3 }
+        else if steps > 5 { steps = 5 }
+        return CGFloat(steps) * 30
+    }
     
     var table : Coderef
     @Binding var head : Head?
     @State var input : Bool
     @State var choice = false
+    
+    var label:String {
+        var inconnu = table.name.singulier + " inconnu"
+        if table.name.genre == .f { inconnu += "e"}
+        if let head = head {
+            if head.label == "" {
+                return inconnu
+            } else {
+               return head.label
+            }
+        } else { return inconnu }
+    }
     
     /*public init(_ choice: Binding<Bool>, _ table:Coderef, _ selected:Binding<Head?>,_ prompt:String?) {
         self.prompt = prompt ?? "Choisir " + table.name.indéterminé
@@ -40,7 +57,7 @@ public struct HeadPicker: View {
         self.table = table
         _head = head
         if let h = head.wrappedValue {
-            input = h.label == ""
+            input = h.label == "" || h.domain == .NA
         } else {
             input = true
         }
@@ -48,24 +65,20 @@ public struct HeadPicker: View {
     
     public var body: some View {
         HStack {
-            
             if choice {
-                GroupBox("choisir " +  prompt) {
-                    ScrollView {
-                        VStack(spacing:2){
+                VStack {
+                    GroupBox("choisir " + table.name.indéterminé) {
+                        ScrollView {
                             ForEach(table.items) {
                                 head in
-                                Button( action: {
-                                    choose(head)
-                                }){
-                                    Text(head.label)
-                                }
+                                Button( action: { choose(head) } )
+                                { Text(head.label) }
                                 //.param(w: width, h: 20)
                             }
-                            
-                        }.frame(alignment: .center)
-                    }.frame(height:height)
-                }
+                        }.frame(height:height)
+                    }
+                    Button("annuler", action:{choice = false})
+                }//.frame(height:height + 50)
             } else {
                 if let head = head {
                     if input {
@@ -76,10 +89,12 @@ public struct HeadPicker: View {
                         ))
                         Button(action:{input = false})
                         {Image(systemName: "checkmark")}
-                        Button(action:{choice = head.domain != .NA})
-                        {Image(systemName: "magnifyingglass")}
+                        if table.items.count > 0 {
+                            Button(action:{choice = true})
+                            {Image(systemName: "magnifyingglass")}
+                        }
                     } else {
-                        Text(head.label)
+                        Text(label)
                         Button(action:{ input = true })
                         {Image(systemName: "pencil")}
                     }
@@ -111,7 +126,7 @@ struct HeadPickerPreview : View {
                 .padding(20)
            
             HeadPicker($head, table, "banque")
-                    .frame(width:250)
+                .frame(width:250, height:300)
           
         }.padding(10)
     }
