@@ -5,14 +5,15 @@
 //  Created by Herve Crespel on 23/03/2026.
 //
 import SwiftUI
+import Taxionomy
 
 public struct HeadPicker: View {
-    var prompt = ""
+    var prompt : Mot
     var width: CGFloat = 130
     var height: CGFloat {
         var h = 0
         for table in tables {
-            var steps = table.items.count
+            var steps = table.ref.items.count
             if steps < 3 { steps = 3 }
             else if steps > 5 { steps = 5 }
             if steps > h { h = steps }
@@ -20,14 +21,14 @@ public struct HeadPicker: View {
         return CGFloat(h) * 30
     }
     
-    var tables : [Coderef]
+    var tables : [(prompt:String, ref:Coderef)]
     @Binding var head : Head?
     @State var input : Bool
     @State var choice = false
     
     var label:String {
         if let head = head {
-            let mot = head.domain.name
+            let mot = head.domain == .NA ? prompt : head.domain.name
             var inconnu = mot.singulier + " inconnu"
             if mot.genre == .f { inconnu += "e"}
             if head.label == "" {
@@ -35,7 +36,11 @@ public struct HeadPicker: View {
             } else {
                return head.label
             }
-        } else { return prompt + " inconnu" }
+        } else {
+            var inconnu = prompt.singulier + " inconnu"
+            if prompt.genre == .f { inconnu += "e"}
+            return inconnu
+        }
     }
     
     /*public init(_ choice: Binding<Bool>, _ table:Coderef, _ selected:Binding<Head?>,_ prompt:String?) {
@@ -45,12 +50,12 @@ public struct HeadPicker: View {
         _choice = choice
     }*/
     
-    public init(_ head:Binding<Head?>, _ domains:[Codomain], _ prompt:String) {
-        var refs : [Coderef] = []
+    public init(_ head:Binding<Head?>, _ domains:[(prompt:String, cas:Codomain)], _ prompt:Mot) {
+        var tables : [(prompt:String, ref:Coderef)] = []
         for domain in domains {
-            refs.append(Coderef.find(domain))
+            tables.append((prompt:domain.prompt, ref:Coderef.find(domain.cas)))
         }
-        tables = refs
+        self.tables = tables
         self.prompt = prompt
         _head = head
         if let h = head.wrappedValue {
@@ -59,9 +64,9 @@ public struct HeadPicker: View {
             input = true
         }
     }
-    public init(_ head:Binding<Head?>, _ ref:Coderef, _ prompt:String?) {
-        self.prompt = prompt ?? ref.name.singulier
-        tables = [ref]
+    public init(_ head:Binding<Head?>, _ ref:Coderef, _ prompt:Mot? = nil) {
+        self.prompt = prompt ?? ref.name
+        tables = [(prompt:prompt?.singulier ?? ref.name.singulier, ref:ref)]
         _head = head
         if let h = head.wrappedValue {
             input = h.label == "" || h.domain == .NA
@@ -73,11 +78,12 @@ public struct HeadPicker: View {
     var tablesheet : some View {
         VStack{
             HStack {
-                ForEach(tables) { table in
-                    if table.items.count > 0 {
-                        GroupBox(table.name.indéterminé) {
+                ForEach(0..<tables.count, id:\.self) {
+                    i in
+                    if tables[i].ref.items.count > 0 {
+                        GroupBox(tables[i].prompt) {
                             ScrollView {
-                                ForEach(table.items) {
+                                ForEach(tables[i].ref.items) {
                                     head in
                                     Button( action: { choose(head) } )
                                     { Text(head.label) }
@@ -96,7 +102,7 @@ public struct HeadPicker: View {
         HStack {
             if let head = head {
                 if input {
-                    if prompt != "" {Text(prompt)}
+                    Text(prompt.singulier)
                     TextField("", text:Binding<String>(
                         get: {head.label},
                         set:{self.head = Head("",$0)}
@@ -113,7 +119,7 @@ public struct HeadPicker: View {
                     {Image(systemName: "pencil")}
                 }
             } else {
-                Button(prompt, action:{
+                Button(prompt.singulier, action:{
                     head = Head("","") ;  input = true
                 })
             }
@@ -129,6 +135,7 @@ public struct HeadPicker: View {
 
 struct HeadPickerPreview : View {
    var table = tables["banques"]!
+    var prompt = Mot("banque", "banques", .f)
     @State var head: Head? = nil
     @State var choice = false
     
@@ -138,7 +145,7 @@ struct HeadPickerPreview : View {
                 .font(.title2)
                 .padding(20)
            
-            HeadPicker($head, table, "banque")
+            HeadPicker($head, table, prompt)
                 .frame(width:250, height:300)
           
         }.padding(10)
