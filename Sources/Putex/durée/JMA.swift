@@ -174,6 +174,18 @@ public struct JMA: Codable, Equatable {
         année = Int(jma[2]) ?? 0
     }
     
+    public var trimestre:String {
+        if self < JMA(1,4,self.année) {
+            return "premier trimestre"
+        } else if self < JMA(1,7,self.année) {
+            return "deuxième trimestre"
+        } else if self < JMA(1,10,self.année) {
+            return "troisième trimestre"
+        } else {
+            return "quatrième trimestre"
+        }
+    }
+    
     public var entexte: String {
         let j = jour == 1 ? "1er" : String(jour)
         return "\(j) \(JMA.moisfr[mois-1]) \(année)"

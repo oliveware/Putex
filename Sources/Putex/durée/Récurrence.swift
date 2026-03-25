@@ -37,8 +37,27 @@ public struct Récurrence: Codable {
     
     public func échéance(_ index:Int,_ échu:Bool = false) -> String {
         var date = date(index)
-        if échu { date = date - 1 }
-        return JMA.moisfr[date.mois - 1] + String(date.année)
+        let mois = date.mois
+        let an = date.année
+        switch période {
+        case .m:
+            if échu {
+                if mois == 1 {
+                    date.mois = 12 ; date.année = an - 1
+                } else { date.mois = mois - 1}
+            }
+            return JMA.moisfr[date.mois] + String(date.année)
+        case .t:
+            if échu {
+                if mois < 3 {
+                    date.mois = 12 - mois ; date.année = an - 1
+                } else { date.mois = mois - 3}
+            }
+            return date.trimestre + " " + String(date.année)
+        case .a:
+            if échu { date.année = an - 1 }
+            return "année " + String(date.année)
+        }
     }
     
     public func date(_ index:Int) -> JMA {
