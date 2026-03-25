@@ -35,6 +35,12 @@ public struct Récurrence: Codable {
         ext = extensible
     }
     
+    public func échéance(_ index:Int,_ échu:Bool = false) -> String {
+        var date = date(index)
+        if échu { date = date - 1 }
+        return JMA.moisfr[date.mois - 1] + String(date.année)
+    }
+    
     public func date(_ index:Int) -> JMA {
         var date = début
         switch période {
