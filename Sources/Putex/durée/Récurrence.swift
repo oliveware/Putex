@@ -20,6 +20,7 @@ public struct Récurrence: Codable {
     }
     var période: Période
    
+    public var occurrences: Int {durée}
     var durée: Int
     var ext: Bool = false
     var début:  JMA
