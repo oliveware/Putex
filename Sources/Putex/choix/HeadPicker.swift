@@ -90,12 +90,13 @@ public struct HeadPicker: View {
                                     //.param(w: width, h: 20)
                                 }
                             }.frame(height:height)
-                        }
+                        }.padding()
                     }
                 }
             }
             Button("annuler", action:{choice = false})
         }//.frame(height:height + 50)
+        .padding()
     }
     
     public var body: some View {

@@ -20,40 +20,38 @@ public struct Récurrence: Codable {
     }
     var période: Période
    
-    var occurences: Int?
+    var durée: Int
+    var ext: Bool = false
     var début:  JMA
-    var fin:    JMA?
+    var fin:    JMA { date(durée) }
     var jour: Int?
     
-    init (_ période:Période, _ début: JMA, _ fin: JMA?) {
+    init (_ période:Période, _ début: JMA, _ durée: Int, _ jour: Int?, _ extensible:Bool = false) {
         self.période = période
         self.début = début
-        self.fin = fin
-        var nbmois:Int
-        if fin != nil {
-            if début.année == fin!.année {
-                nbmois = fin!.mois - début.mois
-            } else {
-                let begin = 12 - début.mois
-                let end = fin!.mois
-                nbmois = 12 * (fin!.année - début.année - 1) + begin + end
-            }
-            switch période {
-            case .m:
-               occurences = nbmois
-            case .t:
-                occurences = Int(nbmois / 3)
-            case .a:
-                occurences = Int(nbmois / 12)
-            }
-        }
+        self.durée = durée
+        self.jour = jour
+        ext = extensible
     }
     
-    init (_ période:Période, _ début: JMA, _ occurences: Int?, _ jour: Int?) {
-        self.période = période
-        self.début = début
-        self.occurences = occurences
-        self.jour = jour
+    public func date(_ index:Int) -> JMA {
+        var date = début
+        switch période {
+        case .a:
+            date.année =  début.année + index
+        case .t:
+            let nbmois = début.mois + 3 * index
+            date.mois = nbmois % 12
+            let nban = Int(Double(nbmois)/12)
+            date.année = début.année + nban
+        case .m:
+            let nbmois = début.mois + index
+            date.mois = nbmois % 12
+            let nban = Int(Double(nbmois)/12)
+            date.année = début.année + nban
+        }
+        if let jour = jour { date.jour = jour }
+        return date
     }
 }
 
