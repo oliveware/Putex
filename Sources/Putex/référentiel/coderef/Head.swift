@@ -5,7 +5,10 @@
 //  Created by Herve Crespel on 09/05/2025.
 //
 
-public struct Head: Codable, Identifiable, Oxet {
+public struct Head: Codable, Identifiable, Equatable, Oxet {
+    public static func == (_ a:Head,_ b:Head) -> Bool {
+        a.code == b.code
+    }
     public static var selector = "item"
     public static var warning = "collection vide"
     
