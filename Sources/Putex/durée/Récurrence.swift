@@ -21,12 +21,18 @@ public struct Récurrence: Codable {
     var période: Période
    
     public var occurrences: Int {durée}
+
     var durée: Int
     var ext: Bool = false
     var début:  JMA
     var fin:    JMA { date(durée) }
     var jour: Int?
     
+    public init() {
+        période = .m
+        début = JMA.origine
+        durée = 12
+    }
     init (_ période:Période, _ début: JMA, _ durée: Int, _ jour: Int?, _ extensible:Bool = false) {
         self.période = période
         self.début = début

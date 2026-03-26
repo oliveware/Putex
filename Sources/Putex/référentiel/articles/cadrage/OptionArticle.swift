@@ -12,7 +12,6 @@ public protocol Vendable {
 
 struct OptionArticle: Codable, Oxet {
     static var selector: String = "option"
-    
     static var warning: String = ""
 
     var id:String {label}
