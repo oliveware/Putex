@@ -13,7 +13,7 @@ public enum Quantité: String, Codable, Enumerable {
     public var id: String { self.rawValue}
     
     
-    static var utility :[Quantité] = [.eau, .elec, .hp, .hc, .gaz, .web, .mobile,.tv]
+    static var utility :[Quantité] = [.eau, .elec, .gaz, .web, .mobile,.tv]
   //  static var loyer = "loyer"
   //  static var honoraire = "honoraires"
   //  static var nourriture = "nourriture"
@@ -33,8 +33,6 @@ public enum Quantité: String, Codable, Enumerable {
     case litre  = "au litre"
     case cl     = "en centilitre"
     case elec   = "électricité"
-    case hc     = "heures creuses"
-    case hp     = "heures pleines"
     case gaz    = "gaz"
     case web    = "accès internet"
     case mobile = "réseau mobile"
@@ -45,13 +43,21 @@ public enum Quantité: String, Codable, Enumerable {
     case volume = "volume"
     //case loyer = "loyer"
     
+    public func tarifs(_ nb:Int = 1) -> [String] {
+        switch self {
+        case .elec:
+            nb == 1 ? ["hp + hc","",""] : ["hp", "hc",""]
+        default: ["normal", "réduit", "surtaxé"]
+        }
+    }
+    
     public var unité: Unité {
         switch self {
             
         case .piece: return .unit
         case .aire: return .m2
         case .volume: return .m3
-        case .elec,.hp,.hc : return .kwh
+        case .elec : return .kwh
         case .eau : return .l
         case .litre : return .l
         case .cl : return .cl
@@ -66,7 +72,7 @@ public enum Quantité: String, Codable, Enumerable {
     }
     public var label: String {
         switch self {
-        case .elec,.hp,.hc,.eau,.gaz  : return "consommation " + self.rawValue
+        case .elec,.eau,.gaz  : return "consommation " + self.rawValue
         case .aire   : return "surface (m2)"
         case .gramme,.kg: return "poids " + self.rawValue
         case .litre, .piece, .cl: return self.rawValue
@@ -87,10 +93,10 @@ public enum Quantité: String, Codable, Enumerable {
     
     public var color: Color {
         switch self {
-        case .eau :          return Color.blue
-        case .elec,.hp,.hc : return Color.red
-        case .mensuel :      return Color.yellow
-       default:    return Color.white
+        case .eau :     return Color.blue
+        case .elec :    return Color.red
+        case .mensuel : return Color.yellow
+        default:        return Color.white
         }
     }
 }

@@ -44,7 +44,7 @@ public struct MesureView :View {
 struct MesurePreview : View {
     @State var volume = Mesure("19,92", .eau)
     @State var surface = Mesure("45,2", .aire)
-    @State var hp = Mesure("4,52", .hp)
+    @State var elec = Mesure("4,52", .elec)
     @State var mensuel = Mesure(.mensuel)
     
     var body:some View {
@@ -58,7 +58,7 @@ struct MesurePreview : View {
             GroupBox("quantité imposée") {
                 VStack( alignment:.leading) {
                     NumberView($volume)
-                    NumberView($hp)
+                    NumberView($elec)
                     NumberView($mensuel)
                     
                     DuréePreview()
