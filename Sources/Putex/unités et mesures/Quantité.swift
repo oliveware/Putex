@@ -100,10 +100,10 @@ public enum Quantité: String, Codable, Enumerable {
         }
     }
     
-    public var nomtarif: (r:String,n:String?,s:String?) {
+    public var nomtarif: (r:String?, n:String, s:String?) {
         switch self {
-        case .elec :    return (r:"heures creuses",n:"herures plaines", s:nil)
-        default:         return (r:"",n:nil, s:nil)
+        case .elec :  return (r:"heures creuses",n:"heures pleines", s:nil)
+        default:      return (r:nil, n:"", s:nil)
         }
     }
 }
