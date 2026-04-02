@@ -99,6 +99,13 @@ public enum Quantité: String, Codable, Enumerable {
         default:        return Color.white
         }
     }
+    
+    public var nomtarif: (r:String,n:String?,s:String?) {
+        switch self {
+        case .elec :    return (r:"heures creuses",n:"herures plaines", s:nil)
+        default:         return (r:"",n:nil, s:nil)
+        }
+    }
 }
 
 
