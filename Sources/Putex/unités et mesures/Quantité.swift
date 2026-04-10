@@ -13,7 +13,7 @@ public enum Quantité: String, Codable, Enumerable {
     public var id: String { self.rawValue}
     
     
-    static var utility :[Quantité] = [.eau, .elec, .gaz, .web, .mobile,.tv]
+    public static var utility :[Quantité] = [.eau, .elec, .gaz, .web, .mobile,.tv]
   //  static var loyer = "loyer"
   //  static var honoraire = "honoraires"
   //  static var nourriture = "nourriture"
