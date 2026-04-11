@@ -29,6 +29,7 @@ public enum Unité: String, Codable, Enumerable {
     public var id: Self {self}
     
     case kwh    = "kWh"
+    case kcal   = "kcal"
     case m      = "m"
     case m2     = "m2"
     case m3     = "m3"
@@ -55,6 +56,7 @@ public enum Unité: String, Codable, Enumerable {
         case .m2 : return Mot("mètre carré","mètres carrés")
         case .m3:  return Mot("mètre cube", "mètres cubes")
         case .kwh: return Mot("kWh","kWh")
+        case .kcal: return Mot("kcal","kcal")
         case .nuit: return Mot("nuitée", "nuitées", .f)
         case .jour: return Mot("jour","jours")
         case .mois: return Mot("mois","mois")
@@ -71,6 +73,9 @@ public enum Unité: String, Codable, Enumerable {
             switch self {
             case .kwh:
                 return Measurement(value:value, unit:UnitEnergy.kilowattHours).formatted()
+                
+            case .kcal:
+                return Measurement(value:value, unit:UnitEnergy.kilocalories).formatted()
             case .l :
                // return Measurement(value:value, unit:UnitVolume.liters).formatted()
                let formatter = MeasurementFormatter()
@@ -112,6 +117,7 @@ public enum Unité: String, Codable, Enumerable {
         case .m2: return UnitArea.squareMeters.symbol
         case .m3: return UnitVolume.cubicMeters.symbol
         case .kwh: return UnitEnergy.kilowattHours.symbol
+        case .kcal: return UnitEnergy.kilocalories.symbol
         case .nuit: return "nuit"
         case .jour: return "jour"
         case .mois: return "mois"

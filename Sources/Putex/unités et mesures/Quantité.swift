@@ -30,6 +30,7 @@ public enum Quantité: String, Codable, Enumerable {
     case gramme  = "en gramme"
     case kg     = "en kg"
     case eau    = "eau"
+    case chaleur = "chaleur"
     case litre  = "au litre"
     case cl     = "en centilitre"
     case elec   = "électricité"
@@ -59,6 +60,7 @@ public enum Quantité: String, Codable, Enumerable {
         case .volume: return .m3
         case .elec : return .kwh
         case .eau : return .l
+        case .chaleur : return .kcal
         case .litre : return .l
         case .cl : return .cl
         case .gramme : return .g
@@ -94,8 +96,10 @@ public enum Quantité: String, Codable, Enumerable {
     public var color: Color {
         switch self {
         case .eau :     return Color.blue
+        case .chaleur:  return .purple
         case .elec :    return Color.red
-        case .mensuel : return Color.yellow
+        case .gaz :     return Color.yellow
+        case .web,.mobile,.tv : return .green
         default:        return Color.white
         }
     }
