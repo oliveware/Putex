@@ -13,7 +13,7 @@ public enum Quantité: String, Codable, Enumerable {
     public var id: String { self.rawValue}
     
     
-    public static var utility :[Quantité] = [.eau, .elec, .gaz, .web, .mobile,.tv]
+    public static var utility :[Quantité] = [.eau, .elec, .gaz, .chaleur, .web, .mobile, .tv]
   //  static var loyer = "loyer"
   //  static var honoraire = "honoraires"
   //  static var nourriture = "nourriture"
@@ -75,6 +75,7 @@ public enum Quantité: String, Codable, Enumerable {
     public var label: String {
         switch self {
         case .elec,.eau,.gaz  : return "consommation " + self.rawValue
+        case .chaleur : return "chauffage urbain"
         case .aire   : return "surface (m2)"
         case .gramme,.kg: return "poids " + self.rawValue
         case .litre, .piece, .cl: return self.rawValue
