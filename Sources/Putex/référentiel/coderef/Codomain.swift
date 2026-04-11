@@ -12,13 +12,14 @@ public enum Codomain :String, Codable {
     
     case article    = "A"
     case batiment   = "B"
-    case company    = "C"
+    case compteur   = "C"
     case equipement = "E"
     case foncier    = "F"
     case human      = "H"
     case local      = "L"
-    case offre      = "O"
+    case offre      = "OF"
     case cataloffre = "OC"
+    case company    = "OR"
     case payment    = "P"
     case piece      = "Q"
     case location   = "R"     // Rent
@@ -33,6 +34,8 @@ public enum Codomain :String, Codable {
             
         case .article: return Mot("article","articles",.f)
         case .batiment: return Mot("bâtiment","bâtiments",.m)
+        
+        case .compteur: return Mot("compteur", "compteurs")
         case .company: return Mot("entreprise","entreprises",.m)
         case .equipement:return Mot("équipement","équipements",.m)
         case .foncier:return Mot("foncier","fonciers",.m)
