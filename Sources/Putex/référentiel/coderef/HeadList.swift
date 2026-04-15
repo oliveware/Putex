@@ -8,29 +8,35 @@
 import SwiftUI
 import Taxionomy
 
-struct HeadList : View {
+public struct HeadList : View {
     @Binding var heads:[Head]
-    var table : (prompt:String, cas:Codomain)
+    var domains : [(prompt:String, cas:Codomain)]
     var prompt: Mot
     @State var head: Head?
     
-    init(_ heads:Binding<[Head]>,_  domain:Codomain, _ prompt: Mot) {
+    public init(_ prompt:Mot, _ heads:Binding<[Head]>,_  domains:[(prompt: String, cas:Codomain)]) {
         _heads = heads
-        table = (prompt:domain.rawValue, cas:domain)
+        self.domains = domains
         self.prompt = prompt
     }
     
     
-    var body: some View {
+    public var body: some View {
         VStack {
             ForEach(heads) {
                 head in
-                Text("head.label")
+                Text(head.label)
             }
-            HeadPicker($head, [table], prompt)
-                .onChange(of:head, {
-                    if let head = head { heads.append(head) }
-            })
+            HeadPicker($head, domains, prompt, add)
+        }
+    }
+    func add() {
+        var new = true
+        if let head = head {
+            for h in heads {
+                if h == head { new = false }
+            }
+            if new { heads.append(head) }
         }
     }
 }
@@ -38,7 +44,7 @@ struct HeadList : View {
 struct HeadListPreview : View {
     @State var heads:[Head] = []
     var body: some View {
-        HeadList($heads, .human, Mot("partie", "parties", .f))
+        HeadList(Mot("partie", "parties", .f), $heads, [(prompt: "particulier", cas:.human)],  )
     }
 }
 

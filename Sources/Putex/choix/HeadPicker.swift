@@ -25,6 +25,7 @@ public struct HeadPicker: View {
     @Binding var head : Head?
     @State var input : Bool
     @State var choice = false
+    var done: () -> Void
     
     var label:String {
         if let head = head {
@@ -50,7 +51,7 @@ public struct HeadPicker: View {
         _choice = choice
     }*/
     
-    public init(_ head:Binding<Head?>, _ domains:[(prompt:String, cas:Codomain)], _ prompt:Mot) {
+    public init(_ head:Binding<Head?>, _ domains:[(prompt:String, cas:Codomain)], _ prompt:Mot, _  done: @escaping () -> Void = {}) {
         var tables : [(prompt:String, ref:Coderef)] = []
         for domain in domains {
             tables.append((prompt:domain.prompt, ref:Coderef.find(domain.cas)))
@@ -63,8 +64,9 @@ public struct HeadPicker: View {
         } else {
             input = true
         }
+        self.done = done
     }
-    public init(_ head:Binding<Head?>, _ ref:Coderef, _ prompt:Mot? = nil) {
+    public init(_ head:Binding<Head?>, _ ref:Coderef, _ prompt:Mot? = nil,  _  done: @escaping () -> Void = {}) {
         self.prompt = prompt ?? ref.name
         tables = [(prompt:prompt?.singulier ?? ref.name.singulier, ref:ref)]
         _head = head
@@ -73,6 +75,7 @@ public struct HeadPicker: View {
         } else {
             input = true
         }
+        self.done = done
     }
     
     var tablesheet : some View {
@@ -108,7 +111,7 @@ public struct HeadPicker: View {
                         get: {head.label},
                         set:{self.head = Head("",$0)}
                     ))
-                    Button(action:{input = false})
+                    Button(action:{input = false ; done()})
                     {Image(systemName: "checkmark")}
                     
                     Button(action:{choice = true})
