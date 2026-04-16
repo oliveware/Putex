@@ -48,7 +48,7 @@ public struct Coderef: Codable, Identifiable {
             let num = Int(item.code.split(separator:"#")[1]) ?? items.count
             if num > max { max = num }
         }
-        return max
+        return max + 1
     }
     
     public init(_ domain:Codomain) {
