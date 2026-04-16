@@ -35,7 +35,9 @@ public struct EnumPicker<T:Enumerable>: View {
                 VStack(alignment:.leading) {
                     Text(T.selector).font(.caption)
                         .padding(.leading,10)
-                    Picker("", selection:$selected) {
+                    Text("Selected: \(selected?.label ?? "None")") // For debugging
+                    Picker(selection:$selected,
+                           label: Text(selected?.label ?? T.selector)) {
                         ForEach (cases) { item in
                             Text(item.label).tag(item as T?)
                         }
