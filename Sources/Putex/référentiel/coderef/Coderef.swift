@@ -25,15 +25,13 @@ public struct Coderef: Codable, Identifiable {
         Coderef(Mot("vide",nil))
     }
     
-    static var nextcode = 0
     public static func newcode(_ domain:Codomain) -> String {
-        
+        let nextcode = find(domain).next
         switch domain {
         case .article:
             Article.nextid += 1
             return "A#" + String(Article.nextid)
         default:
-            nextcode += 1
             return domain.rawValue + "#" + String(nextcode)
         }
     }
@@ -43,6 +41,15 @@ public struct Coderef: Codable, Identifiable {
     var name : Mot
     var items : [Head] = []
     var selector: String = ""
+    
+    var next: Int {
+        var max = 0
+        for item in items {
+            let num = Int(item.code.split(separator:"#")[1]) ?? items.count
+            if num > max { max = num }
+        }
+        return max
+    }
     
     public init(_ domain:Codomain) {
         let tablename = domain.name
