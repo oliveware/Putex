@@ -31,14 +31,14 @@ public struct EnumPicker<T:Enumerable>: View {
     
     var picker: some View {
         //    Text("Selected: \(selected?.label ?? "None")") // For debugging
-            Picker(T.selector, selection:Binding<T?>(
-                get: {selected},
-                set: {selected = $0}) ){
-                Text("choisir " ).tag(nil as T?)
-                ForEach (cases) { item in
-                    Text(item.label).tag(Optional(item as T?))
-                }
-            }//.pickerStyle(.radioGroup)
+        Picker("", selection:$selected) {
+            if selected == nil {
+                Text("choisir " + T.selector).tag(nil as T?)
+            }
+            ForEach (cases) { item in
+                Text(item.label).tag(item as T?)
+            }
+        }//.pickerStyle(.radioGroup)
     }
     
     public var body: some View {
@@ -79,4 +79,7 @@ struct EnumPreview<T:Enumerable>: View  {
 }
 #Preview("domain") {
     EnumPreview<Webdomain>()
+}
+#Preview("unité") {
+    UnitPreview()
 }

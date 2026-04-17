@@ -11,7 +11,7 @@ struct UnitéPicker: View {
     @Binding var selected: Unité?
     
     var body: some View {
-        EnumPicker<Unité>(Unité.allCases, $selected, true)
+        EnumPicker<Unité>(Unité.all, $selected, true)
             .frame(width:200)
     }
 }
