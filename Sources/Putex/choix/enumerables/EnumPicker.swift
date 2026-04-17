@@ -31,7 +31,9 @@ public struct EnumPicker<T:Enumerable>: View {
     
     var picker: some View {
         //    Text("Selected: \(selected?.label ?? "None")") // For debugging
-            Picker(T.selector, selection:$selected) {
+            Picker(T.selector, selection:Binding<T?>(
+                get: {selected},
+                set: {selected = $0}) ){
                 Text("choisir " ).tag(nil as T?)
                 ForEach (cases) { item in
                     Text(item.label).tag(Optional(item as T?))
