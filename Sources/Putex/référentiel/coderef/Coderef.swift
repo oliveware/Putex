@@ -19,20 +19,26 @@ public struct Coderef: Codable, Identifiable {
         all[name] ?? empty
     }
     public static func find(_ domain:Codomain) -> Coderef {
-        all[domain.name.pluriel] ?? empty
+        var coderef : Coderef
+        if let ref =  all[domain.name.pluriel]  {
+            coderef = ref
+        } else {
+            coderef = Coderef(domain)
+        }
+        return coderef
     }
     static var empty: Coderef {
         Coderef(Mot("vide",nil))
     }
     
     public static func newcode(_ domain:Codomain) -> String {
-        let nextcode = find(domain).next
+        var ref = find(domain)
         switch domain {
         case .article:
             Article.nextid += 1
             return "A#" + String(Article.nextid)
         default:
-            return domain.rawValue + "#" + String(nextcode)
+            return domain.rawValue + "#" + String(ref.next)
         }
     }
     
