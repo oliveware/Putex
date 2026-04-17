@@ -19,12 +19,7 @@ public enum Unité: String, Codable, Enumerable {
         return q
     }
     static var all: [Unité] {
-       let tout = Self.allCases
-        var cases : [Unité] = []
-        for cas in tout {
-            if cas != .none {cases.append(cas)}
-        }
-        return cases
+      Self.allCases
     }
     public static var selector = "unité"
     
@@ -49,7 +44,6 @@ public enum Unité: String, Codable, Enumerable {
     case an     = "an"
     case piece  = "pièce"
     case unit   = "unité"
-    case none  = "choisir une unité"
 
     public var local: Mot {
         switch self {
@@ -69,7 +63,6 @@ public enum Unité: String, Codable, Enumerable {
         case .an: return Mot("année","années", .f)
         case .piece: return Mot("pièce", "pièces", .f)
         case .unit: return Mot("unité", "unités", .f)
-        case .none: return Mot("unité non définie", "unités non définies", .f)
         }
     }
     
@@ -131,7 +124,6 @@ public enum Unité: String, Codable, Enumerable {
         case .an: return "an"
         case .unit,.piece : return ""
         case .gb : return "Gb"
-        case .none: return "?"
         }
     }
     

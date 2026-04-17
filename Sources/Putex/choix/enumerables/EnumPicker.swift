@@ -16,21 +16,25 @@ public struct EnumPicker<T:Enumerable>: View {
     let cases: [T]
     var prompt: Bool = false
     var vertical = false
+    var style: (any PickerStyle)?
     @Binding var selected: T?
     
-    public init(_ cases:[T], _ selected:Binding<T?>, _ vorh:Bool = false, _ prompt:Bool = false) {
+    public init(_ cases:[T], _ selected:Binding<T?>, _ vorh:Bool = false, _ prompt:Bool = false, _ style:(any PickerStyle)? = nil) {
         self.cases = cases
         self._selected = selected
+        self.prompt = prompt
+        self.style = style
         vertical = vorh
     }
-    public init(_ cases:[T], _ selected:Binding<T>, _ vorh:Bool = false, _ prompt:Bool = false) {
+    public init(_ cases:[T], _ selected:Binding<T>, _ vorh:Bool = false, _ prompt:Bool = false, _ style:(any PickerStyle)? = nil) {
         self.cases = cases
         self._selected = Binding(selected)
+        self.prompt = prompt
+        self.style = style
         vertical = vorh
     }
     
     var picker: some View {
-        //    Text("Selected: \(selected?.label ?? "None")") // For debugging
         Picker("", selection:$selected) {
             if selected == nil {
                 Text("choisir " + T.selector).tag(nil as T?)
@@ -38,7 +42,16 @@ public struct EnumPicker<T:Enumerable>: View {
             ForEach (cases) { item in
                 Text(item.label).tag(item as T?)
             }
-        }//.pickerStyle(.radioGroup)
+        }
+    }
+    var pickersegmented: some View {
+        Picker("", selection:$selected) {
+            
+            ForEach (cases) { item in
+                Text(item.label).tag(item as T?)
+            }
+            
+        }.pickerStyle(.segmented)
     }
     
     public var body: some View {
@@ -50,7 +63,7 @@ public struct EnumPicker<T:Enumerable>: View {
                     picker
                 }
             } else {
-               picker
+                pickersegmented
             }
         } else {
             picker
@@ -60,12 +73,13 @@ public struct EnumPicker<T:Enumerable>: View {
 
 struct EnumPreview<T:Enumerable>: View  {
     @State var data : T?
+    var vertical = true
     var body: some View {
         VStack {
             Text("le choix retourne un cas")
                 .font(.title2)
                 .padding(20)
-            EnumPicker<T>(T.allCases as! [T], $data, true)
+            EnumPicker<T>(T.allCases as! [T], $data, vertical, true)
                 .frame(width:250, height:150)
         }
     }
@@ -78,7 +92,7 @@ struct EnumPreview<T:Enumerable>: View  {
     EnumPreview<TypeCompteAnalytique>()
 }
 #Preview("domain") {
-    EnumPreview<Webdomain>()
+    EnumPreview<Webdomain>(vertical:false)
 }
 #Preview("unité") {
     UnitPreview()
