@@ -29,34 +29,29 @@ public struct EnumPicker<T:Enumerable>: View {
         vertical = vorh
     }
     
+    var picker: some View {
+        //    Text("Selected: \(selected?.label ?? "None")") // For debugging
+            Picker(T.selector, selection:$selected) {
+                Text("choisir " ).tag(nil as T?)
+                ForEach (cases) { item in
+                    Text(item.label).tag(Optional(item as T?))
+                }
+            }//.pickerStyle(.radioGroup)
+    }
+    
     public var body: some View {
         if prompt {
             if vertical {
                 VStack(alignment:.leading) {
                     Text(T.selector).font(.caption)
                         .padding(.leading,10)
-                    Text("Selected: \(selected?.label ?? "None")") // For debugging
-                    Picker(selection:$selected,
-                           label: Text(selected?.label ?? T.selector)) {
-                        ForEach (cases) { item in
-                            Text(item.label).tag(item as T?)
-                        }
-                    }
+                    picker
                 }
             } else {
-                Picker(T.selector, selection:$selected) {
-                    //  Text("\t\(T.selector)").tag(nil as T?)
-                    ForEach (cases) { item in
-                        Text(item.label).tag(item as T?)
-                    }
-                }//.pickerStyle(.radioGroup)
+               picker
             }
         } else {
-            Picker("", selection:$selected) {
-                ForEach (cases) { item in
-                    Text(item.label).tag(item as T?)
-                }
-            }
+            picker
         }
     }
 }
