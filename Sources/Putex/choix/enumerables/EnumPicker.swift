@@ -79,6 +79,7 @@ struct EnumPreview<T:Enumerable>: View  {
             Text("le choix retourne un cas")
                 .font(.title2)
                 .padding(20)
+            Text(data?.label ?? "?")
             EnumPicker<T>(T.allCases as! [T], $data, vertical, true)
                 .frame(width:250, height:150)
         }
