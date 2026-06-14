@@ -21,7 +21,7 @@ struct ButtonRow: View {
     }
     var done: () -> Void
     
-    func selected(_ col:Int) -> Bool {
+    func selected(_ row:Int,_ col:Int) -> Bool {
         row == bc.row && col == bc.col
     }
     
@@ -35,7 +35,7 @@ struct ButtonRow: View {
                     done()
                 })
                 {Text(cols[col]).frame(width:colwidth)
-                    .foregroundColor(selected(col) ? .yellow : .gray)}
+                    .foregroundColor(selected(row,col) ? .yellow : .white)}
             }
         }
     }

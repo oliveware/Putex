@@ -21,6 +21,7 @@ public struct ButtonStackEditor : View {
     @State private var rowedit = -1
     @State private var newright = false
     @State private var newleft = false
+    @State var pleinpied = true
     
     var done: () -> Void
     @FocusState private var focus
@@ -34,6 +35,13 @@ public struct ButtonStackEditor : View {
         }
     }
     
+    func defocus() {
+        label = ""
+        rowedit = -1
+        focus = false
+        bc = (row:-1, col:-1)
+    }
+    
     var buttons: some View {
         ForEach (0..<$rows.count, id:\.self) {
             row in
@@ -44,10 +52,8 @@ public struct ButtonStackEditor : View {
                         .focused($focus)
                         .onSubmit {
                             rows[row] = [label] + rows[row]
-                            label = ""
-                            rowedit = -1
                             newleft = false
-                            focus = false
+                            defocus()
                         }
                 } else {
                     Button(action:{
@@ -66,10 +72,8 @@ public struct ButtonStackEditor : View {
                         .focused($focus)
                         .onSubmit {
                             rows[row].append(label)
-                            label = ""
-                            rowedit = -1
                             newright = false
-                            focus = false
+                            defocus()
                         }
                 } else {
                     Button(action:{
@@ -93,52 +97,66 @@ public struct ButtonStackEditor : View {
                     .focused($focus)
                     .onSubmit {
                         rows =  [[label]]
-                        label = ""
                         newtop = false
-                        focus = false
+                        defocus()
                     }
             } else {
-                if newtop {
-                    TextField("", text:$label).frame(width:CGFloat(width))
-                        .focused($focus)
-                        .onSubmit {
-                            rows =  [[label]] + rows
-                            label = ""
-                            newtop = false
-                            focus = false
-                        }
-                } else {
-                    Button(action:{
-                        newtop = true
-                        focus = true
-                    })
-                    {Image(systemName: "chevron.up")}
-                        .padding(.bottom,20).disabled(focus)
+                if !pleinpied {
+                    if newtop {
+                        TextField("", text:$label).frame(width:CGFloat(width))
+                            .focused($focus)
+                            .onSubmit {
+                                rows =  [[label]] + rows
+                                newtop = false
+                                defocus()
+                            }
+                    } else {
+                        Button(action:{
+                            newtop = true
+                            focus = true
+                        })
+                        {Image(systemName: "chevron.up")}
+                            .padding(.bottom,20).disabled(focus)
+                    }
                 }
                 
                 buttons
                 
-                if newbottom {
-                    TextField("", text:$label).frame(width:CGFloat(width))
-                        .focused($focus)
-                        .onSubmit {
-                            rows = rows + [[label]]
-                            label = ""
-                            newbottom = false
-                            focus = false
-                        }
-                } else {
-                    Button(action:{
-                        newbottom = true
-                        focus = true
-                    })
-                    {Image(systemName: "chevron.down")}
-                        .padding(.top,20).disabled(focus)
+                if !pleinpied {
+                    if newbottom  {
+                        TextField("", text:$label).frame(width:CGFloat(width))
+                            .focused($focus)
+                            .onSubmit {
+                                rows = rows + [[label]]
+                                newbottom = false
+                                defocus()
+                            }
+                    } else {
+                        Button(action:{
+                            newbottom = true
+                            focus = true
+                        })
+                        {Image(systemName: "chevron.down")}
+                            .padding(.top,20).disabled(focus)
+                    }
                 }
                 
                 if rows.count > 0 {
-                    Button("valider", action:{ done() }).padding(20)
-                        .disabled(focus)
+                    HStack {
+                        if pleinpied {
+                            Button(action: { pleinpied = false })
+                            {Text("plusieurs " + mots[0].pluriel).foregroundColor(.gray)}
+                        }
+                        Spacer()
+                        Button(action:{
+                            defocus()
+                            done()
+                        })
+                        {Text("valider")} //.foregroundColor(.gray)}
+                            .padding(20)
+                            .disabled(focus)
+                        Spacer()
+                    }
                 }
             }
         }
