@@ -21,7 +21,7 @@ public struct ButtonStackEditor : View {
     @State private var rowedit = -1
     @State private var newright = false
     @State private var newleft = false
-    @State var pleinpied = false
+    @State var pleinpied = true
     
     var done: () -> Void
     @FocusState private var focus
@@ -146,6 +146,9 @@ public struct ButtonStackEditor : View {
                         if pleinpied {
                             Button(action: { pleinpied = false })
                             {Text("plusieurs " + mots[0].pluriel).foregroundColor(.gray)}
+                        } else {
+                            Button(action: { pleinpied = true })
+                            {Text("un seul " + mots[0].singulier).foregroundColor(.gray)}
                         }
                         Spacer()
                         Button(action:{
