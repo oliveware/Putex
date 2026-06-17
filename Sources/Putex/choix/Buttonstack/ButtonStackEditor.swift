@@ -90,7 +90,7 @@ public struct ButtonStackEditor : View {
     }
     
     public var body: some View {
-        VStack {
+        HStack {
             if rows.isEmpty {
                 Text("ajouter " + mots[1].indéterminé)
                 TextField("", text:$label).frame(width:CGFloat(width))
@@ -101,56 +101,60 @@ public struct ButtonStackEditor : View {
                         defocus()
                     }
             } else {
-                if !pleinpied {
-                    if newtop {
-                        TextField("", text:$label).frame(width:CGFloat(width))
-                            .focused($focus)
-                            .onSubmit {
-                                rows =  [[label]] + rows
-                                newtop = false
-                                defocus()
-                            }
+                if rows.count < 2 {
+                    if pleinpied {
+                        Button(action: { pleinpied = false })
+                        {Text("plusieurs " + mots[0].pluriel).foregroundColor(.gray)}
                     } else {
-                        Button(action:{
-                            newtop = true
-                            focus = true
-                        })
-                        {Image(systemName: "chevron.up")}
-                            .padding(.bottom,20).disabled(focus)
+                        Button(action: { pleinpied = true })
+                        {Text("unique " + mots[0].singulier).foregroundColor(.gray)}
                     }
+                    Spacer()
                 }
                 
-                buttons
-                
-                if !pleinpied {
-                    if newbottom  {
-                        TextField("", text:$label).frame(width:CGFloat(width))
-                            .focused($focus)
-                            .onSubmit {
-                                rows = rows + [[label]]
-                                newbottom = false
-                                defocus()
-                            }
-                    } else {
-                        Button(action:{
-                            newbottom = true
-                            focus = true
-                        })
-                        {Image(systemName: "chevron.down")}
-                            .padding(.top,20).disabled(focus)
-                    }
-                }
-                
-                if rows.count > 0 {
-                    HStack {
-                        if pleinpied {
-                            Button(action: { pleinpied = false })
-                            {Text("plusieurs " + mots[0].pluriel).foregroundColor(.gray)}
+                VStack {
+                    Spacer()
+                    if !pleinpied || rows.count > 1 {
+                        if newtop {
+                            TextField("", text:$label).frame(width:CGFloat(width))
+                                .focused($focus)
+                                .onSubmit {
+                                    rows =  [[label]] + rows
+                                    newtop = false
+                                    defocus()
+                                }
                         } else {
-                            Button(action: { pleinpied = true })
-                            {Text("un seul " + mots[0].singulier).foregroundColor(.gray)}
+                            Button(action:{
+                                newtop = true
+                                focus = true
+                            })
+                            {Image(systemName: "chevron.up")}
+                                .padding(.bottom,20).disabled(focus)
                         }
-                        Spacer()
+                    }
+                    
+                    buttons
+                    
+                    if !pleinpied  || rows.count > 1{
+                        if newbottom  {
+                            TextField("", text:$label).frame(width:CGFloat(width))
+                                .focused($focus)
+                                .onSubmit {
+                                    rows = rows + [[label]]
+                                    newbottom = false
+                                    defocus()
+                                }
+                        } else {
+                            Button(action:{
+                                newbottom = true
+                                focus = true
+                            })
+                            {Image(systemName: "chevron.down")}
+                                .padding(.top,20).disabled(focus)
+                        }
+                    }
+                    Spacer()
+                    if rows.count > 0 {
                         Button(action:{
                             defocus()
                             done()
@@ -158,7 +162,6 @@ public struct ButtonStackEditor : View {
                         {Text("valider")} //.foregroundColor(.gray)}
                             .padding(20)
                             .disabled(focus)
-                        Spacer()
                     }
                 }
             }
