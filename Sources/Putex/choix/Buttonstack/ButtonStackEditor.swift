@@ -109,8 +109,8 @@ public struct ButtonStackEditor : View {
                         Button(action: { pleinpied = true })
                         {Text("unique " + mots[0].singulier).foregroundColor(.gray)}
                     }
-                    Spacer()
                 }
+                Spacer()
                 
                 VStack {
                     Spacer()
@@ -164,6 +164,7 @@ public struct ButtonStackEditor : View {
                             .disabled(focus)
                     }
                 }
+                Spacer()
             }
         }
     }
