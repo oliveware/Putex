@@ -21,7 +21,7 @@ public struct ButtonStackEditor : View {
     @State private var rowedit = -1
     @State private var newright = false
     @State private var newleft = false
-    @State var pleinpied = true
+    @State var pleinpied = false
     
     var done: () -> Void
     @FocusState private var focus
