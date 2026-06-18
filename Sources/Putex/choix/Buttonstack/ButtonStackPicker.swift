@@ -10,7 +10,7 @@ import Taxionomy
 
 public struct ButtonStackPicker : View {
     @Binding var label:String
-    var labels:[[String]]
+    @State var labels:[[String]]
     var mot:Mot
     
     @State private var bc = (row:0, col:0)
@@ -32,7 +32,7 @@ public struct ButtonStackPicker : View {
             Button(action:{pick = true})
             {Image(systemName: "pencil")}
                 .sheet(isPresented: $pick)
-            {ButtonStack($bc, $label, labels, done:{pick = false}).padding()}
+            {ButtonStack($bc, $label, $labels, done:{pick = false}).padding()}
         }
     }
 }

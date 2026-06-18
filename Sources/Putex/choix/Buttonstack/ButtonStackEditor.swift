@@ -35,10 +35,7 @@ public struct ButtonStackEditor : View {
         }
     }
     
-    func defocus() {
-        label = ""
-        rowedit = -1
-        focus = false
+    func deselect() {
         bc = (row:-1, col:-1)
     }
     
@@ -46,47 +43,23 @@ public struct ButtonStackEditor : View {
         ForEach (0..<$rows.count, id:\.self) {
             row in
             HStack(spacing:20) {
+                Button(action:{
+                    rows[row] = [""] + rows[row]
+                })
+                {Image(systemName: "chevron.left")}
+                   .disabled(focus)
+                    .padding(.trailing,20)
                 
-                if newleft && rowedit == row {
-                    TextField("", text:$label).frame(width:100)
-                        .focused($focus)
-                        .onSubmit {
-                            rows[row] = [label] + rows[row]
-                            newleft = false
-                            defocus()
-                        }
-                } else {
-                    Button(action:{
-                        newleft = true
-                        rowedit = row
-                        focus = true
-                    })
-                    {Image(systemName: "chevron.left")}
-                        .disabled(focus)
-                        .padding(.trailing,20)
-                }
-                ButtonRow(bc: $bc, label: $label, cols: rows[row], row:row, width: width, done:{})
-                
-                if newright && rowedit == row {
-                    TextField("", text:$label).frame(width:100)
-                        .focused($focus)
-                        .onSubmit {
-                            rows[row].append(label)
-                            newright = false
-                            defocus()
-                        }
-                } else {
-                    Button(action:{
-                        newright = true
-                        rowedit = row
-                        focus = true
-                    })
-                    {Image(systemName: "chevron.right")}
-                        .disabled(focus)
-                        .padding(.leading,20)
+                ButtonRow($bc, true, $rows[row], width, {})
+
+                Button(action:{
+                    rows[row].append("")
+                })
+                {Image(systemName: "chevron.right")}
+                   .disabled(focus)
+                    .padding(.leading,20)
                 }
             }
-        }
     }
     
     public var body: some View {
@@ -97,8 +70,6 @@ public struct ButtonStackEditor : View {
                     .focused($focus)
                     .onSubmit {
                         rows =  [[label]]
-                        newtop = false
-                        defocus()
                     }
             } else {
                 if rows.count < 2 {
@@ -115,48 +86,28 @@ public struct ButtonStackEditor : View {
                 VStack {
                     Spacer()
                     if !pleinpied || rows.count > 1 {
-                        if newtop {
-                            TextField("", text:$label).frame(width:CGFloat(width))
-                                .focused($focus)
-                                .onSubmit {
-                                    rows =  [[label]] + rows
-                                    newtop = false
-                                    defocus()
-                                }
-                        } else {
-                            Button(action:{
-                                newtop = true
-                                focus = true
-                            })
-                            {Image(systemName: "chevron.up")}
-                                .padding(.bottom,20).disabled(focus)
-                        }
+                        Button(action:{
+                            
+                            rows = [[""]] + rows
+                        })
+                        {Image(systemName: "chevron.up")}
+                            .padding(.bottom,20).disabled(focus)
                     }
                     
                     buttons
                     
                     if !pleinpied  || rows.count > 1{
-                        if newbottom  {
-                            TextField("", text:$label).frame(width:CGFloat(width))
-                                .focused($focus)
-                                .onSubmit {
-                                    rows = rows + [[label]]
-                                    newbottom = false
-                                    defocus()
-                                }
-                        } else {
-                            Button(action:{
-                                newbottom = true
-                                focus = true
-                            })
-                            {Image(systemName: "chevron.down")}
-                                .padding(.top,20).disabled(focus)
-                        }
+                        Button(action:{
+                            rows.append([""])
+                        })
+                        {Image(systemName: "chevron.down")}
+                            .padding(.top,20).disabled(focus)
+                        
                     }
                     Spacer()
                     if rows.count > 0 {
                         Button(action:{
-                            defocus()
+                            deselect()
                             done()
                         })
                         {Text("valider")} //.foregroundColor(.gray)}
@@ -187,7 +138,7 @@ struct ButtonStackPreview : View {
                 ButtonStackEditor($rows, valider )
             } else {
                 HStack(spacing:50) {
-                    ButtonStack($bc, $label, rows, done:valider)
+                    ButtonStack($bc, $label, $rows, done:valider)
                     if rows.count > 0 {
                         Text("\(rows.count - 1 - bc.row) - \(bc.col)  \(label)")
                     }
