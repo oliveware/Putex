@@ -8,19 +8,12 @@ import SwiftUI
 import Taxionomy
 
 public struct ButtonStackEditor : View {
-    @Binding var rows: [[String]]
+    @Binding var labels: [[String]]
     var mots:[Mot] = [Mot("ligne","lignes",.f),Mot("colonne","colonnes",.f)]
-    var width = 200
+    @State var width = 300
     
     @State private var bc = (row:0, col:0)
-    
-    @State private var label = ""
-    
-    @State private var newtop = false
-    @State private var newbottom = false
-    @State private var rowedit = -1
-    @State private var newright = false
-    @State private var newleft = false
+
     @State var pleinpied = true
     
     var done: () -> Void
@@ -28,11 +21,22 @@ public struct ButtonStackEditor : View {
     
     public init(_ rows:Binding<[[String]]>, _ done:@escaping () -> Void,
          _ mots:[Mot]? = nil) {
-        _rows = rows
+        _labels = rows
         self.done = done
-        if mots != nil {
-            self.mots = mots!
+        if mots != nil { self.mots = mots! }
+        focus = rows.isEmpty
+    }
+    
+    func setwidth() -> Int {
+        var max = 0
+        for row in labels {
+            var rowlarge = 0
+            for col in row {
+                rowlarge += col.count
+            }
+            if rowlarge > max { max = rowlarge }
         }
+        return 15 * max
     }
     
     func deselect() {
@@ -40,39 +44,17 @@ public struct ButtonStackEditor : View {
     }
     
     var buttons: some View {
-        ForEach (0..<$rows.count, id:\.self) {
+        ForEach (0..<$labels.count, id:\.self) {
             row in
-            HStack(spacing:20) {
-                Button(action:{
-                    rows[row] = [""] + rows[row]
-                })
-                {Image(systemName: "chevron.left")}
-                   .disabled(focus)
-                    .padding(.trailing,20)
-                
-                ButtonRow($bc, true, $rows[row], width, {})
-
-                Button(action:{
-                    rows[row].append("")
-                })
-                {Image(systemName: "chevron.right")}
-                   .disabled(focus)
-                    .padding(.leading,20)
-                }
-            }
+            ButtonRowEditor($bc, $labels[row], $width, {
+                bc.row = row
+            })
+        }
     }
     
     public var body: some View {
         HStack {
-            if rows.isEmpty {
-                Text("ajouter " + mots[1].indéterminé)
-                TextField("", text:$label).frame(width:CGFloat(width))
-                    .focused($focus)
-                    .onSubmit {
-                        rows =  [[label]]
-                    }
-            } else {
-                if rows.count < 2 {
+                if labels.count < 2 {
                     if pleinpied {
                         Button(action: { pleinpied = false })
                         {Text("plusieurs " + mots[0].pluriel).foregroundColor(.gray)}
@@ -85,10 +67,10 @@ public struct ButtonStackEditor : View {
                 
                 VStack {
                     Spacer()
-                    if !pleinpied || rows.count > 1 {
+                    if !pleinpied || labels.count > 1 {
                         Button(action:{
                             
-                            rows = [[""]] + rows
+                            labels = [[""]] + labels
                         })
                         {Image(systemName: "chevron.up")}
                             .padding(.bottom,20).disabled(focus)
@@ -96,16 +78,16 @@ public struct ButtonStackEditor : View {
                     
                     buttons
                     
-                    if !pleinpied  || rows.count > 1{
+                    if !pleinpied  || labels.count > 1{
                         Button(action:{
-                            rows.append([""])
+                            labels.append([""])
                         })
                         {Image(systemName: "chevron.down")}
                             .padding(.top,20).disabled(focus)
                         
                     }
                     Spacer()
-                    if rows.count > 0 {
+                    if labels.count > 0 {
                         Button(action:{
                             deselect()
                             done()
@@ -118,7 +100,7 @@ public struct ButtonStackEditor : View {
                 Spacer()
             }
         }
-    }
+    
 }
 
 struct ButtonStackPreview : View {
@@ -138,14 +120,14 @@ struct ButtonStackPreview : View {
                 ButtonStackEditor($rows, valider )
             } else {
                 HStack(spacing:50) {
-                    ButtonStack($bc, $label, $rows, done:valider)
+                    ButtonStack($bc, rows, done:valider)
                     if rows.count > 0 {
                         Text("\(rows.count - 1 - bc.row) - \(bc.col)  \(label)")
                     }
                 }.padding(20)
                 Button(rows.count > 0 ? "modifier": "créer", action:{edition = true})
             }
-        }.frame(width:500, height:400)
+        }.frame(width:600, height:400)
     }
 }
 
