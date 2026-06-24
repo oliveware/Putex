@@ -43,17 +43,30 @@ public struct ButtonStackEditor : View {
         bc = (row:-1, col:-1)
     }
     
+    @State var label : String = ""
     var buttons: some View {
-        ForEach (0..<$labels.count, id:\.self) {
-            row in
-            ButtonRowEditor($bc, $labels[row], $width, {
-                bc.row = row
-            })
+        VStack {
+            if labels.count == 0 {
+                TextField("", text:$label)
+                    .focused($focus)
+                    .onSubmit {
+                        labels = [[label]]
+                       // width = setwidth()
+                    }
+            } else {
+                ForEach (0..<$labels.count, id:\.self) {
+                    row in
+                    ButtonRowEditor($bc, $labels[row], $width, {
+                        bc.row = row
+                    })
+                }
+            }
         }
     }
     
     public var body: some View {
-        HStack {
+        VStack {
+            HStack {
                 if labels.count < 2 {
                     if pleinpied {
                         Button(action: { pleinpied = false })
@@ -66,7 +79,7 @@ public struct ButtonStackEditor : View {
                 Spacer()
                 
                 VStack {
-                    Spacer()
+                    //Spacer()
                     if !pleinpied || labels.count > 1 {
                         Button(action:{
                             
@@ -86,7 +99,11 @@ public struct ButtonStackEditor : View {
                             .padding(.top,20).disabled(focus)
                         
                     }
+                    //Spacer()
+                }
                     Spacer()
+                
+            }
                     if labels.count > 0 {
                         Button(action:{
                             deselect()
@@ -96,8 +113,8 @@ public struct ButtonStackEditor : View {
                             .padding(20)
                             .disabled(focus)
                     }
-                }
-                Spacer()
+                
+                //Spacer()
             }
         }
     
@@ -127,7 +144,7 @@ struct ButtonStackPreview : View {
                 }.padding(20)
                 Button(rows.count > 0 ? "modifier": "créer", action:{edition = true})
             }
-        }.frame(width:600, height:400)
+        }.frame(width:700, height:400)
     }
 }
 
