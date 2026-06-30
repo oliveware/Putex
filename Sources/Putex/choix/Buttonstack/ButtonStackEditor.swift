@@ -67,12 +67,15 @@ public struct ButtonStackEditor : View {
     public var body: some View {
         VStack {
             HStack {
-                if labels.count < 2 {
+                if labels.count > 0 {
                     if pleinpied {
                         Button(action: { pleinpied = false })
                         {Text("plusieurs " + mots[0].pluriel).foregroundColor(.gray)}
                     } else {
-                        Button(action: { pleinpied = true })
+                        Button(action: {
+                            pleinpied = true
+                            labels = [labels[0]]
+                        })
                         {Text("unique " + mots[0].singulier).foregroundColor(.gray)}
                     }
                 }
@@ -133,7 +136,7 @@ struct ButtonStackPreview : View {
     
     var body: some View {
         VStack(spacing:20) {
-            if edition {
+            if edition || rows.count == 0{
                 ButtonStackEditor($rows, valider )
             } else {
                 HStack(spacing:50) {

@@ -88,7 +88,7 @@ struct ButtonRowEditor: View {
     }
     
     var body: some View {
-        if labels.isEmpty {
+        if labels.count == 0 {
             Text("ajouter " + mot.indéterminé)
             TextField("", text:$label).frame(width:CGFloat(width))
                 .focused($focus)
