@@ -34,15 +34,12 @@ public struct ButtonStack: View {
         self.done = done
     }
     
-  
-
+  @State var selectedrow = -1
     public var body: some View {
         VStack {
             ForEach (0..<labels.count, id:\.self) {
                 row in
-                ButtonRow($bc, labels[row], $width, {
-                    bc.row = row
-                })
+                ButtonRow($bc, labels[row], $width, $selectedrow, {selectedrow = row})
             }
         }
     }

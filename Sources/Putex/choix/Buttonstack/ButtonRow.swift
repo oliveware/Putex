@@ -20,11 +20,18 @@ struct ButtonRow: View {
         CGFloat(Double(width - (spacing+15)*(cols.count-1)) / Double(cols.count))
     }
     
-    init(_ bc:Binding<(row:Int, col:Int)>, _ cols: [String],_ width:Binding<Int>, _ done: @escaping () -> Void) {
+    @Binding var selectedrow : Int
+    func mark(_ col:Int) -> Color {
+        bc.row == selectedrow && bc.col == col ? .yellow : .white
+    }
+        
+    
+    init(_ bc:Binding<(row:Int, col:Int)>, _ cols: [String],_ width:Binding<Int>,_ selectedrow:Binding<Int>, _ done: @escaping () -> Void) {
         _bc = bc
         self.cols = cols
         self.done = done
         _width = width
+        _selectedrow = selectedrow
     }
     
     var body: some View {
@@ -34,8 +41,8 @@ struct ButtonRow: View {
                     bc.col = col
                     done()
                 })
-                {Text(cols[col]).frame(width:colwidth)}
-                // .foregroundColor(mark(col) ? .yellow : .white)}
+                {Text(cols[col]).frame(width:colwidth)
+                 .foregroundColor(mark(col))}
             }
         }
     }
