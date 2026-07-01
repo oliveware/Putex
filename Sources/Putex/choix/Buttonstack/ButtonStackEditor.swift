@@ -12,7 +12,7 @@ public struct ButtonStackEditor : View {
     var mots:[Mot] = [Mot("ligne","lignes",.f),Mot("colonne","colonnes",.f)]
     @State var width = 300
     
-    @State private var bc = (row:0, col:0)
+    @State private var bc = (row:-1, col:-1)
 
     @State var pleinpied = true
     
@@ -37,10 +37,6 @@ public struct ButtonStackEditor : View {
             if rowlarge > max { max = rowlarge }
         }
         return 15 * max
-    }
-    
-    func deselect() {
-        bc = (row:-1, col:-1)
     }
     
     @State var label : String = ""
@@ -109,8 +105,8 @@ public struct ButtonStackEditor : View {
             }
                     if labels.count > 0 {
                         Button(action:{
-                            deselect()
                             done()
+                            bc = (row:-1, col:-1)
                         })
                         {Text("valider")} //.foregroundColor(.gray)}
                             .padding(20)

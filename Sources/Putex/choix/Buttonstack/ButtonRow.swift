@@ -71,7 +71,7 @@ struct ButtonRowEditor: View {
     
     var buttons: some View {
         ForEach (0..<$labels.count, id:\.self) { col in
-            if col == edited {
+            if col == edited  {
                 TextField("", text:$labels[col]).frame(width:colwidth)
                     .focused($focus)
                     .onSubmit { edited = -1 }
@@ -88,14 +88,14 @@ struct ButtonRowEditor: View {
     }
     
     var body: some View {
-        if labels.count == 0 {
+      /*  if labels.count == 0 {
             Text("ajouter " + mot.indéterminé)
             TextField("", text:$label).frame(width:CGFloat(width))
                 .focused($focus)
                 .onSubmit {
                     labels =  [label]
                 }
-        } else {
+        } else {*/
             HStack (spacing:CGFloat(spacing)) {
                 Button(action:{
                     labels = [""] + labels
@@ -117,6 +117,6 @@ struct ButtonRowEditor: View {
                     .disabled(focus)
                     .padding(.leading,20)
             }
-        }
+        //}
     }
 }
