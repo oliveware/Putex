@@ -58,7 +58,7 @@ public struct StackEditor<T:Stackable> : View {
                     .focused($focus)
                     .onSubmit {
                         things =  [[T(label)]]
-                        width = setwidth
+                        
                     }
             } else {
                 ForEach (0..<$things.count, id:\.self) {
