@@ -12,9 +12,9 @@ struct Row<T:Stackable>: View {
     @Binding var selected:(row:Int, col:Int)
     var cols: [T]
     
-    @Binding var width: Int
     var done: () -> Void
     
+    var width: Int
     var spacing = 10
     var colwidth: CGFloat {
         CGFloat(Double(width - (spacing+15)*(cols.count-1)) / Double(cols.count))
@@ -26,11 +26,11 @@ struct Row<T:Stackable>: View {
     }
         
     
-    init(_ bc:Binding<(row:Int, col:Int)>, _ cols: [T],_ width:Binding<Int>,_ rownum:Int, _ done: @escaping () -> Void) {
+    init(_ bc:Binding<(row:Int, col:Int)>, _ cols: [T],_ width:Int,_ rownum:Int, _ done: @escaping () -> Void) {
         _selected = bc
         self.cols = cols
         self.done = done
-        _width = width
+        self.width = width
         self.rownum = rownum
     }
     

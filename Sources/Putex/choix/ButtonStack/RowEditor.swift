@@ -62,6 +62,7 @@ struct RowEditor<T:Stackable>: View {
                 TextField("", text:$label).frame(width:colwidth)
                     .focused($focus)
                     .onSubmit { things = [T(label)]
+                        label = ""
                         edited = -1 }
             } else {
                 Button(action:{

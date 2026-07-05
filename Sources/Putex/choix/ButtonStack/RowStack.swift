@@ -11,26 +11,25 @@ import Taxionomy
 public struct RowStack<T:Stackable>: View {
     @Binding var selected : (row:Int, col:Int)
     var things: [[T]]
-    @State var width = 200
+   
     var done: () -> Void
     
+    var width : Int {
+        var max = 0
+        for row in things {
+            var rowlarge = 0
+            for col in row {
+                rowlarge += col.label.count
+            }
+            if rowlarge > max { max = rowlarge }
+        }
+        return 13 * max
+    }
+    
     public init(_ selected:Binding<(row:Int, col:Int)>,
-                _ rows: [[T]], _ large:Int? = nil, done: @escaping () -> Void ) {
+                _ rows: [[T]], done: @escaping () -> Void ) {
         _selected = selected
         things = rows
-        if let largeur = large {
-            width = largeur
-        } else {
-            var max = 0
-            for row in rows {
-                var rowlarge = 0
-                for col in row {
-                    rowlarge += col.label.count
-                }
-                if rowlarge > max { max = rowlarge }
-            }
-            width = 13 * max
-        }
         self.done = done
     }
     
@@ -43,7 +42,7 @@ public struct RowStack<T:Stackable>: View {
         VStack {
             ForEach (0..<things.count, id:\.self) {
                 row in
-                Row($selected, things[row], $width, row, { select(row) })
+                Row($selected, things[row], width, row, { select(row) })
             }
         }
     }
