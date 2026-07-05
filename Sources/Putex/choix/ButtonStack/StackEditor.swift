@@ -105,7 +105,10 @@ public struct StackEditor<T:Stackable> : View {
             }
             if things.count > 0 {
                 HStack(spacing:20) {
-                    Button(action:{ things = [] })
+                    Button(action:{
+                        things = []
+                        selected = (row:-1, col:-1)
+                    })
                     {Text("annuler")} //.foregroundColor(.gray)}
 
                     Button(action:{

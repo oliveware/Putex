@@ -18,7 +18,9 @@ public struct RowStack<T:Stackable>: View {
                 _ rows: [[T]], _ large:Int? = nil, done: @escaping () -> Void ) {
         _selected = selected
         things = rows
-        if large == nil {
+        if let largeur = large {
+            width = largeur
+        } else {
             var max = 0
             for row in rows {
                 var rowlarge = 0
@@ -28,8 +30,6 @@ public struct RowStack<T:Stackable>: View {
                 if rowlarge > max { max = rowlarge }
             }
             width = 13 * max
-        } else {
-            width = large!
         }
         self.done = done
     }
