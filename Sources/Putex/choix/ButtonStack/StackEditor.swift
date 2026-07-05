@@ -29,7 +29,7 @@ public struct StackEditor<T:Stackable> : View {
         focus = rows.count == 0
     }
     
-    func setwidth() -> Int {
+    var setwidth: Int {
         var max = 0
         for row in things {
             var rowlarge = 0
@@ -58,12 +58,14 @@ public struct StackEditor<T:Stackable> : View {
                     .focused($focus)
                     .onSubmit {
                         things =  [[T(label)]]
+                        width = setwidth
                     }
             } else {
                 ForEach (0..<$things.count, id:\.self) {
                     row in
                     RowEditor($selected, $things[row], mots[1], $width, {
                         selected.row = row
+                        width = setwidth
                     })
                 }
             }
