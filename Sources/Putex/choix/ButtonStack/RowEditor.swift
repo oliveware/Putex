@@ -42,7 +42,8 @@ struct RowEditor<T:Stackable>: View {
             if col == edited  {
                 TextField("", text:$things[col].label).frame(width:colwidth)
                     .focused($focus)
-                    .onSubmit { edited = -1 }
+                    .onSubmit { done()
+                        edited = -1 }
             } else {
                 Button(action:{
                     selected.col = col

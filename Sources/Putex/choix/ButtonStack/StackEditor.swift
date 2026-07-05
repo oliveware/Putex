@@ -27,6 +27,7 @@ public struct StackEditor<T:Stackable> : View {
         if mots != nil { self.mots = mots! }
         pleinpied = rows.wrappedValue.count == 1
         focus = rows.count == 0
+        width = setwidth
     }
     
     var setwidth: Int {
