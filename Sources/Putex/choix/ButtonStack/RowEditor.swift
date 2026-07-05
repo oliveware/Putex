@@ -30,6 +30,7 @@ struct RowEditor<T:Stackable>: View {
         self.done = done
         _width = width
         self.mot = mot
+        focus = true
     }
     
     func mark(_ col:Int) -> Bool {
@@ -57,25 +58,32 @@ struct RowEditor<T:Stackable>: View {
     var body: some View {
         
         HStack (spacing:CGFloat(spacing)) {
-            Button(action:{
-                things = [T()] + things
-                edited = 0
-                focus = true
-            })
-            {Image(systemName: "chevron.left")}
-                .disabled(focus)
-                .padding(.trailing,20)
-            
-            buttons
-            
-            Button(action:{
-                things.append(T())
-                edited = things.count - 1
-                focus = true
-            })
-            {Image(systemName: "chevron.right")}
-                .disabled(focus)
-                .padding(.leading,20)
+            if things.count == 0 {
+                TextField("", text:$label).frame(width:colwidth)
+                    .focused($focus)
+                    .onSubmit { things = [T(label)]
+                        edited = -1 }
+            } else {
+                Button(action:{
+                    things = [T()] + things
+                    edited = 0
+                    focus = true
+                })
+                {Image(systemName: "chevron.left")}
+                    .disabled(focus)
+                    .padding(.trailing,20)
+                
+                buttons
+                
+                Button(action:{
+                    things.append(T())
+                    edited = things.count - 1
+                    focus = true
+                })
+                {Image(systemName: "chevron.right")}
+                    .disabled(focus)
+                    .padding(.leading,20)
+            }
         }
         
     }
