@@ -53,9 +53,9 @@ public struct StackEditor<T:Stackable> : View {
     @State var label : String = ""
     var buttons: some View {
         VStack {
-            if things.count == 0 {
+            if things.count < 1 {
                 Text("nommer " + mots[1].indéterminé)
-                TextField("", text:$label).frame(width:CGFloat(width))
+                TextField("", text:$label).frame(width:120)
                     .focused($focus)
                     .onSubmit {
                         things =  [[T(label)]]
