@@ -13,6 +13,10 @@ import Fichiers
 public var cache = Cache()
 
 public struct Cache: Codable {
+    
+    public static var local = Cache("http://192.168.1.41", "/dodata/")
+    public static var distant = Cache("http://pi.inawani.org", "/dodata/")
+    
     var endpoint = "http://192.168.1.41"
     var dir = "/dodata/"
     //var filextension = Filextension.taxion
