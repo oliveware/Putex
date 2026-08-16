@@ -18,8 +18,12 @@ struct RowEditor<T:Stackable>: View {
     
     var spacing = 10
     var colwidth: CGFloat {
-        let nselected = things.count
-        return CGFloat(Double(width - (spacing+15) * nselected) / Double(nselected))
+        let nthings = things.count
+        if nthings > 0 {
+            return CGFloat(Double(width - (spacing+15) * nthings) / Double(nthings))
+        } else {
+            return CGFloat(width)
+        }
     }
     var done: () -> Void
     @FocusState private var focus
