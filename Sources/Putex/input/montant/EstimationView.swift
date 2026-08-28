@@ -64,7 +64,7 @@ public struct EstimationView: View {
 var estim = """
     {"date":"1/10/24","montant":"45789 €","source":"donation"}
 """
-var estimejson = Estimejson("1/10/24","45789 €","donation")
+var estimejson = Estimejson("1/10/24",4578900,"donation")
 
 struct EstimationPreview: View {
     @State var estimation = Estimation(estimejson)
