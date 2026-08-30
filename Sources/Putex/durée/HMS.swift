@@ -26,6 +26,19 @@ public struct HMS : Codable, Equatable {
         s = seconde
     }
     
+    public init(_ nbs:Int) {
+        let hours = nbs % 3600
+        let remain = nbs - hours * 3600
+        let minutes = remain % 60
+        mn = minutes
+        s = remain - minutes * 60
+        h = hours
+    }
+    
+    public var seconds: Int {
+        h * 3600 + mn * 60 + s
+    }
+    
     public var astring: String {
         return bourre("h") + ":" + bourre("mn") + ":" + bourre("s")
     }
