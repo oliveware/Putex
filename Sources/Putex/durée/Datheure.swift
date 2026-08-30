@@ -12,7 +12,7 @@ public struct Datheure : Codable, Equatable {
     }
     
     public static var now: Datheure {
-        Datheure(JMA.now, HMS.NaN)
+        Datheure(Date.now)
     }
     
     var j : Int = 0
@@ -22,6 +22,32 @@ public struct Datheure : Codable, Equatable {
     var h: Int
     var mn: Int
     var s: Int
+    
+    public init(_ date :Date){
+       // formatted(date: Date.FormatStyle.DateStyle, time: Date.FormatStyle.TimeStyle) -> String
+        let jma = date.formatted(
+            Date.FormatStyle()
+                .locale(Locale(identifier: "fr_FR"))
+                .year(.defaultDigits)
+                .month(.twoDigits)
+                .day(.twoDigits)
+        )
+        .split(separator: "/")
+        let hms = date.formatted(
+            Date.FormatStyle()
+                .locale(Locale(identifier: "fr_FR"))
+                .hour()
+                .minute()
+                .second()
+            )
+            .split(separator: ":")
+        j = Int(jma[0]) ?? 0
+        m = Int(jma[1]) ?? 0
+        a = Int(jma[2]) ?? 0
+        h = Int(hms[0]) ?? 0
+        mn = Int(hms[1]) ?? 0
+        s = Int(hms[2]) ?? 0
+    }
     
     public init(_ jour:Int, _ mois:Int, _ an:Int, _ heure: Int, _ minute: Int, _ seconde: Int) {
         j = jour
