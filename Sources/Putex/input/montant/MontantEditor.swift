@@ -29,7 +29,7 @@ public struct MontantEditor: View {
     
     var editorwidth:CGFloat{
         var nbc = montant.nombre.enchiffres().count  + montant.symbol.count + 1
-        if nbc < 5 { nbc = 5 }
+        if nbc < 12 { nbc = 12 }
         return CGFloat(nbc * 9)
     }
     
@@ -46,7 +46,7 @@ public struct MontantEditor: View {
             }
             
             NumberEditor($montant.nombre, "cents")
-                .frame(width:editorwidth + 20)
+                .frame(width:editorwidth)
             
             DevisePicker($montant.symbol)
         }
@@ -55,7 +55,7 @@ public struct MontantEditor: View {
 
 struct MontantPreditor: View {
     
-    @State var montant = Montant()
+    @State var montant = Montant(1234)
     var body: some View {
         MontantView($montant).frame(width:300)
     }

@@ -28,8 +28,8 @@ public struct EstimationView: View {
     public var body : some View {
         GroupBox(prompt) {
             if edition {
-                HStack {
-                    Form{
+                VStack {
+                  //  Form{
                         HStack {
                             JMAPicker($estimation.date,"",{})
                             MontantView($estimation.montant, "")
@@ -43,7 +43,7 @@ public struct EstimationView: View {
                             }
                         }
                         
-                    }
+                  //  }
                     Button(action:{
                         edition = false
                         estimation.check()

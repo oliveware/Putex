@@ -63,7 +63,7 @@ struct NumberEditor: View {
         HStack(spacing:0){
             if mono {
                 TextField("", text:$cents)
-                    .frame(width:CGFloat((cents.count + 1) * 8), alignment: .trailing )
+                    .frame(width:CGFloat(20 + (cents.count + 1) * 8), alignment: .trailing )
                     .onChange(of: cents, {nombre = Nombre(cents)})
             } else {
                 TextField("", value:$nombre.entiere, format:.number)
