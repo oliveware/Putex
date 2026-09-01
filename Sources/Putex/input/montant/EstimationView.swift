@@ -11,8 +11,9 @@ public struct EstimationView: View {
     var prompt : String
     var source = false
     @State var edition :Bool
+    var done: () -> Void
     
-    public init(_ estimation:Binding<Estimation>, _ prompt:String = "estimation", _ source:Bool = false) {
+    public init(_ estimation:Binding<Estimation>, _ prompt:String = "estimation", _ source:Bool = false, _ done: @escaping ()->Void = {}) {
         _estimation = estimation
         self.prompt = prompt
         if let _ :Binding<String> = Binding(estimation.source) {
@@ -21,6 +22,7 @@ public struct EstimationView: View {
             self.source = source
         }
         edition = !estimation.wrappedValue.checked
+        self.done = done
     }
     
     public var body : some View {
@@ -45,6 +47,7 @@ public struct EstimationView: View {
                     Button(action:{
                         edition = false
                         estimation.check()
+                        done()
                     })
                     {Image(systemName: "checkmark")}
                 }

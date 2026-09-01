@@ -44,7 +44,7 @@ public struct Estimation: Codable {
     }
     
     private var unchecked:Bool?
-    var checked:Bool {
+    public var checked:Bool {
         unchecked == nil ? false : !unchecked!
     }
     mutating func check() {
