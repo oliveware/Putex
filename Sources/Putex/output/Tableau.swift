@@ -30,6 +30,10 @@ public struct Tableau : View {
         return large
     }
     
+    public init(_ cells:[[String]]) {
+        self.cells = cells
+    }
+    
    public  var body:some View {
         VStack {
             ForEach(0..<nblines, id:\.self) {
