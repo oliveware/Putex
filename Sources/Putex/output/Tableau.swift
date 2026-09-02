@@ -6,7 +6,7 @@
 //
 import SwiftUI
 
-struct Tableau : View {
+public struct Tableau : View {
     var cells:[[String]]
     
     var nblines: Int { cells.count }
@@ -30,7 +30,7 @@ struct Tableau : View {
         return large
     }
     
-    var body:some View {
+   public  var body:some View {
         VStack {
             ForEach(0..<nblines, id:\.self) {
                 line in
