@@ -8,24 +8,30 @@ import SwiftUI
 
 public struct Tableau : View {
     var cells:[[String]]
-    
+    var charwidth = 8
     var nblines: Int { cells.count }
     
-    var large:[CGFloat] {
-        let nbcol = cells[0].count
-        var cols: [CGFloat] = []
-        var large: [CGFloat] = []
-        for line in cells {
-            cols = []
+    var large:[CGFloat]// = [100,100,100]
+    {   var large: [CGFloat] = []
+        if cells.count > 0 {
+            let nbcol = cells[0].count
             for col in 0..<nbcol {
-               let colarge = CGFloat(line[col].count)
-                if colarge > large[col] {
-                    cols.append(colarge)
-                } else {
-                    cols.append(large[col])
-                }
+                large.append(CGFloat(charwidth * cells[0][col].count))
             }
-            large = cols
+            var cols: [CGFloat] = []
+            
+            for line in cells {
+                cols = []
+                for col in 0..<nbcol {
+                    let colarge = CGFloat(charwidth * line[col].count)
+                    if colarge > large[col] {
+                        cols.append(colarge)
+                    } else {
+                        cols.append(large[col])
+                    }
+                }
+                large = cols
+            }
         }
         return large
     }
@@ -35,11 +41,25 @@ public struct Tableau : View {
     }
     
    public  var body:some View {
-        VStack {
-            ForEach(0..<nblines, id:\.self) {
-                line in
-                FormattedRow(cols:cells[line], large:large)
-            }
+        ForEach(0..<nblines, id:\.self) {
+            line in
+            FormattedRow(cols:cells[line], large:large)
         }
     }
+}
+
+struct Pretableau : View {
+    var cells = [["dqzdaz", "zdqsd", "gyjukuk"],
+                 ["dqzdafhdghfz", "zdqtyutyutuiusd", "gyjukuk"],
+                 ["dqzdaz", "zdqsd", "gyjukudfsdgfk"],
+                ["dqzdaz", "zdqsd", "gyjukuk"]
+    ]
+    var body: some View {
+        Tableau(cells)
+        FormattedRow(cols:cells[0])
+    }
+}
+
+#Preview {
+    Pretableau()
 }
