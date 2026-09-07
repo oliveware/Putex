@@ -37,7 +37,7 @@ public struct Estimation: Codable {
     
     public var entexte:String {
         if montant.nombre.entiere == nil {
-            " à définir"
+            " non précisé "
         } else {
             montant.enchiffres + "\t(" + date.entexte + " - " + (source ?? "") + ")"
         }

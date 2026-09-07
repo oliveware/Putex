@@ -54,6 +54,9 @@ public struct Valeur : Codable {
         self.estimation = estimation
         self.revente = revente
     }
+    public init(_ date:JMA, _ achat:Montant) {
+        acquisition = Estimation(date, achat, "achat")
+    }
     
     public init() {}
     
