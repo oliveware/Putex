@@ -113,9 +113,9 @@ public struct ValeurView: View {
             HStack {
                 Form {
                     VStack {
-                        EstimationView($valeur.acquisition, "acquisition")
+                        EstimationView($valeur.acquisition, "acquisition", true)
                         if valeur.acquisition.checked {
-                            EstimationView($valeur.estimation, "estimation")
+                            EstimationView($valeur.estimation, "estimation", true)
                             if valeur.estimation.checked {
                                 Text("plus-value potentielle : " + valeur.potentiel).padding(.top,10)
                                 if let optional : Binding<Estimation> = Binding($valeur.revente) {
