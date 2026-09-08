@@ -53,7 +53,7 @@ public struct Coderef: Codable, Identifiable {
         var num = 0
         for item in items {
             let splitid = item.code.split(separator:"#")
-            if splitid.count > 0 {
+            if splitid.count > 1 {
                 num = Int(splitid[1]) ?? items.count }
             if num > max { max = num }
         }
