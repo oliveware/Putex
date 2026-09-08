@@ -32,7 +32,7 @@ public struct Coderef: Codable, Identifiable {
     }
     
     public static func newcode(_ domain:Codomain) -> String {
-        var ref = find(domain)
+        let ref = find(domain)
         switch domain {
         case .article:
             Article.nextid += 1
@@ -49,9 +49,12 @@ public struct Coderef: Codable, Identifiable {
     var selector: String = ""
     
     var next: Int {
-        var max = 0
+        var max = items.count
+        var num = 0
         for item in items {
-            let num = Int(item.code.split(separator:"#")[1]) ?? items.count
+            let splitid = item.code.split(separator:"#")
+            if splitid.count > 0 {
+                num = Int(splitid[1]) ?? items.count }
             if num > max { max = num }
         }
         return max + 1
