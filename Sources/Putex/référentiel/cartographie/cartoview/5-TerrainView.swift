@@ -44,7 +44,7 @@ public struct TerrainShow: View {
     public var body: some View {
         VStack ( alignment:.leading, spacing:10 ) {
             ParceList(parcelles: $terrain.parcelles)
-                .frame(height:CGFloat(terrain.parcelles.count * 8))
+               // .frame(height:CGFloat(terrain.parcelles.count * 8))
         }
     }
 }
