@@ -69,7 +69,7 @@ public struct Continent : Codable, Identifiable {
     subscript(_ nom:String) -> Territoire {
         var found : Territoire?
         for territoire in territoires {
-            if territoire.isNaN {
+            if territoire.nom == nom{
                 found = territoire
                 break
             }
