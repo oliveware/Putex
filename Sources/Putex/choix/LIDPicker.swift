@@ -23,7 +23,7 @@ struct LIDPicker : View {
     init(_ lid: Binding<LID>, _ done: @escaping () -> Void, _ level:Level = .terrain) {
         _lid = lid
         continent = World.Europe
-        territoire = World.Europe["France"]
+        territoire =  cache.get("France")//World.Europe["France"]
         self.done = done
         self.level = level
     }
