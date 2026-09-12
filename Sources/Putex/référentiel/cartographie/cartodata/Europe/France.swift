@@ -198,7 +198,10 @@ let FR = """
                     ]
                 },
                 {"id":10,"nom":"Lomme", "tutelle":"Lille", "quartiers":[
-                        {"id":1, "nom":"Bourg", "terrains":[]},
+                        {"id":1, "nom":"Bourg", "terrains":[
+                                                    {"id":947, "numvoie":{"voie":"avenue de Dunkerque", "num":"947","codepostal":"59160"},
+                                                        "parcelles":[{"id":46, "cadastre":"LIlle 355 B 01 46", "surface":{"nombre":{"entiere":74},"quantité":"surface"}}]}
+                                                ]},
                         {"id":5, "nom":"Mitterie", "terrains":[]}
                         ]
                 }
