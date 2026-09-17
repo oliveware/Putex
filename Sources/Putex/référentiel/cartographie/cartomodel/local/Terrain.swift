@@ -72,6 +72,27 @@ public struct Terrain: Codable, Identifiable {
         let adresse = autre ? (autrenumvoie?.adresse(complement) ?? "") : numvoie.adresse(complement)
         return adresse + " " + commune
     }
+    public var fiscaldata:[String:String] {
+        let cp = numvoie.codepostal
+        let index = cp.index(cp.startIndex, offsetBy: 3)
+        let dept = String(cp[..<index])
+        var département = ""
+        if let lid = lid {
+            if let territoire = Lieu(lid).territoire {
+                if let départements = territoire.départements {
+                    département = départements[dept] ?? "dépt!"
+                }
+            }
+        }
+        
+        return [
+            "num": numvoie.num,
+            "voie": numvoie.voirie,
+            "commune":commune,
+            "dept": dept,
+            "département":département
+        ]
+    }
     
     var parcelles:[Parcelle] = []
     

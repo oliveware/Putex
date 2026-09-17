@@ -59,6 +59,7 @@ struct NumberEditor: View {
       //  localedot = locale.decimalSeparator ?? ","
     }
     
+    @State var entière:Int?
     var body: some View {
         HStack(spacing:0){
             if mono {
@@ -66,8 +67,14 @@ struct NumberEditor: View {
                     .frame(width:CGFloat(20 + (cents.count + 1) * 8), alignment: .trailing )
                     .onChange(of: cents, {nombre = Nombre(cents)})
             } else {
-                TextField("", value:$nombre.entiere, format:.number)
-                    .frame(width: width($nombre.wrappedValue.entiere), alignment: .trailing )
+                TextField("", value:$entière, format:.number)
+                    .frame(width: width(entière), alignment: .trailing )
+                    .onChange(of: entière, {
+                        if let int = entière {
+                            nombre.entiere = int
+                        } else {
+                            nombre.entiere = 0
+                        }})
                 if nombre.decimales != nil  || nbdec > 0 {
                     Text(dot)
                     TextField("", value:$decimales, format:.number)
@@ -91,17 +98,29 @@ struct NumberEditPreview : View {
     var set : NumberSet = .naturel
     var classifier = ""
     @State var autovalide = false
+    var mono : Bool
     
-    public init(_ nombre:Nombre, _ edition:Bool, _ set: NumberSet, _ classifier:String = "") {
+    init(_ nombre:Nombre, _ edition:Bool, _ set: NumberSet, _ classifier:String = "") {
         self.nombre = nombre
         self.set = set
         self.classifier = classifier
+        mono = false
+    }
+    init(_ nombre:Nombre) {
+        self.nombre = nombre
+        mono = true
     }
     
     var body : some View {
-        HStack {
-            NumberEditor($nombre, set, classifier)
-
+        VStack {
+            if mono {
+                NumberEditor($nombre)
+            } else {
+                NumberEditor($nombre, set, classifier)
+            }
+            
+            Text(nombre.enchiffres())
+            Text(nombre.enlettres)
         }
             //.frame(width:200, height: 100)
     }
@@ -115,6 +134,11 @@ struct NumberEditPreview : View {
 
 #Preview ("entier") {
     NumberEditPreview(Nombre(), true, .naturel)
+        .frame(width:400, height:250)
+}
+
+#Preview ("mono") {
+    NumberEditPreview(Nombre())
         .frame(width:400, height:250)
 }
 

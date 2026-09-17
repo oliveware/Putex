@@ -15,6 +15,7 @@ public struct Territoire : Codable, Identifiable {
     public var pays:String { nom }
     
     var regions:[Region] = []
+    public var départements:[String:String]?         // code: nom
     
     init() {
         id = 0
