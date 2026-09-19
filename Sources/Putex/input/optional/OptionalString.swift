@@ -46,14 +46,14 @@ public struct OptionalString: View {
                         
                         Text(fieldname).font(.caption)
                         
-                        TextField("" , text:Binding<String>(
+                        TextField(fieldname , text:Binding<String>(
                             get: { string ?? "" },
                             set: { string = $0 == "" ? nil : $0}
                         ))
                     }
                 } else {
                     Text(fieldname)
-                    TextField("" , text:Binding<String>(
+                    TextField(fieldname , text:Binding<String>(
                         get: { string ?? "" },
                         set: { string = $0 == "" ? nil : $0}
                     ))

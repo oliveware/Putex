@@ -59,6 +59,7 @@ struct NumberEditor: View {
       //  localedot = locale.decimalSeparator ?? ","
     }
     
+    // utilisation d'un optionnel pour éviter que le textfield affiche 0 pour initier la saisie
     @State var entière:Int?
     var body: some View {
         HStack(spacing:0){
