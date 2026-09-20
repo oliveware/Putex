@@ -17,6 +17,12 @@ public struct OptionalView: View {
     private var vertical:Bool
     private var large:CGFloat
     
+    var width:CGFloat {
+        let nbc  = max((string?.count ?? 0), fieldname.count)
+        let width = CGFloat((nbc + 1) * 8)
+        return width > 25 ? width : 25
+    }
+    
     public init(_ prompt:String, _ optional:Binding<String?>, _ vertical:Bool = false, _ large:CGFloat = 80 ) {
         buttontext = "ajouter \(prompt)"
         fieldname = prompt
@@ -55,19 +61,21 @@ public struct OptionalView: View {
                             TextField("" , text:Binding<String>(
                                 get: { string ?? "" },
                                 set: { string = $0 }
-                                ))
+                            )).frame(width:width)
                         }
                     } else {
                         Text(fieldname)
                         TextField("" , text:Binding<String>(
                             get: { string ?? "" },
                             set: { string = $0 }
-                            ))
+                            )).frame(width:width)
                     }
                     Button(action:{ edition = false }) {Image(systemName: "checkmark")}
                         .disabled(string == "")
                 } else {
                     if vertical {
+                        Button(action:{ string = nil })
+                        {Image(systemName: "delete.right")}
                         VStack (alignment:.leading) {
                             Text(fieldname).font(.caption)
                             Text(string!)
@@ -75,12 +83,11 @@ public struct OptionalView: View {
                     } else {
                         Text(fieldname + " : " + string!)
                     }
-                    Spacer()
                     Button(action:{ edition = true }) {Image(systemName: "pencil")}
-                    Button(action:{
-                        string = nil
-                    })
-                    {Image(systemName: "delete.left")}
+                    if !vertical {
+                        Button(action:{ string = nil })
+                        {Image(systemName: "delete.left")}
+                    }
                 }
             }
         }.frame(minWidth:large, alignment:.leading)
