@@ -46,6 +46,7 @@ public struct Cache: Codable {
     }
     
     func get(_ nom:String) -> Territoire {
+        let dircarto = dir + "carto/"
         if let country : Territoire = Fichier(dir, nom, .country).get(endpoint) {
              return country
          } else {
