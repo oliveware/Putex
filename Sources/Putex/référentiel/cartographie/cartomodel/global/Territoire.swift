@@ -5,8 +5,9 @@
 //  Created by Herve Crespel on 02/11/2024.
 //
 import SwiftUI
-
+import Fichiers
 public struct Territoire : Codable, Identifiable {
+    public static var cache = Asyncache<Territoire>()
 
     public var id:Int
     var lid:LID?
@@ -35,6 +36,10 @@ public struct Territoire : Codable, Identifiable {
         let pays = try! JSONDecoder().decode(Territoire.self, from: jsonData)
         self = pays
     }
+    
+    init(_ nom:String, _ endpoint:String) async {
+        self = await Territoire.cache.get(nom)
+    }
 
     subscript(_ id:Int) -> Region? {
         var found : Region?
@@ -51,30 +56,3 @@ public struct Territoire : Codable, Identifiable {
         regions.append(Region(lid ?? LID()))
     }
 }
-
-/*
-extension Territoire {
-    static var france = Territoire("France", [
-    "Hauts de France", "Normandie", "Corse", "Guyanne"
-    ]
-    )
- 
- /*public init(_ nom:String, _ regions: [String]) {
-     self.nom = nom
-     for region in regions {
-         self.regions.append(Region(region))
-     }
- }
- 
- mutating func add(_ nom:String) {
-     regions.append(Region(nom))
- }
- 
- mutating func update(_ region : Region) {
-     for index in 0..<regions.count {
-         if regions[index].nom == region.nom {
-             regions[index] = region
-         }
-     }
- }*/
-}*/

@@ -64,5 +64,21 @@ public struct Cache: Codable {
          }
     }
     
+    
 
+}
+
+
+extension Asyncache {
+    func get(_ nom:String) async -> Territoire {
+        var found = Territoire()
+            do {
+                found = try await lire(nom + ".country", "carto")                                                     as! Territoire
+                ///dataget = try await cache.gethttp(country , ext, "carto")
+                erreur = ""
+            } catch {
+                erreur = error.localizedDescription
+            }
+        return found
+    }
 }
