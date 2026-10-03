@@ -75,9 +75,9 @@ extension Asyncache {
             do {
                 found = try await lire(nom + ".country", "carto")                                                     as! Territoire
                 ///dataget = try await cache.gethttp(country , ext, "carto")
-                erreur = ""
+              // erreur = ""
             } catch {
-                erreur = error.localizedDescription
+               // erreur = error.localizedDescription
             }
         return found
     }
