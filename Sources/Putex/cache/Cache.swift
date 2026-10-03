@@ -68,7 +68,7 @@ public struct Cache: Codable {
 
 }
 
-
+/*
 extension Asyncache {
     func get(_ nom:String) async -> Territoire {
         var found = Territoire()
@@ -81,4 +81,4 @@ extension Asyncache {
             }
         return found
     }
-}
+}*/

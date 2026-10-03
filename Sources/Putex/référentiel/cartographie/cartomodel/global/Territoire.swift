@@ -37,9 +37,9 @@ public struct Territoire : Codable, Identifiable {
         self = pays
     }
     
-    init(_ nom:String, _ endpoint:String) async {
+  /*  init(_ nom:String, _ endpoint:String) async {
         self = await Territoire.cache.get(nom)
-    }
+    }*/
 
     subscript(_ id:Int) -> Region? {
         var found : Region?
