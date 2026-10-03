@@ -61,7 +61,7 @@ public struct NumberView: View {
                    .frame(minWidth:showidth + 20)
                     
                     Button(action: {edition = false})
-                    {Image(systemName: "checkmark")}
+                    {Image(systemName: "checkmark")}.buttonStyle(.plain)
                 }
         } else {
             HStack {
@@ -76,7 +76,7 @@ public struct NumberView: View {
                     //.frame(width:showidth*1.7)
                     }
                 Button(action: {edition = true})
-                {Image(systemName: "pencil")}
+                {Image(systemName: "pencil")}.buttonStyle(.plain)
             }
         }
     }

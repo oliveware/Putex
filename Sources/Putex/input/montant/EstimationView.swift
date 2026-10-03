@@ -49,7 +49,7 @@ public struct EstimationView: View {
                         estimation.check()
                         done()
                     })
-                    {Image(systemName: "checkmark")}
+                    {Image(systemName: "checkmark")}.buttonStyle(.plain)
                 }
             } else {
                 HStack {
@@ -57,7 +57,7 @@ public struct EstimationView: View {
                     Button(action:{
                         edition = true
                     })
-                    {Image(systemName: "pencil")}
+                    {Image(systemName: "pencil")}.buttonStyle(.plain)
                 }
             }
         }

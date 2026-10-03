@@ -37,7 +37,7 @@ struct ConditionnementView: View {
                         Text(conditionnement.contenant.nom)
                         Spacer()
                         Button(action:{contenantpick = true})
-                        {Image(systemName: "pencil")}
+                        {Image(systemName: "pencil")}.buttonStyle(.plain)
                     }.frame(width:350, alignment:.leading)
                 }
             
@@ -49,7 +49,7 @@ struct ConditionnementView: View {
                         Text(conditionnement.fermeture.nom)
                         Spacer()
                         Button(action:{fermeturepick = true})
-                        {Image(systemName: "pencil")}
+                        {Image(systemName: "pencil")}.buttonStyle(.plain)
                     }.frame(width:350, alignment:.leading)
                 }
             }

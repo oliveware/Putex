@@ -16,11 +16,11 @@ struct NumVoieView : View {
             if edit {
                 NumVoieEditor($numvoie)
                 Button(action:{edit = false})
-                {Image(systemName: "checkmark")}
+                {Image(systemName: "checkmark")}.buttonStyle(.plain)
             } else {
                 Text(numvoie.adresse + "  " + commune)
                 Button(action:{edit = true})
-                {Image(systemName: "pencil")}
+                {Image(systemName: "pencil")}.buttonStyle(.plain)
             }
         }.padding(20)
     }

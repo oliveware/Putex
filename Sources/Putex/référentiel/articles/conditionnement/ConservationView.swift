@@ -37,7 +37,7 @@ struct ConservationView: View {
                 Text("conservation : \(conserve.show)")
                 Spacer()
                 Button(action:{edition = true})
-                {Image(systemName: "pencil")}
+                {Image(systemName: "pencil")}.buttonStyle(.plain)
             }.frame(alignment:.leading)
         }
     }

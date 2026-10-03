@@ -24,7 +24,7 @@ struct ArticleView: View {
             Text(article.show)
             Spacer()
             Button(action:{edition = true})
-            {Image(systemName: "pencil")}
+            {Image(systemName: "pencil")}.buttonStyle(.plain)
                 .sheet(isPresented:$edition)
             {ArticleEditor($article, ref, $edition)}
         }

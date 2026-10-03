@@ -23,7 +23,7 @@ public struct TerrainView: View {
                     TerrainEditor($terrain)
                     Spacer()
                     Button(action: { edition = false})
-                    {Image(systemName: "checkmark")}
+                    {Image(systemName: "checkmark")}.buttonStyle(.plain)
                 }
             }
         } else {
@@ -32,7 +32,7 @@ public struct TerrainView: View {
  
                 Spacer()
                 Button(action: { edition = true})
-                {Image(systemName: "pencil")}
+                {Image(systemName: "pencil")}.buttonStyle(.plain)
             }
         }
     }

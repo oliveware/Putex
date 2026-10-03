@@ -70,12 +70,12 @@ public struct OptionalView: View {
                             set: { string = $0 }
                             )).frame(width:width)
                     }
-                    Button(action:{ edition = false }) {Image(systemName: "checkmark")}
+                    Button(action:{ edition = false }) {Image(systemName: "checkmark")}.buttonStyle(.plain)
                         .disabled(string == "")
                 } else {
                     if vertical {
                         Button(action:{ string = nil })
-                        {Image(systemName: "delete.right")}
+                        {Image(systemName: "delete.right")}.buttonStyle(.plain)
                         VStack (alignment:.leading) {
                             Text(fieldname).font(.caption)
                             Text(string!)
@@ -83,10 +83,10 @@ public struct OptionalView: View {
                     } else {
                         Text(fieldname + " : " + string!)
                     }
-                    Button(action:{ edition = true }) {Image(systemName: "pencil")}
+                    Button(action:{ edition = true }) {Image(systemName: "pencil")}.buttonStyle(.plain)
                     if !vertical {
                         Button(action:{ string = nil })
-                        {Image(systemName: "delete.left")}
+                        {Image(systemName: "delete.left")}.buttonStyle(.plain)
                     }
                 }
             }

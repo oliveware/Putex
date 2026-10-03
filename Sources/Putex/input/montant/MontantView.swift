@@ -56,14 +56,14 @@ public struct MontantView: View {
                MontantEditor($montant, label)
                 if !montant.nombre.isNaN {
                     Button(action: {edition = false})
-                    {Image(systemName: "checkmark")}
+                    {Image(systemName: "checkmark")}.buttonStyle(.plain)
                 }
             } else {
                 show
                 if editable {
                     Button(action: {edition = true}) {
                         Image(systemName: "pencil")
-                    }
+                    }.buttonStyle(.plain)
                 }
             }
         }//.frame(width:150+width)

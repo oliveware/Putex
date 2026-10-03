@@ -24,13 +24,13 @@ struct QuartierView : View {
                 }
                 Spacer()
                 Button(action: { edition = false})
-                {Image(systemName: "checkmark")}
+                {Image(systemName: "checkmark")}.buttonStyle(.plain)
                 
             } else {
                 Text(quartier.nom).frame(width:200, alignment:.leading)
                 Spacer()
                 Button(action: { edition = true})
-                {Image(systemName: "pencil")}
+                {Image(systemName: "pencil")}.buttonStyle(.plain)
             }
         }
     }

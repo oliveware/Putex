@@ -28,7 +28,7 @@ public struct Typicker: View {
                     Text("type : " + type.line)
                 }
                 Button(action: {pick = true})
-                { Image(systemName: "pencil") }
+                { Image(systemName: "pencil") }.buttonStyle(.plain)
                     .sheet(isPresented:$pick)
                     { ScrollView {
                         ForEach(types) {

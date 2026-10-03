@@ -35,7 +35,7 @@ struct OptionArticleView: View {
                 Text("option : ")
                 Text(option.label)
                 Button(action: {pick = true})
-                {Image(systemName: "pencil")}
+                {Image(systemName: "pencil")}.buttonStyle(.plain)
                     .sheet(isPresented: $pick)
                 {ItemPicker(cadrage.options, $option, {
                     pick = false

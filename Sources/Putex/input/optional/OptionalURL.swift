@@ -44,7 +44,7 @@ struct OptionUrl : View {
                         url = string
                         edition = false
                     })
-                    {Image(systemName: "checkmark")}
+                    {Image(systemName: "checkmark")}.buttonStyle(.plain)
                         .disabled(string == "")
                 } else {
                     Button(action:{ url = nil })
@@ -52,7 +52,7 @@ struct OptionUrl : View {
                     Text(fieldname + " : " + string)
                     Spacer()
                     Button(action:{ edition = true })
-                    {Image(systemName: "pencil")}
+                    {Image(systemName: "pencil")}.buttonStyle(.plain)
                     
                 }
             }

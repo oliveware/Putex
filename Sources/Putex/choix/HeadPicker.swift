@@ -112,15 +112,15 @@ public struct HeadPicker: View {
                         set:{self.head = Head("",$0)}
                     ))
                     Button(action:{input = false ; done()})
-                    {Image(systemName: "checkmark")}
+                    {Image(systemName: "checkmark")}.buttonStyle(.plain)
                     
                     Button(action:{choice = true})
-                    {Image(systemName: "magnifyingglass")}
+                    {Image(systemName: "magnifyingglass")}.buttonStyle(.plain)
                     .sheet(isPresented: $choice) {tablesheet}
                 } else {
                     Text(label)
                     Button(action:{ input = true })
-                    {Image(systemName: "pencil")}
+                    {Image(systemName: "pencil")}.buttonStyle(.plain)
                 }
             } else {
                 Button(prompt.singulier, action:{

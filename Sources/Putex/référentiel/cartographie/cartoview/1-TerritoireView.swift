@@ -20,14 +20,14 @@ struct TerritoireView : View {
                 TerritoireEditor(territoire:$territoire)
                 Spacer()
                 Button(action: { edition = false})
-                {Image(systemName: "checkmark")}
+                {Image(systemName: "checkmark")}.buttonStyle(.plain)
             }
         } else {
             HStack {
                 Text(territoire.nom)
                 Spacer()
                 Button(action: { edition = true})
-                {Image(systemName: "pencil")}
+                {Image(systemName: "pencil")}.buttonStyle(.plain)
             }
         }
     }

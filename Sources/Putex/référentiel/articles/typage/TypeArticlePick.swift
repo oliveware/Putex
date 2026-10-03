@@ -26,7 +26,7 @@ struct TypeArticlePick: View {
             Text(type.label) // .font(.title)
             Spacer()
             Button(action:{edition = true})
-            {Image(systemName: "pencil")}
+            {Image(systemName: "pencil")}.buttonStyle(.plain)
                 .sheet(isPresented: $edition)
                 { TypeArticleEditor($type, taxionomy) }
         }    }

@@ -21,7 +21,7 @@ struct CommuneView : View {
 
                 Spacer()
                 Button(action: { edition = true})
-                {Image(systemName: "pencil")}
+                {Image(systemName: "pencil")}.buttonStyle(.plain)
                 .sheet(isPresented: $edition) {
                     CommuneEditor(commune: $commune)
             }

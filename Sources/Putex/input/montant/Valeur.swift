@@ -132,13 +132,13 @@ public struct ValeurView: View {
                     }
                 }
                 Button(action:{ edition = false })
-                {Image(systemName: "checkmark")}
+                {Image(systemName: "checkmark")}.buttonStyle(.plain)
             }
         } else {
             HStack {
                 ValeurShow(valeur)
                 Button(action:{ edition = true })
-                {Image(systemName: "pencil")}
+                {Image(systemName: "pencil")}.buttonStyle(.plain)
             }
         }
         

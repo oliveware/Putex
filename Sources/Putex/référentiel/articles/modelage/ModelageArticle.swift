@@ -29,11 +29,11 @@ public struct ModelageArticle : View {
                 if edition {
                     ModeleArticleEditor(type, $modele, {})
                     Button(action: {edition = false})
-                    {Image(systemName: "checkmark")}
+                    {Image(systemName: "checkmark")}.buttonStyle(.plain)
                 } else {
                     ModeleArticleShow(type, modele)
                     Button(action: {edition = true})
-                    {Image(systemName: "pencil")}
+                    {Image(systemName: "pencil")}.buttonStyle(.plain)
                 }
             }
             

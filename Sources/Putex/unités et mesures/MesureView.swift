@@ -30,11 +30,11 @@ public struct MesureView :View {
                 }
                 Text(mesure.unité.symbol)
                 Button(action:{edit = false})
-                {Image(systemName: "checkmark")}
+                {Image(systemName: "checkmark")}.buttonStyle(.plain)
             } else {
                 Text(mesure.quantité.label + " : " + mesure.astring)
                 Button(action:{edit = true})
-                {Image(systemName: "pencil")}
+                {Image(systemName: "pencil")}.buttonStyle(.plain)
             }
             
         }

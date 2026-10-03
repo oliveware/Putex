@@ -26,7 +26,7 @@ public struct ArticlePicker : View {
                 Text(selected.show)
                 Spacer()
                 Button(action: {pick = true})
-                {Image(systemName: "pencil")}
+                {Image(systemName: "pencil")}.buttonStyle(.plain)
                 .sheet(isPresented: $pick) {
                     ScrollView {
                         ForEach(items){
@@ -38,7 +38,7 @@ public struct ArticlePicker : View {
                                     selected = item
                                     pick = false
                                 })
-                                {Image(systemName: "list.triangle")}
+                                {Image(systemName: "list.triangle")}.buttonStyle(.plain)
                             }
                         }.padding(10)
                     }
