@@ -103,3 +103,7 @@ struct HeadListPreview : View {
 #Preview("editable") {
     HeadListPreview(editable:true).frame(width:200, height:100)
 }
+
+#Preview("videe") {
+    HeadListPreview(heads:[]).frame(width:200, height:100)
+}

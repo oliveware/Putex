@@ -23,8 +23,8 @@ public struct HeadPicker: View {
     
     var tables : [(prompt:String, ref:Coderef)]
     @Binding var head : Head?
-    @State var input : Bool
-    @State var choice = false
+    @State var edition : Bool
+    @State var choice = true
     var done: () -> Void
     
     var label:String {
@@ -60,9 +60,9 @@ public struct HeadPicker: View {
         self.prompt = prompt
         _head = head
         if let h = head.wrappedValue {
-            input = h.label == "" || h.domain == .NA
+            edition = h.label == "" || h.domain == .NA
         } else {
-            input = true
+            edition = true
         }
         self.done = done
     }
@@ -71,33 +71,50 @@ public struct HeadPicker: View {
         tables = [(prompt:prompt?.singulier ?? ref.name.singulier, ref:ref)]
         _head = head
         if let h = head.wrappedValue {
-            input = h.label == "" || h.domain == .NA
+            edition = h.label == "" || h.domain == .NA
         } else {
-            input = true
+            edition = true
         }
         self.done = done
     }
     
     var tablesheet : some View {
-        VStack{
-            HStack {
-                ForEach(0..<tables.count, id:\.self) {
-                    i in
-                    if tables[i].ref.items.count > 0 {
-                        GroupBox(tables[i].prompt) {
-                            ScrollView {
-                                ForEach(tables[i].ref.items) {
-                                    head in
-                                    Button( action: { choose(head) } )
-                                    { Text(head.label) }
-                                    //.param(w: width, h: 20)
-                                }
-                            }.frame(height:height)
-                        }.padding()
+        VStack {
+            if choice {
+                HStack {
+                    ForEach(0..<tables.count, id:\.self) {
+                        i in
+                        if tables[i].ref.items.count > 0 {
+                            GroupBox(tables[i].prompt) {
+                                ScrollView {
+                                    ForEach(tables[i].ref.items) {
+                                        head in
+                                        Button( action: { choose(head) } )
+                                        { Text(head.label) }
+                                        //.param(w: width, h: 20)
+                                    }
+                                }.frame(height:height)
+                            }.padding()
+                        }
                     }
                 }
+                if head == nil {
+                    Button("autre " + prompt.singulier, action:{choice = false})
+                } else {
+                    Button("annuler", action:{choice = false})
+                }
+            } else {
+                HStack {
+                    Text(prompt.singulier)
+                    TextField("", text:Binding<String>(
+                        get: {head?.label ?? ""},
+                        set:{self.head = Head("",$0)}
+                    ))
+                    Button(action:{edition = false ; done()})
+                    {Image(systemName: "checkmark")}.buttonStyle(.plain)
+                }
             }
-            Button("annuler", action:{choice = false})
+            
         }//.frame(height:height + 50)
         .padding()
     }
@@ -105,27 +122,18 @@ public struct HeadPicker: View {
     public var body: some View {
         HStack {
             if let head = head {
-                if input {
-                    Text(prompt.singulier)
-                    TextField("", text:Binding<String>(
-                        get: {head.label},
-                        set:{self.head = Head("",$0)}
-                    ))
-                    Button(action:{input = false ; done()})
-                    {Image(systemName: "checkmark")}.buttonStyle(.plain)
-                    
-                    Button(action:{choice = true})
-                    {Image(systemName: "magnifyingglass")}.buttonStyle(.plain)
-                    .sheet(isPresented: $choice) {tablesheet}
+                if edition {
+                    tablesheet
                 } else {
                     Text(label)
-                    Button(action:{ input = true })
+                    Button(action:{ edition = true ; choice = false })
                     {Image(systemName: "pencil")}.buttonStyle(.plain)
+                    Button(action:{edition = true ; choice = true ; self.head = nil})
+                    {Image(systemName: "magnifyingglass")}.buttonStyle(.plain)
+                    //.sheet(isPresented: $choice) {tablesheet}
                 }
             } else {
-                Button(prompt.singulier, action:{
-                    head = Head("","") ;  input = true
-                })
+               tablesheet
             }
         }
     }
@@ -133,7 +141,7 @@ public struct HeadPicker: View {
     func choose(_ item:Head) {
         head = item
         choice = false
-        input = false
+        edition = false
     }
 }
 
@@ -157,5 +165,9 @@ struct HeadPickerPreview : View {
 }
 
 #Preview("choice") {
+    HeadPickerPreview()
+}
+
+#Preview("choice 2") {
     HeadPickerPreview()
 }
