@@ -36,36 +36,34 @@ public struct HeadList : View {
     public var body: some View {
         VStack {
             if heads.count == 0 {
-                Button(action:{more = true})
-                {Text("ajouter " + prompt.indéterminé)}
-                    .sheet(isPresented: $more)
-                { HeadPicker($head, domains, prompt, add)}
+                 HeadPicker($head, domains, prompt, add)
             } else {
-                GroupBox (heads.count < 2 ? prompt.singulier : prompt.pluriel) {
-                    ForEach(heads) {
-                        head in HStack {
-                            if suppression {
-                                Button(action:{
-                                    delete(head)
-                                    suppression = false
-                                })
-                                {Image(systemName: "minus")}
-                            }
-                            Text(head.label)
-                        }.frame(width: width + 16)
+                HStack(alignment: .center ) {
+                    if edition{
+                        Button(action:{suppression.toggle()})
+                        {Image(systemName: "trash")}.buttonStyle(.plain)}
+                    GroupBox (heads.count < 2 ? prompt.singulier : prompt.pluriel) {
+                        ForEach($heads) {
+                            head in HStack {
+                                if suppression {
+                                    Button(action:{
+                                        delete(head.wrappedValue)
+                                        suppression = false
+                                    })
+                                    {Image(systemName: "trash")}.buttonStyle(.plain)
+                                }
+                                Text(head.wrappedValue.label)
+                            }.frame(width: width + 16)
+                        }
+                    }
+                    if edition {
+                        Button(action:{more = true})
+                        {Image(systemName: "plus")}.buttonStyle(.plain)
+                            .sheet(isPresented: $more)
+                        { HeadPicker($head, domains, prompt, add) }
                     }
                 }
-                if edition {
-                    HStack {
-                        Button(action:{suppression.toggle()})
-                        {Image(systemName: "minus")}
-                        Spacer()
-                        Button(action:{more = true})
-                        {Image(systemName: "plus")}
-                            .sheet(isPresented: $more)
-                        { HeadPicker($head, domains, prompt, add)}
-                    }.frame(width: width + 16)
-                }
+               
             }
         }
     }
@@ -78,6 +76,7 @@ public struct HeadList : View {
             if new { heads.append(head) }
         }
         head = nil
+        more = false
     }
     func delete(_ head:Head) {
         var new : [Head] = []
@@ -89,21 +88,22 @@ public struct HeadList : View {
 }
 
 struct HeadListPreview : View {
-    @State var heads:[Head] = [Head("untel machin"), Head("untel machine")]
+    @State var heads:[Head] = [Head("untel machin"), Head("untel truc")]
     var editable = false
     var body: some View {
-        HeadList(Mot("partie", "parties", .f), $heads, [(prompt: "particulier", cas:.human)], editable )
+        HeadList(Mot("partie", "parties", .f), $heads, [(prompt: "particulier", cas:.human),(prompt: "organisation", cas:.company)], editable )
+            .frame(width:200, height:200)
     }
 }
 
-#Preview {
-    HeadListPreview().frame(width:200, height:100)
+#Preview("show") {
+    HeadListPreview()
 }
 
 #Preview("editable") {
-    HeadListPreview(editable:true).frame(width:200, height:100)
+    HeadListPreview(editable:true)
 }
 
-#Preview("videe") {
-    HeadListPreview(heads:[]).frame(width:200, height:100)
+#Preview("vide") {
+    HeadListPreview(heads:[])
 }

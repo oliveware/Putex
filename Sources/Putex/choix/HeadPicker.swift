@@ -23,7 +23,7 @@ public struct HeadPicker: View {
     
     var tables : [(prompt:String, ref:Coderef)]
     @Binding var head : Head?
-    @State var edition : Bool
+    @State var edition = false
     @State var choice = true
     var done: () -> Void
     
@@ -60,9 +60,9 @@ public struct HeadPicker: View {
         self.prompt = prompt
         _head = head
         if let h = head.wrappedValue {
-            edition = h.label == "" || h.domain == .NA
+            choice = h.label == "" || h.domain == .NA
         } else {
-            edition = true
+            choice = true
         }
         self.done = done
     }
@@ -71,14 +71,14 @@ public struct HeadPicker: View {
         tables = [(prompt:prompt?.singulier ?? ref.name.singulier, ref:ref)]
         _head = head
         if let h = head.wrappedValue {
-            edition = h.label == "" || h.domain == .NA
+            choice = h.label == "" || h.domain == .NA
         } else {
-            edition = true
+            choice = true
         }
         self.done = done
     }
     
-    var tablesheet : some View {
+    var choicepanel : some View {
         VStack {
             if choice {
                 HStack {
@@ -97,51 +97,43 @@ public struct HeadPicker: View {
                             }.padding()
                         }
                     }
-                }
-                if head == nil {
-                    Button("autre " + prompt.singulier, action:{choice = false})
-                } else {
-                    Button("annuler", action:{choice = false})
-                }
-            } else {
-                HStack {
-                    Text(prompt.singulier)
-                    TextField("", text:Binding<String>(
-                        get: {head?.label ?? ""},
-                        set:{self.head = Head("",$0)}
-                    ))
-                    Button(action:{edition = false ; done()})
-                    {Image(systemName: "checkmark")}.buttonStyle(.plain)
-                }
+                }.border(.gray, width: 1)
             }
-            
-        }//.frame(height:height + 50)
-        .padding()
+            HStack {
+               // Text(prompt.singulier)
+                TextField("", text:Binding<String>(
+                    get: {head?.label ?? ""},
+                    set:{self.head = Head("",$0)}
+                ))
+                Button(action:{edition = false ; done()})
+                {Image(systemName: "checkmark")}.buttonStyle(.plain)
+            }
+
+        }.padding()
     }
     
     public var body: some View {
         HStack {
-            if let head = head {
-                if edition {
-                    tablesheet
-                } else {
-                    Text(label)
-                    Button(action:{ edition = true ; choice = false })
-                    {Image(systemName: "pencil")}.buttonStyle(.plain)
-                    Button(action:{edition = true ; choice = true ; self.head = nil})
-                    {Image(systemName: "magnifyingglass")}.buttonStyle(.plain)
-                    //.sheet(isPresented: $choice) {tablesheet}
-                }
+            if edition {
+                choicepanel
             } else {
-               tablesheet
+                Text(label)
+                Button(action:{ edition = true ; choice = false })
+                {Image(systemName: "pencil")}.buttonStyle(.plain)
+                Button(action:{ edition = true ; choice = true ; self.head = nil})
+                {Image(systemName: "magnifyingglass")}.buttonStyle(.plain)
+            
+              
             }
         }
+        //Button("annuler", action:{choice = false})
     }
     
     func choose(_ item:Head) {
         head = item
         choice = false
         edition = false
+        done()
     }
 }
 
