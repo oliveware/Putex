@@ -23,7 +23,7 @@ public struct HeadPicker: View {
     
     var tables : [(prompt:String, ref:Coderef)]
     @Binding var head : Head?
-    @State var edition = false
+    @State var edition = true
     @State var choice = true
     var done: () -> Void
     
@@ -97,19 +97,18 @@ public struct HeadPicker: View {
                             }.padding()
                         }
                     }
-                }.border(.gray, width: 1)
+                }
             }
             HStack {
-               // Text(prompt.singulier)
                 TextField("", text:Binding<String>(
                     get: {head?.label ?? ""},
-                    set:{self.head = Head("",$0)}
+                    set:{head = Head("",$0)}
                 ))
-                Button(action:{edition = false ; done()})
+                Button(action:{done()})
                 {Image(systemName: "checkmark")}.buttonStyle(.plain)
             }
 
-        }.padding()
+        }.padding().border(.gray, width: 1)
     }
     
     public var body: some View {
@@ -117,13 +116,8 @@ public struct HeadPicker: View {
             if edition {
                 choicepanel
             } else {
-                Text(label)
-                Button(action:{ edition = true ; choice = false })
-                {Image(systemName: "pencil")}.buttonStyle(.plain)
                 Button(action:{ edition = true ; choice = true ; self.head = nil})
                 {Image(systemName: "magnifyingglass")}.buttonStyle(.plain)
-            
-              
             }
         }
         //Button("annuler", action:{choice = false})
