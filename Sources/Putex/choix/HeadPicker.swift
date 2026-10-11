@@ -22,7 +22,9 @@ public struct HeadPicker: View {
     }
     
     var tables : [(prompt:String, ref:Coderef)]
+    private var domains:[Codomain] = []
     @Binding var head : Head?
+    @State var newlabel :String
     @State var edition = true
     @State var choice = true
     var done: () -> Void
@@ -55,59 +57,59 @@ public struct HeadPicker: View {
         var tables : [(prompt:String, ref:Coderef)] = []
         for domain in domains {
             tables.append((prompt:domain.prompt, ref:Coderef.find(domain.cas)))
+            self.domains.append(domain.cas)
         }
         self.tables = tables
         self.prompt = prompt
         _head = head
         if let h = head.wrappedValue {
             choice = h.label == "" || h.domain == .NA
+            newlabel = h.label
         } else {
             choice = true
+            newlabel = ""
         }
         self.done = done
     }
     public init(_ head:Binding<Head?>, _ ref:Coderef, _ prompt:Mot? = nil,  _  done: @escaping () -> Void = {}) {
         self.prompt = prompt ?? ref.name
         tables = [(prompt:prompt?.singulier ?? ref.name.singulier, ref:ref)]
+        domains = [ref.domain]
         _head = head
         if let h = head.wrappedValue {
             choice = h.label == "" || h.domain == .NA
+            newlabel = h.label
         } else {
             choice = true
+            newlabel = ""
         }
         self.done = done
     }
     
     var choicepanel : some View {
-        VStack {
-            if choice {
-                HStack {
-                    ForEach(0..<tables.count, id:\.self) {
-                        i in
-                        if tables[i].ref.items.count > 0 {
-                            GroupBox(tables[i].prompt) {
-                                ScrollView {
-                                    ForEach(tables[i].ref.items) {
-                                        head in
-                                        Button( action: { choose(head) } )
-                                        { Text(head.label) }
-                                        //.param(w: width, h: 20)
-                                    }
-                                }.frame(height:height)
-                            }.padding()
-                        }
+        HStack {
+            ForEach(0..<tables.count, id:\.self) {
+                i in
+                VStack {
+                    if tables[i].ref.items.count > 0 && choice {
+                        GroupBox(tables[i].prompt) {
+                            ScrollView {
+                                ForEach(tables[i].ref.items) {
+                                    head in
+                                    Button( action: { choose(head) } )
+                                    { Text(head.label) }
+                                        .buttonStyle(.plain)
+                                }
+                            }.frame(height:height)
+                        }.padding()
+                    }
+                    HStack {
+                        TextField("", text:$newlabel)
+                        Button(action:{choose(Head(Coderef.newcode(domains[i]),newlabel))})
+                        {Image(systemName: "checkmark")}.buttonStyle(.plain)
                     }
                 }
             }
-            HStack {
-                TextField("", text:Binding<String>(
-                    get: {head?.label ?? ""},
-                    set:{head = Head("",$0)}
-                ))
-                Button(action:{done()})
-                {Image(systemName: "checkmark")}.buttonStyle(.plain)
-            }
-
         }.padding().border(.gray, width: 1)
     }
     
@@ -116,6 +118,7 @@ public struct HeadPicker: View {
             if edition {
                 choicepanel
             } else {
+                Text(head?.label ?? "choisir")
                 Button(action:{ edition = true ; choice = true ; self.head = nil})
                 {Image(systemName: "magnifyingglass")}.buttonStyle(.plain)
             }

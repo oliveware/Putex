@@ -47,28 +47,26 @@ public struct HeadList : View {
                     Button(action:{suppression.toggle()})
                     {Image(systemName: "trash")}.buttonStyle(.plain)
                 }
-                    GroupBox (heads.count < 2 ? prompt.singulier : prompt.pluriel) {
-                        ForEach($heads) {
-                            head in HStack {
-                                if suppression {
-                                    Button(action:{
-                                        delete(head.wrappedValue)
-                                        suppression = false
-                                    })
-                                    {Image(systemName: "trash")}.buttonStyle(.plain)
-                                }
-                                Text(head.wrappedValue.label)
-                            }.frame(width: width + 16)
-                        }
-                    
-                    if edition {
-                        Button(action:{more = true})
-                        {Image(systemName: "plus")}.buttonStyle(.plain)
-                            .sheet(isPresented: $more)
-                        { HeadPicker($head, domains, prompt, add) }
+                GroupBox (heads.count < 2 ? prompt.singulier : prompt.pluriel) {
+                    ForEach($heads) {
+                        head in HStack {
+                            if suppression {
+                                Button(action:{
+                                    delete(head.wrappedValue)
+                                    suppression = false
+                                })
+                                {Image(systemName: "trash")}.buttonStyle(.plain)
+                            }
+                            Text(head.wrappedValue.label)
+                        }.frame(width: width + 16)
                     }
                 }
-               
+                if edition {
+                    Button(action:{more = true})
+                    {Image(systemName: "plus")}.buttonStyle(.plain)
+                        .sheet(isPresented: $more)
+                    { HeadPicker($head, domains, prompt, add) }
+                }
             }
         }
     }

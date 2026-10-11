@@ -48,6 +48,10 @@ public struct Coderef: Codable, Identifiable {
     var items : [Head] = []
     var selector: String = ""
     
+    var domain: Codomain {
+        items.count > 0 ? items[0].domain : .NA
+    }
+    
     var next: Int {
         var max = items.count
         var num = 0
