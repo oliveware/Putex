@@ -34,14 +34,19 @@ public struct HeadList : View {
     }
     
     public var body: some View {
-        VStack {
+        HStack {
             if heads.count == 0 {
-                 HeadPicker($head, domains, prompt, add)
+                Text("aucun " + prompt.singulier)
+                Button(action:{more = true})
+                {Image(systemName: "plus")}.buttonStyle(.plain)
+                    .sheet(isPresented: $more)
+                { HeadPicker($head, domains, prompt, add) }
             } else {
-                HStack(alignment: .center ) {
-                    if edition{
-                        Button(action:{suppression.toggle()})
-                        {Image(systemName: "trash")}.buttonStyle(.plain)}
+
+                if edition {
+                    Button(action:{suppression.toggle()})
+                    {Image(systemName: "trash")}.buttonStyle(.plain)
+                }
                     GroupBox (heads.count < 2 ? prompt.singulier : prompt.pluriel) {
                         ForEach($heads) {
                             head in HStack {
@@ -55,7 +60,7 @@ public struct HeadList : View {
                                 Text(head.wrappedValue.label)
                             }.frame(width: width + 16)
                         }
-                    }
+                    
                     if edition {
                         Button(action:{more = true})
                         {Image(systemName: "plus")}.buttonStyle(.plain)
