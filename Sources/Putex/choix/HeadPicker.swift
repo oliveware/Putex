@@ -16,7 +16,7 @@ public struct HeadPicker: View {
     var table : (prompt:String, ref:Coderef)
     private var domain:Codomain
     @Binding var head : Head?
-    @State var newlabel :String
+    @State var newlabel: String
     @State var edition = true
     @State var choice = true
     var done: () -> Void
@@ -45,7 +45,7 @@ public struct HeadPicker: View {
         _head = head
         if let h = head.wrappedValue {
             edition = h.label == "" || h.domain == .NA
-            newlabel = h.label
+            newlabel = h.domain == domain ? h.label : ""
         } else {
             edition = true
             newlabel = ""
@@ -119,5 +119,5 @@ struct HeadPickerPreview : View {
 }
 
 #Preview("choice 2") {
-    HeadPickerPreview(head:(Head("C#12","banky")))
+    HeadPickerPreview(head:(Head("O#12","banky")))
 }
