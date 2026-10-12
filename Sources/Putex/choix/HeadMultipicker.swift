@@ -26,7 +26,7 @@ public struct HeadMultipicker: View {
     private var domains:[Codomain] = []
     @Binding var head : Head?
     @State var newlabel :String
-    @State var edition = true
+    @State var edition = false
     @State var choice = true
     var done: () -> Void
     
