@@ -81,7 +81,11 @@ public struct HeadPicker: View {
                 choicepanel
             } else {
                 Text(head?.label ?? "choisir")
-                Button(action:{ edition = true ; choice = true ; self.head = nil})
+                Button(action:{ edition = true ; choice = true
+                    if let head = head {
+                        if newlabel != head.label {newlabel = ""}
+                    }
+                })
                 {Image(systemName: "magnifyingglass")}.buttonStyle(.plain)
             }
         }

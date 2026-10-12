@@ -25,7 +25,6 @@ public struct HeadMultipicker: View {
     var tables : [(prompt:String, ref:Coderef)]
     private var domains:[Codomain] = []
     @Binding var head : Head?
-    @State var newlabel :String
     @State var edition = false
     @State var choice = true
     var done: () -> Void
@@ -65,10 +64,8 @@ public struct HeadMultipicker: View {
         _head = head
         if let h = head.wrappedValue {
             choice = h.label == "" || h.domain == .NA
-            newlabel = h.label
         } else {
             choice = true
-            newlabel = ""
         }
         self.done = done
     }
@@ -77,7 +74,7 @@ public struct HeadMultipicker: View {
         HStack {
             ForEach(0..<tables.count, id:\.self) {
                 i in
-                HeadPicker($head, tables[i].ref, nil, done)
+                HeadPicker($head, tables[i].ref, nil, choose)
             }
         }.padding().border(.gray, width: 1)
     }
@@ -95,8 +92,7 @@ public struct HeadMultipicker: View {
         //Button("annuler", action:{choice = false})
     }
     
-    func choose(_ item:Head) {
-        head = item
+    func choose() {
         choice = false
         edition = false
         done()
