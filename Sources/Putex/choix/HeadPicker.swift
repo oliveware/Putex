@@ -9,24 +9,16 @@ import Taxionomy
 
 public struct HeadPicker: View {
     var prompt : Mot
-    var width: CGFloat = 130
-    var height: CGFloat {
-        var h = 0
-        for table in tables {
-            var steps = table.ref.items.count
-            if steps < 3 { steps = 3 }
-            else if steps > 5 { steps = 5 }
-            if steps > h { h = steps }
-        }
-        return CGFloat(h) * 30
-    }
+    var width: CGFloat = 150
+    var height: CGFloat { CGFloat([table.ref.items.count, 5].max() ?? 5) * 15 }
+   
     
-    var tables : [(prompt:String, ref:Coderef)]
-    private var domains:[Codomain] = []
+    var table : (prompt:String, ref:Coderef)
+    private var domain:Codomain
     @Binding var head : Head?
     @State var newlabel :String
     @State var edition = true
-    @State var choice = true
+    @State var choice = false
     var done: () -> Void
     
     var label:String {
@@ -46,71 +38,41 @@ public struct HeadPicker: View {
         }
     }
     
-    /*public init(_ choice: Binding<Bool>, _ table:Coderef, _ selected:Binding<Head?>,_ prompt:String?) {
-        self.prompt = prompt ?? "Choisir " + table.name.indéterminé
-        self.table = table
-        _head = selected
-        _choice = choice
-    }*/
-    
-    public init(_ head:Binding<Head?>, _ domains:[(prompt:String, cas:Codomain)], _ prompt:Mot, _  done: @escaping () -> Void = {}) {
-        var tables : [(prompt:String, ref:Coderef)] = []
-        for domain in domains {
-            tables.append((prompt:domain.prompt, ref:Coderef.find(domain.cas)))
-            self.domains.append(domain.cas)
-        }
-        self.tables = tables
-        self.prompt = prompt
-        _head = head
-        if let h = head.wrappedValue {
-            choice = h.label == "" || h.domain == .NA
-            newlabel = h.label
-        } else {
-            choice = true
-            newlabel = ""
-        }
-        self.done = done
-    }
     public init(_ head:Binding<Head?>, _ ref:Coderef, _ prompt:Mot? = nil,  _  done: @escaping () -> Void = {}) {
         self.prompt = prompt ?? ref.name
-        tables = [(prompt:prompt?.singulier ?? ref.name.singulier, ref:ref)]
-        domains = [ref.domain]
+        table = (prompt:prompt?.singulier ?? ref.name.singulier, ref:ref)
+        domain = ref.domain
         _head = head
         if let h = head.wrappedValue {
-            choice = h.label == "" || h.domain == .NA
+            edition = h.label == "" || h.domain == .NA
             newlabel = h.label
         } else {
-            choice = true
+            edition = true
             newlabel = ""
         }
         self.done = done
     }
     
     var choicepanel : some View {
-        HStack {
-            ForEach(0..<tables.count, id:\.self) {
-                i in
-                VStack {
-                    if tables[i].ref.items.count > 0 && choice {
-                        GroupBox(tables[i].prompt) {
-                            ScrollView {
-                                ForEach(tables[i].ref.items) {
-                                    head in
-                                    Button( action: { choose(head) } )
-                                    { Text(head.label) }
-                                        .buttonStyle(.plain)
-                                }
-                            }.frame(height:height)
-                        }.padding()
-                    }
-                    HStack {
-                        TextField("", text:$newlabel)
-                        Button(action:{choose(Head(Coderef.newcode(domains[i]),newlabel))})
-                        {Image(systemName: "checkmark")}.buttonStyle(.plain)
-                    }
+        VStack {
+            if table.ref.items.count > 0 && choice {
+                GroupBox(table.prompt) {
+                    ScrollView {
+                        ForEach(table.ref.items) {
+                            head in
+                            Button( action: { choose(head) } )
+                            { Text(head.label) }
+                                .buttonStyle(.plain)
+                        }
+                    }.frame(height:height).padding(.horizontal)
                 }
             }
-        }.padding().border(.gray, width: 1)
+            HStack {
+                TextField("", text:$newlabel)
+                Button(action:{choose(Head(Coderef.newcode(domain),newlabel))})
+                {Image(systemName: "checkmark")}.buttonStyle(.plain)
+            }.padding(.top,1)
+        }.frame(width:width)
     }
     
     public var body: some View {
@@ -138,7 +100,6 @@ struct HeadPickerPreview : View {
    var table = tables["banques"]!
     var prompt = Mot("banque", "banques", .f)
     @State var head: Head? = nil
-    @State var choice = false
     
     var body: some View {
         VStack {
@@ -158,5 +119,5 @@ struct HeadPickerPreview : View {
 }
 
 #Preview("choice 2") {
-    HeadPickerPreview()
+    HeadPickerPreview(head:(Head("C#12","banky")))
 }

@@ -40,7 +40,7 @@ public struct HeadList : View {
                 Button(action:{more = true})
                 {Image(systemName: "plus")}.buttonStyle(.plain)
                     .sheet(isPresented: $more)
-                { HeadPicker($head, domains, prompt, add) }
+                { HeadMultipicker($head, domains, prompt, add) }
             } else {
 
                 if edition {
@@ -65,7 +65,7 @@ public struct HeadList : View {
                     Button(action:{more = true})
                     {Image(systemName: "plus")}.buttonStyle(.plain)
                         .sheet(isPresented: $more)
-                    { HeadPicker($head, domains, prompt, add) }
+                    { HeadMultipicker($head, domains, prompt, add) }
                 }
             }
         }
