@@ -13,7 +13,14 @@ public struct LigneCF:Codable {
     var taxe: Montant
     var TTC: String
     
-   
+    public init(article: String, unitaire: String, quantité: String, HT: Montant, taxe: Montant, TTC: String) {
+        self.article = article
+        self.unitaire = unitaire
+        self.quantité = quantité
+        self.HT = HT
+        self.taxe = taxe
+        self.TTC = TTC
+    }
 
     
     var facture: [String] {
