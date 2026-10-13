@@ -67,7 +67,7 @@ public struct Facture : Codable {
         }
     }
     
-    var total:String {
+    public var total:String {
         classic?.total ?? ""
     }
     
