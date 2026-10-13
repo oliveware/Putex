@@ -57,7 +57,7 @@ struct QuittancePreview: View {
          (occupation: "noms locataires", adresse: "adresse", loyer:"loyer"),
          11, 2022,
          (short:"HC", adresse:"adresse", commune:"ailleurs"),
-         JMA(3,12,22)   //"loyer", 50000))
+         JMA(3,12,22), "560€"   //"loyer", 50000))
     )
     
     var body: some View {
