@@ -22,6 +22,14 @@ public struct Facture : Codable {
     var eau:  Factureau?
     var telecom: FactureTelecom?
     var classic: Enlignes?
+    
+    
+
+    public init(_ date:JMA, _ ventes:[LigneCF]) {
+        classic = Enlignes(ventes)
+        self.date = date
+    }
+
 
     var tete:String {
         if kind == nil {
@@ -34,10 +42,8 @@ public struct Facture : Codable {
     struct Enlignes: Codable {
         var lignes:[LigneCF] = []
         
-        init(_ ventes:[Vente]) {
-            for vente in ventes {
-                lignes.append(LigneCF(vente))
-            }
+        init(_ ventes:[LigneCF]) {
+            lignes = ventes
         }
         
         var HT : Montant {
